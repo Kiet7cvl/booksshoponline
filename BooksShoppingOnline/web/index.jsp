@@ -71,7 +71,7 @@
 
                         <a href="list?&categoryId=1"><div class="category-item category-img" style="background: url('./assets/img/categoryImg/categoryImg2.jpg') 
                                         top center / cover no-repeat">
-                                <div class="category-content"></div>
+                                <div class="category-content">Nghệ thuật - Giải trí</div>
                             </div></a>
 
                         <a href="list?&categoryId=4"><div class="category-item category-img" style="background: url('./assets/img/categoryImg/categoryImg3.jpg') 
