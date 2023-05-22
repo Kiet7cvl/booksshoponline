@@ -66,7 +66,7 @@
                     <div class="category-list">
                         <a href="list?&categoryId=3"><div class="category-item category-img" style="background: url('./assets/img/categoryImg/categoryImg1.jpg') 
                                         top center / cover no-repeat">
-                                <div class="category-content"></div>
+                                <div class="category-content">Kĩ năng sống</div>
                             </div></a>
 
                         <a href="list?&categoryId=1"><div class="category-item category-img" style="background: url('./assets/img/categoryImg/categoryImg2.jpg') 
