@@ -37,3 +37,59 @@
         </div>
     </div>
 </div>
+
+<!-- Register -->
+
+<div class="modal fade col-md-12" role="dialog" id="registerModal" style="padding-right: 18px" >
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 10px; margin-top: 180px;">
+            <div class="modal-header">
+                <h2 class="" id="registerModal" style="text-align:center; font-family: Arial"><b style="padding-left: 100px;">Đăng ký tài khoản</b></h2><br>
+            </div>
+
+            <div class="modal-body">
+                <section>
+                    <div class="container">
+                        <form action="register" method="POST">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="name" placeholder="Họ và tên" name="fullName" style="border-radius: 100px;" required>
+                                    </div></div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="email" placeholder="Email" name="email" style="border-radius: 100px;" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="name" placeholder="Số điện thoại" name="mobile" style="border-radius: 100px;" required>
+                                    </div></div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="password" style="border-radius: 100px;" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="pwd" placeholder="Nhập lại mật khẩu" name="repassword" style="border-radius: 100px;" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group" required>
+                                        Giới tính
+                                        <input class="" name="gender" type="radio" value="1" required/> Nam
+                                        
+                                        <input class="" name="gender" type="radio" value="0" required/> Nữ
+                                    </div>
+                                </div>
+                                <br><br><center><button type="submit" class="btn btn-dark" style="padding-right: 190px;padding-left: 190px; border-radius: 100px;">Đăng ký</button></center><br><br>
+                            </div>
+                        </form>
+                        <a type="button" data-toggle="modal" data-dismiss="modal" data-target="#loginModal" style="padding-left: 150px; text-decoration: none; border-radius: 100px;">Quay lại đăng nhập</a> 
+                    </div>    
+                </section>
+            </div>
+        </div>
+    </div>
+</div> 
