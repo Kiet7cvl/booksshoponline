@@ -73,9 +73,10 @@ public class LoginController extends HttpServlet {
             request.setAttribute("notification", "Sai email hoặc mật khẩu");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
-
             session.setAttribute("us", u);
-            response.sendRedirect(historyUrl);
+//          response.sendRedirect(historyUrl);
+//          request.getRequestDispatcher("home").forward(request, response);
+            response.sendRedirect("home");
         }
     }
 

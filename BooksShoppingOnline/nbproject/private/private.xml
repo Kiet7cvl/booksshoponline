@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< HEAD
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/web/components/header.jsp</file>
-=======
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/src/java/model/User.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/web/components/account.jsp</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/src/java/dal/UserDAO.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/src/java/context/DBContext.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/src/java/Controller/Common/RegisterController.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/web/index.jsp</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/web/components/header.jsp</file>
->>>>>>> acb0ceb74609eb8ba922776107df0eeaa7f66798
-        </group>
+        <group/>
     </open-files>
 </project-private>

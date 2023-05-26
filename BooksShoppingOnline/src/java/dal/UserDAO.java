@@ -3,7 +3,6 @@ package dal;
 import context.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import model.User;
 
 public class UserDAO extends DBContext {
@@ -80,7 +79,7 @@ public class UserDAO extends DBContext {
     }
 
     public static void main(String[] args){
-         System.out.println(new UserDAO().login("kiet1@gmail.com", "11112012"));
+         System.out.println(new UserDAO().login("lamdthe@gmail.com", "123456789"));
 //       System.out.println(new UserDAO().checkUserExist("kiet1@gmail.com"));
     }
 }
