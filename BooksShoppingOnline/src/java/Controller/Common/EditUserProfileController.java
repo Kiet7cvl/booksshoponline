@@ -263,7 +263,7 @@ public class EditUserProfileController extends HttpServlet {
             InputStream filecontent = null;
             final PrintWriter writer = response.getWriter();
             try {
-                File file = new File("D:\\ảnh\\bookavarta" + File.separator + uid_raw+"_" + fileName);
+                File file = new File("E:\\Ki5\\SWP391\\ShoppingOnile\\BooksShoppingOnline\\web\\WEB-INF\\images\\avatar" + File.separator + uid_raw+"_" + fileName);
                 url_avatar = file.getCanonicalPath();
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();
