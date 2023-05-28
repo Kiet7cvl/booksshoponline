@@ -79,6 +79,66 @@ public class UserDAO extends DBContext {
             
     }
 
+    
+    public boolean chekcAccount(String email) {
+        try {
+            String sql = "select * from user\n"
+                    + "where email = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, email);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Register error : " + e.getMessage());
+        }
+        return false;
+    }
+
+    public User getUserByEmail(String email) {
+        try {
+            String sql = "select * from user\n"
+                    + "where email = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                User user = User.builder()
+                        .user_Id(rs.getInt(1))
+                        .full_Name(rs.getString(2))
+                        .password(rs.getString(3))
+                        .avatar(rs.getString(4))
+                        .gender(rs.getBoolean(5))
+                        .email(rs.getString(6))
+                        .mobile(rs.getString(7))
+                        .address(rs.getString(8))
+                        .status(rs.getBoolean(9))
+                        .role_Id(rs.getString(10))
+                        .build();
+                return user;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public String UpdatePassword(String pass, String email){
+        try{
+            
+           String sql = "UPDATE `user`  SET `password` = ? WHERE `email` = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, pass);
+            stm.setString(2, email);
+            stm.executeUpdate();
+        } catch (Exception e) {
+                 System.out.println("Get all error "+ e.getMessage());
+        }
+        return null;
+    }
+    
+    
     public static void main(String[] args){
          System.out.println(new UserDAO().login("kiet1@gmail.com", "11112012"));
 //       System.out.println(new UserDAO().checkUserExist("kiet1@gmail.com"));
