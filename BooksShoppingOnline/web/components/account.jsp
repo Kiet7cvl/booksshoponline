@@ -132,6 +132,37 @@
     </div>
 </div> 
 
+
+<!-- ResetPassword -->
+<div class="modal fade col-md-12" role="dialog" id="ResetPasswordModal">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 10px; margin-top: 150px;">
+            <div class="modal-header">
+                <h1 style="text-align: center ; margin-left: 70px;">Cấp lại mật khẩu</h1>
+            </div>
+            <div class="modal-body">
+                <form action="resetpassword" method="post">
+                    <div class="form-group">
+                        <input name="email" type="email" class="form-control" placeholder="Email của bạn"style="border-radius: 100px;" required>
+                    </div>
+                    <br>
+                    <center>
+                        <button type="submit" class="btn btn-dark" style="padding-right: 200px;
+                                padding-left: 200px;
+                                border-radius: 100px;
+                                margin-bottom: -40px;
+                                height: 50px;">Kiểm tra
+                        </button>
+                    </center>
+                </form>
+                <br><br>
+                <a type="button" data-toggle="modal" data-dismiss="modal" data-target="#loginModal" style="padding-left: 170px; text-decoration: none; border-radius: 100px;">Quay lại Đăng nhập</a> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- User Profile -->   
 <div class="modal fade col-md-12" role="dialog" id="userProfileModal" style="padding-right: 18px" >
     <div class="modal-dialog">
@@ -196,3 +227,4 @@
         </div>
     </div>
 </div> 
+

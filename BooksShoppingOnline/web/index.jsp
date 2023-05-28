@@ -24,7 +24,8 @@
 
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
 
-                       
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${c}" aria-label="Slide ${c+1}"></button>
+                        
                     </div>
 
                     <div class="carousel-inner">
@@ -50,7 +51,7 @@
 
 
                     <!-- Base Product -->
-                    <h2 class="section-heading">Top 4 quyển sách ngẫu nhiên</h2>
+                    <h2 class="section-heading">Top 4 quyển sách đa dạng</h2>
                     <div  class="container-fluid">
                         <div class="row">
                           
@@ -71,18 +72,18 @@
 
                         <a href="list?&categoryId=1"><div class="category-item category-img" style="background: url('./assets/img/categoryImg/categoryImg2.jpg') 
                                         top center / cover no-repeat">
-                                <div class="category-content"></div>
+                                <div class="category-content">Nghệ thuật - Giải trí</div>
                             </div></a>
 
                         <a href="list?&categoryId=4"><div class="category-item category-img" style="background: url('./assets/img/categoryImg/categoryImg3.jpg') 
                                         top center / cover no-repeat">
-                                <div class="category-content"></div>
+                                <div class="category-content">Light-Novel</div>
                             </div></a>
 
 
                         <a href="list?&categoryId=2"><div class="category-item category-img" style="background: url('./assets/img/categoryImg/categoryImg4.jpg') 
                                         top center / cover no-repeat">
-                                <div class="category-content"></div>
+                                <div class="category-content">Manga-Comic</div>
                             </div></a>
 
 
