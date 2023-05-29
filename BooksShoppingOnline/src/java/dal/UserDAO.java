@@ -36,9 +36,9 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
+
     public User checkUserExist(String email) {
-        String sql = "select * from user\n"
-                + "where email = ?";
+        String sql = "SELECT * FROM `User` WHERE userId = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, email);
@@ -63,9 +63,9 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public void register(String fullName, String password, String gender, String email, String mobile){
-        String sql = "INSERT INTO user (`fullName`, `password`,`gender`, `email`, `mobile`, `status`, `role_id`) VALUES \n" +
-                  "(?,?,b?,?,?,0,1)";
+    public void register(String fullName, String password, String gender, String email, String mobile) {
+        String sql = "INSERT INTO user (`fullName`, `password`,`gender`, `email`, `mobile`, `status`, `role_id`) VALUES \n"
+                + "(?,?,b?,?,?,0,1)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, fullName);
@@ -76,83 +76,119 @@ public class UserDAO extends DBContext {
             st.executeUpdate();
         } catch (Exception e) {
         }
-            
+
+    }
+
+
+    public void changePassword(int userId, String new_pass1) {
+        try {
+            String sql = "UPDATE `User`\n"
+                    + "   SET \n"
+                    + "      `password` = ?\n"
+                    + " WHERE `userId` = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, new_pass1);
+            ps.setInt(2, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public User getUser(int userId, String old_pass) {
+        try {
+            String sql = "SELECT * FROM `User` WHERE userId = ? AND password = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.setString(2, old_pass);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                User user = User.builder()
+                        .user_Id(rs.getInt(1))
+                        .full_Name(rs.getString(2))
+                        .password(rs.getString(3))
+                        .avatar(rs.getString(4))
+                        .gender(rs.getBoolean(5))
+                        .email(rs.getString(6))
+                        .mobile(rs.getString(7))
+                        .address(rs.getString(8))
+                        .status(rs.getBoolean(9))
+                        .role_Id(rs.getString(10))
+                        .build();
+                return user;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
     }
     
-//    public void editUserProfile(String uname, String uavatar, String ugender, String umobile, String uaddress, int uid) {
-//        String sql = "UPDATE `User`\n" +
-//    "SET `fullName` = ?,\n" +
-//"    `avatar` = ?,\n" +
-//"    `gender` = ?,\n" +
-//"    `mobile` = ?,\n" +
-//"    `address` = ?\n" +
-//"WHERE `userId` = ?";
-//        try {
-//            PreparedStatement st = connection.prepareStatement(sql);
-//            st.setString(1, uname);
-//            st.setString(2, uavatar);
-//            st.setString(3, ugender);
-//            st.setString(4, umobile);
-//            st.setString(5, uaddress);
-//            st.setInt(6, uid);
-//            st.executeUpdate();
-//        } catch (SQLException e) {
-//            System.out.println("editUserProfile "+e.getMessage());
-//        }
-//    }
-//    
-//      public User getUserById(int uid) {
-//        try {
-//            String sql = "SELECT *\n" +
-//"FROM `User`\n" +
-//"WHERE `userId` = ?";
-//            PreparedStatement ps = connection.prepareStatement(sql);
-//            ps.setInt(1, uid);
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next()) {
-//                User user = User.builder()
-//                        .user_Id(rs.getInt(1))
-//                        .full_Name(rs.getString(2))
-//                        .password(rs.getString(3))
-//                        .avatar(rs.getString(4))
-//                        .gender(rs.getBoolean(5))
-//                        .email(rs.getString(6))
-//                        .mobile(rs.getString(7))
-//                        .address(rs.getString(8))
-//                        .status(rs.getBoolean(9))
-//                        .role_Id(rs.getString(10))
-//                        .build();
-//                return user;
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return null;
-//    }
-//      
-//       public String getUrlImageById(int id) {
-//        String sql = "SELECT `avatar`\n" +
-//"FROM `books_shop_online`.`User`\n" +
-//"WHERE `userId` = 1";
-//        try {
-//            PreparedStatement st = connection.prepareStatement(sql);
-//            st.setInt(1, id);
-//            ResultSet rs = st.executeQuery();
-//            while (rs.next()) {
-//                return rs.getString(1);
-//            }
-//        } catch (Exception e) {
-//        }
-//        return null;
-//    }
-//
-//    
-//
-//    public static void main(String[] args){
-//  //       System.out.println(new UserDAO().login("lamdthe@gmail.com", "123456789"));
-////       System.out.println(new UserDAO().checkUserExist("kiet1@gmail.com"));
-////System.out.println(new UserDAO().editUserProfile("dieu bo", 0, 0123456789, dcxvdgas, 1));
-//    }
+    public boolean chekcAccount(String email) {
+        try {
+            String sql = "select * from user\n"
+                    + "where email = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, email);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Register error : " + e.getMessage());
+        }
+        return false;
+    }
+
+    public User getUserByEmail(String email) {
+        try {
+            String sql = "select * from user\n"
+                    + "where email = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                User user = User.builder()
+                        .user_Id(rs.getInt(1))
+                        .full_Name(rs.getString(2))
+                        .password(rs.getString(3))
+                        .avatar(rs.getString(4))
+                        .gender(rs.getBoolean(5))
+                        .email(rs.getString(6))
+                        .mobile(rs.getString(7))
+                        .address(rs.getString(8))
+                        .status(rs.getBoolean(9))
+                        .role_Id(rs.getString(10))
+                        .build();
+                return user;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+
+    public String UpdatePassword(String pass, String email){
+        try{
+            
+           String sql = "UPDATE `user`  SET `password` = ? WHERE `email` = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, pass);
+            stm.setString(2, email);
+            stm.executeUpdate();
+        } catch (Exception e) {
+                 System.out.println("Get all error "+ e.getMessage());
+        }
+        return null;
+    }
+    
+    
+    public static void main(String[] args){
+         System.out.println(new UserDAO().login("kiet1@gmail.com", "11112012"));
+
+//       System.out.println(new UserDAO().checkUserExist("kiet1@gmail.com"));
+    }
+ 
     
     
     public void editUserProfile(String uname, String uavatar, boolean ugender, String umobile, String uaddress, int uid) {
@@ -174,6 +210,7 @@ public class UserDAO extends DBContext {
             st.executeUpdate();
         } catch (Exception e) {
         }
+
     }
    
      public User getUserById(int uid) {
