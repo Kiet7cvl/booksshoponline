@@ -233,54 +233,7 @@
                             </div>
                             <h6>Miêu tả ngắn gọn: </h6>
                             <div class="mb-5">${product.brief_infor}</div>
-<!--                            <div class="pd-color">
-                                <h6>Màu sắc: </h6>
-                                <div class="row">
-                                    <div class="col-12 pb-5">
-                                        <input class="checkbox-color" type="radio" name="color" id="color-1" value="1" checked="">
-                                        <label class="for-checkbox-color" for="color-1" style="background-color: black"></label>
 
-                                        <input class="checkbox-color" type="radio" name="color" id="color-2" value="2">
-                                        <label class="for-checkbox-color" for="color-2" style="background-color: blue"></label>
-
-                                        <input class="checkbox-color" type="radio" name="color" id="color-3" value="3">
-                                        <label class="for-checkbox-color" for="color-3" style="background-color: red"></label>
-
-                                        <input class="checkbox-color" type="radio" name="color" id="color-4" value="4">
-                                        <label class="for-checkbox-color" for="color-4" style="background-color: yellow"></label>
-
-                                        <input class="checkbox-color" type="radio" name="color" id="color-5" value="5">
-                                        <label class="for-checkbox-color" for="color-5" style="background-color: green"></label>
-
-                                        <input class="checkbox-color" type="radio" name="color" id="color-6" value="6">
-                                        <label class="for-checkbox-color" for="color-6" style="background-color: purple"></label>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h6>Kích thước Áo/Quần....:  </h6>
-                            <div class="row">
-                                <div class="col-12 pb-5">
-                                    <input class="checkbox-size" type="radio" name="size" id="size-1" checked="" value="1">
-                                    <label class="for-checkbox-size" for="size-1">S</label>
-
-                                    <input class="checkbox-size" type="radio" name="size" id="size-2">
-                                    <label class="for-checkbox-size" for="size-2">M</label>
-
-                                    <input class="checkbox-size" type="radio" name="size" id="size-3">
-                                    <label class="for-checkbox-size" for="size-3">L</label>
-
-                                    <input class="checkbox-size" type="radio" name="size" id="size-4">
-                                    <label class="for-checkbox-size" for="size-4">XL</label>
-
-                                    <input class="checkbox-size" type="radio" name="size" id="size-5">
-                                    <label class="for-checkbox-size" for="size-5">2XL</label>
-
-                                    <input class="checkbox-size" type="radio" name="size" id="tsize-6">
-                                    <label class="for-checkbox-size" for="size-6">3XL</label>
-                                </div>
-                            </div>-->
                             <div class="row">
                                 <div class="countProduct col-lg-3" style="margin-left: 3%">
                                     <div id="decrement" onclick="stepper(this)"><b>-</b></div>
