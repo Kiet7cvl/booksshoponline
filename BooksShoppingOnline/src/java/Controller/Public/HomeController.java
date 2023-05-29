@@ -21,7 +21,7 @@ import model.Slider;
 
 /**
  *
- * @author son22
+ * @author lam
  */
 public class HomeController extends HttpServlet {
 
@@ -37,8 +37,8 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
         
+        HttpSession session = request.getSession();  
         List<Blog> listBlog_HomePage = new BlogDAO().getAllBlog();
         session.setAttribute("listBlog_HomePage", listBlog_HomePage);
         

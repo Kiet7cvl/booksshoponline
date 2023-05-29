@@ -20,7 +20,7 @@ import model.Slider;
 public class SliderDAO extends DBContext {
 
     public Slider getFirstSlider() {
-        String sql = "SELECT * FROM Slider where status = 1 ORDER BY slider_id limit 1";
+        String sql = "SELECT * FROM books_shop_online.slider WHERE status = 1 LIMIT 1;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -39,7 +39,7 @@ public class SliderDAO extends DBContext {
     }
 
     public int getcountSlider() {
-        String sql = "SELECT count(*) FROM [dbo].[Slider] where [status] = 1";
+        String sql = "SELECT count(*) FROM books_shop_online.slider where status = 1";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -204,4 +204,5 @@ public class SliderDAO extends DBContext {
         System.out.println(sc.getFirstSlider());
 
     }
+    
 }

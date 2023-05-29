@@ -17,7 +17,8 @@ import model.Product;
  *
  * @author ADMIN
  */
-public class ProductDAO extends DBContext{
+public class ProductDAO extends DBContext {
+
     public List<Product> get4ProductRandom() {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT * FROM Product ORDER BY RAND() LIMIT 4;";
@@ -48,6 +49,7 @@ public class ProductDAO extends DBContext{
         }
         return list;
     }
+
     public String getImgProduct(int id) {
         String sql = "select images from Products_Images where product_id = ?";
         try {
@@ -62,6 +64,7 @@ public class ProductDAO extends DBContext{
         }
         return null;
     }
+
     public double getRatedProduct(int id) {
         String sql = "select AVG(rated_star) from Feedback where product_id = ?";
         try {
@@ -78,8 +81,8 @@ public class ProductDAO extends DBContext{
     }
 
     public int getTotalProduct(String searchKey, String categoryId, String status) {
-        String sql = "SELECT COUNT(product_id) FROM Product\n" +
-"WHERE category_id "+ categoryId +" AND status "+status+" AND product_name LIKE '%"+searchKey+ "%';";
+        String sql = "SELECT COUNT(product_id) FROM Product\n"
+                + "WHERE category_id " + categoryId + " AND status " + status + " AND product_name LIKE '%" + searchKey + "%';";
 //        String sql = "Select count(product_id) from Product "
 //                + "where category_id " + categoryId + " and status " + status + " and product_name like N'%" + searchKey + "%'\n";
         try {
@@ -96,7 +99,7 @@ public class ProductDAO extends DBContext{
 
     public List<Product> getProductWithPaging(int page, int PAGE_SIZE, String searchKey, String categoryId, String type, String value, String status) {
         List<Product> list = new ArrayList<>();
-        int a = (page-1)*8;
+        int a = (page - 1) * 8;
         String sql = "select * from product\n"
                 + "where category_id " + categoryId + " and status " + status + " and product_name like N'%" + searchKey + "%'\n"
                 + " order by " + value + " " + type + " LIMIT ?, ?;";
@@ -190,7 +193,7 @@ public class ProductDAO extends DBContext{
 
     }
 
-    public List<Product> getProductTop4Category(int productId, int categoryId) {
+    public List<Product> getProductTop4Category(int productId, int categoryId) { //getProductTop4Category Ramdom
         List<Product> list = new ArrayList<>();
         String sql = "SELECT * FROM Product WHERE category_id = ? AND product_id != ? ORDER BY RAND() LIMIT 4;";
         try {
@@ -221,6 +224,7 @@ public class ProductDAO extends DBContext{
         }
         return list;
     }
+
 
     public void UpdateProduct(int id, String name, String desciption, String brief_infor, int quantity, int status, int original_price, int sale_price, int categoryId, String url) {
         try {
@@ -323,7 +327,6 @@ public class ProductDAO extends DBContext{
 //            System.out.println(ex);
 //        }
 //    }
-
     public int getTotalProduct() {
         String sql = "select COUNT(product_id) from Product";
         try {
@@ -416,7 +419,6 @@ public class ProductDAO extends DBContext{
 //
 //        return list;
 //    }
-
 //    public List<Chart> getChartProductArea(String start, int day) {
 //        List<Chart> list = new ArrayList<>();
 //        for (int i = 1; i <= day; i++) {
@@ -450,7 +452,6 @@ public class ProductDAO extends DBContext{
 //
 //        return list;
 //    }
-
     public String getUrlImageById(int id) {
         String sql = "SELECT images FROM Products_Images where product_id = ?";
         try {
@@ -480,10 +481,10 @@ public class ProductDAO extends DBContext{
             System.out.println(ex);
         }
     }
-    
+
     public static void main(String[] args) {
         ProductDAO sc = new ProductDAO();
-        
+
 //        System.out.println(sc.getTotalProduct(" ", "!= 1", "= 1"));
 //        System.out.println(sc.getProductWithPaging(1, 8, "", "1", "desc", "update_date", "1"));
 //          System.out.println(sc.getProductById(1));
