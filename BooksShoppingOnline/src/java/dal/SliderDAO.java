@@ -18,7 +18,7 @@ import model.Slider;
  */
 public class SliderDAO extends DBContext{
     public Slider getFirstSlider() {
-        String sql = "SELECT top 1 * FROM books_shop_online.slider where status = 1";
+        String sql = "SELECT * FROM books_shop_online.slider WHERE status = 1 LIMIT 1;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -73,5 +73,8 @@ public class SliderDAO extends DBContext{
         }
 
         return 0;
+    }
+    public static void main(String[] args) {
+        System.out.println(new SliderDAO().getFirstSlider());
     }
 }

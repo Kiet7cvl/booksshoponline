@@ -36,9 +36,9 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
+
     public User checkUserExist(String email) {
-        String sql = "select * from user\n"
-                + "where email = ?";
+        String sql = "SELECT * FROM `User` WHERE userId = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, email);
@@ -63,9 +63,9 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public void register(String fullName, String password, String gender, String email, String mobile){
-        String sql = "INSERT INTO user (`fullName`, `password`,`gender`, `email`, `mobile`, `status`, `role_id`) VALUES \n" +
-                  "(?,?,b?,?,?,0,1)";
+    public void register(String fullName, String password, String gender, String email, String mobile) {
+        String sql = "INSERT INTO user (`fullName`, `password`,`gender`, `email`, `mobile`, `status`, `role_id`) VALUES \n"
+                + "(?,?,b?,?,?,0,1)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, fullName);
@@ -76,10 +76,52 @@ public class UserDAO extends DBContext {
             st.executeUpdate();
         } catch (Exception e) {
         }
-            
+
     }
 
 
+    public void changePassword(int userId, String new_pass1) {
+        try {
+            String sql = "UPDATE `User`\n"
+                    + "   SET \n"
+                    + "      `password` = ?\n"
+                    + " WHERE `userId` = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, new_pass1);
+            ps.setInt(2, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public User getUser(int userId, String old_pass) {
+        try {
+            String sql = "SELECT * FROM `User` WHERE userId = ? AND password = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.setString(2, old_pass);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                User user = User.builder()
+                        .user_Id(rs.getInt(1))
+                        .full_Name(rs.getString(2))
+                        .password(rs.getString(3))
+                        .avatar(rs.getString(4))
+                        .gender(rs.getBoolean(5))
+                        .email(rs.getString(6))
+                        .mobile(rs.getString(7))
+                        .address(rs.getString(8))
+                        .status(rs.getBoolean(9))
+                        .role_Id(rs.getString(10))
+                        .build();
+                return user;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
     
     public boolean chekcAccount(String email) {
         try {
@@ -125,6 +167,7 @@ public class UserDAO extends DBContext {
         return null;
     }
 
+
     public String UpdatePassword(String pass, String email){
         try{
             
@@ -142,6 +185,7 @@ public class UserDAO extends DBContext {
     
     public static void main(String[] args){
          System.out.println(new UserDAO().login("kiet1@gmail.com", "11112012"));
+
 //       System.out.println(new UserDAO().checkUserExist("kiet1@gmail.com"));
     }
  
