@@ -4,18 +4,21 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>Controller.Public.HomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListDetailController</servlet-name>
+        <servlet-class>Controller.Public.ListDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListDetailController</servlet-name>
+        <url-pattern>/list-detail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>
-            index.jsp
-        </welcome-file>
-    </welcome-file-list>
 </web-app>
