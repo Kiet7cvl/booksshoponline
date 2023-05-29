@@ -8,6 +8,15 @@
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+        <servlet>
+        <servlet-name>ProductListController</servlet-name>
+        <servlet-class>Controller.Public.ProductListController</servlet-class>
+    </servlet>
+        <servlet-mapping>
+        <servlet-name>ProductListController</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30

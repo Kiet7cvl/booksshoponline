@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/src/java/model/User.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/web/components/account.jsp</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/src/java/dal/UserDAO.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/src/java/context/DBContext.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/src/java/Controller/Common/RegisterController.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/web/index.jsp</file>
-            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/web/components/header.jsp</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/web/product.jsp</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/src/java/Controller/Public/ProductListController.java</file>
+            <file>file:/C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/src/java/dal/ProductDAO.java</file>
         </group>
     </open-files>
 </project-private>
