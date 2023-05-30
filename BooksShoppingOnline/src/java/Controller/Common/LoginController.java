@@ -66,7 +66,7 @@ public class LoginController extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String historyUrl = (String) session.getAttribute("historyUrl");
-        
+
         UserDAO dao = new UserDAO();
         User u = dao.login(email, password);
         if (u == null) {
@@ -74,9 +74,9 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
             session.setAttribute("us", u);
-//          response.sendRedirect(historyUrl);
+            response.sendRedirect(historyUrl);
 //          request.getRequestDispatcher("home").forward(request, response);
-            response.sendRedirect("home");
+//            response.sendRedirect("home");
         }
     }
 

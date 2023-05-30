@@ -1,6 +1,8 @@
 
 package Controller.Common;
 
+
+import model.SendMail;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,7 +56,9 @@ public class RegisterController extends HttpServlet {
             } else if (u == null) {
                 //dang ky thanh cong
                 dao.register(fullName, password, gender, email, mobile);
-                request.setAttribute("notification", "Đăng kí thành công");
+
+                SendMail.sendEmailSignup(email);
+                request.setAttribute("notification", "Đăng kí thành công, vui lòng kiểm tra mail của bạn");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
                 request.setAttribute("notification", "Email đã tồn tại");

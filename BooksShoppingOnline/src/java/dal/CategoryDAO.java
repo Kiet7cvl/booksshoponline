@@ -13,10 +13,7 @@ import java.util.List;
 import model.Category;
 import model.CategoryBlog;
 
-/**
- *
- * @author ASUS
- */
+
 public class CategoryDAO extends DBContext{
 
     public List<Category> getAllCategory() {
@@ -61,6 +58,13 @@ public class CategoryDAO extends DBContext{
         return list;
     }
     
-    
+   
+    public static void main(String[] args) {
+        CategoryDAO sc = new CategoryDAO();
+        
+//        System.out.println(sc.getTotalProduct(" ", "1", "1"));
+        System.out.println(sc.getAllCategory());
+
+    }
     
 }
