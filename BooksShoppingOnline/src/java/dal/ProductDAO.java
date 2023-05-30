@@ -311,22 +311,7 @@ public class ProductDAO extends DBContext {
         }
     }
 
-//    public void updateQuantityProduct(List<OrderDetail> listOrderDetail) {
-//        try {
-//            for (OrderDetail orderDetail : listOrderDetail) {
-//                String sql = "UPDATE [dbo].[Product]\n"
-//                        + "   SET [quantity] = (quantity - ? )\n"
-//                        + " WHERE product_id = ?";
-//                PreparedStatement st = connection.prepareStatement(sql);
-//                st.setInt(1, orderDetail.getQuantity());
-//                st.setInt(2, orderDetail.getProduct_id());
-//                st.executeUpdate();
-//            }
-//
-//        } catch (SQLException ex) {
-//            System.out.println(ex);
-//        }
-//    }
+
     public int getTotalProduct() {
         String sql = "select COUNT(product_id) from Product";
         try {
