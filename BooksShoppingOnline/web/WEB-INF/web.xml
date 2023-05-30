@@ -4,11 +4,12 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>Controller.Public.HomeController</servlet-class>
     </servlet>
+    
     <servlet>
-
         <servlet-name>ListDetailController</servlet-name>
         <servlet-class>Controller.Public.ListDetailController</servlet-class>
     </servlet>
+
     <servlet>
         <servlet-name>changepassword</servlet-name>
         <servlet-class>Controller.Common.changepassword</servlet-class>
@@ -17,25 +18,38 @@
     <servlet>
         <servlet-name>Edituser</servlet-name>
         <servlet-class>Controller.Common.EditUser</servlet-class>
-
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ProductListController</servlet-name>
+        <servlet-class>Controller.Public.ProductListController</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
+        <servlet-name>ProductListController</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
 
+    <servlet-mapping>
         <servlet-name>ListDetailController</servlet-name>
         <url-pattern>/list-detail</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+
+    <servlet-mapping>  
         <servlet-name>changepassword</servlet-name>
         <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>Edituser</servlet-name>
         <url-pattern>/edituser</url-pattern>
     </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

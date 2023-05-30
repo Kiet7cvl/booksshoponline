@@ -89,7 +89,7 @@ public class EditUserProfileController extends HttpServlet {
 
 // Configure a repository (to ensure a secure temp location is used)
         ServletContext servletContext = this.getServletConfig().getServletContext();
-        File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+        File repository = (File) servletContext.getAttribute("jakarta.servlet.context.tempdir");
         factory.setRepository(repository);
 
 // Create a new file upload handler

@@ -15,6 +15,7 @@ public class DBContext {
 
             String password = "123456";
 
+
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url,username, password);
         } catch (ClassNotFoundException | SQLException ex) {
