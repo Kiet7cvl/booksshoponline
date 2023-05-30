@@ -13,13 +13,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import model.User;
 
 /**
@@ -100,7 +100,7 @@ public class ResetPassController extends HttpServlet {
                 props.put("mail.smtp.host", "smtp.gmail.com");
                 props.put("mail.smtp.starttls.enable", "true");
                 props.put("mail.smtp.port", "587");
-                Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+                Session session = Session.getDefaultInstance(props, new jakarta.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication("dotung7733@gmail.com", "eldtmhglijbmuoyd");
                     }

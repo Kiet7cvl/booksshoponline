@@ -122,7 +122,7 @@ input[type = text] {
                 <div class="rsp">Reset Password</div>
                 <form action="newpass" method="post">
                     <div class="edit">
-                        <input type="text" placeholder=" Enter New Password(*)" name="pass">
+                        <input type="password" placeholder=" Enter New Password(*)" name="pass">
                     </div> 
                     <div class="edit">
                         <input type="password"  placeholder=" Confirm New Password(*)" name="pass2">
@@ -144,7 +144,7 @@ input[type = text] {
             console.log(mess.innerText === '');
 
             if (mess.innerText !== '') {
-                alert('Mật khẩu chứa ít nhất 8 chứ kí tự ');
+                alert('Your Password less than 8 character or more than 32 characters ');
             }
 
         </script>
