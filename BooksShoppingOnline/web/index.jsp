@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title>JSP Page</title>
+        <title>Home</title>
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css">
         <%@include file="components/javascript.jsp" %>
@@ -24,7 +24,7 @@
 
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                         <c:forEach begin="1" end="${sessionScope.totalSlider-1}" var="c">    
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${c}" aria-label="Slide ${c+1}"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${c}" aria-label="Slide ${c+1}"></button>   
                         </c:forEach>
                     </div>
 
@@ -139,7 +139,7 @@
                                                           top center / cover no-repeat">
                                 <div class="category-content">Manga-Comic</div>
                             </div></a>
-                        
+
                         <div class="clear"></div>
                     </div> 
                 </div>
@@ -151,6 +151,17 @@
 
                         <!-- blog list hot -->
                         <div class="blog-list">
+
+                            <c:forEach items="${sessionScope.listBlog_HomePage}" var="c">
+                                <div class="blog-item">
+                                    <img src="${c.thumbnail}" alt="" class="blog-img" style="width: 592px; height: 450px">
+                                    <div class="blog-body" style="min-height: 340px">
+                                        <h3 class="blog-heading" style="font-size: 40px">${c.title}</h3>
+                                        <p class="blog-desc">${c.brief_infor}</p>
+                                        <a href="blogDetail?blog_id=${c.blog_id}&categoryBlog_id=${c.categoryBlog_id}" class="place-buy-btn">Tìm hiểu thêm</a>
+                                    </div>
+                                </div>
+                            </c:forEach>
 
 
                             <div class="clear"></div>
