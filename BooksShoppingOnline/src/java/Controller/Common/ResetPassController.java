@@ -20,6 +20,7 @@ import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.servlet.http.HttpSession;
 import model.User;
 
 /**
@@ -88,6 +89,7 @@ public class ResetPassController extends HttpServlet {
         UserDAO dao = new UserDAO();
 
         User user = new UserDAO().getUserByEmail(email);
+        HttpSession session1 = request.getSession();
 
         if (user == null) {
             request.setAttribute("notification", "Email không tồn tại");
@@ -118,7 +120,8 @@ public class ResetPassController extends HttpServlet {
                 } catch (MessagingException e) {
                     throw new RuntimeException(e);
                 }
-            }
+            }                        
+            session1.setAttribute("uss", user);
             request.setAttribute("notification", "Hãy kiểm tra hòm thư của bạn");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
