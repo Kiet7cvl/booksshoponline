@@ -76,6 +76,7 @@
                             <a><i type="button" class="ti-user btn btn-icon py-2 px-4" data-toggle="modal"  data-target="#loginModal"></i></a>
                         </li>
                     </c:if>
+                        
                     <!-- begin icon header -->
                     <c:if test="${sessionScope.us.role_Id == 1 || sessionScope.us == null}">
                         <li class="nav-item">

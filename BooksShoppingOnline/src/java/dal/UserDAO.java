@@ -255,6 +255,19 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
-    
+      public String getAuthorById(int author_id) {
+        String sql = "select * from books_shop_online.User where userId = ? ";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, author_id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+
+                return rs.getString(2);
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
 }

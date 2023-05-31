@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
 /**
  *
  * @author MSI Bravo
@@ -38,7 +37,7 @@ public class newpass extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet newpass</title>");            
+            out.println("<title>Servlet newpass</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet newpass at " + request.getContextPath() + "</h1>");
@@ -59,7 +58,7 @@ public class newpass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                request.getRequestDispatcher("components/newpassword.jsp").forward(request, response);
+        request.getRequestDispatcher("components/newpassword.jsp").forward(request, response);
     }
 
     /**
@@ -73,14 +72,15 @@ public class newpass extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
+        int userId = Integer.parseInt(request.getParameter("user_Id"));
+//        String email = request.getParameter("email");
         String pass = request.getParameter("pass");
         String pass2 = request.getParameter("pass2");
-        if(pass.matches("((?=.*\\d)[a-zA-Z\\d!@#$%^&*]{8,31})") && 
-                pass2.matches("((?=.*\\d)[a-zA-Z\\d!@#$%^&*]{8,31})") && 
-                (pass.equals(pass2))) {
+        if (pass.matches("((?=.*\\d)[a-zA-Z\\d!@#$%^&*]{8,31})")
+                && pass2.matches("((?=.*\\d)[a-zA-Z\\d!@#$%^&*]{8,31})")
+                && (pass.equals(pass2))) {
             UserDAO u = new UserDAO();
-            u.UpdatePassword(pass, email);
+            u.changePassword(userId, pass);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
             request.setAttribute("mess", "x");
