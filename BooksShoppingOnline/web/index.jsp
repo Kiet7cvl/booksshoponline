@@ -119,7 +119,7 @@
                     <!-- Product list -->
                     <h2 class="section-heading">Những thể loại hấp đẫn</h2>
                     <div class="category-list">
-                        <a href="list?&categoryId=2"><div class="category-item category-img" style="background: url('assets/img/categoryImg/1.png')
+                        <a href="list?&categoryId=2"><div class="category-item category-img" style="bategoryId=2"><ackground: url('assets/img/categoryImg/1.png')
                                                           top center / cover no-repeat">
                                 <div class="category-content">Kĩ năng sống</div>
                             </div></a>
