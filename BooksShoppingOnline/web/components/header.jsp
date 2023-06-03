@@ -11,6 +11,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand me-5 ti-joomla" href="home">KingBooks</a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,12 +27,9 @@
                     <li class="nav-item me-4">
                         <a class="nav-link" href="blog">Blog</a>
                     </li>
-                    <li class="nav-item me-4">
-                        <a class="nav-link" href="#">Liên hệ</a>
-                    </li>
-
-
                 </ul>
+
+                <!--                Search form-->
                 <form class="d-flex me-5" action="list">
                     <input class="form-control me-2" type="text" name ="key" placeholder="Tìm kiếm sản phẩm..." aria-label="Search" value="${key}" id="" required class="form-control">
                     <button class="btn btn-outline-danger" type="submit">Tìm</button>
@@ -39,7 +37,7 @@
 
 
 
-
+                <!--            Authorization when users logged -->
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <c:if test="${sessionScope.us != null}">
                         <div class="btn-group">
@@ -76,7 +74,7 @@
                             <a><i type="button" class="ti-user btn btn-icon py-2 px-4" data-toggle="modal"  data-target="#loginModal"></i></a>
                         </li>
                     </c:if>
-                        
+
                     <!-- begin icon header -->
                     <c:if test="${sessionScope.us.role_Id == 1 || sessionScope.us == null}">
                         <li class="nav-item">
