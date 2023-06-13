@@ -5,28 +5,25 @@
  */
 package model;
 
+import java.sql.Date;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-
+/**
+ *
+ * @author son22
+ */
 @Builder
 @Getter
 @Setter
 @ToString
-public class User {
-    private int user_Id;
-    private String full_Name;
-    private String password;
-    private String avatar;
-    private boolean gender;
-    private String email;
-    private String mobile;
-    private String address;
+public class Customer {
+    private int customer_id;
+    private String customer_name;
+    private String customer_email;
+    private String customer_mobile;
+    private Date updated_date;
     private boolean status;
-    private String role_Id;
-    private byte[] image;  
-    private String base64Image;
-    
 }

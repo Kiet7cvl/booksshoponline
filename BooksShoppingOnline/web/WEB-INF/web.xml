@@ -40,34 +40,47 @@
         <servlet-name>UpdateCart</servlet-name>
         <servlet-class>Controller.Public.UpdateCart</servlet-class>
     </servlet>
+    
     <servlet>
         <servlet-name>CartContactController</servlet-name>
         <servlet-class>Controller.Public.CartContactController</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>MKTDashboardController</servlet-name>
+        <servlet-class>Controller.Marketing.MKTDashboardController</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+    
     <servlet>
         <servlet-name>ProductListController</servlet-name>
         <servlet-class>Controller.Public.ProductListController</servlet-class>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>ProductListController</servlet-name>
         <url-pattern>/list</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>ListDetailController</servlet-name>
         <url-pattern>/list-detail</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>changepassword</servlet-name>
         <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>Edituser</servlet-name>
         <url-pattern>/edituser</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>FeedbackCommonController</servlet-name>
         <url-pattern>/feedback_common</url-pattern>
@@ -92,9 +105,15 @@
         <servlet-name>UpdateCart</servlet-name>
         <url-pattern>/update-cart</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>CartContactController</servlet-name>
         <url-pattern>/cart-contact</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>  
+        <servlet-name>MKTDashboardController</servlet-name>
+        <url-pattern>/mkt-dashboard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

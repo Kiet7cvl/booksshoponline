@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.Chart;
 import model.Product;
 
 /**
@@ -225,7 +226,6 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
-
     public void UpdateProduct(int id, String name, String desciption, String brief_infor, int quantity, int status, int original_price, int sale_price, int categoryId, String url) {
         try {
             String sql = "UPDATE [dbo].[Product]\n"
@@ -311,7 +311,6 @@ public class ProductDAO extends DBContext {
         }
     }
 
-
     public int getTotalProduct() {
         String sql = "select COUNT(product_id) from Product";
         try {
@@ -371,72 +370,75 @@ public class ProductDAO extends DBContext {
         return 0;
     }
 
-//    public List<Chart> getChartProductBar(String start, int day) {
-//        List<Chart> list = new ArrayList<>();
-//        for (int i = 1; i <= day; i++) {
-//            int value = 0;
-//            String sql = "select count(*) from Product where update_date = DATEADD(DAY, ?, ?) and status = 1";
-//            try {
-//                PreparedStatement st = connection.prepareStatement(sql);
-//                st.setInt(1, i);
-//                st.setString(2, start);
-//                ResultSet rs = st.executeQuery();
-//                while (rs.next()) {
-//                    value = rs.getInt(1);
-//                }
-//                sql = "select  DATEADD(DAY, ?, ?)";
-//                st = connection.prepareStatement(sql);
-//                st.setInt(1, i);
-//                st.setString(2, start);
-//                rs = st.executeQuery();
-//                while (rs.next()) {
-//                    Chart c = Chart.builder()
-//                            .date(rs.getDate(1))
-//                            .value(value)
-//                            .build();
-//                    list.add(c);
-//                }
-//
-//            } catch (SQLException e) {
-//                System.out.println(e);
-//            }
-//        }
-//
-//        return list;
-//    }
-//    public List<Chart> getChartProductArea(String start, int day) {
-//        List<Chart> list = new ArrayList<>();
-//        for (int i = 1; i <= day; i++) {
-//            int value = 0;
-//            String sql = "select count(*) from Product where update_date <= DATEADD(DAY, ?, ?) and status = 1 ";
-//            try {
-//                PreparedStatement st = connection.prepareStatement(sql);
-//                st.setInt(1, i);
-//                st.setString(2, start);
-//                ResultSet rs = st.executeQuery();
-//                while (rs.next()) {
-//                    value = rs.getInt(1);
-//                }
-//                sql = "select  DATEADD(DAY, ?, ?)";
-//                st = connection.prepareStatement(sql);
-//                st.setInt(1, i);
-//                st.setString(2, start);
-//                rs = st.executeQuery();
-//                while (rs.next()) {
-//                    Chart c = Chart.builder()
-//                            .date(rs.getDate(1))
-//                            .value(value)
-//                            .build();
-//                    list.add(c);
-//                }
-//
-//            } catch (SQLException e) {
-//                System.out.println(e);
-//            }
-//        }
-//
-//        return list;
-//    }
+    public List<Chart> getChartProductBar(String start, int day) {
+        List<Chart> list = new ArrayList<>();
+        for (int i = 1; i <= day; i++) {
+            int value = 0;
+            String sql = "SELECT COUNT(*) FROM books_shop_online.Product WHERE update_date = DATE_ADD(?, INTERVAL ?  DAY) AND status = 1;";
+            try {
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setString(1, start);
+                st.setInt(2, i);
+                ResultSet rs = st.executeQuery();
+                while (rs.next()) {
+                    value = rs.getInt(1);
+                }
+                sql = "SELECT DATE_ADD(?, INTERVAL ? DAY);";
+                st = connection.prepareStatement(sql);
+                st.setString(1, start);
+                st.setInt(2, i);
+                rs = st.executeQuery();
+                while (rs.next()) {
+                    Chart c = Chart.builder()
+                            .date(rs.getDate(1))
+                            .value(value)
+                            .build();
+                    list.add(c);
+                }
+
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+
+        return list;
+    }
+
+    public List<Chart> getChartProductArea(String start, int day) {
+        List<Chart> list = new ArrayList<>();
+        for (int i = 1; i <= day; i++) {
+            int value = 0;
+            String sql = "SELECT COUNT(*) FROM product\n"
+                    + "WHERE update_date <= DATE_ADD(?, INTERVAL ? DAY) AND status = 1; ";
+            try {
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setString(1, start);
+                st.setInt(2, i);
+                ResultSet rs = st.executeQuery();
+                while (rs.next()) {
+                    value = rs.getInt(1);
+                }
+                sql = "SELECT DATE_ADD(?, INTERVAL ? DAY);";
+                st = connection.prepareStatement(sql);
+                st.setString(1, start);
+                st.setInt(2, i);
+                rs = st.executeQuery();
+                while (rs.next()) {
+                    Chart c = Chart.builder()
+                            .date(rs.getDate(1))
+                            .value(value)
+                            .build();
+                    list.add(c);
+                }
+
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+
+        return list;
+    }
+
     public String getUrlImageById(int id) {
         String sql = "SELECT images FROM Products_Images where product_id = ?";
         try {
@@ -473,8 +475,7 @@ public class ProductDAO extends DBContext {
 //        System.out.println(sc.getTotalProduct(" ", "!= 1", "= 1"));
 //        System.out.println(sc.getProductWithPaging(1, 8, "", "1", "desc", "update_date", "1"));
 //          System.out.println(sc.getProductById(1));
-//        System.out.println(sc.getUrlImageById(5));
+        System.out.println(sc.getChartProductBar("2023-05-19", 7));
     }
 
 }
-
