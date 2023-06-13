@@ -24,6 +24,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import model.User;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 
 @WebServlet(name = "EditUserProfileController", urlPatterns = {"/edit"})
@@ -84,85 +86,71 @@ public class EditUserProfileController extends HttpServlet {
 //
 //        
 
-        // Create a factory for disk-based file items
-        org.apache.commons.fileupload.disk.DiskFileItemFactory factory = new org.apache.commons.fileupload.disk.DiskFileItemFactory();
+       // Create a factory for disk-based file items
+        DiskFileItemFactory factory = new DiskFileItemFactory();
 
-// Configure a repository (to ensure a secure temp location is used)
+        // Configure a repository (to ensure a secure temp location is used)
         ServletContext servletContext = this.getServletConfig().getServletContext();
-        File repository = (File) servletContext.getAttribute("jakarta.servlet.context.tempdir");
+        File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
         factory.setRepository(repository);
 
-// Create a new file upload handler
-        org.apache.commons.fileupload.servlet.ServletFileUpload upload = new org.apache.commons.fileupload.servlet.ServletFileUpload(factory);
+        // Create a new file upload handler
+        ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setHeaderEncoding("UTF-8");
 
         try {
-
-//
             String uid_raw = request.getParameter("userId");
             String uname = request.getParameter("fullName");
             String umobile = request.getParameter("mobile");
             String uaddress = request.getParameter("address");
-            String url_avatar = "images/avatar/";
-            boolean ugender;
-            if (request.getParameter("gender") == "1") {
-                ugender = true;
-            } else {
-                ugender = false;
-            }
+
+            boolean ugender = request.getParameter("gender").equals("1");
             Part filePart = request.getPart("avatar");
             String fileName = getFileName(filePart);
+            String url_avatar = "images/avatar";
             OutputStream out = null;
             InputStream filecontent = null;
-            final PrintWriter writer = response.getWriter();
+            PrintWriter writer = response.getWriter();
+
             try {
-                File file = new File("E:\\Ki5\\SWP391\\ShoppingOnile\\BooksShoppingOnline\\web\\WEB-INF\\images\\avatar" + File.separator + uid_raw+"_" + fileName);
+                File file = new File("D:/JAVA/booksshop/BooksShoppingOnline/web/WEB-INF/images/avatar" + File.separator + uid_raw + "_" + fileName);
                 url_avatar = file.getCanonicalPath();
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();
-                int read = 0;
-                final byte[] bytes = new byte[1024];
+                int read;
+                byte[] bytes = new byte[1024];
 
                 while ((read = filecontent.read(bytes)) != -1) {
                     out.write(bytes, 0, read);
                 }
             } catch (FileNotFoundException fne) {
-                writer.println("You either did not specify a file to upload or are "
-                        + "trying to upload a file to a protected or nonexistent "
-                        + "location.");
-                writer.println("<br/> ERROR: " + fne.getMessage());
-            } finally {
-                if (out != null) {
-                    out.close();
-                }
-                if (filecontent != null) {
-                    filecontent.close();
-                }
-                if (writer != null) {
-                    writer.close();
-                }
-            }
+                request.setAttribute("notification", "Bạn không chỉ định ảnh để tải lên");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+
+           } 
 
             int uid = Integer.parseInt(uid_raw);
 
             ud.editUserProfile(uname, url_avatar, ugender, umobile, uaddress, uid);
 
             User u = ud.getUserById(uid);
+
             session.setAttribute("us", u);
             TimeUnit.SECONDS.sleep(2);
-            response.sendRedirect("home");
+            request.setAttribute("notification", "Cập nhật thông tin thành công !");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+           // response.sendRedirect("home");
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }
-
     }
 
     private String getFileName(Part part) {
-        final String partHeader = part.getHeader("content-disposition");
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename")) {
-                return content.substring(
-                        content.indexOf('=') + 1).trim().replace("\"", "");
+        String contentDisposition = part.getHeader("content-disposition");
+        String[] tokens = contentDisposition.split(";");
+        for (String token : tokens) {
+            if (token.trim().startsWith("filename")) {
+                return token.substring(token.indexOf('=') + 1).trim().replace("\"", "");
             }
         }
         return null;
