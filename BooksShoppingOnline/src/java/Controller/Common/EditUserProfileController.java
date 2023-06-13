@@ -144,7 +144,7 @@ public class EditUserProfileController extends HttpServlet {
             }
 
             int uid = Integer.parseInt(uid_raw);
-
+            
             ud.editUserProfile(uname, url_avatar, ugender, umobile, uaddress, uid);
 
             User u = ud.getUserById(uid);
