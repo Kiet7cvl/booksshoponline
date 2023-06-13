@@ -31,8 +31,8 @@
             <!-- Css Styles -->
             <link rel="stylesheet" href="do1/css/bootstrap.min.css" type="text/css">
             <link rel="stylesheet" href="do1/css/font-awesome.min.css" type="text/css">
-            <link rel="stylesheet" href="do1/css/themify-icons.css" type="text/css">
             <link rel="stylesheet" href="do1/css/elegant-icons.css" type="text/css">
+            <link rel="stylesheet" href="do1/css/themify-icons.css" type="text/css">
             <link rel="stylesheet" href="do1/css/owl.carousel.min.css" type="text/css">
             <link rel="stylesheet" href="do1/css/nice-select.css" type="text/css">
             <link rel="stylesheet" href="do1/css/jquery-ui.min.css" type="text/css">
