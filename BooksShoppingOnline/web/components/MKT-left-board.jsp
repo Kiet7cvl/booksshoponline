@@ -1,8 +1,4 @@
-<%-- 
-    Document   : MKT-left-board
-    Created on : Jun 23, 2022, 8:55:56 PM
-    Author     : son22
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="layoutSidenav_nav">
@@ -23,7 +19,9 @@
                 <div class="collapse" id="collapse1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="marketingproductlist">Danh sách sản phẩm</a>
-                        <a class="nav-link" href="add_product.jsp">Thêm mới sản phẩm</a>
+
+                        <a class="nav-link" href="MKTAddProduct.jsp">Thêm mới sản phẩm</a>
+
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapseLayouts">

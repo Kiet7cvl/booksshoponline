@@ -35,18 +35,17 @@
                     <button class="btn btn-outline-danger" type="submit">Tìm</button>
                 </form>
 
-
-
-                <!--            Authorization when users logged -->
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <c:if test="${sessionScope.us != null}">
                         <div class="btn-group">
                            <button type="button" style="border-radius: 4px" class="btn btn-outline-dark py-2 px-4" data-toggle="dropdown" aria-expanded="false">
                                 <c:if test="${sessionScope.us.avatar != null && sessionScope.us.avatar ne ''}">
                                     <img class="rounded-circle " width="30px" height="30px" src="data:image/png;base64,${sessionScope.us.base64Image}">
-                                    <span class="font-weight-bold">${sessionScope.us.full_Name}</span>
-                                    </c:if>
-                                    <c:if test="${sessionScope.us.avatar == null || sessionScope.us.avatar eq ''}">
+
+                                        <span class="font-weight-bold">${sessionScope.us.full_Name}</span>
+                                </c:if>
+                                <c:if test="${sessionScope.us.avatar == null || sessionScope.us.avatar eq ''}">
+
                                     <img class="rounded-circle " width="30px" height="30px" src="data:image/png;base64,${sessionScope.us.avatar}">
                                         <span class="font-weight-bold">${sessionScope.us.full_Name} ${sessionScope.us.base64Image}</span>
                                 </c:if>

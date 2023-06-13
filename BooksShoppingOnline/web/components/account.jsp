@@ -1,8 +1,4 @@
-<%-- 
-    Document   : account
-    Created on : Jun 3, 2022, 6:30:16 PM
-    Author     : son22
---%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Notification User -->
 <c:if test="${notification !=null}">
@@ -74,7 +70,6 @@
     </div>
 </div>
 
- 
 
 <!-- Register -->
 
@@ -105,6 +100,10 @@
                                     </div></div>
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <input type="text" class="form-control" id="name" placeholder="address" name="address" style="border-radius: 100px;" required>
+                                    </div></div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="password" style="border-radius: 100px;" required>
                                     </div>
                                 </div>
@@ -117,7 +116,7 @@
                                     <div class="form-group" required>
                                         Giới tính
                                         <input class="" name="gender" type="radio" value="1" required/> Nam
-                                        
+
                                         <input class="" name="gender" type="radio" value="0" required/> Nữ
                                     </div>
                                 </div>
@@ -176,7 +175,7 @@
                     <div class="container">
 
                         <div class="row">
-                            
+
                             <c:if test="${sessionScope.us.avatar != null && sessionScope.us.avatar ne ''}">
                                 <div class="col-md-4">
                                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -210,10 +209,11 @@
                                                 <div><input name="gender" type="radio" value="0" ${sessionScope.us.gender == false ? 'checked' : ''}/>
                                                     Nữ
                                                 </div>
-                                                    <input type="hidden" name="userId" value="${sessionScope.us.user_Id}"/>
+
+                                                <input type="hidden" name="userId" value="${sessionScope.us.user_Id}"/>
                                             </div>
                                             <div class="row mt-4 col-md-6" hidden><label class="labels" style="font-size: 10px;">ID</label><input type="text" class="form-control" name="userId" placeholder="ID" value="${sessionScope.us.user_Id}"></div>&nbsp;
-                                            <div class="row mt-4 col-md-3"><label class="labels" style="font-size: 15px;">Mật khẩu</label><a href="#" style="text-decoration: none;"><button type="button" data-toggle="modal" data-dismiss="modal" data-target="#ChangePasswordModal"  class="btn btn-dark" value="">Đổi mật khẩu</button></a></div>
+                                            <div class="row mt-4 col-md-3"><label class="labels" style="font-size: 10px;">Mật khẩu</label><a href="#" style="text-decoration: none;"><button type="button" data-toggle="modal" data-dismiss="modal" data-target="#ChangePasswordModal"  class="btn btn-dark" value="">Đổi mật khẩu</button></a></div>
                                         </div>
                                         <div class="row mt-5 col-md-6 text-center"><button class="btn btn-dark" type="submit">Lưu</button></div>
                                     </form>
@@ -228,4 +228,5 @@
         </div>
     </div>
 </div> 
+
 

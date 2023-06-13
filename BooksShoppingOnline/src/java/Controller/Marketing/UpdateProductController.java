@@ -3,38 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Common;
+package Controller.Marketing;
 
-import dal.UserDAO;
+import dal.ProductDAO;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import model.User;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+/**
+ *
+ * @author son22
+ */
+public class UpdateProductController extends HttpServlet {
 
-@WebServlet(name = "EditUserProfileController", urlPatterns = {"/edit"})
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,
-        maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 50)
-public class EditUserProfileController extends HttpServlet {
-
-   
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,9 +42,8 @@ public class EditUserProfileController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
-  
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -61,7 +56,7 @@ public class EditUserProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -74,76 +69,75 @@ public class EditUserProfileController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-
-            throws ServletException, IOException {    
-       
-         
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         
-       
-        HttpSession session = request.getSession();
-        UserDAO ud = new UserDAO();
-        
+        ProductDAO pd = new ProductDAO();
+           
+        String url_thumbnail = "images/product/";
+
         // Create a factory for disk-based file items
         DiskFileItemFactory factory = new DiskFileItemFactory();
 
-        // Configure a repository (to ensure a secure temp location is used)
+// Configure a repository (to ensure a secure temp location is used)
         ServletContext servletContext = this.getServletConfig().getServletContext();
         File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
         factory.setRepository(repository);
 
-        // Create a new file upload handler
+// Create a new file upload handler
         ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setHeaderEncoding("UTF-8");
 
         try {
-            String uid_raw = request.getParameter("userId");
-            String uname = request.getParameter("fullName");
-            String umobile = request.getParameter("mobile");
-            String uaddress = request.getParameter("address");
-            boolean ugender = request.getParameter("gender").equals("1");
-            
-            Part filePart = request.getPart("avatar");
-            String fileName = getFileName(filePart);            
-            String url_avatar = "images/avatar";        
-            OutputStream out = null;
-            InputStream filecontent = null;
-            final PrintWriter writer = response.getWriter();
+            // Parse the request
+            List<FileItem> items = upload.parseRequest(request);
+            // Process the uploaded items
+            Iterator<FileItem> iter = items.iterator();
+            HashMap<String, String> fields = new HashMap<>();
+            while (iter.hasNext()) {
+                FileItem item = iter.next();
 
-            try {
-                
-                File file = new File("C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\shopping_online\\booksshop\\BooksShoppingOnline\\web\\images\\avatar" + File.separator + fileName);
-                url_avatar = file.getCanonicalPath();
-                out = new FileOutputStream(file);
-                filecontent = filePart.getInputStream();
-                int read;
+                if (item.isFormField()) {
+                    fields.put(item.getFieldName(), item.getString("UTF-8"));
 
-                final byte[] bytes = new byte[1024];
+                } else {
+                    String filename = item.getName();
+                    if (filename == null || filename.equals("")) {
+                        String url_old = pd.getUrlImageById(Integer.parseInt(fields.get("productId")));
+                        url_thumbnail = url_old;
+                        break;
+                    } else {
+                        Path path = Paths.get(filename);
+                        String storePath = servletContext.getRealPath("../../web/images/product");
+                        File uploadFile = new File(storePath + "/" + path.getFileName());
+                        item.write(uploadFile);
+                        url_thumbnail += filename;
+                    }
 
-
-                while ((read = filecontent.read(bytes)) != -1) {
-                    out.write(bytes, 0, read);
                 }
+            }
+            
+            int product_id = Integer.parseInt(fields.get("productId"));
+            String name = fields.get("name");
+            String brief_infor = fields.get("brief_infor");
+            String desciption = fields.get("desciption");
+            int original_price = Integer.parseInt(fields.get("original_price"));
+            int sale_price = Integer.parseInt(fields.get("sale_price"));
+            int quantity = Integer.parseInt(fields.get("quantity"));
+            int categoryId = Integer.parseInt(fields.get("categoryId"));
+            int status = Integer.parseInt(fields.get("status"));
 
-                
-            } catch (FileNotFoundException fne) { 
-                request.setAttribute("notification", "Bạn cần phải điền đầy đủ thông tin cơ bản của hồ sơ");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            } 
-            int uid = Integer.parseInt(uid_raw);
+            
+            pd.UpdateProduct(product_id, name, desciption, brief_infor, quantity, status, original_price, sale_price, categoryId,url_thumbnail);
+            TimeUnit.SECONDS.sleep(1);
+            response.sendRedirect("product-detail?product_id="+product_id);
+        } catch (FileUploadException ex) {
 
-            ud.editUserProfile(uname, url_avatar, ugender, umobile, uaddress, uid);
-            User u = ud.getUserById(uid);
-            session.setAttribute("us", u);
-            TimeUnit.SECONDS.sleep(2);
-            request.setAttribute("notification", "Bạn đã cập nhật hồ sơ thành công");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
         } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }
 
+        }
     }
     private String getFileName(Part part) {
         final String partHeader = part.getHeader("content-disposition");
@@ -155,6 +149,7 @@ public class EditUserProfileController extends HttpServlet {
         }
         return null;
     }
+
 
     /**
      * Returns a short description of the servlet.

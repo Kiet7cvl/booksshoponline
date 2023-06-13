@@ -1,8 +1,3 @@
-<%-- 
-    Document   : MKTDashboard
-    Created on : Jun 23, 2022, 7:56:23 AM
-    Author     : Veetu
---%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,16 +9,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
 
-        <script src="
-                https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js
-        "></script>
-
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <title>Dashboard - Maketing</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="./assets/css/styles.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -44,9 +33,8 @@
             }
         </style>
     </head>
-    
-    <body class="sb-nav-fixed">
 
+    <body class="sb-nav-fixed">
         <%@include file="components/account.jsp" %>
         <%@include file="components/manager-header.jsp" %>
         <div id="layoutSidenav">
@@ -69,7 +57,8 @@
                                 <div class="card mb-4">
                                     <div class="card-header mb-4 nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseThongkebaidang" aria-expanded="false" aria-controls="collapseThongkebaidang">
                                         <i class="fas fa-chart-area me-1"></i>
-                                        Thống kê bài đăng 
+
+                                        Thống kê bài đăng
                                     </div>
                                     <div id="collapseThongkebaidang" aria-labelledby="headingOne" data-bs-parent="#cutomerSetting" class="collapse card-body">
                                         <div class="row">
@@ -160,12 +149,15 @@
             Chart.defaults.global.defaultFontColor = '#292b2c';
 // Area Chart Example
 
+
             var ctx1 = document.getElementById("myAreaChart-1");
             var myLineChart = new Chart(ctx1, {
             type: 'line',
                     data: {
+
                     labels: [<c:forEach  items="${listChartBlogBar}" var="blog" > "${blog.date}",</c:forEach>],
                             //   labels: ["2023-06-10", "2023-06-11", "2023-06-12"],
+
 
                             datasets: [{
                             label: "Bài Đăng",
@@ -181,6 +173,7 @@
                                     pointBorderWidth: 2,
                                     data: [<c:forEach  items="${listChartBlogArea}" var="blog" > "${blog.value}",</c:forEach>],
                                   //  data: [3, 4, 5],
+
                             }],
                     },
                     options: {
@@ -359,6 +352,7 @@
 //                            }
 //                    }
 //            });</script>
+
         <script>
             /// Set new default font family and font color to mimic Bootstrap's default styling
             Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -369,11 +363,14 @@
             type: 'bar',
                     data: {
                     labels: [<c:forEach  items="${listChartBlogBar}" var="blog" > "${blog.date}",</c:forEach>],
+
                             datasets: [{
                             label: "Bài Đăng",
                                     backgroundColor: "rgba(2,117,216,1)",
                                     borderColor: "rgba(2,117,216,1)",
+
                                     data: [<c:forEach  items="${listChartBlogBar}" var="blog" > "${blog.value}",</c:forEach>],
+
                             }],
                     },
                     options: {
@@ -528,6 +525,7 @@
 //                            }
 //                    }
 //            });</script>
+
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
     </body>

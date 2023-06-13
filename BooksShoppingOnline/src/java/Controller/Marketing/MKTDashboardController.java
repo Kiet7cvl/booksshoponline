@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -11,10 +12,12 @@ import dal.FeedbackDAO;
 import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,15 +73,7 @@ public class MKTDashboardController extends HttpServlet {
 String start = "";
 String end = "";
 
-if (date != null && date.getStart() != null) {
-    SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-    start = outputFormat.format(date.getStart());
-}
 
-if (date != null && date.getEnd() != null) {
-    SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-    end = outputFormat.format(date.getEnd());
-}
 
 String start_raw = request.getParameter("start");
 String end_raw = request.getParameter("end");
@@ -190,6 +185,7 @@ int day = dd.CountDayByStartEnd(start, end);
         request.setAttribute("start", start);
         request.setAttribute("end", end);
         request.getRequestDispatcher("MKTDashboard.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -204,7 +200,9 @@ int day = dd.CountDayByStartEnd(start, end);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         processRequest(request, response);
+
     }
 
     /**

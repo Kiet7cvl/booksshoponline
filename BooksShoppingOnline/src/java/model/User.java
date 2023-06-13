@@ -28,5 +28,6 @@ public class User {
     private String role_Id;
     private byte[] image;  
     private String base64Image;
+
     
 }
