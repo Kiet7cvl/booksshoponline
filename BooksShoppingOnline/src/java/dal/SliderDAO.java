@@ -20,7 +20,7 @@ import model.Slider;
 public class SliderDAO extends DBContext {
 
     public Slider getFirstSlider() {
-        String sql = "SELECT * FROM Slider where status = 1 ORDER BY slider_id limit 1";
+        String sql = "SELECT * FROM books_shop_online.slider WHERE status = 1 LIMIT 1;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -39,7 +39,7 @@ public class SliderDAO extends DBContext {
     }
 
     public int getcountSlider() {
-        String sql = "SELECT count(*) FROM [dbo].[Slider] where [status] = 1";
+        String sql = "SELECT count(*) FROM books_shop_online.slider where status = 1";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -78,10 +78,25 @@ public class SliderDAO extends DBContext {
 
         return list;
     }
+    
+    public void changeStatusById(int slider_id, int status) {
+        try {
+            String sql = "UPDATE Slider\n"
+                    + "   SET `status` = ?\n"
+                    + " WHERE slider_id = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, status);
+            st.setInt(2, slider_id);
 
-    public List<Slider> getALLSlider_True_False() {
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+     public List<Slider> getALLSlider_True_False(String status) {
         List<Slider> list = new ArrayList<>();
-        String sql = "SELECT * FROM [dbo].[Slider]";
+        String sql = "SELECT * FROM Slider where status " + status;
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -104,8 +119,26 @@ public class SliderDAO extends DBContext {
         return list;
     }
 
+
+
+
+    public String getUrlImageById(int id) {
+        String sql = "select slider_image from Slider where slider_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                
+                return rs.getString(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
     public Slider GetSliderDetailbyID(int sliderId) {
-        String sql = "SELECT * FROM [dbo].[Slider] where slider_id = ?";
+        String sql = "SELECT * FROM Slider where slider_id = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, sliderId);
@@ -128,53 +161,21 @@ public class SliderDAO extends DBContext {
 
         return null;
     }
-
-    public void updateStatusSlider(int id, int i) {
-        String sql = "UPDATE [dbo].[Slider]\n"
-                + "   SET status = ?\n"
-                + " WHERE slider_id = ?";
+    
+    public void AddSliderById(String slider_title, String url_thumbnail, String backlink, boolean status) {
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, i);
-            st.setInt(2, id);
-            st.executeUpdate();
-        } catch (Exception e) {
-        }
-    }
-
-    public void UpdateSliderById(int slider_id, String slider_title, String backlink, String url_thumbnail) {
-        try {
-            String sql = "UPDATE [dbo].[Slider]\n"
-                    + "   SET [slider_title] = ?\n"
-                    + "      ,[slider_image] = ?\n"
-                    + "      ,[backlink] = ?\n"
-                    + " WHERE slider_id = ?";
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, slider_title);
-            st.setString(2, url_thumbnail);
-            st.setString(3, backlink);
-            st.setInt(4, slider_id);
-
-            st.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-    }
-
-    public void AddSliderById(String slider_title, String backlink, String url_thumbnail, int status) {
-        try {
-            String sql = "INSERT INTO [dbo].[Slider]\n"
-                    + "           (slider_title\n"
-                    + "           ,slider_image\n"
-                    + "           ,backlink\n"
-                    + "           ,[status])\n"
+            String sql = "INSERT INTO Slider\n"
+                    + "           (`slider_title`\n"
+                    + "           ,`slider_image`\n"
+                    + "           ,`backlink`\n"
+                    + "           ,`status`)\n"
                     + "     VALUES\n"
                     + "           (?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, slider_title);
             st.setString(2, url_thumbnail);
             st.setString(3, backlink);
-            st.setInt(4, status);
+            st.setBoolean(4, status);
 
             st.executeUpdate();
         } catch (SQLException ex) {
@@ -182,26 +183,12 @@ public class SliderDAO extends DBContext {
         }
     }
 
-    public String getUrlImageById(int id) {
-        String sql = "select slider_image from Slider where slider_id = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, id);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                
-                return rs.getString(1);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return null;
-    }
-
     public static void main(String[] args) {
         SliderDAO sc = new SliderDAO();
         
-        System.out.println(sc.getFirstSlider());
+        System.out.println(sc.getALLSlider_True_False("!= -1"));
+
 
     }
+    
 }
