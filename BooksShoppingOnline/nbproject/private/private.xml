@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/FeedbackCommonController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/BlogDetail.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/product.jsp</file>
@@ -36,6 +37,16 @@
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/js/imagesloaded.pkgd.min.js</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/UpdateCart.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/js/owl.carousel.min.js</file>
+=======
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/src/java/model/Category.java</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/src/java/dal/OrderDetailDAO.java</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/web/myorder.jsp</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/src/java/model/OrderDetail.java</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/web/order-detail.jsp</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/src/java/dal/OrderDao.java</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/src/java/Controller/Customer/OrderDetailController.java</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/src/java/dal/CategoryDAO.java</file>
+>>>>>>> b659b060ab0fc9047861bde66f26847c087612ce
         </group>
     </open-files>
 </project-private>

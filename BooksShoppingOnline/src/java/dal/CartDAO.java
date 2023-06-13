@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dal;
 
 import context.DBContext;
@@ -14,10 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Cart;
 
-/**
- *
- * @author tr498
- */
 public class CartDAO extends DBContext {
 
     public List<Cart> getAllCartByUserId(int user_id) {
@@ -76,6 +69,7 @@ public class CartDAO extends DBContext {
         try {
             String sql = "INSERT INTO Cart (product_id, product_name, product_price, quantity, total_cost, user_id)"
                     + " VALUES (?, ?, ?, ?, ?, ?)";
+
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, product_id);
             st.setString(2, name);
@@ -94,6 +88,7 @@ public class CartDAO extends DBContext {
             String sql = "UPDATE Cart"
                     + " SET quantity = ?, total_cost = ?"
                     + " WHERE product_id = ? AND user_id = ?";
+
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, quantity);
             st.setInt(2, total_cost);
@@ -109,6 +104,7 @@ public class CartDAO extends DBContext {
         try {
             String sql = "DELETE FROM Cart"
                     + " WHERE product_id = ? AND user_id = ?";
+
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, product_id);
             st.setInt(2, user_id);
@@ -132,4 +128,5 @@ public class CartDAO extends DBContext {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

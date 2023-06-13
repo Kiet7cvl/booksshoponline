@@ -46,14 +46,15 @@ public class RegisterController extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
             UserDAO dao = new UserDAO();
-            User u = dao.checkUserExist(email);
+//            User u = dao.checkUserExist(email);
+            boolean u = dao.chekcAccount(email);
             if (!mobile.matches("[0-9]*")) {
                 request.setAttribute("notification", "Your Mobile Invalid");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else if (password.length() < 8 || password.length() > 32) {
                 request.setAttribute("notification", "Your Password less than 8 character or more than 32 characters");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-            } else if (u == null) {
+            } else if (u == false) {
                 //dang ky thanh cong
                 dao.register(fullName, password, gender, email, mobile);
 
