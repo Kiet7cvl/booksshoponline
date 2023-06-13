@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/web/index.jsp</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/src/java/model/Category.java</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/src/java/dal/OrderDetailDAO.java</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/web/myorder.jsp</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/src/java/model/OrderDetail.java</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/web/order-detail.jsp</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/src/java/dal/OrderDao.java</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/src/java/Controller/Customer/OrderDetailController.java</file>
+            <file>file:/D:/daycode%20HC/booksshop/BooksShoppingOnline/src/java/dal/CategoryDAO.java</file>
         </group>
     </open-files>
 </project-private>
