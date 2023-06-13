@@ -5,13 +5,11 @@ package Controller.Common;
 import model.SendMail;
 import dal.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.User;
 
 /**
  *
@@ -40,13 +38,14 @@ public class RegisterController extends HttpServlet {
         String password = request.getParameter("password");
         String repassword = request.getParameter("repassword");
         String gender = request.getParameter("gender");
+        String address = request.getParameter("address");
+
 
         if (!password.equals(repassword)) {
             request.setAttribute("notification", "Nhập lại mật khẩu không giống nhau");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
             UserDAO dao = new UserDAO();
-//            User u = dao.checkUserExist(email);
             boolean u = dao.chekcAccount(email);
             if (!mobile.matches("[0-9]*")) {
                 request.setAttribute("notification", "Your Mobile Invalid");
@@ -56,10 +55,10 @@ public class RegisterController extends HttpServlet {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else if (u == false) {
                 //dang ky thanh cong
-                dao.register(fullName, password, gender, email, mobile);
+                dao.register(fullName, password, gender, email, mobile, address);
 
                 SendMail.sendEmailSignup(email);
-                request.setAttribute("notification", "Đăng kí thành công, vui lòng kiểm tra mail của bạn");
+                request.setAttribute("notification", "Đăng kí thành công, vui lòng kiểm tra hòm thư của bạn");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
                 request.setAttribute("notification", "Email đã tồn tại");

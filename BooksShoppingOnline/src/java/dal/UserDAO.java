@@ -1,9 +1,13 @@
 package dal;
 
 import context.DBContext;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 import model.User;
 
 public class UserDAO extends DBContext {
@@ -28,6 +32,7 @@ public class UserDAO extends DBContext {
                         .address(rs.getString(8))
                         .status(rs.getBoolean(9))
                         .role_Id(rs.getString(10))
+                        .base64Image(getImageBase64(rs.getString(4)))
                         .build();
                 return u;
 
@@ -63,9 +68,11 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public void register(String fullName, String password, String gender, String email, String mobile) {
-        String sql = "INSERT INTO user (`fullName`, `password`,`gender`, `email`, `mobile`, `status`, `role_id`) VALUES \n"
-                + "(?,?,b?,?,?,0,1)";
+
+    public void register(String fullName, String password, String gender, String email, String mobile, String address) {
+        String sql = "INSERT INTO user (`fullName`, `password`,`gender`, `email`, `mobile`, `address`, `status`, `role_id`) VALUES \n"
+                + "(?,?,b?,?,?,?,0,1)";
+
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, fullName);
@@ -73,6 +80,7 @@ public class UserDAO extends DBContext {
             st.setString(3, gender);
             st.setString(4, email);
             st.setString(5, mobile);
+            st.setString(6, address);
             st.executeUpdate();
         } catch (Exception e) {
         }
@@ -122,7 +130,7 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
-    
+
     public boolean chekcAccount(String email) {
         try {
             String sql = "select * from user\n"
@@ -168,29 +176,25 @@ public class UserDAO extends DBContext {
     }
 
 
+
     public String UpdatePassword(String pass, String email){
         try{
             
            String sql = "UPDATE `user`  SET `password` = ? WHERE `email` = ?";
+
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, pass);
             stm.setString(2, email);
             stm.executeUpdate();
         } catch (Exception e) {
-                 System.out.println("Get all error "+ e.getMessage());
+            System.out.println("Get all error " + e.getMessage());
         }
         return null;
     }
-    
-    
-    public static void main(String[] args){
-         System.out.println(new UserDAO().login("kiet1@gmail.com", "11112012"));
 
-//       System.out.println(new UserDAO().checkUserExist("kiet1@gmail.com"));
-    }
+
  
-    
-    
+
     public void editUserProfile(String uname, String uavatar, boolean ugender, String umobile, String uaddress, int uid) {
         String sql = "update books_shop_online.User\n"
                 + "set fullName = ?,\n"
@@ -212,10 +216,10 @@ public class UserDAO extends DBContext {
         }
 
     }
-   
-     public User getUserById(int uid) {
+
+    public User getUserById(int uid) throws IOException {
         try {
-            String sql = "select * from User where userId = ?";
+            String sql = "select * from books_shop_online.user where userId = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, uid);
             ResultSet rs = ps.executeQuery();
@@ -231,7 +235,9 @@ public class UserDAO extends DBContext {
                         .address(rs.getString(8))
                         .status(rs.getBoolean(9))
                         .role_Id(rs.getString(10))
+                        .base64Image(getImageBase64(rs.getString(4)))
                         .build();
+                System.out.println(user.getBase64Image());
                 return user;
             }
         } catch (SQLException e) {
@@ -239,11 +245,11 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
-    
-      public String getUrlImageById(int id) {
+
+    public String getUrlImageById(int id) {
         String sql = "SELECT avatar\n"
                 + "  FROM books_shop_online.User\n"
-                + "  Where userId = 1";
+                + "  Where userId = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
@@ -255,7 +261,8 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
-      public String getAuthorById(int author_id) {
+
+    public String getAuthorById(int author_id) {
         String sql = "select * from books_shop_online.User where userId = ? ";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -266,6 +273,8 @@ public class UserDAO extends DBContext {
                 return rs.getString(2);
             }
         } catch (Exception e) {
+
+                 System.out.println("Get all error "+ e.getMessage());
         }
         return null;
     }
@@ -274,4 +283,17 @@ public class UserDAO extends DBContext {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    public String getImageBase64(String path) throws IOException{
+        File file = new File(path);
+        FileInputStream fl = new FileInputStream(file);
+        byte[] arr = new byte[(int)file.length()];
+        fl.read(arr);
+        fl.close();
+        return  Base64.getEncoder().encodeToString(arr);
+
+    }
+    
+   
 }
+
+    

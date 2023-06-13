@@ -10,10 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- *
- * @author GanKPoet
- */
+
 @Builder
 @Getter
 @Setter
@@ -29,6 +26,8 @@ public class User {
     private String address;
     private boolean status;
     private String role_Id;
+    private byte[] image;  
+    private String base64Image;
 
     
 }

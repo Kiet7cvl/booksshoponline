@@ -33,4 +33,6 @@ public class Order {
     String fullNameFirstProduct;
     String status_order_name;
     String fullNameSaler;
+    String gender;
+    String email;
 }

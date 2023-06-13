@@ -4,28 +4,86 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>Controller.Public.HomeController</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>ListDetailController</servlet-name>
         <servlet-class>Controller.Public.ListDetailController</servlet-class>
     </servlet>
-
     <servlet>
         <servlet-name>changepassword</servlet-name>
         <servlet-class>Controller.Common.changepassword</servlet-class>
     </servlet>
-
     <servlet>
         <servlet-name>Edituser</servlet-name>
         <servlet-class>Controller.Common.EditUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FeedbackCommonController</servlet-name>
+        <servlet-class>Controller.Public.FeedbackCommonController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedbackController</servlet-name>
+        <servlet-class>Controller.Public.FeedbackController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartController</servlet-name>
+        <servlet-class>Controller.Public.CartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddtoCartController</servlet-name>
+        <servlet-class>Controller.Public.AddtoCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCartController</servlet-name>
+        <servlet-class>Controller.Public.DeleteCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCart</servlet-name>
+        <servlet-class>Controller.Public.UpdateCart</servlet-class>
+    </servlet>
     
+    <servlet>
+        <servlet-name>CartContactController</servlet-name>
+        <servlet-class>Controller.Public.CartContactController</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>MKTDashboardController</servlet-name>
+        <servlet-class>Controller.Marketing.MKTDashboardController</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>ProductsListController</servlet-name>
+        <servlet-class>Controller.Marketing.ProductsListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeStatusProductController</servlet-name>
+        <servlet-class>Controller.Marketing.ChangeStatusProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SliderListController</servlet-name>
+        <servlet-class>Controller.Marketing.SliderListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddProductController</servlet-name>
+        <servlet-class>Controller.Marketing.AddProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDetailController</servlet-name>
+        <servlet-class>Controller.Marketing.ProductDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProductController</servlet-name>
+        <servlet-class>Controller.Marketing.UpdateProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeStatusSliderController</servlet-name>
+        <servlet-class>Controller.Marketing.ChangeStatusSliderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
+        <servlet>
         <servlet-name>ProductListController</servlet-name>
         <servlet-class>Controller.Public.ProductListController</servlet-class>
     </servlet>
@@ -34,22 +92,85 @@
         <servlet-name>ProductListController</servlet-name>
         <url-pattern>/list</url-pattern>
     </servlet-mapping>
-
+    
     <servlet-mapping>
         <servlet-name>ListDetailController</servlet-name>
         <url-pattern>/list-detail</url-pattern>
     </servlet-mapping>
-
-    <servlet-mapping>  
+    
+    <servlet-mapping>
         <servlet-name>changepassword</servlet-name>
         <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
-    
+
+
     <servlet-mapping>
         <servlet-name>Edituser</servlet-name>
         <url-pattern>/edituser</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>FeedbackCommonController</servlet-name>
+        <url-pattern>/feedback_common</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedbackController</servlet-name>
+        <url-pattern>/feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/carts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddtoCartController</servlet-name>
+        <url-pattern>/addcart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCartController</servlet-name>
+        <url-pattern>/delete-cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCart</servlet-name>
+        <url-pattern>/update-cart</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>CartContactController</servlet-name>
+        <url-pattern>/cart-contact</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MKTDashboardController</servlet-name>
+        <url-pattern>/mkt-dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductsListController</servlet-name>
+        <url-pattern>/marketingproductlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusProductController</servlet-name>
+        <url-pattern>/change-status-product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SliderListController</servlet-name>
+        <url-pattern>/slider-list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProductController</servlet-name>
+        <url-pattern>/add_product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetailController</servlet-name>
+        <url-pattern>/product-detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductController</servlet-name>
+        <url-pattern>/update_product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusSliderController</servlet-name>
+        <url-pattern>/change-status-slider</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

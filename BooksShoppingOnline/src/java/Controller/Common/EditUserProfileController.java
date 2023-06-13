@@ -24,6 +24,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import model.User;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 
 @WebServlet(name = "EditUserProfileController", urlPatterns = {"/edit"})
@@ -72,91 +74,77 @@ public class EditUserProfileController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
 
-        
+            throws ServletException, IOException {    
+       
+         
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-//
+        
+       
         HttpSession session = request.getSession();
         UserDAO ud = new UserDAO();
-//
-//        
-
+        
         // Create a factory for disk-based file items
-        org.apache.commons.fileupload.disk.DiskFileItemFactory factory = new org.apache.commons.fileupload.disk.DiskFileItemFactory();
+        DiskFileItemFactory factory = new DiskFileItemFactory();
 
-// Configure a repository (to ensure a secure temp location is used)
+        // Configure a repository (to ensure a secure temp location is used)
         ServletContext servletContext = this.getServletConfig().getServletContext();
-        File repository = (File) servletContext.getAttribute("jakarta.servlet.context.tempdir");
+        File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
         factory.setRepository(repository);
 
-// Create a new file upload handler
-        org.apache.commons.fileupload.servlet.ServletFileUpload upload = new org.apache.commons.fileupload.servlet.ServletFileUpload(factory);
+        // Create a new file upload handler
+        ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setHeaderEncoding("UTF-8");
 
         try {
-
-//
             String uid_raw = request.getParameter("userId");
             String uname = request.getParameter("fullName");
             String umobile = request.getParameter("mobile");
             String uaddress = request.getParameter("address");
-            String url_avatar = "images/avatar/";
-            boolean ugender;
-            if (request.getParameter("gender") == "1") {
-                ugender = true;
-            } else {
-                ugender = false;
-            }
+            boolean ugender = request.getParameter("gender").equals("1");
+            
             Part filePart = request.getPart("avatar");
-            String fileName = getFileName(filePart);
+            String fileName = getFileName(filePart);            
+            String url_avatar = "images/avatar";        
             OutputStream out = null;
             InputStream filecontent = null;
             final PrintWriter writer = response.getWriter();
+
             try {
-                File file = new File("E:\\Ki5\\SWP391\\ShoppingOnile\\BooksShoppingOnline\\web\\WEB-INF\\images\\avatar" + File.separator + uid_raw+"_" + fileName);
+                
+                File file = new File("C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\shopping_online\\booksshop\\BooksShoppingOnline\\web\\images\\avatar" + File.separator + fileName);
                 url_avatar = file.getCanonicalPath();
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();
-                int read = 0;
+                int read;
+
                 final byte[] bytes = new byte[1024];
+
 
                 while ((read = filecontent.read(bytes)) != -1) {
                     out.write(bytes, 0, read);
                 }
-            } catch (FileNotFoundException fne) {
-                writer.println("You either did not specify a file to upload or are "
-                        + "trying to upload a file to a protected or nonexistent "
-                        + "location.");
-                writer.println("<br/> ERROR: " + fne.getMessage());
-            } finally {
-                if (out != null) {
-                    out.close();
-                }
-                if (filecontent != null) {
-                    filecontent.close();
-                }
-                if (writer != null) {
-                    writer.close();
-                }
-            }
 
+                
+            } catch (FileNotFoundException fne) { 
+                request.setAttribute("notification", "Bạn cần phải điền đầy đủ thông tin cơ bản của hồ sơ");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } 
             int uid = Integer.parseInt(uid_raw);
             
             ud.editUserProfile(uname, url_avatar, ugender, umobile, uaddress, uid);
-
             User u = ud.getUserById(uid);
             session.setAttribute("us", u);
             TimeUnit.SECONDS.sleep(2);
-            response.sendRedirect("home");
+            request.setAttribute("notification", "Bạn đã cập nhật hồ sơ thành công");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }
 
     }
-
     private String getFileName(Part part) {
         final String partHeader = part.getHeader("content-disposition");
         for (String content : part.getHeader("content-disposition").split(";")) {

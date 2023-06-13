@@ -61,4 +61,24 @@ public class FeedbackDAO extends DBContext {
 
         return list;
     }
+    public int addNewFeedback(String full_Name, int star, String subject, String image, int i, int product_id, int user_Id) {
+        try {
+           String sql = " INSERT INTO `books_shop_online`.`feedback` ( `fullName`, `rated_star`, `feedback`, `image`, `status`, `product_id`, `userId`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement st = connection.prepareStatement(sql);           
+            st.setString(1, full_Name);
+            st.setInt(2, star);
+            st.setString(3, subject);
+            st.setString(4, image);
+            st.setInt(5, i);
+            st.setInt(6, product_id);
+            st.setInt(7, user_Id);
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+    
+
 }
