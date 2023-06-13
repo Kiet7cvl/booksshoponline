@@ -3,19 +3,39 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/FeedbackCommonController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/BlogDetail.jsp</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/list-detail.jsp</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/ListDetailController.java</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/HomeController.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/product.jsp</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/js/main.js</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/model/Category.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/dal/CartDAO.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/js/jquery.nice-select.min.js</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/BlogList.jsp</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/context/DBContext.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/components/header.jsp</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/js/jquery.countdown.min.js</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/cart-contact.jsp</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/CartController.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/components/javascript.jsp</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/index.jsp</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/js/jquery-ui.min.js</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/DeleteCartController.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/js/jquery.zoom.min.js</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/js/jquery-3.3.1.min.js</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/ProductListController.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/CartContactController.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/FeedbackController.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/BlogController.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/list-detail.jsp</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/AddtoCartController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Common/EditUserProfileController.java</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/BlogDetailController.java</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/dal/BlogDAO.java</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/dal/FeedbackDAO.java</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/CategoryBlogController.java</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/assets/fonts/themify-icons/ie7/ie7.css</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/model/Cart.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/js/bootstrap.min.js</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/carts.jsp</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/components/newpassword.jsp</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/js/imagesloaded.pkgd.min.js</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/UpdateCart.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/js/owl.carousel.min.js</file>
         </group>
     </open-files>
 </project-private>
