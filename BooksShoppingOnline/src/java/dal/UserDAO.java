@@ -269,5 +269,9 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
+
+    public void editUserProfile(String uname, String url_avatar, String ugender, String umobile, String uaddress, int uid) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
