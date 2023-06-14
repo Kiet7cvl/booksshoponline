@@ -18,10 +18,6 @@ import jakarta.servlet.http.HttpSession;
 import model.Category;
 import model.Product;
 
-/**
- *
- * @author son22
- */
 public class ProductDetailController extends HttpServlet {
 
     /**

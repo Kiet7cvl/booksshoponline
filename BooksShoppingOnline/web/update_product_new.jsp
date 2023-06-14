@@ -1,8 +1,3 @@
-<%-- 
-    Document   : MKTDashboard
-    Created on : Jun 23, 2022, 7:56:23 AM
-    Author     : Veetu
---%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -171,7 +166,7 @@
                                                 <input name="status" type="radio" value="0" ${product.status == false ? 'checked' : ''} />&nbsp;Ẩn
                                             </div>
                                             <div class="col-md-12">Hình thu nhỏ<input type="file" name="thumbnail" class="form-control" placeholder="Thumbnail" value=""></div>
-                                            <img class="mt-5"  src="data:image/png;base64,${product.base64Image}"/>
+                                            <img class="mt-5"  src="${product.image}"/>
                                         </div>
 
                                     </div>

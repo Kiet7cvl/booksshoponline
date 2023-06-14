@@ -1,8 +1,4 @@
-<%-- 
-    Document   : cart-contact
-    Created on : Jun 2, 2023, 8:09:57 AM
-    Author     : tr498
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
