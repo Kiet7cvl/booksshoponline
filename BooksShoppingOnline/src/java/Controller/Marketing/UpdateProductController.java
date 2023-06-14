@@ -25,10 +25,6 @@
 //import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 //import org.apache.commons.fileupload.servlet.ServletFileUpload;
 //
-///**
-// *
-// * @author son22
-// */
 //public class UpdateProductController extends HttpServlet {
 //
 //    /**

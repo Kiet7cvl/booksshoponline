@@ -118,7 +118,7 @@ public class AddSliderController extends HttpServlet {
             try {
 //                File file = new File("images/product" + File.separator + fileName);
                 File file = new File("C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/web/images/slider" + File.separator + fileName);
-                url_thumbnail = "image/slider/"+file.getName();
+                url_thumbnail = "images/slider/"+file.getName();
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();
                 int read;

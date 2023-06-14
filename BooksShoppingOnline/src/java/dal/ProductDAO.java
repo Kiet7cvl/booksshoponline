@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -480,15 +479,6 @@ public class ProductDAO extends DBContext {
         }
     }
 
-
-    public String getImageBase64(String path) throws IOException {
-        File file = new File(path);
-        FileInputStream fl = new FileInputStream(file);
-        byte[] arr = new byte[(int) file.length()];
-        fl.read(arr);
-        fl.close();
-        return Base64.getEncoder().encodeToString(arr);
-    }
 
 
 }

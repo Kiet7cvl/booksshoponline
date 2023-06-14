@@ -107,7 +107,7 @@ public class EditUserProfileController extends HttpServlet {
             
             Part filePart = request.getPart("avatar");
             String fileName = getFileName(filePart);            
-            String url_avatar = "images/avatar";        
+            String url_avatar = "images/avatar/";        
             OutputStream out = null;
             InputStream filecontent = null;
             final PrintWriter writer = response.getWriter();
@@ -115,7 +115,7 @@ public class EditUserProfileController extends HttpServlet {
             try {
                 
                 File file = new File("C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\shopping_online\\booksshop\\BooksShoppingOnline\\web\\images\\avatar" + File.separator + fileName);
-                url_avatar = file.getCanonicalPath();
+                url_avatar = url_avatar + file.getName();
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();
                 int read;

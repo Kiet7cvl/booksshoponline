@@ -32,7 +32,6 @@ public class UserDAO extends DBContext {
                         .address(rs.getString(8))
                         .status(rs.getBoolean(9))
                         .role_Id(rs.getString(10))
-                        .base64Image(getImageBase64(rs.getString(4)))
                         .build();
                 return u;
 
@@ -235,9 +234,8 @@ public class UserDAO extends DBContext {
                         .address(rs.getString(8))
                         .status(rs.getBoolean(9))
                         .role_Id(rs.getString(10))
-                        .base64Image(getImageBase64(rs.getString(4)))
                         .build();
-                System.out.println(user.getBase64Image());
+                System.out.println();
                 return user;
             }
         } catch (SQLException e) {
@@ -282,17 +280,6 @@ public class UserDAO extends DBContext {
     public void editUserProfile(String uname, String url_avatar, String ugender, String umobile, String uaddress, int uid) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public String getImageBase64(String path) throws IOException{
-        File file = new File(path);
-        FileInputStream fl = new FileInputStream(file);
-        byte[] arr = new byte[(int)file.length()];
-        fl.read(arr);
-        fl.close();
-        return  Base64.getEncoder().encodeToString(arr);
-
-    }
-    
    
 }
 
