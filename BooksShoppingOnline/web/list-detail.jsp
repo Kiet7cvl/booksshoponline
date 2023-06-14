@@ -51,7 +51,7 @@
                 cursor: pointer;
                 color: white;
                 -webkit-transition: all 300ms linear;
-                transition: all 300ms linear; 
+                transition: all 300ms linear;
             }
             .checkbox-size:not(:checked) + label{
                 background-color: white;
@@ -98,7 +98,7 @@
                 color: black;
                 border: 3px solid black;
                 -webkit-transition: all 300ms linear;
-                transition: all 300ms linear; 
+                transition: all 300ms linear;
             }
             .checkbox-color:not(:checked) + label{
                 border: 3px solid white;
@@ -242,7 +242,14 @@
                                     <div id="increment" onclick="stepper(this)"><b>+</b></div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input class="btn btn-outline-dark" type="submit" style="font-size: 20px" value="Thêm vào giỏ hàng">                                     
+                                    <c:if test="${sessionScope.us != null}">
+                                        <input class="btn btn-outline-dark" type="submit" style="font-size: 20px" value="Thêm vào giỏ hàng">
+                                    </c:if>
+
+                                    <c:if test="${sessionScope.us == null}">
+
+                                        <input class="btn btn-outline-dark" data-toggle="modal"  data-target="#loginModal" style="font-size: 20px" value="Thêm vào giỏ hàng">                                 </li>
+                                    </c:if>
                                 </div>
                             </div>
                         </form>
