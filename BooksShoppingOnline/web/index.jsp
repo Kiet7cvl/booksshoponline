@@ -88,7 +88,7 @@
                                                         <img src="${p.image}" height="365px" width="230px" alt="">
                                                     </a>
                                                 </a>
-                                                <a href="addcart?productId=${p.id}" class="buy-now" >Mua ngay</a>
+                                                    
                                                 <c:if test="${sessionScope.us == null}" >
                                                     <a class="buy-now" data-toggle="modal"  data-target="#loginModal" style="color: white">Mua ngay</a>
                                                 </c:if>
