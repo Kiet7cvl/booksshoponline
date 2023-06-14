@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Common;
+package Controller.Marketing;
 
-import dal.UserDAO;
+import dal.SliderDAO;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -22,19 +23,18 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import model.User;
+import model.Slider;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+/**
+ *
+ * @author Admin
+ */
+public class AddSliderController extends HttpServlet {
 
-@WebServlet(name = "EditUserProfileController", urlPatterns = {"/edit"})
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,
-        maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 50)
-public class EditUserProfileController extends HttpServlet {
-
-   
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,9 +46,15 @@ public class EditUserProfileController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        
+        
+        
+        request.getRequestDispatcher("MKTAddSlider.jsp").forward(request, response);
+        }
+    
 
-    }
-  
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -61,7 +67,7 @@ public class EditUserProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -74,78 +80,67 @@ public class EditUserProfileController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-
-            throws ServletException, IOException {    
-       
-         
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         
-       
-        HttpSession session = request.getSession();
-        UserDAO ud = new UserDAO();
-        
+
         // Create a factory for disk-based file items
         DiskFileItemFactory factory = new DiskFileItemFactory();
 
-        // Configure a repository (to ensure a secure temp location is used)
+// Configure a repository (to ensure a secure temp location is used)
         ServletContext servletContext = this.getServletConfig().getServletContext();
         File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
         factory.setRepository(repository);
 
-        // Create a new file upload handler
+// Create a new file upload handler
         ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setHeaderEncoding("UTF-8");
 
         try {
-            String uid_raw = request.getParameter("userId");
-            String uname = request.getParameter("fullName");
-            String umobile = request.getParameter("mobile");
-            String uaddress = request.getParameter("address");
-            boolean ugender = request.getParameter("gender").equals("1");
+            String slider_title =  request.getParameter("slider_title");
+            String backlink =  request.getParameter("backlink");     
+            boolean status;
+            if (request.getParameter("status").equalsIgnoreCase("true")) {
+                status = true;
+            } else {
+                status = false;
+            }
             
-            Part filePart = request.getPart("avatar");
-            String fileName = getFileName(filePart);            
-            String url_avatar = "images/avatar/";        
+            Part filePart = request.getPart("thumbnail");
+            String fileName = getFileName(filePart);
+            String url_thumbnail = "images/slider";
             OutputStream out = null;
             InputStream filecontent = null;
             final PrintWriter writer = response.getWriter();
-
+            
             try {
-                
-
-                File file = new File("C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\shopping_online\\booksshop\\BooksShoppingOnline\\web\\images\\avatar" + File.separator + fileName);
-                url_avatar = url_avatar + file.getName();
-
+//                File file = new File("images/product" + File.separator + fileName);
+                File file = new File("C:/Users/ADMIN/Documents/NetBeansProjects/shopping_online/booksshop/BooksShoppingOnline/web/images/slider" + File.separator + fileName);
+                url_thumbnail = "images/slider/"+file.getName();
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();
                 int read;
-
                 final byte[] bytes = new byte[1024];
-
 
                 while ((read = filecontent.read(bytes)) != -1) {
                     out.write(bytes, 0, read);
                 }
 
-                
-            } catch (FileNotFoundException fne) { 
-                request.setAttribute("notification", "Bạn cần phải điền đầy đủ thông tin cơ bản của hồ sơ");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            } 
-            int uid = Integer.parseInt(uid_raw);
+            } catch (FileNotFoundException fne) {
+                request.setAttribute("notification", "Bạn cần phải điền đầy đủ thông tin cơ bản của slider");
+                request.getRequestDispatcher("MKTAddSlider.jsp").forward(request, response);
+            }
+ 
+            SliderDAO sd1 = new SliderDAO();
+            sd1.AddSliderById(slider_title,backlink,url_thumbnail,status);
+            response.sendRedirect("slider-list");
             
-            ud.editUserProfile(uname, url_avatar, ugender, umobile, uaddress, uid);
-            User u = ud.getUserById(uid);
-            session.setAttribute("us", u);
-            TimeUnit.SECONDS.sleep(2);
-            request.setAttribute("notification", "Bạn đã cập nhật hồ sơ thành công");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
         } catch (Exception ex) {
-            System.out.println(ex.toString());
+                request.setAttribute("notification", "Bạn cần phải điền đầy đủ thông tin cơ bản của slider");
+                request.getRequestDispatcher("MKTAddSlider.jsp").forward(request, response);
         }
-
     }
     private String getFileName(Part part) {
         final String partHeader = part.getHeader("content-disposition");

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : Cart
-    Created on : Jun 1, 2023, 9:02:20 PM
-    Author     : tr498
---%>
+
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>

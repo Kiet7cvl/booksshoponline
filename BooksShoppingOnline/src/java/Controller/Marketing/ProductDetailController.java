@@ -1,22 +1,24 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Controller.Marketing;
 
-package Controller.Common;
-
-
-import model.SendMail;
-import dal.UserDAO;
+import dal.CategoryDAO;
+import dal.ProductDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Category;
+import model.Product;
 
-/**
- *
- * @author Veetu
- */
-@WebServlet(name = "RegisterController", urlPatterns = {"/register"})
-public class RegisterController extends HttpServlet {
+public class ProductDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,38 +34,17 @@ public class RegisterController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        String fullName = request.getParameter("fullName");
-        String email = request.getParameter("email");
-        String mobile = request.getParameter("mobile");
-        String password = request.getParameter("password");
-        String repassword = request.getParameter("repassword");
-        String gender = request.getParameter("gender");
-        String address = request.getParameter("address");
+        try (PrintWriter out = response.getWriter()) {
+            String id = request.getParameter("product_id");
+            CategoryDAO c = new CategoryDAO();
+            ProductDAO pd = new ProductDAO();
+            HttpSession session = request.getSession();
+            Product p = pd.getProductById(Integer.parseInt(id));
+            List<Category> l = c.getAllCategory();
+            session.setAttribute("listCategories", l);
+            request.setAttribute("product", p);
+            request.getRequestDispatcher("update_product_new.jsp").forward(request, response);
 
-
-        if (!password.equals(repassword)) {
-            request.setAttribute("notification", "Nhập lại mật khẩu không giống nhau");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-            UserDAO dao = new UserDAO();
-            boolean u = dao.chekcAccount(email);
-            if (!mobile.matches("[0-9]*")) {
-                request.setAttribute("notification", "Your Mobile Invalid");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            } else if (password.length() < 8 || password.length() > 32) {
-                request.setAttribute("notification", "Your Password less than 8 character or more than 32 characters");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            } else if (u == false) {
-                //dang ky thanh cong
-                dao.register(fullName, password, gender, email, mobile, address);
-
-                SendMail.sendEmailSignup(email);
-                request.setAttribute("notification", "Đăng kí thành công, vui lòng kiểm tra hòm thư của bạn");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            } else {
-                request.setAttribute("notification", "Email đã tồn tại");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
         }
     }
 

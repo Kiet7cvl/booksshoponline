@@ -26,3 +26,5 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+// Use this file to add JavaScript to your project

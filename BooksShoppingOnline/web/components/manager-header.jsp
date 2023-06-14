@@ -1,13 +1,16 @@
-<%-- 
-    Document   : manager-header
-    Created on : Jul 18, 2022, 9:53:18 AM
-    Author     : Veetu
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <nav class="sb-topnav navbar navbar-expand navbar-light bg-light    ">
+    <!-- Notification User -->
+<c:if test="${notification !=null}">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="position: fixed; z-index: 15 ; margin-left: 40%; margin-top: 90px;">
+        <strong>${notification}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</c:if>
             <!-- Navbar Brand-->
-            <a class="navbar-brand me-5 ti-joomla" href="home" style="padding-left: 2%">KingsBooks</a>
+            <a class="navbar-brand me-5 ti-joomla" href="home" style="padding-left: 2%">KingsBook</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -45,7 +48,9 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" type="button" data-toggle="modal"  data-target="#userProfileModal">Thông tin cá nhân</a></li>
-                                <li><a class="dropdown-item" href="#">Danh sách đơn hàng</a></li>
+
+                                <li><a class="dropdown-item" href="#">Quản lí tiếp thị</a></li
+                                
                                 <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
                             </ul>
                         </div>

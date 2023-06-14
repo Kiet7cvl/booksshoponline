@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -11,10 +12,12 @@ import dal.FeedbackDAO;
 import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +68,9 @@ public class MKTDashboardController extends HttpServlet {
             end = end_raw;
         }
 
+
         int day = dd.CountDayByStartEnd(start, end);
+
 
         // set chart blog 
         List<Chart> listChartBlogBar = bd.getChartBlogBar(start, day);
@@ -146,6 +151,7 @@ public class MKTDashboardController extends HttpServlet {
         request.setAttribute("start", start);
         request.setAttribute("end", end);
         request.getRequestDispatcher("MKTDashboard.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -160,7 +166,9 @@ public class MKTDashboardController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         processRequest(request, response);
+
     }
 
     /**

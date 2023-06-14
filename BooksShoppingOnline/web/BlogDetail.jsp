@@ -1,8 +1,3 @@
-<%-- 
-    Document   : BlogDetail
-    Created on : May 29, 2023, 9:15:01 PM
-    Author     : ASUS
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
