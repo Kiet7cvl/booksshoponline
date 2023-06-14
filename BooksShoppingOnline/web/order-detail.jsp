@@ -85,7 +85,7 @@
 
             .invoice {
                 position: relative;
-                top: -70px;
+                top: -8px;
             }
 
             .Glasses {
@@ -140,7 +140,7 @@
             .border-line {
                 border-right: 1px solid rgb(226, 206, 226)
             }
-            
+
             .cus-fontsize {
                 font-size: 20px;
             }
@@ -155,13 +155,13 @@
                     <div class="media flex-sm-row flex-column-reverse justify-content-between  ">
                         <div class="col my-auto"> <h4 class="mb-0" style="display: flex; justify-content: center">Thanks for your orders</h4> </div>
                         <div class="col-auto text-center  my-auto pl-0 pt-sm-4">  <p class="mb-4 pt-0 Glasses"></p>  </div>
-<!--                       <img class="img-fluid my-auto align-items-center mb-0 pt-3"  src="" width="115" height="115">-->
+                        <!--                       <img class="img-fluid my-auto align-items-center mb-0 pt-3"  src="" width="115" height="115">-->
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="row justify-content-between mb-3">
-<!--                        <div class="col-auto"> <h6 class="color-1 mb-0 change-color">Receipt</h6> </div>-->
-<!--                        <div class="col-auto  "> <small>Order Id: 10</small> </div>-->
+                        <!--                        <div class="col-auto"> <h6 class="color-1 mb-0 change-color">Receipt</h6> </div>-->
+                        <!--                        <div class="col-auto  "> <small>Order Id: 10</small> </div>-->
                     </div>
                     <c:forEach items = "${Order_Detail}" var="s">
                         <div class="row">
@@ -198,45 +198,37 @@
 
                     <c:forEach items="${listMyOrderinDetail}" var="k">
 
+                        
+                        <div class="row invoice mt-4 " style="padding: 10px">
 
-                        <div class="row mt-4">
                             <div class="col">
-                                <div class="row justify-content-between">
-                                    <div class="flex-sm-col text-right col"><p class="mb-1 cus-fontsize"> <b>Thông tin Người nhận</b></p> </div>
-<!--                                    <div class="flex-sm-col col-auto"><p class="mb-1 cus-fontsize"></p></div>-->
-                                </div>
-                                <div class="row justify-content-between">
-                                    <div class="col-auto"><p class="mb-1 text-dark cus-fontsize"><b>Order Details</b></p></div>
-                                    <div class="flex-sm-col text-right col cus"> <p class="mb-1 cus-fontsize me-2"><b>Họ tên</b></p> </div>
-                                    <div class="flex-sm-col col-auto"> <p class="mb-1 cus-fontsize">${k.fullName}</p> </div>
-                                </div>
-<!--                                <div class="row justify-content-between">
-                                    <div class="flex-sm-col text-right col"><p class="mb-1 cus-fontsize"> <b>Giới tính</b></p> </div>
-                                    <div class="flex-sm-col col-auto"><p class="mb-1 cus-fontsize">${k.gender}</p></div>
-                                </div>-->
-                                <div class="row justify-content-between">
-                                    <div class="flex-sm-col text-right col"><p class="mb-1 cus-fontsize"> <b>Email</b></p> </div>
-                                    <div class="flex-sm-col col-auto"><p class="mb-1 cus-fontsize">${k.email}</p></div>
-                                </div>
-                                <div class="row justify-content-between">
-                                    <div class="flex-sm-col text-right col"><p class="mb-1 cus-fontsize"> <b>Số điện thoại</b></p> </div>
-                                    <div class="flex-sm-col col-auto"><p class="mb-1 cus-fontsize">${k.mobile}</p></div>
-                                </div>
+
+                                <p class="mb-1 text-dark cus-fontsize"><b>Order Details</b></p>
+                                <p class="mb-1 cus-fontsize"> OrderId: ${k.orderID}</p>
+                                <p class="mb-1 cus-fontsize">Ngày mua hàng : ${k.date}</p>
+                                <p class="mb-1 cus-fontsize">Trạng thái : ${k.status_order_name}</p>
+                            </div>
+
+                            <div class="col">
+                                <p class="mb-1 cus-fontsize text-dark "><b>Thông tin Người nhận</b> </p>
+                                <p class="mb-1 cus-fontsize">Họ tên : ${k.fullName}</p>
                                 
-                                <div class="row justify-content-between">
-                                    <div class="flex-sm-col text-right col"><p class="mb-1 cus-fontsize me-5"><b>Địa chỉ</b></p></div>
-                                    <div class="flex-sm-col col-auto"><p class="mb-1 cus-fontsize">${k.address}</p></div>
-                                </div>
-                                
+                                <c:if test = "${k.gender ==1}">
+                                    <p class="mb-1 cus-fontsize">Giới tính : Nam</p>
+                                    </c:if>
+                                <c:if test = "${k.gender ==0}">
+                                    <p class="mb-1 cus-fontsize">Giới tính : Nữ</p>
+                                    </c:if>
+                                <p class="mb-1 cus-fontsize">Email : ${k.email}</p>
+                                <p class="mb-1 cus-fontsize">Số điện thoại : ${k.mobile}</p>
+                                <p class="mb-1 cus-fontsize">Địa chỉ : ${k.address}</p>
                             </div>
                         </div>
-                        <div class="row invoice ">
-                            <div class="col"><p class="mb-1 cus-fontsize"> OrderId: ${k.orderID}</p>
-                                <p class="mb-1 cus-fontsize">Ngày mua hàng : ${k.date}</p>
-                                <p class="mb-1 cus-fontsize">Trạng thái : ${k.status_order_name}</p></div>
-                        </div>
+
+
+
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer" >
                         <div class="jumbotron-fluid">
                             <div class="row justify-content-between ">
                                 <div class="col-sm-auto col-auto my-auto"></div>
@@ -245,8 +237,8 @@
                                 <div class="col-auto my-auto ml-auto"><h1 class="display-3 ">${k.total_cost}đ</h1></div>
                             </div>
                             <div class="row mb-3 mt-3 mt-md-0">
-                                <div > <small class="text-white">Cảm ơn vì đã ủng hộ chúng tôi<3</small></div>
-                                
+                                <div > <small style="letter-spacing: 5px !important;font-size: 15px;" class="text-white">Cảm ơn vì đã ủng hộ chúng tôi<3</small></div>
+
                             </div>
                         </div>
                     </div>
