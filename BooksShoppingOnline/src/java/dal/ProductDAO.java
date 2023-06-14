@@ -374,7 +374,7 @@ public class ProductDAO extends DBContext {
         List<Chart> list = new ArrayList<>();
         for (int i = 1; i <= day; i++) {
             int value = 0;
-            String sql = "SELECT COUNT(*) FROM books_shop_online.Product WHERE update_date = DATE_ADD(?, INTERVAL ?  DAY) AND status = 1;";
+            String sql = "SELECT COUNT(*) FROM books_shop_online.product WHERE update_date = DATE_ADD(?, INTERVAL ? DAY ) AND status = 1;";
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setString(1, start);
@@ -408,8 +408,7 @@ public class ProductDAO extends DBContext {
         List<Chart> list = new ArrayList<>();
         for (int i = 1; i <= day; i++) {
             int value = 0;
-            String sql = "SELECT COUNT(*) FROM product\n"
-                    + "WHERE update_date <= DATE_ADD(?, INTERVAL ? DAY) AND status = 1; ";
+            String sql = "SELECT COUNT(*) FROM product WHERE update_date <= DATE_ADD(?, INTERVAL ? DAY) AND status = 1;  ";
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setString(1, start);
