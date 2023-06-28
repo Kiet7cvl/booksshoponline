@@ -63,7 +63,7 @@ public class CategoryDAO extends DBContext{
         CategoryDAO sc = new CategoryDAO();
         
 //        System.out.println(sc.getTotalProduct(" ", "1", "1"));
-        System.out.println(sc.getAllCategory());
+        System.out.println(sc.getAllCategoryBlog());
 
     }
     

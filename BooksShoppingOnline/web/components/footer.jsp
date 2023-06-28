@@ -1,8 +1,4 @@
-<%-- 
-    Document   : footer
-    Created on : May 30, 2022, 8:50:43 PM
-    Author     : son22
---%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="footer">
 
@@ -52,18 +48,15 @@
 
     <div class="info-footer">
         <div class="content-footer">
-            <h2>Địa chỉ liên hệ</h2>
-            <p class="mt-40">khu công nghệ cao, huyện Thạch Thất, TP. Hà Nội</p>
+            
         </div>
 
         <div class="feedback-footer">
             <h2 class="mt-40">KingsBooks lắng nghe bạn!</h2>
             <p>Chúng tôi luôn trân trọng và mong đợi nhận được mọi ý kiến đóng góp từ khách hàng để có thể nâng cấp trải nghiệm dịch vụ và sản phẩm tốt hơn nữa</p>
-            <a data-toggle="modal" data-dismiss="modal" data-target="#feedback_common"><input class="Button-Feedback mt-16" type="submit" value="Gửi ý kiến"></a> 
-            <br>
-            <br>
             <br>
             <div class="contact-info">
+                <h2>Địa chỉ liên hệ</h2>
                 <p><i class="ti-location-pin"></i>Tran Duy Hung, Ha Noi</p>
                 <p><i class="ti-mobile"></i>Phone:+0356111214</p>
                 <p><i class="ti-email"></i>dotunglam200xx@gmail.com</p>

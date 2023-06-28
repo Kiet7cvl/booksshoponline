@@ -19,6 +19,7 @@ import model.User;
  *
  * @author lam
  */
+
 @WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
 
@@ -74,9 +75,18 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
             session.setAttribute("us", u);
-            response.sendRedirect(historyUrl);
-//          request.getRequestDispatcher("home").forward(request, response);
-//            response.sendRedirect("home");
+            if(u.getRole_Id().equals("1")){
+                response.sendRedirect(historyUrl);
+            }
+            if(u.getRole_Id().equals("2")){
+                response.sendRedirect("mkt-dashboard");
+            }
+            if(u.getRole_Id().equals("3") || u.getRole_Id().equals("4")){
+                response.sendRedirect("sale-dashboard");
+            }
+            if(u.getRole_Id().equals("5")){
+                response.sendRedirect("admin-dashboard");
+            }
         }
     }
 
