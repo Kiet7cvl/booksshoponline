@@ -3,22 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Marketing;
+package Controller.Admin;
 
-import dal.CategoryDAO;
-import dal.ProductDAO;
+import dal.RoleDAO;
+import dal.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Category;
-import model.Product;
+import model.Role;
+import model.User;
 
-public class ProductDetailController extends HttpServlet {
+/**
+ *
+ * @author lam
+ */
+@WebServlet(name = "ListUserController", urlPatterns = {"/list-user"})
+
+public class ListUserController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,21 +36,19 @@ public class ProductDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+       response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String id = request.getParameter("product_id");
-            CategoryDAO c = new CategoryDAO();
-            ProductDAO pd = new ProductDAO();
-            HttpSession session = request.getSession();
-            Product p = pd.getProductById(Integer.parseInt(id));
-            List<Category> l = c.getAllCategory();
-            session.setAttribute("listCategories", l);
-            request.setAttribute("product", p);
-            request.getRequestDispatcher("update_product_new.jsp").forward(request, response);
 
-        }
+        
+        
+        List<User> listUsers = new UserDAO().getAllUsers();
+        List<Role> listRole = new RoleDAO().getAllRole();
+
+        request.setAttribute("listUsers", listUsers);
+        request.setAttribute("listRole", listRole);
+
+        request.getRequestDispatcher("AdminUserList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

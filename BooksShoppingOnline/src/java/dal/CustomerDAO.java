@@ -168,19 +168,19 @@ public class CustomerDAO extends DBContext {
         List<Chart> list = new ArrayList<>();
         for (int i = 0; i < day; i++) {
             int value = 0;
-            String sql = "select count(*) from books_shop_online.customer where updated_date = DATEADD(DAY, ?, ?)";
+            String sql = "SELECT COUNT(*) FROM books_shop_online.customer WHERE updated_date = DATE_ADD(?, INTERVAL ? DAY)";
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
+                st.setString(1, start);
+                st.setInt(2, i);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     value = rs.getInt(1);
                 }
-                sql = "select  DATEADD(DAY, ?, ?)";
+                sql = "SELECT DATE_ADD(?, INTERVAL ? DAY)";
                 st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
+                st.setString(1, start);
+                st.setInt(2, i);
                 rs = st.executeQuery();
                 while (rs.next()) {
                     Chart c = Chart.builder()
@@ -202,19 +202,19 @@ public class CustomerDAO extends DBContext {
         List<Chart> list = new ArrayList<>();
         for (int i = 0; i < day; i++) {
             int value = 0;
-            String sql = "select count(*) from books_shop_online.customer where updated_date <= DATEADD(DAY, ?, ?)";
+            String sql = "SELECT COUNT(*) FROM books_shop_online.customer WHERE updated_date <= DATE_ADD(?, INTERVAL ? DAY)";
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
+                st.setString(1, start);
+                st.setInt(2, i);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     value = rs.getInt(1);
                 }
-                sql = "select  DATEADD(DAY, ?, ?)";
+                sql = "SELECT DATE_ADD(?, INTERVAL ? DAY)";
                 st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
+                st.setString(1, start);
+                st.setInt(2, i); 
                 rs = st.executeQuery();
                 while (rs.next()) {
                     Chart c = Chart.builder()

@@ -30,7 +30,6 @@ public class Product {
     private int category_id;
     private double rated_star;
     private String author;
-    private String base64Image;
     
 
 }

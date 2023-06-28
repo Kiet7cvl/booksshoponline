@@ -179,7 +179,7 @@
                             <c:if test="${sessionScope.us.avatar != null && sessionScope.us.avatar ne ''}">
                                 <div class="col-md-4">
                                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                        <img class="rounded-circle mt-5" width="150px" height="150px" src="data:image/png;base64,${sessionScope.us.base64Image}">
+                                        <img class="rounded-circle mt-5" width="150px" height="150px" src="${sessionScope.us.avatar}">
                                         <span class="font-weight-bold">${sessionScope.us.full_Name}</span><span class="text-black-50">${sessionScope.us.email}</span>
                                     </div>
                                 </div>

@@ -3,22 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Marketing;
+package Controller.Admin;
 
-import dal.CategoryDAO;
-import dal.ProductDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Category;
-import model.Product;
 
-public class ProductDetailController extends HttpServlet {
+/**
+ *
+ * @author lam
+ */
+@WebServlet(name = "DeleteUserController", urlPatterns = {"/delete-user"})
+public class DeleteUserController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,16 +36,17 @@ public class ProductDetailController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String id = request.getParameter("product_id");
-            CategoryDAO c = new CategoryDAO();
-            ProductDAO pd = new ProductDAO();
-            HttpSession session = request.getSession();
-            Product p = pd.getProductById(Integer.parseInt(id));
-            List<Category> l = c.getAllCategory();
-            session.setAttribute("listCategories", l);
-            request.setAttribute("product", p);
-            request.getRequestDispatcher("update_product_new.jsp").forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+//            int userId = Integer.parseInt(request.getParameter("userId"));
+//           UserDAO userDAO = new UserDAO();
+//           userDAO.deleteUser(userId);
 
+            int user_Id = Integer.parseInt(request.getParameter("user_Id"));
+            int status = 0;
+            UserDAO userDAO = new UserDAO();
+            userDAO.UpdateStatusUser(status, user_Id);
+
+            response.sendRedirect("list-user");
         }
     }
 

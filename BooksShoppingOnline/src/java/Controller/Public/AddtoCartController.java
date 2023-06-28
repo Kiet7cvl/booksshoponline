@@ -18,10 +18,7 @@ import model.Cart;
 import model.Product;
 import model.User;
 
-/**
- *
- * @author tr498
- */
+
 public class AddToCartController extends HttpServlet {
    
     /** 

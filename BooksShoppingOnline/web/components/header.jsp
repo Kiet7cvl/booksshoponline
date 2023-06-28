@@ -38,16 +38,17 @@
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <c:if test="${sessionScope.us != null}">
                         <div class="btn-group">
-                           <button type="button" style="border-radius: 4px" class="btn btn-outline-dark py-2 px-4" data-toggle="dropdown" aria-expanded="false">
+                            <button type="button" style="border-radius: 4px" class="btn btn-outline-dark py-2 px-4" data-toggle="dropdown" aria-expanded="false">
                                 <c:if test="${sessionScope.us.avatar != null && sessionScope.us.avatar ne ''}">
-                                    <img class="rounded-circle " width="30px" height="30px" src="data:image/png;base64,${sessionScope.us.base64Image}">
+                                    <img class="rounded-circle " width="30px" height="30px" src="${sessionScope.us.avatar}">
 
-                                        <span class="font-weight-bold">${sessionScope.us.full_Name}</span>
+                                    <span class="font-weight-bold">${sessionScope.us.full_Name}</span>
                                 </c:if>
                                 <c:if test="${sessionScope.us.avatar == null || sessionScope.us.avatar eq ''}">
 
-                                    <img class="rounded-circle " width="30px" height="30px" src="data:image/png;base64,${sessionScope.us.avatar}">
-                                        <span class="font-weight-bold">${sessionScope.us.full_Name} ${sessionScope.us.base64Image}</span>
+                                    <img class="rounded-circle " width="30px" height="30px" src="${sessionScope.us.avatar}">
+                                        <span class="font-weight-bold">${sessionScope.us.full_Name} ${sessionScope.us.avatar}</span>
+
                                 </c:if>
                             </button>
                             <ul class="dropdown-menu menuScroll">
@@ -75,9 +76,15 @@
                     </c:if>
 
                     <!-- begin icon header -->
-                    <c:if test="${sessionScope.us.role_Id == 1 || sessionScope.us == null}">
+                    <c:if test="${sessionScope.us.role_Id == 1}">
                         <li class="nav-item">
                             <a class="nav-link btn btn-icon py-2 px-4" href="carts" tabindex="-1" aria-disabled="true"><i class="ti-shopping-cart"></i></a>
+                        </li>
+                    </c:if>
+
+                    <c:if test="${sessionScope.us == null}">
+                        <li class="nav-item">                
+                            <a class="nav-link btn btn-icon py-2 px-4" data-toggle="modal"  data-target="#loginModal" tabindex="-1" aria-disabled="true"><i class="ti-shopping-cart"></i></a>
                         </li>
                     </c:if>
                 </ul>

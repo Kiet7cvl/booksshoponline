@@ -25,9 +25,7 @@
                     <li class="nav-item me-4">
                         <a class="nav-link" href="blog">Blog</a>
                     </li>
-                    <li class="nav-item me-4">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
+
 
 
                 </ul>
@@ -49,7 +47,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" type="button" data-toggle="modal"  data-target="#userProfileModal">Thông tin cá nhân</a></li>
 
-                                <li><a class="dropdown-item" href="#">Quản lí tiếp thị</a></li
+                                <li><a class="dropdown-item" href="#">Quản lý hệ thống</a></li>
                                 
                                 <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
                             </ul>

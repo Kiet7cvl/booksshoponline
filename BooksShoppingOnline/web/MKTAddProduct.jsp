@@ -1,8 +1,4 @@
-<%-- 
-    Document   : MKTDashboard
-    Created on : Jun 23, 2022, 7:56:23 AM
-    Author     : Veetu
---%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

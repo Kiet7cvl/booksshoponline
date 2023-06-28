@@ -3,22 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Marketing;
+package Controller.Admin;
 
-import dal.CategoryDAO;
-import dal.ProductDAO;
+import dal.SettingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Category;
-import model.Product;
+import model.Setting;
 
-public class ProductDetailController extends HttpServlet {
+/**
+ *
+ * @author lam
+ */
+@WebServlet(name = "SettingDetailsController", urlPatterns = {"/setting-details"})
+public class SettingDetailsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,19 +35,19 @@ public class ProductDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String id = request.getParameter("product_id");
-            CategoryDAO c = new CategoryDAO();
-            ProductDAO pd = new ProductDAO();
+            SettingDAO sd = new SettingDAO();
             HttpSession session = request.getSession();
-            Product p = pd.getProductById(Integer.parseInt(id));
-            List<Category> l = c.getAllCategory();
-            session.setAttribute("listCategories", l);
-            request.setAttribute("product", p);
-            request.getRequestDispatcher("update_product_new.jsp").forward(request, response);
-
+            int setting_id = Integer.parseInt(request.getParameter("setting_id"));
+            
+            Setting s = sd.getSettingById(setting_id);
+            
+            String historyUrl = (String) session.getAttribute("historyUrl");
+            request.setAttribute("historyUrl", historyUrl);
+            request.setAttribute("setting", s);
+            request.getRequestDispatcher("AdminSettingDetail.jsp").forward(request, response);
+            
+            
         }
     }
 

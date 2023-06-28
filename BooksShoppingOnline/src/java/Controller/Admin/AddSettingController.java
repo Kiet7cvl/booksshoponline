@@ -3,22 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Marketing;
+package Controller.Admin;
 
-import dal.CategoryDAO;
-import dal.ProductDAO;
+import dal.SettingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Category;
-import model.Product;
 
-public class ProductDetailController extends HttpServlet {
+/**
+ *
+ * @author lam
+ */
+@WebServlet(name = "AddSettingController", urlPatterns = {"/add-setting"})
+public class AddSettingController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,16 +36,26 @@ public class ProductDetailController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String id = request.getParameter("product_id");
-            CategoryDAO c = new CategoryDAO();
-            ProductDAO pd = new ProductDAO();
-            HttpSession session = request.getSession();
-            Product p = pd.getProductById(Integer.parseInt(id));
-            List<Category> l = c.getAllCategory();
-            session.setAttribute("listCategories", l);
-            request.setAttribute("product", p);
-            request.getRequestDispatcher("update_product_new.jsp").forward(request, response);
+        
+            int type = Integer.parseInt(request.getParameter("type"));
+            int order;
+            String value = request.getParameter("value");
+            String description = request.getParameter("description");
+            int status = Integer.parseInt(request.getParameter("status"));
 
+            SettingDAO sd = new SettingDAO();
+            
+            if (type == 1) {
+                order = sd.addCategory(value, status);
+            } else if (type == 2) {
+                order = sd.addCategoryBlog(value, status);
+            } else if (type == 3) {
+                order = sd.addOrderStatus(value, status);
+            } else {
+                order = sd.addRole(value, status);
+            }
+            sd.addSettingBy(type, order, value, description, status);
+            response.sendRedirect("setting-list");
         }
     }
 

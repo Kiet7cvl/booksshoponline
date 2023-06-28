@@ -104,7 +104,7 @@ public class ResetPassController extends HttpServlet {
                 props.put("mail.smtp.port", "587");
                 Session session = Session.getDefaultInstance(props, new jakarta.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication("dotung7733@gmail.com", "eldtmhglijbmuoyd");
+                        return new PasswordAuthentication("dotung7733@gmail.com", "jwobbomtynkncqet");
                     }
                 });
                 try {

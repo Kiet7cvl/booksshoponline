@@ -3,22 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Marketing;
+package Controller.Admin;
 
-import dal.CategoryDAO;
-import dal.ProductDAO;
+import dal.SettingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Category;
-import model.Product;
 
-public class ProductDetailController extends HttpServlet {
+/**
+ *
+ * @author lam
+ */
+@WebServlet(name = "UpdateSettingController", urlPatterns = {"/update-setting"})
+public class UpdateSettingController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,16 +36,27 @@ public class ProductDetailController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String id = request.getParameter("product_id");
-            CategoryDAO c = new CategoryDAO();
-            ProductDAO pd = new ProductDAO();
-            HttpSession session = request.getSession();
-            Product p = pd.getProductById(Integer.parseInt(id));
-            List<Category> l = c.getAllCategory();
-            session.setAttribute("listCategories", l);
-            request.setAttribute("product", p);
-            request.getRequestDispatcher("update_product_new.jsp").forward(request, response);
-
+            /* TODO output your page here. You may use following sample code. */
+            
+            int settingId = Integer.parseInt(request.getParameter("settingId"));
+            int type = Integer.parseInt(request.getParameter("type"));
+            int order = Integer.parseInt(request.getParameter("order"));
+            String value = request.getParameter("value");
+            String description = request.getParameter("description");
+            int status = Integer.parseInt(request.getParameter("status"));
+            
+            SettingDAO sd = new SettingDAO();
+            sd.updateSettingById(settingId, value, description, status);
+            if(type == 1){
+                sd.updateCategory(order, value, status);
+            }else if(type == 2){
+                sd.updateCategoryBlog(order, value, status);
+            }else if(type == 3){
+                sd.updateOrderStatus(order, value, status);
+            }else{
+                sd.updateRole(order, value, status);
+            }
+            response.sendRedirect("setting-details?setting_id="+settingId);
         }
     }
 

@@ -17,7 +17,7 @@ public class SendMail {
     public static void sendEmailSignup(String a) {
 
         String fromEmail = "dotung7733@gmail.com";
-        String password = "eldtmhglijbmuoyd";
+        String password = "jwobbomtynkncqet";
         String toEmmail = a;
         Properties pr = new Properties();
         pr.setProperty("mail.smtp.host", "smtp.gmail.com");

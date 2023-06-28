@@ -11,21 +11,16 @@ import dal.DateDAO;
 import dal.FeedbackDAO;
 import dal.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import model.Chart;
 import model.Date;
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author ASUS
@@ -52,40 +47,28 @@ public class MKTDashboardController extends HttpServlet {
 
         // set parameter
         Date date = dd.get7day();
-//        String start = "";
-//        if (date != null && date.getStart() != null) {
-//            start = date.getStart().toString();
-//        }
-//        String end = "";
-//        if (date != null && date.getEnd() != null) {
-//            end = date.getEnd().toString();
-//        }
-//        String start_raw = request.getParameter("start");
-//        String end_raw = request.getParameter("end");
-//        if (start_raw != null) {
-//            start = start_raw;
-//            end = end_raw;
-//        }
-//
-//        int day = dd.CountDayByStartEnd(start, end);
-//       
-//Date date = dd.get7day();
-String start = "";
-String end = "";
+        String start = "";
+        if (date != null && date.getStart() != null) {
+            start = date.getStart().toString();
+        }
+        String end = "";
+        if (date != null && date.getEnd() != null) {
+            end = date.getEnd().toString();
+        }
+        String start_raw = request.getParameter("start");
+        String end_raw = request.getParameter("end");
+        if (start_raw != null) {
+            start = start_raw;
+            end = end_raw;
+        }
 
 
+        int day = dd.CountDayByStartEnd(start, end);
 
-String start_raw = request.getParameter("start");
-String end_raw = request.getParameter("end");
-if (start_raw != null) {
-    start = start_raw;
-    end = end_raw;
-}
 
-int day = dd.CountDayByStartEnd(start, end);
         // set chart blog 
-        List<Chart> listChartBlogBar = bd.getChartBlogBar("2023-05-22", 7);
-        List<Chart> listChartBlogArea = bd.getChartBlogArea("2023-05-22", 7);
+        List<Chart> listChartBlogBar = bd.getChartBlogBar(start, day);
+        List<Chart> listChartBlogArea = bd.getChartBlogArea(start, day);
         int maxListChartBlogBar = -1;
         for (Chart o : listChartBlogBar) {
             if (o.getValue() > maxListChartBlogBar) {
@@ -104,8 +87,8 @@ int day = dd.CountDayByStartEnd(start, end);
         maxListChartBlogArea = (maxListChartBlogArea / 10 + 1) * 10;
 
         // set chart product
-        List<Chart> listChartProductBar = pd.getChartProductBar("2023-05-22", 7);
-        List<Chart> listChartProductArea = pd.getChartProductArea("2023-05-22", 7);
+        List<Chart> listChartProductBar = pd.getChartProductBar(start, day);
+        List<Chart> listChartProductArea = pd.getChartProductArea(start, day);
         int maxListChartProductBar = -1;
         for (Chart o : listChartProductBar) {
             if (o.getValue() > maxListChartProductBar) {
@@ -141,24 +124,6 @@ int day = dd.CountDayByStartEnd(start, end);
         }
         maxListChartCustomerArea = (maxListChartCustomerArea / 10 + 1) * 10;
 
-        // set chart feedback
-//        List<Chart> listChartFeedbackBar = fd.getChartFeedbackBar(start, day);
-//        List<Chart> listChartFeedbackArea = fd.getChartFeedbackArea(start, day);
-//        int maxListChartFeedbackBar = -1;
-//        for (Chart o : listChartFeedbackBar) {
-//            if (o.getValue() > maxListChartFeedbackBar) {
-//                maxListChartFeedbackBar = o.getValue();
-//            }
-//        }
-//
-//        maxListChartFeedbackBar = (maxListChartFeedbackBar / 10 + 1) * 10;
-//        int maxListChartFeedbackArea = -1;
-//        for (Chart o : listChartFeedbackArea) {
-//            if (o.getValue() > maxListChartFeedbackArea) {
-//                maxListChartFeedbackArea = o.getValue();
-//            }
-//        }
-//        maxListChartFeedbackArea = (maxListChartFeedbackArea / 10 + 1) * 10;
         // set parameter blog chart request to jsp
         request.setAttribute("listChartBlogBar", listChartBlogBar);
         request.setAttribute("listChartBlogArea", listChartBlogArea);
@@ -177,11 +142,6 @@ int day = dd.CountDayByStartEnd(start, end);
         request.setAttribute("maxListChartCustomerBar", maxListChartCustomerBar);
         request.setAttribute("maxListChartCustomerArea", maxListChartCustomerArea);
 
-        // set parameter feedback chart request to jsp
-//        request.setAttribute("listChartFeedbackBar", listChartFeedbackBar);
-//        request.setAttribute("listChartFeedbackArea", listChartFeedbackArea);
-//        request.setAttribute("maxListChartFeedbackBar", maxListChartFeedbackBar);
-//        request.setAttribute("maxListChartFeedbackArea", maxListChartFeedbackArea);
         request.setAttribute("start", start);
         request.setAttribute("end", end);
         request.getRequestDispatcher("MKTDashboard.jsp").forward(request, response);

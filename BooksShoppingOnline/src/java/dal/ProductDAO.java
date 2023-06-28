@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,10 +21,7 @@ import model.OrderDetail;
 
 import model.Product;
 
-/**
- *
- * @author ADMIN
- */
+
 public class ProductDAO extends DBContext {
 
     public List<Product> get4ProductRandom() {
@@ -386,7 +382,7 @@ public class ProductDAO extends DBContext {
         List<Chart> list = new ArrayList<>();
         for (int i = 1; i <= day; i++) {
             int value = 0;
-            String sql = "SELECT COUNT(*) FROM books_shop_online.Product WHERE update_date = DATE_ADD(?, INTERVAL ?  DAY) AND status = 1;";
+            String sql = "SELECT COUNT(*) FROM books_shop_online.product WHERE update_date = DATE_ADD(?, INTERVAL ? DAY ) AND status = 1;";
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setString(1, start);
@@ -420,8 +416,7 @@ public class ProductDAO extends DBContext {
         List<Chart> list = new ArrayList<>();
         for (int i = 1; i <= day; i++) {
             int value = 0;
-            String sql = "SELECT COUNT(*) FROM product\n"
-                    + "WHERE update_date <= DATE_ADD(?, INTERVAL ? DAY) AND status = 1; ";
+            String sql = "SELECT COUNT(*) FROM product WHERE update_date <= DATE_ADD(?, INTERVAL ? DAY) AND status = 1;  ";
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setString(1, start);
@@ -481,14 +476,6 @@ public class ProductDAO extends DBContext {
         }
     }
 
-    public String getImageBase64(String path) throws IOException {
-        File file = new File(path);
-        FileInputStream fl = new FileInputStream(file);
-        byte[] arr = new byte[(int) file.length()];
-        fl.read(arr);
-        fl.close();
-        return Base64.getEncoder().encodeToString(arr);
-    }
 
     public int getProductQuantity(int productId) {
         int quantity = 0;
@@ -505,6 +492,7 @@ public class ProductDAO extends DBContext {
             System.out.println(ex);
         }
         return quantity;
+
 
     }
 

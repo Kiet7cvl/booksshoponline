@@ -10,23 +10,20 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-
+/**
+ *
+ * @author lam
+ */
 @Builder
 @Getter
 @Setter
 @ToString
-public class User {
-    private int user_Id;
-    private String full_Name;
-    private String password;
-    private String avatar;
-    private boolean gender;
-    private String email;
-    private String mobile;
-    private String address;
+public class Setting {
+    private int setting_id;
+    private int type;
+    private int order;
+    private String value;
+    private String description;
     private boolean status;
-    private String role_Id;
-    private byte[] image;  
-
-    
+    private String type_String;
 }

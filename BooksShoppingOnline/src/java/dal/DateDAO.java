@@ -18,8 +18,8 @@ public class DateDAO extends DBContext {
         String sql = "SELECT DATEDIFF(DATE(?), DATE(?));";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, start);
-            st.setString(2, end);
+            st.setString(2, start);
+            st.setString(1, end);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 return rs.getInt(1)+1;
