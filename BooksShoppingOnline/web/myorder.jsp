@@ -27,60 +27,84 @@
                 color: red;
             }
         </style>
-        
+
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-  
+
     </head>
     <body>
         <%@include file="components/header.jsp" %>
-        <h2 class="mtop title-order" >Danh sách các đơn hàng</h2>
-        <div class="container mtop" style="width:80%">
-            <table class="table table-striped table-bordered" id="sortTable">
-                <thead>
-                    <tr>
-                        <th>OrderID</th>
-                        <th>Ngày&nbspmua&nbsphàng</th>
-                        <th>Sản&nbspphẩm</th>
-                        <th>Tổng&nbspchi&nbspphí</th>
-                        <th>Tình&nbsptrạng</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items ="${listMyOrder}" var="c">
+        <div style="display: flex;display: flex;
+             flex-direction: row;
+             align-content: stretch;
+             justify-content: center;
+             align-items: baseline;
+             flex-wrap: nowrap;">
+            <!-- Side widgets-->
+            <div class="col-lg-2" style="padding: 0;margin: 0;    padding-right: 32px;">
+                <!-- Search widget-->
+                <%@include file="components/sider.jsp" %>
+            </div>
+
+            <div class="container mtop" style="width:80%;padding: 0; margin: 0; ">
+                <h2 class="mtop title-order" style="    margin-top: 100px;" >Danh sách các đơn hàng</h2>
+<div class="row-lg-2">
+    <label for="recordLength">Độ dài hiển thị bản ghi:</label>
+    <input type="number" id="recordLength" min="1" max="100" value="10">
+    <label for="startDate">Từ ngày:</label>
+    <input type="date" id="startDate">
+    <label for="endDate">Đến ngày:</label>
+    <input type="date" id="endDate">
+    <button id="applyBtn">Áp dụng</button>
+</div>
+
+                <table class="table table-striped table-bordered" id="sortTable" style="display: flow">
+                    
+                    <thead>
                         <tr>
-                            <td><a href="order-detail?orderId=${c.orderID}">
-                                    ${c.orderID}</a></td>
-                            <td>${c.date}</td>
-                            <c:if test="${c.countProduct != 0}">
-                                <td>${c.fullNameFirstProduct} và ${c.countProduct} sản phẩm khác</td>
-                            </c:if>
-                            <c:if test="${c.countProduct == 0}">
-                                <td>${c.fullNameFirstProduct}</td>
-                            </c:if>
-                            <td>${c.total_cost}</td>
-                            <td>${c.status_order_name}</td>
-                            <td>
-                                <c:if test="${c.status_order_name eq 'Đang gửi'}">
-                                    <div class="row">
-                                        <a style="width: auto;margin-left: 12px;" href="cancel-order?order_id=${c.orderID}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true" >Hủy</a>
-                                    </div>
-
-                                </c:if></td>
+                            <th>OrderID</th>
+                            <th>Ngày&nbspmua&nbsphàng</th>
+                            <th>Sản&nbspphẩm</th>
+                            <th>Tổng&nbspchi&nbspphí</th>
+                            <th>Tình&nbsptrạng</th>
+                            <th></th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items ="${listMyOrder}" var="c">
+                            <tr>
+                                <td><a href="order-detail?orderId=${c.orderID}">
+                                        ${c.orderID}</a></td>
+                                <td>${c.date}</td>
+                                <c:if test="${c.countProduct != 0}">
+                                    <td>${c.fullNameFirstProduct} và ${c.countProduct} sản phẩm khác</td>
+                                </c:if>
+                                <c:if test="${c.countProduct == 0}">
+                                    <td>${c.fullNameFirstProduct}</td>
+                                </c:if>
+                                <td>${c.total_cost}</td>
+                                <td>${c.status_order_name}</td>
+                                <td>
+                                    <c:if test="${c.status_order_name eq 'Đang gửi'}">
+                                        <div class="row">
+                                            <a style="width: auto;margin-left: 12px;" href="cancel-order?order_id=${c.orderID}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true" >Hủy</a>
+                                        </div>
 
-                    </c:forEach>
+                                    </c:if></td>
+                            </tr>
 
-                </tbody>
-            </table>
+                        </c:forEach>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="mtop"></div>
         <%@include file="components/footer.jsp" %>
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-        
+
         <script>
             $(document).ready(function () {
-                $('#sortTable').DataTable({
+                var table = $('#sortTable').DataTable({
                     "language": {
                         "decimal": "",
                         "emptyTable": "No data available in table",
@@ -105,8 +129,29 @@
                             "sortDescending": ": activate to sort column descending"
                         }
                     }
+
                 });
+
+                $('#applyBtn').on('click', function () {
+                    var recordLength = parseInt($('#recordLength').val());
+                    table.page.len(recordLength).draw();
+                });
+                $('#applyBtn').on('click', function() {
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+
+        table
+            .columns(1)
+            .search(startDate, true, false)
+            .draw();
+
+        table
+            .columns(1)
+            .search(endDate, true, false)
+            .draw();
+    });
             });
+
         </script>
     </body>
 </html>

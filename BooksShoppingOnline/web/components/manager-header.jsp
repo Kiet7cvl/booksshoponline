@@ -25,9 +25,9 @@
                     <li class="nav-item me-4">
                         <a class="nav-link" href="blog">Blog</a>
                     </li>
-                    <li class="nav-item me-4">
+<!--                    <li class="nav-item me-4">
                         <a class="nav-link" href="#">Contact</a>
-                    </li>
+                    </li>-->
 
 
                 </ul>

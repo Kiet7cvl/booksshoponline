@@ -17,10 +17,8 @@ import model.Customer;
 import model.UpdateCustomer;
 import model.User;
 
-/**
- *
- * @author son22
- */
+
+
 public class CustomerDAO extends DBContext {
 
     public Customer checkCustomer(String fullName, String email, String mobile) {
