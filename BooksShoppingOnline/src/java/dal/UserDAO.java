@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import model.User;
 
 public class UserDAO extends DBContext {
@@ -277,10 +279,33 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
-
-    public void editUserProfile(String uname, String url_avatar, String ugender, String umobile, String uaddress, int uid) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<User> getAllAuthor() {
+        List<User> list = new ArrayList<>();
+        String sql = "select * from User where role_id = 2";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                User u = User.builder()
+                        .user_Id(rs.getInt(1))
+                        .full_Name(rs.getString(2))
+                        .password(rs.getString(3))
+                        .avatar(rs.getString(4))
+                        .gender(rs.getBoolean(5))
+                        .email(rs.getString(6))
+                        .mobile(rs.getString(7))
+                        .address(rs.getString(8))
+                        .status(rs.getBoolean(9))
+                        .role_Id(rs.getString(10))
+                        .build();
+                list.add(u);
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
+
+   
    
 }
 
