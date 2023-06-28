@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.Chart;
 import model.Order;
 
 /**
@@ -45,15 +46,44 @@ public class OrderDao extends DBContext {
     public static void main(String[] args) {
 //        System.out.println(new OrderDao().checkProductOrderByUser(1, 2));
         OrderDao o = new OrderDao();
-        System.out.println(o.checkProductOrderByUser(11, 1));
+        System.out.println(o.getChartRevenueArea("=! -1","2023-06-11",27));
     }
+    
+    public List<Chart> getChartRevenueArea(String salerId, String start, int day) {
+        List<Chart> list = new ArrayList<>();
+        for (int i = 0; i < day; i++) {
+            int value = 0;
+            String sql = "select sum(total_cost) from `Order` where  saler_id " + salerId + " and orderDate <= DATE_ADD(?, INTERVAL ? DAY) and orderDate >= ?";
+            try {
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setInt(1, i);
+                st.setString(2, start);
+                st.setString(3, start);
+                ResultSet rs = st.executeQuery();
+                while (rs.next()) {
+                    value = rs.getInt(1);
+                }
+                sql = "SELECT DATE_ADD(?, INTERVAL ? DAY)";
+                st = connection.prepareStatement(sql);
+                st.setInt(1, i);
+                st.setString(2, start);
+                rs = st.executeQuery();
+                while (rs.next()) {
+                    Chart c = Chart.builder()
+                            .date(rs.getDate(1))
+                            .value(value)
+                            .build();
+                    list.add(c);
+                }
 
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        return list;
+    }
     public List<Order> getAllOrder(int userId) {
         List<Order> list = new ArrayList<>();
-//        String sql = "select * from [Order] join Status_Order\n"
-//                + "on [Order].status_order= Status_Order.status_order_id\n"
-//                + "where userId = ?";
-
         String sql = "SELECT *\n"
                 + "FROM `Order`\n"
                 + "JOIN Status_Order ON `Order`.status_order = Status_Order.status_order_id\n"

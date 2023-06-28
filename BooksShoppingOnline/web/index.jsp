@@ -16,8 +16,7 @@
             <%@include file="components/header.jsp" %>
             <%@include file="components/account.jsp" %>
             <!--Slider-->
-
-
+            
             <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" >
                     <div class="carousel-indicators">

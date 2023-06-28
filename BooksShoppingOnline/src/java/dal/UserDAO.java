@@ -7,10 +7,41 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import model.User;
 
 public class UserDAO extends DBContext {
+
+    public void createNewUser(String fname, String password, String email, String phone, String address, String status, String role_id, String gender) {
+        String sql = "INSERT INTO `User`\n"
+                + "           (`fullName`,\n"
+                + "            `password`,\n"
+                + "            `email`,\n"
+                + "            `mobile`,\n"
+                + "            `address`,\n"
+                + "            `status`,\n"
+                + "            `role_id`,\n"
+                + "            `gender`)\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?,?,?);";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, fname);
+            st.setString(2, password);
+            st.setString(3, email);
+            st.setString(4, phone);
+            st.setString(5, address);
+            st.setString(6, status);
+            st.setString(7, role_id);
+            st.setString(8, gender);
+            st.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     public User login(String email, String password) {
         String sql = "select * from user\n"
@@ -41,6 +72,21 @@ public class UserDAO extends DBContext {
         return null;
     }
 
+    public void UpdateStatusUser(int status, int user_Id) {
+        String sql = "UPDATE `User`\n"
+                + "SET `status` = ?\n"
+                + "WHERE `userId` = ?;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, status);
+            st.setInt(2, user_Id);
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
     public User checkUserExist(String email) {
         String sql = "SELECT * FROM `User` WHERE userId = ?";
         try {
@@ -67,7 +113,6 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-
     public void register(String fullName, String password, String gender, String email, String mobile, String address) {
         String sql = "INSERT INTO user (`fullName`, `password`,`gender`, `email`, `mobile`, `address`, `status`, `role_id`) VALUES \n"
                 + "(?,?,b?,?,?,?,0,1)";
@@ -85,7 +130,6 @@ public class UserDAO extends DBContext {
         }
 
     }
-
 
     public void changePassword(int userId, String new_pass1) {
         try {
@@ -174,12 +218,10 @@ public class UserDAO extends DBContext {
         return null;
     }
 
+    public String UpdatePassword(String pass, String email) {
+        try {
 
-
-    public String UpdatePassword(String pass, String email){
-        try{
-            
-           String sql = "UPDATE `user`  SET `password` = ? WHERE `email` = ?";
+            String sql = "UPDATE `user`  SET `password` = ? WHERE `email` = ?";
 
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, pass);
@@ -190,9 +232,6 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
-
-
- 
 
     public void editUserProfile(String uname, String uavatar, boolean ugender, String umobile, String uaddress, int uid) {
         String sql = "update books_shop_online.User\n"
@@ -260,7 +299,6 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    
     public String getAuthorById(int author_id) {
         String sql = "select * from books_shop_online.User where userId = ? ";
         try {
@@ -273,7 +311,7 @@ public class UserDAO extends DBContext {
             }
         } catch (Exception e) {
 
-                 System.out.println("Get all error "+ e.getMessage());
+            System.out.println("Get all error " + e.getMessage());
         }
         return null;
     }
@@ -281,7 +319,31 @@ public class UserDAO extends DBContext {
     public void editUserProfile(String uname, String url_avatar, String ugender, String umobile, String uaddress, int uid) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-   
-}
 
-    
+    public List<User> getAllUsers() {
+        List<User> list = new ArrayList<>();
+        String sql = "SELECT *\n"
+                + "FROM `User`;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                User u = User.builder()
+                        .user_Id(rs.getInt(1))
+                        .full_Name(rs.getString(2))
+                        .password(rs.getString(3))
+                        .avatar(rs.getString(4))
+                        .gender(rs.getBoolean(5))
+                        .email(rs.getString(6))
+                        .mobile(rs.getString(7))
+                        .address(rs.getString(8))
+                        .status(rs.getBoolean(9))
+                        .role_Id(rs.getString(10))
+                        .build();
+                list.add(u);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+}

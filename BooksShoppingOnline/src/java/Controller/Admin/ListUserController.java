@@ -3,25 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Common;
+package Controller.Admin;
 
+import dal.RoleDAO;
 import dal.UserDAO;
 import java.io.IOException;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import model.Role;
 import model.User;
 
 /**
  *
  * @author lam
  */
+@WebServlet(name = "ListUserController", urlPatterns = {"/list-user"})
 
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
+public class ListUserController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +36,19 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+       response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        
+        
+        List<User> listUsers = new UserDAO().getAllUsers();
+        List<Role> listRole = new RoleDAO().getAllRole();
+
+        request.setAttribute("listUsers", listUsers);
+        request.setAttribute("listRole", listRole);
+
+        request.getRequestDispatcher("AdminUserList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,31 +77,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String historyUrl = (String) session.getAttribute("historyUrl");
-
-        UserDAO dao = new UserDAO();
-        User u = dao.login(email, password);
-        if (u == null) {
-            request.setAttribute("notification", "Sai email hoặc mật khẩu");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-            session.setAttribute("us", u);
-            if(u.getRole_Id().equals("1")){
-                response.sendRedirect(historyUrl);
-            }
-            if(u.getRole_Id().equals("2")){
-                request.getRequestDispatcher("mkt-dashboard");
-            }
-            if(u.getRole_Id().equals("3") || u.getRole_Id().equals("4")){
-                response.sendRedirect("sale-dashboard");
-            }
-            if(u.getRole_Id().equals("5")){
-                response.sendRedirect("admin-dashboard");
-            }
-        }
+        processRequest(request, response);
     }
 
     /**
