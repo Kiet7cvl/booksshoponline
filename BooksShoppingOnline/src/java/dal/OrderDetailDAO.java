@@ -18,6 +18,7 @@ import model.OrderDetail;
 
 public class OrderDetailDAO extends DBContext {
 
+    
     public void addCartToOrder(List<Cart> listCart, int order_id) {
         try {
             for (Cart cart : listCart) {

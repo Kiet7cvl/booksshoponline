@@ -175,6 +175,7 @@
                 border-radius: 0 45px 45px 0;
                 cursor: pointer;
                 font-size: 20px;
+
             }
         </style>
         <%@include file="components/javascript.jsp" %>
@@ -225,7 +226,7 @@
                                         Giá gốc: 
                                         <span class="text-decoration-line-through">${product.original_price}đ</span>
                                     </div>
-                                    <div>
+                                    <div style="color:red">
                                         Giảm giá:
                                         <span>${product.sale_price}đ</span>
                                     </div>
@@ -273,20 +274,22 @@
                                 <!-- Product image-->
                                 <img class="card-img-top" src="${p.image}" alt="..." />
                                 <!-- Product details-->
-                                <div class="card-body p-4">
+                                <div class="card-body p-3">
                                     <div class="text-center">
                                         <!-- Product name-->
-                                        <h5 class="fw-bolder">${p.name}</h5>
-                                        <!-- Product price-->
+                                        <div>
+                                            <h5 class="fw-bolder">${p.name}</h5>
+                                            <!-- Product price-->
+                                        </div>
                                         <div style="margin-bottom: 1.7%">
                                             Giá gốc: 
                                             <span class="text-decoration-line-through">${product.original_price}đ</span>
                                         </div>
-                                        <div>
+                                        <div style="color:red">
                                             Giảm giá:
-                                            <span>${product.sale_price}đ</span>
+                                            <span>${product.sale_price}đ</span>                                           
                                         </div>
-                                    </div>
+                                    </div>                                      
                                 </div>
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -308,7 +311,7 @@
                         <h2 style="margin-left: 35%">Bình luận</h2>
                     </div>
                     <div class="modal-body">
-                        <form action="feedback">
+                        <form action="feedback" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="productId" value="${product.id}"/>
                             <b>Viết bình luận:</b>&nbsp;&nbsp;
                             <div class="form-group">
@@ -316,12 +319,12 @@
                             </div>
                             <b>Ảnh phản hồi:</b>&nbsp;&nbsp;
                             <div class="form-group">
-                                <input name="imageurl" type="file" class="form-control" style="border-radius: 100px;" required="">
+                                <input value="" name="feedback" type="file" class="form-control" style="border-radius: 100px;">
                             </div>
                             <b>Đánh giá:</b>&nbsp;&nbsp;
                             <div class="form-group" >
                                 <select name = "star" style="border-radius: 100px;" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                    <option selected>Chọn số sao bạn dành cho KingsMan</option>
+                                    <option selected>Chọn số sao bạn dành cho KingBook</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -346,15 +349,15 @@
             <h3 style="text-align: center; font-style: oblique;">Không có bình luận</h3>
         </c:if>           
         <div style="background-color:#f8f9fa;">
-            <hr class="marketing_feedback_margin">
-            <span><h2 class="marketing_feedback_margin marketing_feedbac_displayinline">${total} Đánh giá</h2></span>
-            <span><h2 class="marketing_feedback_margin marketing_feedbac_displayinline">${Math.round(avg * 1000) / 1000}/5 <img style="height: 40px; width: 40px" src="images/images.png"></h2></span>
-                    <c:if test="${accept.orderID != null}">
-                <a data-toggle="modal" data-dismiss="modal" data-target="#feedback">
-                    <h2 class="marketing_feedback_margin marketing_feedbac_displayinline" style="color: blue">
-                        Viết nhận xét của bạn
+            <div>
+                <hr class="marketing_feedback_margin">
+                <span><h2 class="marketing_feedback_margin marketing_feedbac_displayinline">${total} Đánh giá</h2></span>
+                <span><h2 class="marketing_feedback_margin marketing_feedbac_displayinline">${Math.round(avg * 1000) / 1000}/5 <img style="height: 40px; width: 40px;margin-top: -10px" src="images/star-symbol-icon.png"></h2></span>
+                        <c:if test="${accept.orderID != null}">
+                    <h2 class="marketing_feedback_margin marketing_feedbac_displayinline" >
+                        <a data-toggle="modal" data-dismiss="modal" data-target="#feedback" style="margin-left: 520px"> Viết nhận xét <img style="width: 50px" src="images/feedback-icon.png" > </a>
                     </h2>
-                </a>
+                </div>
             </c:if>
             <hr class="marketing_feedback_margin">
             <div  class="container-fluid">

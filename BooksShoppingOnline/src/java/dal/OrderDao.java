@@ -19,6 +19,30 @@ import model.Order;
 
 public class OrderDao extends DBContext {
 
+        public int createNewOrder(int sum, String fullname, String phone, String address, int user_id, String note) {
+       String sql = "INSERT INTO `Order` " +
+             "(`total_cost`, `fullName`, `mobile`, `address`, `userId`, `note`) " +
+             "VALUES (?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            st.setInt(1, sum);
+            st.setString(2, fullname);
+            st.setString(3, phone);
+            st.setString(4, address);
+            st.setInt(5, user_id);
+            st.setString(6, note);
+
+            st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
     public Order checkProductOrderByUser(int user_Id, int productId) {
         String sql = "SELECT * \n"
                 + "FROM `Order` o \n"
@@ -41,17 +65,51 @@ public class OrderDao extends DBContext {
         return null;
     }
 
-//    public static void main(String[] args) {
-////        System.out.println(new OrderDao().checkProductOrderByUser(1, 2));
-//        OrderDao o = new OrderDao();
-//        System.out.println(o.getTotalOrder("7", "2023-06-10 21:32:30","2023-06-12"));
-//    }
+
+
+    public static void main(String[] args) {
+//        System.out.println(new OrderDao().checkProductOrderByUser(1, 2));
+        OrderDao o = new OrderDao();
+        System.out.println(o.getChartRevenueArea("=! -1","2023-06-11",27));
+    }
+    
+    public List<Chart> getChartRevenueArea(String salerId, String start, int day) {
+        List<Chart> list = new ArrayList<>();
+        for (int i = 0; i < day; i++) {
+            int value = 0;
+            String sql = "select sum(total_cost) from `Order` where  saler_id " + salerId + " and orderDate <= DATE_ADD(?, INTERVAL ? DAY) and orderDate >= ?";
+            try {
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setInt(1, i);
+                st.setString(2, start);
+                st.setString(3, start);
+                ResultSet rs = st.executeQuery();
+                while (rs.next()) {
+                    value = rs.getInt(1);
+                }
+                sql = "SELECT DATE_ADD(?, INTERVAL ? DAY)";
+                st = connection.prepareStatement(sql);
+                st.setInt(1, i);
+                st.setString(2, start);
+                rs = st.executeQuery();
+                while (rs.next()) {
+                    Chart c = Chart.builder()
+                            .date(rs.getDate(1))
+                            .value(value)
+                            .build();
+                    list.add(c);
+                }
+
+
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        return list;
+    }
+
     public List<Order> getAllOrder(int userId) {
         List<Order> list = new ArrayList<>();
-//        String sql = "select * from [Order] join Status_Order\n"
-//                + "on [Order].status_order= Status_Order.status_order_id\n"
-//                + "where userId = ?";
-
         String sql = "SELECT *\n"
                 + "FROM `Order`\n"
                 + "JOIN Status_Order ON `Order`.status_order = Status_Order.status_order_id\n"
@@ -154,42 +212,11 @@ public class OrderDao extends DBContext {
         }
         return null;
     }
-
-    public int createNewOrder(int sum, String fullname, String phone, String address, int user_id, String note) {
-        String sql = "INSERT INTO [dbo].[Order]\n"
-                + "           ([total_cost]\n"
-                + "           ,[fullName]\n"
-                + "           ,[mobile]\n"
-                + "           ,[address]\n"
-                + "           ,[userId]\n"
-                + "           ,[note])\n"
-                + "     VALUES\n"
-                + "           (?,?,?,?,?,?) ";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            st.setInt(1, sum);
-            st.setString(2, fullname);
-            st.setString(3, phone);
-            st.setString(4, address);
-            st.setInt(5, user_id);
-            st.setString(6, note);
-
-            st.executeUpdate();
-            ResultSet rs = st.getGeneratedKeys();
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return 0;
-    }
-
-    public void updateStatusOrder(int orderID, int i) {
-        String sql = "UPDATE `Order`\n"
-                + "SET `status_order` = ?\n"
-                + "WHERE order_id = ?";
+    
+   public void updateStatusOrder(int orderID, int i) {
+        String sql = "UPDATE `Order` " +
+             "SET `status_order` = ? " +
+             "WHERE `order_id` = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, i);
@@ -236,6 +263,7 @@ public class OrderDao extends DBContext {
 
     }
 
+
     public Order getOrderById(int order_id) {
         String sql = "select * from where order_id = ?";
         try {
@@ -263,6 +291,34 @@ public class OrderDao extends DBContext {
         }
         return null;
     }
+    
+    public Order getOrderNew(int user_id) {
+        String sql = "SELECT * FROM `Order` WHERE `userId` = ? AND `status_order` IS NULL";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, user_id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Order p = Order.builder()
+                        .orderID(rs.getInt(1))
+                        .date(rs.getDate(2))
+                        .total_cost(rs.getInt(3))
+                        .fullName(rs.getString(4))
+                        .mobile(rs.getString(5))
+                        .address(rs.getString(6))
+                        .status_order(rs.getInt(7))
+                        .UserId(rs.getInt(8))
+                        .saler_id(rs.getInt(9))
+                        .note(rs.getString(10))
+                        .build();
+
+                return p;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public int getAssignOrder() {
         String sql = "SELECT * FROM `User` WHERE role_id = 3\n"
@@ -281,6 +337,7 @@ public class OrderDao extends DBContext {
     }
 
     public void updateSalerOrder(int orderID, int saler_id) {
+
         String sql = "UPDATE `Order`\n"
                 + "SET `saler_id` = ?\n"
                 + "WHERE `order_id` = ?;";
@@ -433,40 +490,7 @@ public class OrderDao extends DBContext {
         return list;
     }
 
-    public List<Chart> getChartRevenueArea(String salerId, String start, int day) {
-        List<Chart> list = new ArrayList<>();
-        for (int i = 0; i < day; i++) {
-            int value = 0;
-            String sql = "SELECT SUM(total_cost) FROM `Order`\n"
-                    + "WHERE saler_id " + salerId + " AND orderDate <= DATE_ADD(?, INTERVAL ? DAY) AND orderDate >= ?;";
-            try {
-                PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
-                st.setString(3, start);
-                ResultSet rs = st.executeQuery();
-                while (rs.next()) {
-                    value = rs.getInt(1);
-                }
-                sql = "SELECT DATE_ADD(?, INTERVAL ? DAY);";
-                st = connection.prepareStatement(sql);
-                st.setInt(2, i);
-                st.setString(1, start);
-                rs = st.executeQuery();
-                while (rs.next()) {
-                    Chart c = Chart.builder()
-                            .date(rs.getDate(1))
-                            .value(value)
-                            .build();
-                    list.add(c);
-                }
-
-            } catch (SQLException e) {
-                System.out.println(e);
-            }
-        }
-        return list;
-    }
+    
 
     public void updateOrder(int orderId, int status, int salerId) {
         String sql = "UPDATE `Order`\n"

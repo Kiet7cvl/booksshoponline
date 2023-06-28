@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import model.Blog;
 import model.Chart;
 
@@ -21,12 +20,13 @@ import model.Chart;
  */
 public class BlogDAO extends DBContext {
 
-
     public List<Blog> getAllBlog() {
         List<Blog> list = new ArrayList<>();
-        String sql = "SELECT * FROM books_shop_online.blog\n" +
-"              ORDER BY blog_id\n" +
-"                LIMIT 2";
+
+        String sql = "SELECT * FROM books_shop_online.blog\n"
+                + "              ORDER BY blog_id\n"
+                + "                LIMIT 2";
+
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -108,7 +108,7 @@ public class BlogDAO extends DBContext {
         return null;
     }
 
-        public Blog getBlogNew() {
+    public Blog getBlogNew() {
         List<Blog> list = new ArrayList<>();
         String sql = "SELECT *\n"
                 + "FROM books_shop_online.blog\n"
@@ -138,12 +138,12 @@ public class BlogDAO extends DBContext {
         return null;
     }
 
-        public int getTotalBlog(String searchKey, String categoryId) {
+    public int getTotalBlog(String searchKey, String categoryId) {
         String sql = "SELECT COUNT(*)\n"
                 + "FROM books_shop_online.blog\n"
-                + "WHERE categoryBlog_id = "+ categoryId+"\n"
+                + "WHERE categoryBlog_id = " + categoryId + "\n"
                 + "  AND status = 1\n"
-                + "  AND title LIKE CONCAT('%', '"+searchKey+"', '%');";
+                + "  AND title LIKE CONCAT('%', '" + searchKey + "', '%');";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -162,12 +162,12 @@ public class BlogDAO extends DBContext {
         String sql = "select * from books_shop_online.blog \n"
                 + "where categoryBlog_id " + categoryId + " and status = 1  and title like N'%" + searchKey + "%'\n"
                 + " order by " + value + " " + type + "  LIMIT ?, ?;";
-        
+
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, a);
             st.setInt(2, PAGE_SIZE);
-           // st.setInt(3, PAGE_SIZE);
+            // st.setInt(3, PAGE_SIZE);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Blog c = Blog.builder()
@@ -189,12 +189,45 @@ public class BlogDAO extends DBContext {
             System.out.println(e);
         }
         return null;
-    }  
+    }
 
+    public List<Blog> getBlogWithPaging(int page, int PAGE_SIZE, String searchKey, String categoryId, String type, String value, String status, String authorId) {
+        List<Blog> list = new ArrayList<>();
+        int a = (page - 1) * PAGE_SIZE;
+        String sql = "select * from books_shop_online.blog\n"
+                + "where categoryBlog_id " + categoryId + " and status  " + status + " and author_id " + authorId + " and title like N'%" + searchKey + "%'\n"
+                + " order by " + value + " " + type + " LIMIT ?, ?;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, a);
+            st.setInt(2, PAGE_SIZE);
+
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog c = Blog.builder()
+                        .blog_id(rs.getInt(1))
+                        .title(rs.getString(2))
+                        .author_id(rs.getInt(3))
+                        .updated_date(rs.getDate(4))
+                        .content(rs.getString(5))
+                        .thumbnail(rs.getString(6))
+                        .brief_infor(rs.getString(7))
+                        .categoryBlog_id(rs.getInt(8))
+                        .status(rs.getBoolean(9))
+                        .build();
+
+                list.add(c);
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public int getTotalBlog(String searchKey, String categoryId, String status, String author) {
-        String sql = "Select count(*) from books_shop_online.blog  "
-                + "where categoryBlog_id " + categoryId + " and status " + status + " and author_id " + author + " and title like N'%" + searchKey + "%'\n";
+        String sql = "SELECT COUNT(blog_id) FROM blog\n"
+                + "WHERE categoryBlog_id " + categoryId + " AND status " + status + " AND title LIKE '%" + searchKey + "%';";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -206,7 +239,6 @@ public class BlogDAO extends DBContext {
         }
         return 0;
     }
-
 
     public String getUrlImageById(int id) {
         String sql = "select thumbnail from books_shop_online.blog where blog_id = ?";
@@ -223,8 +255,8 @@ public class BlogDAO extends DBContext {
         }
         return null;
     }
-  
-      public List<Chart> getChartBlogBar(String start, int day) {
+
+    public List<Chart> getChartBlogBar(String start, int day) {
         List<Chart> list = new ArrayList<>();
         for (int i = 0; i < day; i++) {
             int value = 0;
@@ -232,7 +264,7 @@ public class BlogDAO extends DBContext {
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setString(1, start);
-                st.setInt(2, i);        
+                st.setInt(2, i);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     value = rs.getInt(1);
@@ -240,7 +272,7 @@ public class BlogDAO extends DBContext {
                 sql = "SELECT DATE_ADD(?, INTERVAL ? DAY);";
                 st = connection.prepareStatement(sql);
                 st.setString(1, start);
-                st.setInt(2, i);       
+                st.setInt(2, i);
                 rs = st.executeQuery();
                 while (rs.next()) {
                     Chart c = Chart.builder()
@@ -266,7 +298,7 @@ public class BlogDAO extends DBContext {
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setString(1, start);
-                st.setInt(2, i);  
+                st.setInt(2, i);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     value = rs.getInt(1);
@@ -274,7 +306,7 @@ public class BlogDAO extends DBContext {
                 sql = "SELECT DATE_ADD(?, INTERVAL ? DAY);";
                 st = connection.prepareStatement(sql);
                 st.setString(1, start);
-                st.setInt(2, i);    
+                st.setInt(2, i);
                 rs = st.executeQuery();
                 while (rs.next()) {
                     Chart c = Chart.builder()
@@ -291,13 +323,82 @@ public class BlogDAO extends DBContext {
 
         return list;
     }
-    
+
+    public void addNewBlog(String title, int user_id, String content, String url_thumbnail, String brief_infor, int category_id, boolean status) {
+        try {
+            String sql = "INSERT INTO Blog\n"
+                    + "           (title\n"
+                    + "           ,author_id\n"
+                    + "           ,content\n"
+                    + "           ,thumbnail\n"
+                    + "           ,brief_infor\n"
+                    + "           ,categoryBlog_id\n"
+                    + "           ,status)\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?,?,?,?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setInt(2, user_id);
+            st.setString(3, content);
+            st.setString(4, url_thumbnail);
+            st.setString(5, brief_infor);
+            st.setInt(6, category_id);
+            st.setBoolean(7, status);
+
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public void changeStatusById(int blog_id, int status) {
+        try {
+            String sql = "UPDATE Blog\n"
+                    + "   SET status = ?\n"
+                    + " WHERE blog_id = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, status);
+            st.setInt(2, blog_id);
+
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public void UpdateBlogById(String title, int user_id, String content, String url_thumbnail, String brief_infor, int category_id, boolean status, int blog_id) {
+        try {
+            String sql = "UPDATE Blog\n"
+                    + "SET title = ?,\n"
+                    + "    author_id = ?,\n"
+                    + "    updated_date = CURRENT_TIMESTAMP,\n"
+                    + "    content = ?,\n"
+                    + "    thumbnail = ?,\n"
+                    + "    brief_infor = ?,\n"
+                    + "    categoryBlog_id = ?,\n"
+                    + "    status = ?\n"
+                    + "WHERE blog_id = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setInt(2, user_id);
+            st.setString(3, content);
+            st.setString(4, url_thumbnail);
+            st.setString(5, brief_infor);
+            st.setInt(6, category_id);
+            st.setBoolean(7, status);
+            st.setInt(8, blog_id);
+
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
     public static void main(String[] args) {
         BlogDAO sc = new BlogDAO();
-      //  System.out.println(sc.getChartBlogArea("", 4));
-        System.out.println(sc.getChartBlogBar("2023-05-22", 7));
+        //  System.out.println(sc.getChartBlogArea("", 4));
+        // System.out.println(sc.getBlogWithPaging(1, 2, "bad");    
 //        System.out.println(sc.getBlogNew());
-        
+
     }
 }
- 
