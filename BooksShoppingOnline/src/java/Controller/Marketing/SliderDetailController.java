@@ -35,13 +35,9 @@ public class SliderDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        int sliderId = Integer.parseInt(request.getParameter("sliderId"));
-        
-
+        int sliderId = Integer.parseInt(request.getParameter("sliderId"));    
         Slider Slider_Detail = new SliderDAO().GetSliderDetailbyID(sliderId);
         request.setAttribute("Slider_Detail", Slider_Detail);
-        
-        
         
         request.getRequestDispatcher("MKTSliderDetail.jsp").forward(request, response);
     }

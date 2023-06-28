@@ -15,12 +15,10 @@ import java.util.List;
 import model.Cart;
 import model.OrderDetail;
 
-/**
- *
- * @author dongh
- */
+
 public class OrderDetailDAO extends DBContext {
 
+    
     public void addCartToOrder(List<Cart> listCart, int order_id) {
         try {
             for (Cart cart : listCart) {

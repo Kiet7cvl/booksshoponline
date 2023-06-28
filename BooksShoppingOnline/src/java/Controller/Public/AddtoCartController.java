@@ -18,11 +18,8 @@ import model.Cart;
 import model.Product;
 import model.User;
 
-/**
- *
- * @author tr498
- */
-public class AddtoCartController extends HttpServlet {
+
+public class AddToCartController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

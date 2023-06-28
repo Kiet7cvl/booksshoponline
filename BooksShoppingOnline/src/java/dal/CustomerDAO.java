@@ -17,16 +17,13 @@ import model.Customer;
 import model.UpdateCustomer;
 import model.User;
 
-/**
- *
- * @author son22
- */
+
 public class CustomerDAO extends DBContext {
 
     public Customer checkCustomer(String fullName, String email, String mobile) {
-        String sql = "SELECT customer_id,customer_name,customer_email,customer_mobile\n"
-                + " FROM books_shop_online.customer\n"
-                + "WHERE customer_name = ? and customer_email = ? or customer_mobile = ?";
+        String sql = "SELECT customer_id, customer_name, customer_email, customer_mobile " +
+             "FROM books_shop_online.customer " +
+             "WHERE customer_name = ? AND customer_email = ? OR customer_mobile = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, fullName);
@@ -50,12 +47,9 @@ public class CustomerDAO extends DBContext {
 
     public void storedNewCustomer(String fullName, String email, String mobile) {
         try {
-            String sql = "INSERT INTO books_shop_online.customer\n"
-                    + "           (customer_name\n"
-                    + "           ,customer_email\n"
-                    + "           ,customer_mobile)\n"
-                    + "     VALUES\n"
-                    + "           (?,?,?)";
+            String sql = "INSERT INTO books_shop_online.customer " +
+             "(customer_name, customer_email, customer_mobile) " +
+             "VALUES (?, ?, ?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, fullName);
             st.setString(2, email);

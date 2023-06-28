@@ -79,7 +79,7 @@ public class LoginController extends HttpServlet {
                 response.sendRedirect(historyUrl);
             }
             if(u.getRole_Id().equals("2")){
-                request.getRequestDispatcher("mkt-dashboard");
+                response.sendRedirect("mkt-dashboard");
             }
             if(u.getRole_Id().equals("3") || u.getRole_Id().equals("4")){
                 response.sendRedirect("sale-dashboard");

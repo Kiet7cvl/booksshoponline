@@ -1,8 +1,4 @@
-<%-- 
-    Document   : newpassword
-    Created on : Feb 13, 2023, 3:44:16 PM
-    Author     : ADMIN
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

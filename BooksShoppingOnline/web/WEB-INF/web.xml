@@ -30,7 +30,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddtoCartController</servlet-name>
-        <servlet-class>Controller.Public.AddtoCartController</servlet-class>
+        <servlet-class>Controller.Public.AddToCartController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteCartController</servlet-name>
@@ -40,17 +40,14 @@
         <servlet-name>UpdateCart</servlet-name>
         <servlet-class>Controller.Public.UpdateCart</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>CartContactController</servlet-name>
         <servlet-class>Controller.Public.CartContactController</servlet-class>
     </servlet>
-
     <servlet>
         <servlet-name>MKTDashboardController</servlet-name>
         <servlet-class>Controller.Marketing.MKTDashboardController</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>ProductsListController</servlet-name>
         <servlet-class>Controller.Marketing.ProductsListController</servlet-class>
@@ -72,43 +69,86 @@
         <servlet-class>Controller.Marketing.ProductDetailController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ChangeStatusSliderController</servlet-name>
+        <servlet-class>Controller.Marketing.ChangeStatusSliderController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UpdateProductController</servlet-name>
         <servlet-class>Controller.Marketing.UpdateProductController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ChangeStatusSliderController</servlet-name>
-        <servlet-class>Controller.Marketing.ChangeStatusSliderController</servlet-class>
+        <servlet-name>SliderDetailController</servlet-name>
+        <servlet-class>Controller.Marketing.SliderDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSliderController</servlet-name>
+        <servlet-class>Controller.Marketing.AddSliderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSliderController</servlet-name>
+        <servlet-class>Controller.Marketing.UpdateSliderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostsListController</servlet-name>
+        <servlet-class>Controller.Marketing.PostsListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostDetailsController</servlet-name>
+        <servlet-class>Controller.Marketing.PostDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddPostController</servlet-name>
+        <servlet-class>Controller.Marketing.AddPostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeStatusController</servlet-name>
+        <servlet-class>Controller.Marketing.ChangeStatusController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePostController</servlet-name>
+        <servlet-class>Controller.Marketing.UpdatePostController</servlet-class>
+    </servlet>    
+    
+    <servlet>    
+        <servlet-name>DeleteFeedbackController</servlet-name>
+        <servlet-class>Controller.Public.DeleteFeedbackController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToOrderController</servlet-name>
+        <servlet-class>Controller.Public.AddToOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckOutController</servlet-name>
+        <servlet-class>Controller.Public.CheckOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SuccessfulCheckoutController</servlet-name>
+        <servlet-class>Controller.Public.SuccessfulCheckoutController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
-        <servlet>
+    <servlet>
         <servlet-name>ProductListController</servlet-name>
         <servlet-class>Controller.Public.ProductListController</servlet-class>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>ProductListController</servlet-name>
         <url-pattern>/list</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ListDetailController</servlet-name>
         <url-pattern>/list-detail</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>changepassword</servlet-name>
         <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
-
-
     <servlet-mapping>
         <servlet-name>Edituser</servlet-name>
         <url-pattern>/edituser</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>FeedbackCommonController</servlet-name>
         <url-pattern>/feedback_common</url-pattern>
@@ -133,12 +173,10 @@
         <servlet-name>UpdateCart</servlet-name>
         <url-pattern>/update-cart</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>CartContactController</servlet-name>
         <url-pattern>/cart-contact</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>MKTDashboardController</servlet-name>
         <url-pattern>/mkt-dashboard</url-pattern>
@@ -164,16 +202,89 @@
         <url-pattern>/product-detail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UpdateProductController</servlet-name>
-        <url-pattern>/update_product</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ChangeStatusSliderController</servlet-name>
         <url-pattern>/change-status-slider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductController</servlet-name>
+        <url-pattern>/updateproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SliderDetailController</servlet-name>
+        <url-pattern>/slider-detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSliderController</servlet-name>
+        <url-pattern>/add-slider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSliderController</servlet-name>
+        <url-pattern>/updateslider</url-pattern>
+    </servlet-mapping>  
+    <servlet-mapping>  
+        <servlet-name>PostsListController</servlet-name>
+        <url-pattern>/posts-list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostDetailsController</servlet-name>
+        <url-pattern>/post-details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddPostController</servlet-name>
+        <url-pattern>/add-post</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusController</servlet-name>
+        <url-pattern>/change-status</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePostController</servlet-name>
+        <url-pattern>/update-post</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFeedbackController</servlet-name>
+        <url-pattern>/delete-feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToOrderController</servlet-name>
+        <url-pattern>/add-order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutController</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SuccessfulCheckoutController</servlet-name>
+        <url-pattern>/successful</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
+      <servlet>
+        <servlet-name>ConnectorServlet</servlet-name>
+        <servlet-class>com.ckfinder.connector.ConnectorServlet</servlet-class>
+        <init-param>
+            <description>
+                Path to configuration file can be relative path inside application,
+                absolute path on local file system or UNC path.
+            </description>
+            <param-name>XMLConfig</param-name>
+            <param-value>/WEB-INF/config.xml</param-value>
+        </init-param>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConnectorServlet</servlet-name>
+        <url-pattern>
+            /ckfinder/core/connector/java/connector.java
+        </url-pattern>
+    </servlet-mapping>
+    
 </web-app>

@@ -72,13 +72,13 @@
                     <main>
                         <div class="container rounded bg-white mt-5 mb-5">
                             <form action="add_product" method="post" enctype="multipart/form-data">
-                                <div class="row"  style="margin-top: 8%;">
+                                <div class="row"  style="margin-top: 3%;">
                                     <div class="p-4">
 
                                         <h4 class="text-center">Thêm sản phẩm</h4>
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="p-3 py-5">
+                                        <div class="p-3 py-1">
                                             <div class="col-md-12">Tên sản phẩm<input type="text" class="form-control"  name="name"></div>
                                             <div class="col-md-12">Thông tin rút gọn<textarea class="form-control" name="brief_infor"  rows="2" ></textarea></div>
                                             <div class="col-md-12">Nội dung<textarea class="form-control" rows="10" id="editor" name="desciption"></textarea>
@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="p-3 py-5">
+                                        <div class="p-3 py-1">
                                             <div class="row mt-16">
                                                 <div class="col-md-12">Giá gốc<input name="original_price" type="number" class="form-control" /></div>                                        
                                                 <div class="col-md-12">Giá khuyến mãi<input name="sale_price" type="number" class="form-control" /></div>                                        
