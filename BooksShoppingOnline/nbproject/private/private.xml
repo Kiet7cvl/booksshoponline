@@ -2,31 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group/>
-=======
-        <group>
-<<<<<<< HEAD
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/dal/UserDAO.java</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/Controller/Public/BlogDetailController.java</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/web/components/account.jsp</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/Controller/Marketing/MKTDashboardController.java</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/model/Date.java</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/model/User.java</file>
-=======
-<<<<<<< HEAD
-            <file>file:/D:/swp391/booksshop12/BooksShoppingOnline/src/java/dal/OrderDao.java</file>
-            <file>file:/D:/swp391/booksshop12/BooksShoppingOnline/src/java/Controller/Customer/OrderDetailController.java</file>
-            <file>file:/D:/swp391/booksshop12/BooksShoppingOnline/src/java/context/DBContext.java</file>
-            <file>file:/D:/swp391/booksshop12/BooksShoppingOnline/src/java/Controller/Common/EditUserProfileController.java</file>
-            <file>file:/D:/swp391/booksshop12/BooksShoppingOnline/web/order-detail.jsp</file>
-=======
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/Controller/Common/AdminAuthorization.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/web/components/header.jsp</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/web/index.jsp</file>
->>>>>>> da3d59ccbb49451276161edc9817158ff4d69020
->>>>>>> 0695e3694149d9520043314222410b11c179d587
-        </group>
->>>>>>> 36a84188770e5d045fcfc8a9eadfd64f58b51f82
     </open-files>
 </project-private>
