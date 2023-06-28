@@ -29,10 +29,10 @@
             background: #ddd;
             min-height: 100vh;
             vertical-align: middle;
-            /*display: flex;*/
+/*            display: flex;*/
             font-family: sans-serif;
-            font-size: 0.8rem;
-            font-weight: bold;
+/*            font-size: 0.8rem;
+            font-weight: bold;*/
         }
 
         .title {
@@ -210,20 +210,17 @@
 
         <div class="card" style="margin-top: 10%; margin-bottom: 5%">
             <div class=" row">
-                <div class="col-md-7 cart">
+                <div class="col-md-7 cart" style="font-size: 0.8rem;font-weight: bold;">
                     <div class="title">
                         <div class="row">
                             <div class="col">
                                 <h4><b>Sản phẩm</b></h4>
                             </div>
-                            <!-- <div class="col align-self-center text-right text-muted">3 items</div> -->
                         </div>
                     </div>
                     <c:forEach items="${listCart}" var="c">
                     <div class="row border-top border-bottom">
-                        <div class="row main align-items-center">
-                            
-                            <!--<div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>-->
+                        <div class="row main align-items-center">                          
                             <div class="col">
                                 <div class="row">${c.product_id}</div>
                             </div>
@@ -240,7 +237,7 @@
 
                     <div class="back-to-shop text-muted"><a href="carts">&leftarrow; Trở lại cửa hàng</a></div>
                 </div>
-                <div class="style-btn col-md-5 summary">
+                <div class="style-btn col-md-5 summary" style="font-size: 0.8rem;font-weight: bold;">
                     <div class="row">
                         <h4 class="cal"><b>Thông tin giao hàng</b></h4>
                         <div class="col align-self-center text-right text-muted">Hãy sửa các thông tin chính xác nhất</div>

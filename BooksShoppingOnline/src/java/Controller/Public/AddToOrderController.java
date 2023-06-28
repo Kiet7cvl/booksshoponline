@@ -6,7 +6,8 @@
 package Controller.Public;
 
 import dal.CartDAO;
-import dal.ProductDAO;
+import dal.OrderDao;
+import dal.OrderDetailDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,15 +15,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import model.Cart;
-import model.Product;
 import model.User;
 
 /**
  *
  * @author tr498
  */
-public class AddToCartController extends HttpServlet {
+public class AddToOrderController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,37 +34,33 @@ public class AddToCartController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String productId_raw = request.getParameter("productId");
-        int product_id = Integer.parseInt(productId_raw);
-        HttpSession session = request.getSession();
-        User u = (User) session.getAttribute("us");
-        int user_id = u.getUser_Id();   
-        CartDAO cd = new CartDAO();
-        Cart c = cd.checkCart(user_id, product_id);
-        int quantity = 1;
-        String quantity_raw = request.getParameter("quantity");
-        if(quantity_raw != null){
-            quantity = Integer.parseInt(quantity_raw);
-        }
-        int total_cost;
-        if (c == null) {
-            ProductDAO pd = new ProductDAO();
-            Product p = pd.getProductById(product_id);
-            int price = p.getOriginal_price();
-            if (p.getSale_price() != 0) {
-                price = p.getSale_price();
-            }
-            total_cost = quantity * price;
-            cd.addToCart(product_id, p.getName(), price, quantity, total_cost, user_id);
-        } else {
-                quantity += c.getQuantity();
-            total_cost = quantity * c.getProduct_price();
-            cd.addQuantityCartProduct(product_id, quantity, total_cost, user_id);
-        }
-        String historyUrl = (String) session.getAttribute("historyUrl");
-        response.sendRedirect(historyUrl);
+         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            String fullname = request.getParameter("fullname");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+            String note = request.getParameter("note");
+            int sum = Integer.parseInt(request.getParameter("sum"));
 
+            CartDAO c = new CartDAO();
+            OrderDao od = new OrderDao();
+            OrderDetailDAO odd = new OrderDetailDAO();
+            
+            HttpSession session = request.getSession();
+            User u = (User) session.getAttribute("us");
+            int user_id = u.getUser_Id();
+            int order_id = od.createNewOrder(sum, fullname, phone, address, user_id, note);
+            List<Cart> listCart = c.getAllCartByUserId(user_id);
+            odd.addCartToOrder(listCart, order_id);
+            
+            request.setAttribute("fullname", fullname);
+            request.setAttribute("phone", phone);
+            request.setAttribute("address", address);
+            
+            request.getRequestDispatcher("checkout").forward(request, response);
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

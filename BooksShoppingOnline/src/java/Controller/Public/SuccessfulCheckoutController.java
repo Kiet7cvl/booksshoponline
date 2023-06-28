@@ -5,21 +5,19 @@
 
 package Controller.Public;
 
-import dal.FeedbackDAO;
+import dal.OrderDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.User;
 
 /**
  *
  * @author tr498
  */
-public class FeedbackCommonController extends HttpServlet {
+public class SuccessfulCheckoutController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -29,27 +27,23 @@ public class FeedbackCommonController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException  {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            User u = (User) session.getAttribute("us");
-            if (u == null) {
-                request.setAttribute("notification", "Bạn cần đăng nhập để gửi phản hồi cho KingsMan");
+            /* TODO output your page here. You may use following sample code. */
+            OrderDao od = new OrderDao();
+            String id_raw = request.getParameter("vnp_OrderInfo");
+            int id = Integer.parseInt(id_raw);
+            if (id == -1) {
+                request.setAttribute("notification", "Bạn đã chọn phương thức thanh toán khi nhận hàng.");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-            } else {
-                int product_id = -1;
-                String subject = request.getParameter("subject");
-                String image = "images/feedback/" + request.getParameter("imageurl");
-                int star = Integer.parseInt(request.getParameter("star"));
-
-                FeedbackDAO fed = new FeedbackDAO();
-                
-                fed.addNewFeedback(u.getFull_Name(), star, subject, image, 1, product_id, u.getUser_Id());
-                response.sendRedirect("home");
             }
+            if (id_raw != null) {
+                od.updateStatusOrder(id, 2);
+                request.setAttribute("notification", "Thanh toán bằng VNPAY thành công.");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+            
 
         }
     } 

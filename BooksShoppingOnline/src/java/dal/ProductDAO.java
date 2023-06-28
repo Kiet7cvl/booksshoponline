@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Chart;
+import model.OrderDetail;
 
 import model.Product;
 
@@ -104,7 +105,7 @@ public class ProductDAO extends DBContext {
         return 0;
     }
 
-    public List<Product> getProductWithPaging(int page, int PAGE_SIZE, String searchKey, String categoryId, String type, String value, String status) throws IOException{
+    public List<Product> getProductWithPaging(int page, int PAGE_SIZE, String searchKey, String categoryId, String type, String value, String status) throws IOException {
         List<Product> list = new ArrayList<>();
 
         int a = (page - 1) * PAGE_SIZE;
@@ -130,12 +131,12 @@ public class ProductDAO extends DBContext {
                         .category_id(rs.getInt(9))
                         .update_date(rs.getDate(10))
                         .image(rs.getString(14))
-//                        .rated_star(getRatedProduct(rs.getInt(1)))
+                        //                        .rated_star(getRatedProduct(rs.getInt(1)))
                         .build();
 
                 list.add(p);
             }
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -480,7 +481,6 @@ public class ProductDAO extends DBContext {
         }
     }
 
-
     public String getImageBase64(String path) throws IOException {
         File file = new File(path);
         FileInputStream fl = new FileInputStream(file);
@@ -490,5 +490,38 @@ public class ProductDAO extends DBContext {
         return Base64.getEncoder().encodeToString(arr);
     }
 
+    public int getProductQuantity(int productId) {
+        int quantity = 0;
+        try {
+            String sql = "SELECT quantity FROM Product WHERE product_id = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, productId);
+            try ( ResultSet resultSet = st.executeQuery()) {
+                if (resultSet.next()) {
+                    quantity = resultSet.getInt("quantity");
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return quantity;
 
+    }
+
+    public void updateQuantityProduct(List<OrderDetail> listOrderDetail) {
+        try {
+            for (OrderDetail orderDetail : listOrderDetail) {
+                String sql = "UPDATE `Product` " +
+             "SET `quantity` = (quantity - ?) " +
+             "WHERE `product_id` = ?";
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setInt(1, orderDetail.getQuantity());
+                st.setInt(2, orderDetail.getProduct_id());
+                st.executeUpdate();
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
 }

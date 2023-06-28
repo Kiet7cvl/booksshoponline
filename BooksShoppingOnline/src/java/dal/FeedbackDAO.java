@@ -61,6 +61,23 @@ public class FeedbackDAO extends DBContext {
 
         return list;
     }
+
+    public int getAVGStar() {
+        String sql = "SELECT AVG(rated_star) "
+           + "FROM Feedback;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+
     public int addNewFeedback(String full_Name, int star, String subject, String image, int i, int product_id, int user_Id) {
         try {
            String sql = " INSERT INTO `books_shop_online`.`feedback` ( `fullName`, `rated_star`, `feedback`, `image`, `status`, `product_id`, `userId`) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -78,6 +95,18 @@ public class FeedbackDAO extends DBContext {
             System.out.println(e);
         }
         return 0;
+    }
+        public void deleteFeedbacktById(int id) {
+        String sql = "DELETE FROM `Feedback` "
+           + "WHERE feedBack_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
     
 
