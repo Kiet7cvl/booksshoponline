@@ -1,4 +1,3 @@
-
 package dal;
 
 import context.DBContext;
@@ -116,13 +115,26 @@ public class CartDAO extends DBContext {
 
     public void updateQuantityCart(int quantity, int cartId, int product_id) {
         try {
-            String sql = "UPDATE Cart"
-            + " SET quantity = ? "
-            + " WHERE cart_id = ? AND product_id = ?";
+            String sql = "UPDATE Cart "
+                    + "SET quantity = ?, total_cost = (product_price * ?) "
+                    + "WHERE cart_id = ? AND product_id = ?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, quantity);
-            st.setInt(2, cartId);
-            st.setInt(3, product_id);
+            st.setInt(2, quantity);
+            st.setInt(3, cartId);
+            st.setInt(4, product_id);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void deleteCartByUserId(int user_id) {
+        try {
+            String sql = "DELETE FROM `Cart` "
+                    + "WHERE `user_id` = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, user_id);
             st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);

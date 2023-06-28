@@ -16,8 +16,7 @@
             <%@include file="components/header.jsp" %>
             <%@include file="components/account.jsp" %>
             <!--Slider-->
-
-
+            
             <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" >
                     <div class="carousel-indicators">
@@ -97,7 +96,9 @@
                                                 </c:if>
                                             </div>
                                             <div class="product-infor">
-                                                <a href="" class="product-name">${p.name}</a>
+                                                <diV style="width: 226px; height: 90px">
+                                                <a href="" class="product-name">${p.name}</a> 
+                                                </div>
                                                 <div class="product-price">
                                                     <c:if test="${p.sale_price != 0}">
                                                         ${p.sale_price}đ

@@ -30,7 +30,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddtoCartController</servlet-name>
-        <servlet-class>Controller.Public.AddtoCartController</servlet-class>
+        <servlet-class>Controller.Public.AddToCartController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteCartController</servlet-name>
@@ -95,6 +95,23 @@
     <servlet>
         <servlet-name>UpdatePostController</servlet-name>
         <servlet-class>Controller.Marketing.UpdatePostController</servlet-class>
+    </servlet>    
+    
+    <servlet>    
+        <servlet-name>DeleteFeedbackController</servlet-name>
+        <servlet-class>Controller.Public.DeleteFeedbackController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToOrderController</servlet-name>
+        <servlet-class>Controller.Public.AddToOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckOutController</servlet-name>
+        <servlet-class>Controller.Public.CheckOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SuccessfulCheckoutController</servlet-name>
+        <servlet-class>Controller.Public.SuccessfulCheckoutController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -200,10 +217,22 @@
         <servlet-name>UpdatePostController</servlet-name>
         <url-pattern>/update-post</url-pattern>
     </servlet-mapping>
-    
-   
-    
-    
+    <servlet-mapping>
+        <servlet-name>DeleteFeedbackController</servlet-name>
+        <url-pattern>/delete-feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToOrderController</servlet-name>
+        <url-pattern>/add-order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutController</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SuccessfulCheckoutController</servlet-name>
+        <url-pattern>/successful</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

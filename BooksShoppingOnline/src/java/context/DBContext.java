@@ -14,7 +14,7 @@ public class DBContext {
             String username = "root";
 
 
-            String password = "12345678"; 
+            String password = "12345678"; // Thay doi tren tung may
 
 
             Class.forName("com.mysql.cj.jdbc.Driver");

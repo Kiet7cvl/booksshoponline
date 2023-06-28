@@ -6,11 +6,13 @@
             <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/web/assets/fonts/themify-icons/themify-icons.css</file>
             <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/dal/UserDAO.java</file>
             <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/Controller/Marketing/UpdateProductController.java</file>
+            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/web/WEB-INF/web.xml</file>
             <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/dal/BlogDAO.java</file>
             <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/Controller/Marketing/PostDetailsController.java</file>
             <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/model/Blog.java</file>
             <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/Controller/Marketing/ProductDetailController.java</file>
             <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/Controller/Marketing/UpdatePostController.java</file>
+            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/Controller/Admin/ListUserController.java</file>
             <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/model/User.java</file>
         </group>
     </open-files>
