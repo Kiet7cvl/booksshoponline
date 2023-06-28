@@ -62,7 +62,7 @@ public class AdminDashboardController extends HttpServlet {
 
         int day = dd.CountDayByStartEnd(start, end);
 
-        int totalProduct = pd.getTotalProduct(end);
+        int totalProduct =  pd.getTotalProduct(end);
         int totalProduct1 = pd.getTotalProduct(1, end);
         int totalProduct2 = pd.getTotalProduct(2, end);
         int totalProduct3 = pd.getTotalProduct(3, end);
