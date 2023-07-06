@@ -76,7 +76,7 @@ public class LoginController extends HttpServlet {
         } else {
             session.setAttribute("us", u);
             if(u.getRole_Id().equals("1")){
-                response.sendRedirect(historyUrl);
+                response.sendRedirect(historyUrl);                
             }
             if(u.getRole_Id().equals("2")){
                 response.sendRedirect("mkt-dashboard");

@@ -24,7 +24,7 @@ public class BlogDAO extends DBContext {
         List<Blog> list = new ArrayList<>();
 
         String sql = "SELECT * FROM books_shop_online.blog\n"
-                + "              ORDER BY blog_id\n"
+                + "              ORDER BY RAND()\n"
                 + "                LIMIT 2";
 
         try {

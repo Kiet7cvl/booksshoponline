@@ -37,27 +37,32 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        HttpSession session = request.getSession();  
-        List<Blog> listBlog_HomePage = new BlogDAO().getAllBlog();
-        session.setAttribute("listBlog_HomePage", listBlog_HomePage);
-        
-        Slider listSlider_HomePageFirst = new SliderDAO().getFirstSlider();
-        session.setAttribute("sliderFirst", listSlider_HomePageFirst);
-        
-        int totalSlider = new SliderDAO().getcountSlider();
-        session.setAttribute("totalSlider", totalSlider);        
-        
-        List<Slider> listSlider_HomePageAll = new SliderDAO().getALLSlider();
-        session.setAttribute("listSlider_HomePageAll", listSlider_HomePageAll);
-        
-        List<Product> list4product = new ProductDAO().get4ProductRandom();
-        session.setAttribute("list4product", list4product);
-        
-        session.setAttribute("historyUrl", "home");
-        
-        
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        try {
+            HttpSession session = request.getSession();
+            List<Blog> listBlog_HomePage = new BlogDAO().getAllBlog();
+            session.setAttribute("listBlog_HomePage", listBlog_HomePage);
+            
+            Slider listSlider_HomePageFirst = new SliderDAO().getFirstSlider();
+            session.setAttribute("sliderFirst", listSlider_HomePageFirst);
+
+            int totalSlider = new SliderDAO().getcountSlider();
+            session.setAttribute("totalSlider", totalSlider);
+
+            List<Slider> listSlider_HomePageAll = new SliderDAO().getALLSlider();
+            session.setAttribute("listSlider_HomePageAll", listSlider_HomePageAll);
+
+            List<Product> list4product = new ProductDAO().get4ProductRandom();
+            session.setAttribute("list4product", list4product);
+            
+            session.setAttribute("historyUrl", "home");
+
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } catch (Exception e) {
+            // If there is an error, set an attribute with the error message
+            request.setAttribute("errorMessage", "Error data. Please try again later.");
+            // Forward the request to the error JSP page
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

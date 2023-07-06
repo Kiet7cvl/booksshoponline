@@ -39,24 +39,26 @@ public class ListDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+
+        try {
             HttpSession session = request.getSession();
             /* TODO output your page here. You may use following sample code. */
             int productId = Integer.parseInt(request.getParameter("productId"));
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
             User u = (User) session.getAttribute("us");
-
+            
             Product product = new ProductDAO().getProductById(productId);
             FeedbackDAO fed = new FeedbackDAO();
             OrderDao od = new OrderDao();
             Order accept = null;
             int Total = fed.getTotalFeedback(productId);
+            
             if (u != null) {
                 accept = od.checkProductOrderByUser(u.getUser_Id(), productId);
             }
 
             List<Feedback> listfeedbackbyproduct = fed.getAllFeedbackByProductId(productId);
-            
+
             List<Product> listProduct = new ProductDAO().getProductTop4Category(productId, categoryId);
             double avg = new ProductDAO().getRatedProduct(productId);
 
@@ -68,7 +70,13 @@ public class ListDetailController extends HttpServlet {
             request.setAttribute("accept", accept);
             session.setAttribute("historyUrl", "list-detail?productId=" + productId + "&categoryId=" + categoryId);
             request.getRequestDispatcher("list-detail.jsp").forward(request, response);
+        } catch (Exception e) {
+            // If there is an error, set an attribute with the error message
+            request.setAttribute("errorMessage", "Error data. Please try again later.");
+            // Forward the request to the error JSP page
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

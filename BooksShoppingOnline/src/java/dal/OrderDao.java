@@ -80,8 +80,8 @@ public class OrderDao extends DBContext {
             String sql = "select sum(total_cost) from `Order` where  saler_id " + salerId + " and orderDate <= DATE_ADD(?, INTERVAL ? DAY) and orderDate >= ?";
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
+                st.setInt(2, i);
+                st.setString(1, start);
                 st.setString(3, start);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
@@ -89,8 +89,8 @@ public class OrderDao extends DBContext {
                 }
                 sql = "SELECT DATE_ADD(?, INTERVAL ? DAY)";
                 st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
+                st.setString(1, start);
+                st.setInt(2, i);
                 rs = st.executeQuery();
                 while (rs.next()) {
                     Chart c = Chart.builder()
