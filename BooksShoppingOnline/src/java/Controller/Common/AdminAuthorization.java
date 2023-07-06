@@ -24,7 +24,7 @@ import model.User;
  *
  * @author lam
  */
-@WebFilter(filterName = "AdminAuthorization", urlPatterns = {"/AddUser.jsp", "/delete-user", "/list-user", "/update-status-user","/update-setting","/admin-dashboard","/AddSetting.jsp","/setting-details","/setting-list"})
+@WebFilter(filterName = "AdminAuthorization", urlPatterns = {"/UpUser","/AddUser.jsp", "/delete-user", "/list-user", "/update-status-user","/update-setting","/admin-dashboard","/AddSetting.jsp","/setting-details","/setting-list"})
 public class AdminAuthorization implements Filter {
 
     private static final boolean debug = true;

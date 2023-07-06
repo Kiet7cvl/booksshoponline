@@ -284,6 +284,8 @@
                                                                     </select>
                                                                
                                                             </c:if>
+                                                                <p class="mb-1 cus-fontsize" style="margin-top: 10px;float: inherit">Ghi chú:</p>
+                                                                <div> <input type="text" value="${k.note}" name="note" style="width: auto;margin-top: 10px;"></div>
                                                         </div>
 
                                                         <div class="col">

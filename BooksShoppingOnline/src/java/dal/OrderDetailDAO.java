@@ -15,10 +15,8 @@ import java.util.List;
 import model.Cart;
 import model.OrderDetail;
 
-
 public class OrderDetailDAO extends DBContext {
 
-    
     public void addCartToOrder(List<Cart> listCart, int order_id) {
         try {
             for (Cart cart : listCart) {
@@ -71,19 +69,17 @@ public class OrderDetailDAO extends DBContext {
 
     public List<OrderDetail> getDetailAllOrder(int orderId) {
         List<OrderDetail> list = new ArrayList<>();
-        String sql = "SELECT *\n"
-                + "FROM books_shop_online.Order_Detail\n"
-                + "JOIN books_shop_online.Product ON books_shop_online.Order_Detail.product_id = books_shop_online.Product.product_id\n"
-                + "JOIN books_shop_online.Products_Images ON books_shop_online.Order_Detail.product_id = books_shop_online.Products_Images.product_id\n"
-                + "JOIN books_shop_online.Category ON books_shop_online.Product.category_id = books_shop_online.Category.category_id\n"
-                + "WHERE books_shop_online.Order_Detail.order_id = ?";
+        String sql = "SELECT * FROM books_shop_online.Order_Detail \n"
+                + "JOIN books_shop_online.Product ON Order_Detail.product_id = Product.product_id\n"
+                + "JOIN books_shop_online.Products_Images ON Order_Detail.product_id = Products_Images.product_id\n"
+                + "JOIN books_shop_online.Category ON Product.category_id = Category.category_id\n"
+                + "WHERE order_id = ?;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, orderId);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 OrderDetail c = OrderDetail.builder()
-                        
                         .product_price(rs.getInt(2))
                         .quantity(rs.getInt(3))
                         .order_id(rs.getInt(4))

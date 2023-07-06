@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -58,7 +59,19 @@ public class newpass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("components/newpassword.jsp").forward(request, response);
+        try {
+            HttpSession session1 = request.getSession();
+            Long time = (Long) session1.getAttribute("time");
+            if (System.currentTimeMillis() < time && time != null) {
+                request.getRequestDispatcher("components/newpassword.jsp").forward(request, response);
+            } else {
+                request.setAttribute("notification", "Link không còn tồn tại. Hãy thực hiện lại việc gửi email");
+                request.getRequestDispatcher("home").forward(request, response);
+            }
+        } catch (Exception e) {
+            request.setAttribute("notification", "Link không còn tồn tại. Hãy thực hiện lại việc gửi email");
+            request.getRequestDispatcher("home").forward(request, response);
+        }
     }
 
     /**
@@ -81,9 +94,15 @@ public class newpass extends HttpServlet {
                 && (pass.equals(pass2))) {
             UserDAO u = new UserDAO();
             u.changePassword(userId, pass);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-            request.setAttribute("mess", "x");
+            request.setAttribute("notification", "Đổi mật khẩu thành công.");
+
+            request.getRequestDispatcher("home").forward(request, response);
+        } else if (!pass.equals(pass2)) {
+            request.setAttribute("notification", "Mật khẩu mới hai lần nhập không giống nhau.Hãy nhập lại");
+            request.getRequestDispatcher("components/newpassword.jsp").forward(request, response);
+
+        } else if (pass.length() <= 8 || pass.length() > 32) {
+            request.setAttribute("notification", "Mật khẩu của bạn ít hơn 8 ký tự hoặc nhiều hơn 32 ký tự.Hãy nhập lại");
             request.getRequestDispatcher("components/newpassword.jsp").forward(request, response);
         }
     }

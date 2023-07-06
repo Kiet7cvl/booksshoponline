@@ -1,3 +1,9 @@
+<%-- 
+    Document   : UpdateUser
+    Created on : Jul 1, 2023, 7:18:18 AM
+    Author     : MSI Bravo
+--%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Add - User</title>
+        <title>Chi tiết USER</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
@@ -78,65 +84,75 @@
             <%@include file="components/admin-left-dashboard.jsp" %>
             <div class="groundy" id="layoutSidenav_content">
                 <main>
-
+                    <div class="col-md-1">
+                        <a href="AddUser.jsp"><button type="button" class="btn btn-danger " style="">Thêm</button></a>
+                    </div>
                     <div class="container-fluid rounded row" style="margin-top: 3% !important; margin-bottom: 1% !important">
                         <div class="container">
-                            <h4 class="mb-5 text-secondary">Thêm Người Dùng</h4>
+                            <h4 class="mb-5 text-secondary">Chi tiết USER</h4>
                             <div class="row">
 
-                                <form action="create-user" method="post">
+                                <form action="UpUser" method="post">
                                     <div class="mb-3 col-md-12">
-                                        <label for="fullname">Họ tên<span class="text-danger">*</span></label>
-                                        <input  type="text" name="fullName" class="form-control" placeholder="Nhập họ tên" required>
+                                        <label for="fullname">Avatar<span class="text-danger"></span></label>
+                                        <div class="sq align-self-center "> <img class="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="${us.avatar}" width="135" height="135" /> </div>
+
                                     </div>
                                     <div class="mb-3 col-md-12">
-                                        <label for="pass">Mật khẩu<span class="text-danger">*</span></label>
-                                        <input  type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required>
+                                        <label for="user_Id">ID<span class="text-danger"></span></label>
+                                        <input value="${us.user_Id}"  type="text" name="user_Id" class="form-control" placeholder="id" required readonly>
                                     </div>
                                     <div class="mb-3 col-md-12">
-                                        <label for="Email">Email<span class="text-danger">*</span></label>
-                                        <input  type="text" name="email" class="form-control" placeholder="Nhập email" required>
+                                        <label for="fullname">Họ tên<span class="text-danger"></span></label>
+                                        <input value="${us.full_Name}"  type="text" name="full_Name" class="form-control" placeholder="Nhập họ tên" required >
                                     </div>
                                     <div class="mb-3 col-md-12">
-                                        <label for="phone">Số điện thoại<span class="text-danger">*</span></label>
-                                        <input  type="text" name="mobile" class="form-control" placeholder="Nhập số điện thoại" required>
+                                        <label for="pass">Mật khẩu<span class="text-danger"></span></label>
+                                        <input value="${us.password}"  type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required >
                                     </div>
                                     <div class="mb-3 col-md-12">
-                                        <label for="address" >Địa chỉ<span class="text-danger">*</span></label>
-                                        <input type="text" name="address" class="form-control" placeholder="Nhập địa chỉ" required>
+                                        <label for="Email">Email<span class="text-danger"></span></label>
+                                        <input value="${us.email}"  type="text" name="email" class="form-control" placeholder="Nhập email" required >
+                                    </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label for="mobile">Số điện thoại<span class="text-danger"></span></label>
+                                        <input value="${us.mobile}" type="text" name="mobile" class="form-control" placeholder="Nhập số điện thoại" required >
+                                    </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label for="address">Địa chỉ<span class="text-danger"></span></label>
+                                        <input value="${us.address}" type="text" name="address" class="form-control" placeholder="Nhập địa chỉ" required>
                                     </div>
 
 
-                                    <div class="mb-3 col-md-12 input-group " style="margin-top: 35px">
-                                        <label class="input-group-text" for="inputGroupSelect01" style="">Giới tính</label>
-                                        <select name="sex_id" class="form-select" id="inputGroupSelect01">
-                                            <option value="True">Nam</option>
-                                            <option value="False">Nữ</option>
+
+                                    <div class="mb-3 col-md-12 input-group" style="margin-top: 35px;">
+                                        <label class="input-group-text" for="inputGroupSelect1" style="">Giới tính</label>
+                                        <select name="sex_id" class="form-select" id="inputGroupSelect1">
+                                            <option value="1" ${us.gender == "1" ? "selected" : ""}>Nam</option>
+                                            <option value="0" ${us.gender == "0" ? "selected" : ""}>Nữ</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-12 input-group" style="margin-top: 35px;">
+                                        <label class="input-group-text" for="inputGroupSelect01" style="">Trạng thái</label>
+                                        <select name="status" class="form-select" id="inputGroupSelect01">
+                                            <option value="0" ${us.status == "0" ? "selected" : ""}>Ẩn</option>
+                                            <option value="1" ${us.status == "1" ? "selected" : ""}>Hiện</option>
                                         </select>
                                     </div>
 
 
 
-                                    <div class="mb-3 col-md-12 input-group "  style="margin-top: 35px">
-
-                                        <!--                                        Vai trò
-                                                                                <input class="" name="role_id" type="radio" value="1" required/> customer
-                                                                                <input class="" name="role_id" type="radio" value="2" required/> marketing
-                                                                                <input class="" name="role_id" type="radio" value="3" required/> sale
-                                                                                <input class="" name="role_id" type="radio" value="4" required/> sale manager
-                                                                                <input class="" name="role_id" type="radio" value="5" required/> admin-->
+                                    <div class="mb-3 col-md-12 input-group" style="margin-top: 35px;">
                                         <label class="input-group-text" for="inputGroupSelect02">Vai trò</label>
-                                        <select name="role_id" class="form-select" id="inputGroupSelect02">
-                                            <option value="1">customer</option>
-                                            <option value="2">marketing</option>
-                                            <option value="3">sale</option>
-                                            <option value="4">sale manager</option>
-                                            <option value="5">admin</option>
-
-
+                                        <select name="role_Id" class="form-select" id="inputGroupSelect02">
+                                            <option value="1" ${us.role_Id == 1 ? 'selected' : ''}>customer</option>
+                                            <option value="2" ${us.role_Id == 2 ? 'selected' : ''}>marketing</option>
+                                            <option value="3" ${us.role_Id == 3 ? 'selected' : ''}>sale</option>
+                                            <option value="4" ${us.role_Id == 4 ? 'selected' : ''}>sale manager</option>
+                                            <option value="5" ${us.role_Id == 5 ? 'selected' : ''}>admin</option>
                                         </select>
-
                                     </div>
+
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary">Lưu</button>
                                     </div>

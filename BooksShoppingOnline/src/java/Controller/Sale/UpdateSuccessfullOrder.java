@@ -35,7 +35,7 @@ public class UpdateSuccessfullOrder extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         int id = Integer.parseInt(request.getParameter("order_id"));
-            new OrderDao().updateStatusOrder(id, 2);
+            new OrderDao().updateStatusOrder(id, 2);// Cập nhật trạng thái đơn hàng bằng cách gọi phương thức updateStatusOrder trong OrderDao
             response.sendRedirect("order-list-sale");
         
     }
