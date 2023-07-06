@@ -30,7 +30,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddtoCartController</servlet-name>
-        <servlet-class>Controller.Public.AddToCartController</servlet-class>
+        <servlet-class>Controller.Public.AddtoCartController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteCartController</servlet-name>
