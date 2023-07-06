@@ -107,9 +107,8 @@
     <servlet>
         <servlet-name>UpdatePostController</servlet-name>
         <servlet-class>Controller.Marketing.UpdatePostController</servlet-class>
-    </servlet>    
-    
-    <servlet>    
+    </servlet>
+    <servlet>
         <servlet-name>DeleteFeedbackController</servlet-name>
         <servlet-class>Controller.Public.DeleteFeedbackController</servlet-class>
     </servlet>
@@ -124,6 +123,10 @@
     <servlet>
         <servlet-name>SuccessfulCheckoutController</servlet-name>
         <servlet-class>Controller.Public.SuccessfulCheckoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeStatusCustomerController</servlet-name>
+        <servlet-class>Controller.Marketing.ChangeStatusCustomerController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -220,8 +223,8 @@
     <servlet-mapping>
         <servlet-name>UpdateSliderController</servlet-name>
         <url-pattern>/updateslider</url-pattern>
-    </servlet-mapping>  
-    <servlet-mapping>  
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>PostsListController</servlet-name>
         <url-pattern>/posts-list</url-pattern>
     </servlet-mapping>
@@ -257,13 +260,16 @@
         <servlet-name>SuccessfulCheckoutController</servlet-name>
         <url-pattern>/successful</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusCustomerController</servlet-name>
+        <url-pattern>/change-status-customer</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
-      <servlet>
+    <servlet>
         <servlet-name>ConnectorServlet</servlet-name>
         <servlet-class>com.ckfinder.connector.ConnectorServlet</servlet-class>
         <init-param>
@@ -286,5 +292,4 @@
             /ckfinder/core/connector/java/connector.java
         </url-pattern>
     </servlet-mapping>
-    
 </web-app>

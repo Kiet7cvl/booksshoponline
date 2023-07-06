@@ -25,7 +25,7 @@ import model.User;
  *
  * @author lam
  */
-@WebFilter(filterName="SaleAndManagerAdminAuthorization", urlPatterns={"/posts-list","/sale-dashboard","/order-list-sale","/update-successfull-order"})
+@WebFilter(filterName="SaleAndManagerAdminAuthorization", urlPatterns={"/sale-dashboard","/order-list-sale","/update-successfull-order"})
 public class SaleAndManagerAdminAuthorization implements Filter {
 
     private static final boolean debug = true;
