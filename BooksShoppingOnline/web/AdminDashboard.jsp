@@ -30,12 +30,21 @@
                 border-radius: 5px;
             }
         </style>
+        
     </head>
     <body class="sb-nav-fixed">
         <%@include file="components/account.jsp" %>
         <%@include file="components/manager-header.jsp" %>
         <div id="layoutSidenav">
             <%@include file="components/admin-left-dashboard.jsp" %>
+            <script>
+            // Display error message using SweetAlert
+            Swal.fire({
+            icon: 'error',
+                    title: 'Error',
+                    text: '${errorMessage}'
+            });
+        </script>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
@@ -112,158 +121,158 @@
                     },
             });
         </script>
-            <script>
-                // Set new default font family and font color to mimic Bootstrap's default styling
-                Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-                Chart.defaults.global.defaultFontColor = '#292b2c';
-                // Area Chart Example
-                var ctx1 = document.getElementById("myAreaChart-1");
-                var myLineChart1 = new Chart(ctx1, {
-                type: 'line',
-                        data: {
-                        labels: [<c:forEach  items="${listChartRevenueArea}" var="revenue" > "${revenue.date}",</c:forEach>],
-                                datasets: [{
-                                label: "Doanh Thu",
-                                        lineTension: 0.3,
-                                        backgroundColor: "rgba(2,117,216,0.2)",
-                                        borderColor: "rgba(2,117,216,1)",
-                                        pointRadius: 5,
-                                        pointBackgroundColor: "rgba(2,117,216,1)",
-                                        pointBorderColor: "rgba(255,255,255,0.8)",
-                                        pointHoverRadius: 5,
-                                        pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                                        pointHitRadius: 50,
-                                        pointBorderWidth: 2,
-                                        data: [<c:forEach  items="${listChartRevenueArea}" var="revenue" > "${revenue.value}",</c:forEach>],
-                                }],
-                        },
-                        options: {
-                        scales: {
-                        xAxes: [{
-                        time: {
-                        unit: 'date'
-                        },
-                                gridLines: {
-                                display: false
-                                },
-                                ticks: {
-                                maxTicksLimit: 7
-                                }
-                        }],
-                                yAxes: [{
-                                ticks: {
-                                min: 0,
-                                        max: ${maxListChartRevenueArea},
-                                        maxTicksLimit: 5
-                                },
-                                        gridLines: {
-                                        color: "rgba(0, 0, 0, .125)",
-                                        }
-                                }],
-                        },
-                                legend: {
-                                display: false
-                                }
-                        }
-                });
-                var ctx2 = document.getElementById("myAreaChart-2");
-                var myLineChart2 = new Chart(ctx2, {
-                type: 'line',
-                        data: {
-                        labels: [<c:forEach  items="${listChartCustomer}" var="customer" > "${customer.date}",</c:forEach>],
-                                datasets: [{
-                                label: "Khách hàng",
-                                        lineTension: 0.3,
-                                        backgroundColor: "rgba(2,117,216,0.2)",
-                                        borderColor: "rgba(2,117,216,1)",
-                                        pointRadius: 5,
-                                        pointBackgroundColor: "rgba(2,117,216,1)",
-                                        pointBorderColor: "rgba(255,255,255,0.8)",
-                                        pointHoverRadius: 5,
-                                        pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                                        pointHitRadius: 50,
-                                        pointBorderWidth: 2,
-                                        data: [<c:forEach  items="${listChartCustomer}" var="customer" > "${customer.value}",</c:forEach>],
-                                }],
-                        },
-                        options: {
-                        scales: {
-                        xAxes: [{
-                        time: {
-                        unit: 'date'
-                        },
-                                gridLines: {
-                                display: false
-                                },
-                                ticks: {
-                                maxTicksLimit: 7
-                                }
-                        }],
-                                yAxes: [{
-                                ticks: {
-                                min: 0,
-                                        max: ${maxListChartCustomerArea},
-                                        maxTicksLimit: 5
-                                },
-                                        gridLines: {
-                                        color: "rgba(0, 0, 0, .125)",
-                                        }
-                                }],
-                        },
-                                legend: {
-                                display: false
-                                }
-                        }
-                });
-                var ctx3 = document.getElementById("myAreaChart-3");
-                var myLineChart3 = new Chart(ctx3, {
-                type: 'line',
-                        data: {
-                        labels: [<c:forEach  items="${listChartAvgStar}" var="star" > "${star.date}",</c:forEach>],
-                                datasets: [{
-                                label: "Sao Trung Bình",
-                                        lineTension: 0.3,
-                                        backgroundColor: "rgba(2,117,216,0.2)",
-                                        borderColor: "rgba(2,117,216,1)",
-                                        pointRadius: 5,
-                                        pointBackgroundColor: "rgba(2,117,216,1)",
-                                        pointBorderColor: "rgba(255,255,255,0.8)",
-                                        pointHoverRadius: 5,
-                                        pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                                        pointHitRadius: 50,
-                                        pointBorderWidth: 2,
-                                        data: [<c:forEach  items="${listChartAvgStar}" var="star" > "${star.value}",</c:forEach>],
-                                }],
-                        },
-                        options: {
-                        scales: {
-                        xAxes: [{
-                        time: {
-                        unit: 'date'
-                        },
-                                gridLines: {
-                                display: false
-                                },
-                                ticks: {
-                                maxTicksLimit: 7
-                                }
-                        }],
-                                yAxes: [{
-                                ticks: {
-                                min: 0,
-                                        max: 5,
-                                        maxTicksLimit: 5
-                                },
-                                        gridLines: {
-                                        color: "rgba(0, 0, 0, .125)",
-                                        }
-                                }],
-                        },
-                                legend: {
-                                display: false
-                                }
-                        }
-                });
+        <script>
+            // Set new default font family and font color to mimic Bootstrap's default styling
+            Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+            Chart.defaults.global.defaultFontColor = '#292b2c';
+            // Area Chart Example
+            var ctx1 = document.getElementById("myAreaChart-1");
+            var myLineChart1 = new Chart(ctx1, {
+            type: 'line',
+                    data: {
+                    labels: [<c:forEach  items="${listChartRevenueArea}" var="revenue" > "${revenue.date}",</c:forEach>],
+                            datasets: [{
+                            label: "Doanh Thu",
+                                    lineTension: 0.3,
+                                    backgroundColor: "rgba(2,117,216,0.2)",
+                                    borderColor: "rgba(2,117,216,1)",
+                                    pointRadius: 5,
+                                    pointBackgroundColor: "rgba(2,117,216,1)",
+                                    pointBorderColor: "rgba(255,255,255,0.8)",
+                                    pointHoverRadius: 5,
+                                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                                    pointHitRadius: 50,
+                                    pointBorderWidth: 2,
+                                    data: [<c:forEach  items="${listChartRevenueArea}" var="revenue" > "${revenue.value}",</c:forEach>],
+                            }],
+                    },
+                    options: {
+                    scales: {
+                    xAxes: [{
+                    time: {
+                    unit: 'date'
+                    },
+                            gridLines: {
+                            display: false
+                            },
+                            ticks: {
+                            maxTicksLimit: 7
+                            }
+                    }],
+                            yAxes: [{
+                            ticks: {
+                            min: 0,
+                                    max: ${maxListChartRevenueArea},
+                                    maxTicksLimit: 5
+                            },
+                                    gridLines: {
+                                    color: "rgba(0, 0, 0, .125)",
+                                    }
+                            }],
+                    },
+                            legend: {
+                            display: false
+                            }
+                    }
+            });
+            var ctx2 = document.getElementById("myAreaChart-2");
+            var myLineChart2 = new Chart(ctx2, {
+            type: 'line',
+                    data: {
+                    labels: [<c:forEach  items="${listChartCustomer}" var="customer" > "${customer.date}",</c:forEach>],
+                            datasets: [{
+                            label: "Khách hàng",
+                                    lineTension: 0.3,
+                                    backgroundColor: "rgba(2,117,216,0.2)",
+                                    borderColor: "rgba(2,117,216,1)",
+                                    pointRadius: 5,
+                                    pointBackgroundColor: "rgba(2,117,216,1)",
+                                    pointBorderColor: "rgba(255,255,255,0.8)",
+                                    pointHoverRadius: 5,
+                                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                                    pointHitRadius: 50,
+                                    pointBorderWidth: 2,
+                                    data: [<c:forEach  items="${listChartCustomer}" var="customer" > "${customer.value}",</c:forEach>],
+                            }],
+                    },
+                    options: {
+                    scales: {
+                    xAxes: [{
+                    time: {
+                    unit: 'date'
+                    },
+                            gridLines: {
+                            display: false
+                            },
+                            ticks: {
+                            maxTicksLimit: 7
+                            }
+                    }],
+                            yAxes: [{
+                            ticks: {
+                            min: 0,
+                                    max: ${maxListChartCustomerArea},
+                                    maxTicksLimit: 5
+                            },
+                                    gridLines: {
+                                    color: "rgba(0, 0, 0, .125)",
+                                    }
+                            }],
+                    },
+                            legend: {
+                            display: false
+                            }
+                    }
+            });
+            var ctx3 = document.getElementById("myAreaChart-3");
+            var myLineChart3 = new Chart(ctx3, {
+            type: 'line',
+                    data: {
+                    labels: [<c:forEach  items="${listChartAvgStar}" var="star" > "${star.date}",</c:forEach>],
+                            datasets: [{
+                            label: "Sao Trung Bình",
+                                    lineTension: 0.3,
+                                    backgroundColor: "rgba(2,117,216,0.2)",
+                                    borderColor: "rgba(2,117,216,1)",
+                                    pointRadius: 5,
+                                    pointBackgroundColor: "rgba(2,117,216,1)",
+                                    pointBorderColor: "rgba(255,255,255,0.8)",
+                                    pointHoverRadius: 5,
+                                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                                    pointHitRadius: 50,
+                                    pointBorderWidth: 2,
+                                    data: [<c:forEach  items="${listChartAvgStar}" var="star" > "${star.value}",</c:forEach>],
+                            }],
+                    },
+                    options: {
+                    scales: {
+                    xAxes: [{
+                    time: {
+                    unit: 'date'
+                    },
+                            gridLines: {
+                            display: false
+                            },
+                            ticks: {
+                            maxTicksLimit: 7
+                            }
+                    }],
+                            yAxes: [{
+                            ticks: {
+                            min: 0,
+                                    max: 5,
+                                    maxTicksLimit: 5
+                            },
+                                    gridLines: {
+                                    color: "rgba(0, 0, 0, .125)",
+                                    }
+                            }],
+                    },
+                            legend: {
+                            display: false
+                            }
+                    }
+            });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>

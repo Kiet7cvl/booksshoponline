@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -9,14 +9,15 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css">
         <%@include file="components/javascript.jsp" %>
+
     </head>
     <body>
         <div id="main">
-
+            ${errorMessage}
             <%@include file="components/header.jsp" %>
             <%@include file="components/account.jsp" %>
             <!--Slider-->
-            
+
             <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" >
                     <div class="carousel-indicators">
@@ -34,7 +35,6 @@
                                 <a href="${s.backlink}"><img src="${s.slider_image}" class="d-block w-100" alt="..."></a>
 
                             </div> 
-
                         </c:forEach>
 
                     </div>
@@ -87,7 +87,7 @@
                                                         <img src="${p.image}" height="365px" width="230px" alt="">
                                                     </a>
                                                 </a>
-                                                    
+
                                                 <c:if test="${sessionScope.us == null}" >
                                                     <a class="buy-now" data-toggle="modal"  data-target="#loginModal" style="color: white">Mua ngay</a>
                                                 </c:if>
@@ -97,7 +97,7 @@
                                             </div>
                                             <div class="product-infor">
                                                 <diV style="width: 226px; height: 90px">
-                                                <a href="" class="product-name">${p.name}</a> 
+                                                    <a href="" class="product-name">${p.name}</a> 
                                                 </div>
                                                 <div class="product-price">
                                                     <c:if test="${p.sale_price != 0}">
@@ -173,8 +173,6 @@
                     </div>
 
                 </div>
-
-
                 <%@include file="components/footer.jsp" %>
                 </body>
                 </html>

@@ -27,6 +27,5 @@ public class User {
     private boolean status;
     private String role_Id;
     private byte[] image;  
-
     
 }

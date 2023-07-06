@@ -25,8 +25,7 @@ import model.User;
  *
  * @author lam
  */
-@WebFilter(filterName = "MKTAuthorization", urlPatterns = {"/add-slider","/marketingproductlist", "/update_product", "/add_product", "/update-post", "/add-customer","/add-post", "/customer-detail", "/customer-list", "/load-customer", "/post-details", "/posts-list","/change-status","/change-status-customer","/status-feedback","/change-status-product","/feedback-detail","/feedback-list","/mkt-dashboard","/product-detail","/slider-detail","/slider-list","/update-customer","/update-false-slider","/update-slider","/update-true-slider"
-})
+@WebFilter(filterName = "MKTAuthorization", urlPatterns = {"/posts-list","/add-slider","/marketingproductlist", "/update_product", "/add_product", "/update-post", "/add-customer","/add-post", "/customer-detail", "/customer-list", "/load-customer", "/post-details","/change-status","/change-status-customer","/status-feedback","/change-status-product","/feedback-detail","/feedback-list","/mkt-dashboard","/product-detail","/slider-detail","/slider-list","/update-customer","/update-false-slider","/update-slider","/update-true-slider"})
 public class MKTAuthorization implements Filter {
 
     private static final boolean debug = true;
@@ -116,7 +115,7 @@ public class MKTAuthorization implements Filter {
             chain.doFilter(request, response);
             return;
         }
-        req.setAttribute("notification", "Rất tiêc bạn không có quyền truy cập đường dẫn này! MKT");
+        req.setAttribute("notification", "Rất tiêc bạn không có quyền truy cập đường dẫn này!");
         request.getRequestDispatcher("index.jsp").forward(request, response);
 
 	
