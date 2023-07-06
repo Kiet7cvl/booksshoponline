@@ -39,11 +39,11 @@ public class MKTDashboardController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        BlogDAO bd = new BlogDAO();
-        ProductDAO pd = new ProductDAO();
-        CustomerDAO cd = new CustomerDAO();
-        FeedbackDAO fd = new FeedbackDAO();
-        DateDAO dd = new DateDAO();
+            BlogDAO bd = new BlogDAO();
+            ProductDAO pd = new ProductDAO();
+            CustomerDAO cd = new CustomerDAO();
+            FeedbackDAO fd = new FeedbackDAO();
+            DateDAO dd = new DateDAO();
 
         // set parameter
         Date date = dd.get7day();
@@ -61,10 +61,7 @@ public class MKTDashboardController extends HttpServlet {
             start = start_raw;
             end = end_raw;
         }
-
-
         int day = dd.CountDayByStartEnd(start, end);
-
 
         // set chart blog 
         List<Chart> listChartBlogBar = bd.getChartBlogBar(start, day);
@@ -123,6 +120,26 @@ public class MKTDashboardController extends HttpServlet {
             }
         }
         maxListChartCustomerArea = (maxListChartCustomerArea / 10 + 1) * 10;
+        
+        // set chart feedback
+        List<Chart> listChartFeedbackBar = fd.getChartFeedbackBar(start, day);
+        List<Chart> listChartFeedbackArea = fd.getChartFeedbackArea(start, day);
+        int maxListChartFeedbackBar = -1;
+        for (Chart o : listChartFeedbackBar) {
+            if (o.getValue() > maxListChartFeedbackBar) {
+                maxListChartFeedbackBar = o.getValue();
+            }
+        }
+
+        maxListChartFeedbackBar = (maxListChartFeedbackBar / 10 + 1) * 10;
+        int maxListChartFeedbackArea = -1;
+        for (Chart o : listChartFeedbackArea) {
+            if (o.getValue() > maxListChartFeedbackArea) {
+                maxListChartFeedbackArea = o.getValue();
+            }
+        }
+        maxListChartFeedbackArea = (maxListChartFeedbackArea / 10 + 1) * 10;
+        
 
         // set parameter blog chart request to jsp
         request.setAttribute("listChartBlogBar", listChartBlogBar);
@@ -141,6 +158,12 @@ public class MKTDashboardController extends HttpServlet {
         request.setAttribute("listChartCustomerArea", listChartCustomerArea);
         request.setAttribute("maxListChartCustomerBar", maxListChartCustomerBar);
         request.setAttribute("maxListChartCustomerArea", maxListChartCustomerArea);
+        
+        // set parameter feedback chart request to jsp
+        request.setAttribute("listChartFeedbackBar", listChartFeedbackBar);
+        request.setAttribute("listChartFeedbackArea", listChartFeedbackArea);
+        request.setAttribute("maxListChartFeedbackBar", maxListChartFeedbackBar);
+        request.setAttribute("maxListChartFeedbackArea", maxListChartFeedbackArea);
 
         request.setAttribute("start", start);
         request.setAttribute("end", end);
