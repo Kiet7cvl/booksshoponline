@@ -106,7 +106,7 @@ public class FeedbackController extends HttpServlet {
             final PrintWriter writer = response.getWriter();
 
             try {
-                File file = new File("C:\\Users\\tr498\\AssPRJ\\Shopping_Online\\booksshop\\BooksShoppingOnline\\web\\images\\feedback" + File.separator + fileName);
+                File file = new File("D:\\JAVA\\booksshop2\\BooksShoppingOnline\\web\\images\\feedback" + File.separator + fileName);
                 url_feedback = "images/feedback/" + file.getName();
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();
