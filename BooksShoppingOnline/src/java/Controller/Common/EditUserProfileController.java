@@ -115,7 +115,7 @@ public class EditUserProfileController extends HttpServlet {
 
                 
 
-                File file = new File("E:\\Ki5\\SWP391\\ShoppingOnile\\BooksShoppingOnline\\web\\images\\avatar" + File.separator + fileName);
+                File file = new File("D:\\JAVA\\booksshop3\\BooksShoppingOnline\\web\\images\\avatar" + File.separator + fileName);
 
                 url_avatar = url_avatar + file.getName();
 

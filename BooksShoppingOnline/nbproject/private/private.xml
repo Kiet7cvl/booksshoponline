@@ -3,30 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/Controller/Common/AdminAuthorization.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/dal/ProductDAO.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/dal/OrderDao.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/dal/DateDAO.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/Controller/Admin/SettingDetailsController.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/Controller/Common/MKTAuthorization.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/Controller/Common/LoginController.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/Controller/Common/SaleAndManagerAdminAuthorization.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/Controller/Admin/AdminDashboardController.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/dal/SettingDAO.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/dal/CustomerDAO.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/Controller/Admin/SettingListController.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/BooksShoppingOnline/src/java/Controller/Public/ListDetailController.java</file>
-=======
+            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/web/WEB-INF/web.xml</file>
+            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/Controller/Common/AdminAuthorization.java</file>
+            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/model/Blog.java</file>
             <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/model/CategoryBlog.java</file>
-            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/model/User.java</file>
-            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/dal/CategoryDAO.java</file>
-            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/dal/UserDAO.java</file>
+            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/context/DBContext.java</file>
+            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/Controller/Common/MKTAuthorization.java</file>
             <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/Controller/Marketing/AddPostController.java</file>
             <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/Controller/Marketing/PostsListController.java</file>
             <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/model/Category.java</file>
+            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/Controller/Common/SaleAndManagerAdminAuthorization.java</file>
             <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/dal/BlogDAO.java</file>
->>>>>>> dieu
+            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/Controller/Public/HomeController.java</file>
+            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/model/User.java</file>
+            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/dal/CategoryDAO.java</file>
+            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/dal/UserDAO.java</file>
+            <file>file:/D:/JAVA/booksshop3/BooksShoppingOnline/src/java/Controller/Common/EditUserProfileController.java</file>
         </group>
     </open-files>
 </project-private>
