@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import model.Order;
 
 /**
@@ -36,13 +37,23 @@ public class OrderListSaleController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        List<Order> OrderList = new OrderDao().getAllOrder(); 
-        request.setAttribute("OrderList", OrderList);
-        
-        request.getRequestDispatcher("SaleOrderList.jsp").forward(request, response);
+
+        List<Order> OrderList = new OrderDao().getAllOrder();
+        List<String> salerList = new ArrayList<>();
+        // Lặp qua danh sách đơn hàng và lấy tên người bán (saler) từ mỗi đơn hàng
+        // Nếu tên người bán chưa tồn tại trong danh sách salerList, thêm nó vào danh sách
+        for (Order order : OrderList) {
+            String saler = order.getFullNameSaler();
+            if (!salerList.contains(saler)) {
+                salerList.add(saler);
+            }
         }
-    
+        // Đặt OrderList và salerList làm thuộc tính của yêu cầu
+        request.setAttribute("OrderList", OrderList);
+        request.setAttribute("salerList", salerList);
+        request.getRequestDispatcher("SaleOrderList.jsp").forward(request, response);
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -19,7 +19,7 @@ import model.User;
 
 /**
  *
- * @author lam
+ * @author MSI Bravo
  */
 @WebServlet(name = "ListUserController", urlPatterns = {"/list-user"})
 
@@ -39,15 +39,8 @@ public class ListUserController extends HttpServlet {
        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-
-        
-        
-        List<User> listUsers = new UserDAO().getAllUsers();
-        List<Role> listRole = new RoleDAO().getAllRole();
-
-        request.setAttribute("listUsers", listUsers);
-        request.setAttribute("listRole", listRole);
-
+        List<User> listUsers = new UserDAO().getAllUsers();     
+        request.setAttribute("listUsers", listUsers);     // Đặt danh sách người dùng (listUsers) làm thuộc tính của yêu cầu
         request.getRequestDispatcher("AdminUserList.jsp").forward(request, response);
     }
 

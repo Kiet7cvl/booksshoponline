@@ -3,26 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/Controller/Sale/SaleDashboardController.java</file>
-            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/dal/DateDAO.java</file>
-            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/model/Date.java</file>
-            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/dal/OrderDao.java</file>
-            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/model/Chart.java</file>
-            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/dal/UserDAO.java</file>
-=======
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/web/assets/fonts/themify-icons/themify-icons.css</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/dal/UserDAO.java</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/Controller/Marketing/UpdateProductController.java</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/web/WEB-INF/web.xml</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/dal/BlogDAO.java</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/Controller/Marketing/PostDetailsController.java</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/model/Blog.java</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/Controller/Marketing/ProductDetailController.java</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/Controller/Marketing/UpdatePostController.java</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/Controller/Admin/ListUserController.java</file>
-            <file>file:/D:/JAVA/booksshop2/BooksShoppingOnline/src/java/model/User.java</file>
->>>>>>> 31f53d201d62e52783381713496b5ad5f8aaee30
+            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/web/myorder.jsp</file>
+            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/Controller/Sale/UpdateSuccessfullOrder.java</file>
+            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/web/SaleOrderList.jsp</file>
+            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/Controller/Sale/OrderDetailSaleController.java</file>
+            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/Controller/Sale/UpdateOrderController.java</file>
         </group>
     </open-files>
 </project-private>

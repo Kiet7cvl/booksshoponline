@@ -70,7 +70,8 @@ public class OrderDao extends DBContext {
     public static void main(String[] args) {
 //        System.out.println(new OrderDao().checkProductOrderByUser(1, 2));
         OrderDao o = new OrderDao();
-        System.out.println(o.getChartRevenueArea("=! -1","2023-06-11",27));
+        System.out.println(o.getChartRevenueArea("7","2023-06-11",27));
+        System.out.println(o.getChartOrderBar("7","2023-06-11",27));
     }
     
     public List<Chart> getChartRevenueArea(String salerId, String start, int day) {
@@ -80,8 +81,8 @@ public class OrderDao extends DBContext {
             String sql = "select sum(total_cost) from `Order` where  saler_id " + salerId + " and orderDate <= DATE_ADD(?, INTERVAL ? DAY) and orderDate >= ?";
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
+                st.setInt(2, i);
+                st.setString(1, start);
                 st.setString(3, start);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
@@ -89,8 +90,8 @@ public class OrderDao extends DBContext {
                 }
                 sql = "SELECT DATE_ADD(?, INTERVAL ? DAY)";
                 st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
+                st.setString(1, start);
+                                st.setInt(2, i);
                 rs = st.executeQuery();
                 while (rs.next()) {
                     Chart c = Chart.builder()
@@ -248,6 +249,7 @@ public class OrderDao extends DBContext {
                         .address(rs.getString(6))
                         .status_order(rs.getInt(7))
                         .saler_id(rs.getInt(9))
+                        .note(rs.getNString(10))
                         .status_order_name(rs.getString(12))
                         .gender(rs.getString(18))
                         .email(rs.getString(19))
@@ -430,8 +432,8 @@ public class OrderDao extends DBContext {
                     + "WHERE saler_id " + salerId + " AND orderDate = DATE_ADD(?, INTERVAL ? DAY);";
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
+                st.setInt(2, i);
+                st.setString(1, start);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     value = rs.getInt(1);
@@ -464,8 +466,8 @@ public class OrderDao extends DBContext {
                     + "WHERE saler_id " + salerId + " AND orderDate = DATE_ADD(?, INTERVAL ? DAY);";
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
+                st.setInt(2, i);
+                st.setString(1, start);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     value = rs.getInt(1);
@@ -492,15 +494,30 @@ public class OrderDao extends DBContext {
 
     
 
-    public void updateOrder(int orderId, int status, int salerId) {
+    public void updateOrder(int orderId, int status, int salerId,String note) {
         String sql = "UPDATE `Order`\n"
-                + "SET `status_order` = ?, `saler_id` = ?\n"
+                + "SET `status_order` = ?, `saler_id` = ?,`note` = ?\n"
                 + "WHERE `order_id` = ?; ";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, status);
             st.setInt(2, salerId);
-            st.setInt(3, orderId);
+            st.setString(3, note);
+            st.setInt(4, orderId);
+            st.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    public void updateOrder_(int orderId, int status, int salerId,String note ) {
+        String sql = "UPDATE `Order`\n"
+                + "SET `status_order` = ?, `saler_id` = ?,`note` = ?\n"
+                + "WHERE `order_id` = ?; ";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, status);
+            st.setInt(2, salerId);
+            st.setString(3, note);
+            st.setInt(4, orderId);
             st.executeUpdate();
         } catch (Exception e) {
         }

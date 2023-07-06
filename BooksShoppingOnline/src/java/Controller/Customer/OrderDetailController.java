@@ -43,10 +43,10 @@ public class OrderDetailController extends HttpServlet {
 
         String orderId_raw = request.getParameter("orderId");
         int orderId = Integer.parseInt(orderId_raw);
-
+// Lấy danh sách chi tiết đơn hàng dựa trên orderId
         List<OrderDetail> Order_Detail = new OrderDetailDAO().getDetailAllOrder(orderId);
         request.setAttribute("Order_Detail", Order_Detail);
-
+// Lấy danh sách đơn hàng liên quan đến orderId
         List<Order> listMyOrderinDetail = new OrderDao().getAllOrderInDetail(orderId);
         request.setAttribute("listMyOrderinDetail", listMyOrderinDetail);
 
