@@ -1,27 +1,28 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.Common;
+package Controller.Marketing;
 
+import dal.CustomerDAO;
 import dal.UserDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.User;
+import model.Customer;
+import model.UpdateCustomer;
 
 /**
  *
- * @author lam
+ * @author ASUS
  */
-
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "CustomerDetailController", urlPatterns = {"/customer-detail"})
+public class CustomerDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,8 +36,22 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        
+        int customer_id = Integer.parseInt(request.getParameter("cid"));
+        CustomerDAO cus = new CustomerDAO();
+        
+        
+        Customer c = cus.getCustomerById(customer_id);
+        List<UpdateCustomer> listUpdate = cus.getAllUpdateCustomerById(customer_id);
+        
+        request.setAttribute("customerDetail", c);
+        request.setAttribute("listUpdate", listUpdate);
+        request.getRequestDispatcher("CustomerDetail.jsp").forward(request, response);
+        
+        
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -63,31 +78,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String historyUrl = (String) session.getAttribute("historyUrl");
-
-        UserDAO dao = new UserDAO();
-        User u = dao.login(email, password);
-        if (u == null) {
-            request.setAttribute("notification", "Sai email hoặc mật khẩu");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-            session.setAttribute("us", u);
-            if(u.getRole_Id().equals("1")){
-                response.sendRedirect(historyUrl);                
-            }
-            if(u.getRole_Id().equals("2")){
-                response.sendRedirect("mkt-dashboard");
-            }
-            if(u.getRole_Id().equals("3") || u.getRole_Id().equals("4")){
-                response.sendRedirect("sale-dashboard");
-            }
-            if(u.getRole_Id().equals("5")){
-                response.sendRedirect("admin-dashboard");
-            }
-        }
+        processRequest(request, response);
     }
 
     /**

@@ -36,8 +36,6 @@
                 margin-bottom: 1rem;
             }
 
-
-
             .payment-method__item-icon-wrapper img {
                 min-width: 100px;
                 max-height: 100px;
@@ -69,26 +67,26 @@
             <div class="groundy" id="layoutSidenav_content">
                 <main>
                     <div class="container rounded bg-white mt-5 mb-5">
-                        <form action="add-slider" method="post" enctype="multipart/form-data">
-                            <div class="row"  style="margin-top: 8%;">
+                        <form action="add-slider" method="POST" enctype="multipart/form-data">
+                            <div class="row"  style="margin-top: 6%;">
                                 <div class="p-4">
-
-                                    <h4 class="text-center">Thêm Slider</h4>
+                                    <h2 class="text-center">Thêm Slider</h2>
                                 </div>
-
                                 <div class="col-md-8">
-                                    <div class="p-3 py-5">
-                                        <div class="col-md-12">Tiêu đề<input type="text" class="form-control"  name="slider_title" ></div>
-                                        <div class="col-md-12">link URL<textarea class="form-control" name="backlink"  rows="2" ></textarea></div>
-                                        <div class="col-md-12">Status
-                                            <br/>
-                                            <input type="radio"  name="status" value="0" >Ẩn
-                                            <input type="radio" name="status" value="1">Hiện
-                                        </div>
-                                        <div class="col-md-12">Hình thu nhỏ<input type="file" name="slider_image" class="form-control" placeholder="Thumbnail" ></div>
-                                            <img class="mt-5"  src="" width="600px"/>
-
-
+                                    <div class="p-3 py-3">
+                                        <div class="col-md-12">Tiêu đề<input type="text" class="form-control" name="slider_title" required=""></div>
+                                        <div class="col-md-12">link URL<textarea class="form-control" name="backlink"  rows="2" required=""></textarea></div>
+                                        <div class="col-md-12">Hình thu nhỏ<input type="file" name="thumbnail" class="form-control" placeholder="Thumbnail" required=""></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 py-3">
+                                    <div class="col-md-12">Trạng thái
+                                        <br/>
+                                        <input name="status" type="radio" value="${Slider_Detail.status}" ${Slider_Detail.status == true ? 'checked' : ''} />&nbsp;Hiện
+                                        <input name="status" type="radio" value="${Slider_Detail.status}" ${Slider_Detail.status == false ? 'checked' : ''} />&nbsp;Ẩn
+                                    </div>
+                                    <div class="col-md-12">Ghi chú<textarea class="form-control" name="note"  rows="5" required=""></textarea></div>
                                     </div>
                                 </div>
 
@@ -114,5 +112,7 @@
         <script src="js/datatables-simple-demo.js"></script>
     </body>
 </html>
+
+
 
 

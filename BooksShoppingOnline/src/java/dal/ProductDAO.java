@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dal;
 
 import context.DBContext;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,8 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Chart;
 import model.OrderDetail;
 
@@ -107,7 +100,7 @@ public class ProductDAO extends DBContext {
         int a = (page - 1) * PAGE_SIZE;
         String sql = "select * from product\n"
                 + "JOIN products_images ON product.`product_id` = products_images.`product_id`"
-                + "where category_id " + categoryId + " and status " + status + " and product_name like N'%" + searchKey + "%'\n"
+                + "where category_id " + categoryId + " and `status` " + status + " and product_name like N'%" + searchKey + "%'\n"
                 + " order by " + value + " " + type + " LIMIT ?, ?;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -188,6 +181,7 @@ public class ProductDAO extends DBContext {
                         .category_id(rs.getInt(9))
                         .update_date(rs.getDate(10))
                         .image(getImgProduct(rs.getInt(1)))
+                        .author(rs.getString(11))
                         .rated_star(getRatedProduct(rs.getInt(1)))
                         .build();
 
@@ -232,19 +226,20 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
-    public void UpdateProduct(int id, String name, String desciption, String brief_infor, int quantity, int status, int original_price, int sale_price, int categoryId, String url) {
+    public void UpdateProduct(int id, String name, String desciption, String brief_infor, int quantity, int status, int original_price, int sale_price, int categoryId, String author, String url) {
         try {
-            String sql = "UPDATE [dbo].[Product]\n"
-                    + "   SET [product_name] = ?\n"
-                    + "      ,[original_prices] = ?\n"
-                    + "      ,[sale_prices] = ?\n"
-                    + "      ,[product_details] = ?\n"
-                    + "      ,[brief_infor] = ?\n"
-                    + "      ,[status] = ?\n"
-                    + "      ,[quantity] = ?\n"
-                    + "      ,[category_id] = ?\n"
-                    + "      ,[update_date] = GETDATE()\n"
-                    + " WHERE product_id = ?";
+            String sql = "UPDATE Product\n"
+                    + "   SET `product_name` = ?\n"
+                    + "      ,`original_prices` = ?\n"
+                    + "      ,`sale_prices` = ?\n"
+                    + "      ,`product_details` = ?\n"
+                    + "      ,`brief_infor` = ?\n"
+                    + "      ,`status` = ?\n"
+                    + "      ,`quantity` = ?\n"
+                    + "      ,`category_id` = ?\n"
+                    + "      ,`author` = ?\n"
+                    + "      ,`update_date` = NOW()\n"
+                    + " WHERE `product_id` = ?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, name);
             st.setInt(2, original_price);
@@ -254,11 +249,12 @@ public class ProductDAO extends DBContext {
             st.setInt(6, status);
             st.setInt(7, quantity);
             st.setInt(8, categoryId);
-            st.setInt(9, id);
+            st.setString(9, author);
+            st.setInt(10, id);
             st.executeUpdate();
-            sql = "UPDATE [dbo].[Products_Images]\n"
-                    + "   SET   [images] = ?\n"
-                    + " WHERE product_id = ?";
+            sql = "UPDATE Products_Images\n"
+                    + "   SET   `images` = ?\n"
+                    + " WHERE `product_id` = ?";
             st = connection.prepareStatement(sql);
             st.setString(1, url);
             st.setInt(2, id);
@@ -446,7 +442,7 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
-    public String getUrlImageById(int id) {
+    public String getUrlProductImageById(int id) {
         String sql = "SELECT images FROM Products_Images where product_id = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -475,7 +471,6 @@ public class ProductDAO extends DBContext {
             System.out.println(ex);
         }
     }
-
 
     public int getProductQuantity(int productId) {
         int quantity = 0;

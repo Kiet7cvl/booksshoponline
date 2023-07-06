@@ -5,7 +5,10 @@
         <group>
             <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/web/myorder.jsp</file>
             <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/Controller/Sale/UpdateSuccessfullOrder.java</file>
+            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/web/product.jsp</file>
+            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/web/order-detail.jsp</file>
             <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/web/SaleOrderList.jsp</file>
+            <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/dal/OrderDao.java</file>
             <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/Controller/Sale/OrderDetailSaleController.java</file>
             <file>file:/D:/swp391_p2/booksshop/BooksShoppingOnline/src/java/Controller/Sale/UpdateOrderController.java</file>
         </group>

@@ -91,7 +91,7 @@ public class OrderDao extends DBContext {
                 sql = "SELECT DATE_ADD(?, INTERVAL ? DAY)";
                 st = connection.prepareStatement(sql);
                 st.setString(1, start);
-                                st.setInt(2, i);
+                st.setInt(2, i);
                 rs = st.executeQuery();
                 while (rs.next()) {
                     Chart c = Chart.builder()

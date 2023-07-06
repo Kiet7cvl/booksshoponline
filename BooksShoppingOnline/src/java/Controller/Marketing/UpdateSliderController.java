@@ -1,4 +1,3 @@
-
 package Controller.Marketing;
 
 import dal.SliderDAO;
@@ -16,19 +15,17 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,
         maxFileSize = 1024 * 1024 * 10,
         maxRequestSize = 1024 * 1024 * 50)
-public class AddSliderController extends HttpServlet {
-
+public class UpdateSliderController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException { 
+            throws ServletException, IOException {
+
     }
 
     @Override
@@ -36,7 +33,6 @@ public class AddSliderController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -58,26 +54,43 @@ public class AddSliderController extends HttpServlet {
         upload.setHeaderEncoding("UTF-8");
 
         try {
-            SliderDAO sd1 = new SliderDAO();
+            SliderDAO sd = new SliderDAO();
             String slider_title = request.getParameter("slider_title");
             String backlink = request.getParameter("backlink");
-            boolean status;
-            if (request.getParameter("status").equalsIgnoreCase("true")) {
-                status = true;
-            } else {
-                status = false;
-            }
             String note = request.getParameter("note");
+            int status = 0;
+            if (request.getParameter("status") != null && request.getParameter("status").equalsIgnoreCase("true")) {
+                status = 1;
+            }
+            int id = 0;
+            String slider_id = request.getParameter("slider_id");
+            if (slider_id != null && !slider_id.isEmpty()) {
+                id = Integer.parseInt(slider_id);
+            }
+            int updated_by = 0;
+            String userid = request.getParameter("userid");
+            if (userid != null && !userid.isEmpty()) {
+                updated_by = Integer.parseInt(userid);
+            }
+            PrintWriter outu = response.getWriter();
             Part filePart = request.getPart("thumbnail");
-            String fileName = getFileName(filePart);
+            String fileName = null;
             String url_thumbnail = "images/slider/";
             OutputStream out = null;
             InputStream filecontent = null;
             final PrintWriter writer = response.getWriter();
-
             try {
+                if (filePart != null) {
+                    fileName = getFileName(filePart);
+                }
                 File file = new File("C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\shopping_online\\booksshop\\BooksShoppingOnline\\web\\images\\slider" + File.separator + fileName);
-                url_thumbnail = url_thumbnail + file.getName();
+                String x = file.getName();
+                if (x.equalsIgnoreCase("slider")) {
+                    url_thumbnail = sd.getUrlSliderImageById(id);
+                } else {
+                    url_thumbnail = url_thumbnail + x;
+                }
+
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();
                 int read;
@@ -86,15 +99,14 @@ public class AddSliderController extends HttpServlet {
                 while ((read = filecontent.read(bytes)) != -1) {
                     out.write(bytes, 0, read);
                 }
-
             } catch (FileNotFoundException fne) {
-                request.setAttribute("notification", "Bạn cần phải điền đầy đủ thông tin cơ bản của slider");
-                request.getRequestDispatcher("MKTAddSlider.jsp").forward(request, response);
-            }  
-            sd1.AddSlider(slider_title, url_thumbnail, backlink, note, status);
-            response.sendRedirect("slider-list");
-        } catch (Exception ex) {
+                
+            }
             
+            sd.UpdateSliderById(id, slider_title, url_thumbnail, backlink, note, status, updated_by);
+            response.sendRedirect("slider-detail?sliderId=" + id);
+        } catch (Exception e) {
+
         }
     }
 

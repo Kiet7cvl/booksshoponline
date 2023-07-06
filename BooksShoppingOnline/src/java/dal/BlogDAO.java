@@ -24,7 +24,7 @@ public class BlogDAO extends DBContext {
         List<Blog> list = new ArrayList<>();
 
         String sql = "SELECT * FROM books_shop_online.blog\n"
-                + "              ORDER BY blog_id\n"
+                + "              ORDER BY RAND()\n"
                 + "                LIMIT 2";
 
         try {
@@ -141,9 +141,9 @@ public class BlogDAO extends DBContext {
     public int getTotalBlog(String searchKey, String categoryId) {
         String sql = "SELECT COUNT(*)\n"
                 + "FROM books_shop_online.blog\n"
-                + "WHERE categoryBlog_id = " + categoryId + "\n"
+                + "WHERE categoryBlog_id = categoryId\n"
                 + "  AND status = 1\n"
-                + "  AND title LIKE CONCAT('%', '" + searchKey + "', '%');";
+                + "  AND title LIKE CONCAT('%', searchKey, '%');";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -167,7 +167,6 @@ public class BlogDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, a);
             st.setInt(2, PAGE_SIZE);
-            // st.setInt(3, PAGE_SIZE);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Blog c = Blog.builder()
@@ -260,7 +259,7 @@ public class BlogDAO extends DBContext {
         List<Chart> list = new ArrayList<>();
         for (int i = 0; i < day; i++) {
             int value = 0;
-            String sql = "SELECT COUNT(*) FROM Blog WHERE updated_date = DATE_ADD(?, INTERVAL ? DAY) AND status = 1;";
+            String sql = "SELECT COUNT(*) FROM books_shop_online.Blog WHERE updated_date = DATE_ADD(?, INTERVAL ? DAY)AND status = 1;";
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setString(1, start);
@@ -326,16 +325,16 @@ public class BlogDAO extends DBContext {
 
     public void addNewBlog(String title, int user_id, String content, String url_thumbnail, String brief_infor, int category_id, boolean status) {
         try {
-            String sql = "INSERT INTO Blog\n"
-                    + "           (title\n"
-                    + "           ,author_id\n"
-                    + "           ,content\n"
-                    + "           ,thumbnail\n"
-                    + "           ,brief_infor\n"
-                    + "           ,categoryBlog_id\n"
-                    + "           ,status)\n"
-                    + "     VALUES\n"
-                    + "           (?,?,?,?,?,?,?)";
+                String sql = "INSERT INTO Blog\n"
+                        + "           (title\n"
+                        + "           ,author_id\n"
+                        + "           ,content\n"
+                        + "           ,thumbnail\n"
+                        + "           ,brief_infor\n"
+                        + "           ,categoryBlog_id\n"
+                        + "           ,status)\n"
+                        + "     VALUES\n"
+                        + "           (?,?,?,?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, title);
             st.setInt(2, user_id);
