@@ -11,22 +11,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Veetu
- */
 @WebServlet(name = "RegisterController", urlPatterns = {"/register"})
 public class RegisterController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -39,29 +27,30 @@ public class RegisterController extends HttpServlet {
         String repassword = request.getParameter("repassword");
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");
-
-
+        String avatar = "images/avatar/1.png";
+        // get value of parameter from screen
+ 
         if (!password.equals(repassword)) {
-            request.setAttribute("notification", "Nhập lại mật khẩu không giống nhau");
+            request.setAttribute("notification", "Nhập lại mật khẩu không giống nhau");       // gui thong bao check lai re-password
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
             UserDAO dao = new UserDAO();
-            boolean u = dao.chekcAccount(email);
+            boolean u = dao.chekcAccount(email);        // check account dùng mail đã tồn tại chưa
             if (!mobile.matches("[0-9]*")) {
-                request.setAttribute("notification", "Your Mobile Invalid");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                request.setAttribute("notification", "Số điện thoại không hợp lệ");                  // gui thong bao check lai phone
+                request.getRequestDispatcher("index.jsp").forward(request, response); 
             } else if (password.length() < 8 || password.length() > 32) {
-                request.setAttribute("notification", "Your Password less than 8 character or more than 32 characters");
+                request.setAttribute("notification", "Mật khẩu của bạn phải từ 8-32 kí tự");    // gui thong bao check lai password
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else if (u == false) {
                 //dang ky thanh cong
-                dao.register(fullName, password, gender, email, mobile, address);
+                dao.register(fullName,password, avatar, gender, email, mobile, address);       
 
-                SendMail.sendEmailSignup(email);
-                request.setAttribute("notification", "Đăng kí thành công, vui lòng kiểm tra hòm thư của bạn");
+                SendMail.sendEmailSignup(email);       // gửi tin nhắn về mail người đăng kí
+                request.setAttribute("notification", "Đăng kí thành công, vui lòng kiểm tra hòm thư của bạn");     // gửi thống báo thành công cho người dùng 
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
-                request.setAttribute("notification", "Email đã tồn tại");
+                request.setAttribute("notification", "Email đã tồn tại");                // gửi thống báo lỗi cho người dùng 
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
         }

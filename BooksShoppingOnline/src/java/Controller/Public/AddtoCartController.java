@@ -19,7 +19,7 @@ import model.Product;
 import model.User;
 
 
-public class AddToCartController extends HttpServlet {
+public class AddtoCartController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

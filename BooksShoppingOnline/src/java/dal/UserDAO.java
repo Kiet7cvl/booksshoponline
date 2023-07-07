@@ -113,18 +113,19 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public void register(String fullName, String password, String gender, String email, String mobile, String address) {
-        String sql = "INSERT INTO user (`fullName`, `password`,`gender`, `email`, `mobile`, `address`, `status`, `role_id`) VALUES \n"
-                + "(?,?,b?,?,?,?,0,1)";
+    public void register(String fullName, String password, String avatar, String gender, String email, String mobile, String address) {
+        String sql = "INSERT INTO user (`fullName`, `password`,`avatar`, `gender`, `email`, `mobile`, `address`, `status`, `role_id`) VALUES \n"
+                + "(?,?,?,b?,?,?,?,0,1)";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, fullName);
             st.setString(2, password);
-            st.setString(3, gender);
-            st.setString(4, email);
-            st.setString(5, mobile);
-            st.setString(6, address);
+            st.setString(3, avatar);
+            st.setString(4, gender);
+            st.setString(5, email);
+            st.setString(6, mobile);
+            st.setString(7, address);
             st.executeUpdate();
         } catch (Exception e) {
         }

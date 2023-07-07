@@ -30,14 +30,12 @@
                     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" >
                             <div class="carousel-indicators">
-
                                 <c:forEach items="${listSlider_HomePageAll}" var="s" >
                                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="${s.id -1}" class="${s.id == sliderFirst.id ? "active" : ""}" aria-current="${s.id == sliderFirst.id ? "true" : ""}" aria-label="Slide ${s.id}"></button>
                                 </c:forEach>
                             </div>
 
                             <div class="carousel-inner">
-
                                 <c:forEach items="${listSlider_HomePageAll}" var="s" >
                                     <div class="carousel-item ${s.id == sliderFirst.id ? "active" : ""}">
                                         <img src="${s.slider_image}" class="d-block w-100" alt="...">
@@ -90,7 +88,7 @@
 
                             </div>
                             <div class="product-infor">
-                                <a href="" class="product-name">${sessionScope.pNew.name}</a>
+                                <a href="list-detail?productId=${sessionScope.pNew.id}&categoryId=${sessionScope.pNew.category_id}" class="product-name">${sessionScope.pNew.name}</a>
                                 <div class="product-price">
                                     <c:if test="${sessionScope.pNew.sale_price != 0}">
                                         ${sessionScope.pNew.sale_price}đ
@@ -187,7 +185,7 @@
                                     </c:if>
                                 </div>
                                 <div class="product-infor">
-                                    <a href="" class="product-name">${p.name}</a>
+                                    <a href="list-detail?productId=${p.id}&categoryId=${p.category_id}" class="product-name">${p.name}</a>
                                     <div class="product-price">
                                         <c:if test="${p.sale_price != 0}">
                                             ${p.sale_price}đ

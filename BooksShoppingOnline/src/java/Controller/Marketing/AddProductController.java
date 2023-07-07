@@ -24,11 +24,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
         maxRequestSize = 1024 * 1024 * 50)
 public class AddProductController extends HttpServlet {
 
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -74,7 +72,6 @@ public class AddProductController extends HttpServlet {
             int sale_price = Integer.parseInt(request.getParameter("sale_price"));
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
             String author = request.getParameter("author");
-
             Part filePart = request.getPart("thumbnail");
             String fileName = getFileName(filePart);
             String url_avatar = "images/product";
@@ -83,23 +80,37 @@ public class AddProductController extends HttpServlet {
             final PrintWriter writer = response.getWriter();
             try {
                 File file = new File("C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\shopping_online\\booksshop\\BooksShoppingOnline\\web\\images\\product" + File.separator + fileName);
-                url_avatar = "images/product/"+file.getName();
+                url_avatar = "images/product/" + file.getName();
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();
                 int read;
                 final byte[] bytes = new byte[1024];
-
                 while ((read = filecontent.read(bytes)) != -1) {
                     out.write(bytes, 0, read);
                 }
-
+                
             } catch (FileNotFoundException fne) {
                 request.setAttribute("notification", "Bạn cần phải điền đầy đủ thông tin cơ bản của sản phẩm");
                 request.getRequestDispatcher("MKTAddProduct.jsp").forward(request, response);
             }
+            if (original_price <= 0) {
+                    request.setAttribute("notification", "Giá gốc sản phẩm phải lớn hơn 0");
+                    request.getRequestDispatcher("MKTAddProduct.jsp").forward(request, response);
+            } else if (sale_price <= 0) {
+                request.setAttribute("notification", "Giá khuyến mãi sản phẩm phải lớn hơn 0");
+                    request.getRequestDispatcher("MKTAddProduct.jsp").forward(request, response);
+            } else if (quantity <= 0) {
+                request.setAttribute("notification", "số lượng sản phẩm phải lớn hơn 0");
+                    request.getRequestDispatcher("MKTAddProduct.jsp").forward(request, response);
+            } else if (sale_price >= original_price) {
+                request.setAttribute("notification", "Giá khuyến mãi phải thấp hơn giá gốc");
+                    request.getRequestDispatcher("MKTAddProduct.jsp").forward(request, response);
+            }
+            else {
             int new_id = p.addNewProduct(name, desciption, brief_infor, quantity, status, original_price, sale_price, categoryId, author);
             p.AddImageProduct(new_id, url_avatar);
             response.sendRedirect("marketingproductlist");
+            }
         } catch (Exception e) {
             request.setAttribute("notification", "Bạn cần phải điền đầy đủ thông tin cơ bản của sản phẩm");
             request.getRequestDispatcher("MKTAddProduct.jsp").forward(request, response);
@@ -124,6 +135,3 @@ public class AddProductController extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
-
