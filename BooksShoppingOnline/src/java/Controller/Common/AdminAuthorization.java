@@ -24,7 +24,7 @@ import model.User;
  *
  * @author lam
  */
-@WebFilter(filterName = "AdminAuthorization", urlPatterns = {"/create-user", "/delete-user", "/list-user", "/update-status-user","/update-setting","/admin-dashboard","/add-setting","/setting-details","/setting-list"})
+@WebFilter(filterName = "AdminAuthorization", urlPatterns = {"/UpUser","/AddUser.jsp", "/delete-user", "/list-user", "/update-status-user","/update-setting","/admin-dashboard","/AddSetting.jsp","/setting-details","/setting-list"})
 public class AdminAuthorization implements Filter {
 
     private static final boolean debug = true;
@@ -118,7 +118,7 @@ public class AdminAuthorization implements Filter {
             chain.doFilter(request, response);
             return;
         }
-        req.setAttribute("notification", "Rất tiêc bạn không có quyền truy cập đường dẫn này! Admin");
+        req.setAttribute("notification", "Rất tiêc bạn không có quyền truy cập đường dẫn này!");
         request.getRequestDispatcher("index.jsp").forward(request, response);
 
         Throwable problem = null;

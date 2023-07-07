@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author lam
+ * @author MSI Bravo
  */
 @WebServlet(name = "UpdateStatusUserController", urlPatterns = {"/update-status-user"})
 public class UpdateStatusUserController extends HttpServlet {
@@ -39,7 +39,7 @@ public class UpdateStatusUserController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             int user_Id = Integer.parseInt(request.getParameter("userId"));
             int status = Integer.parseInt(request.getParameter("status"));
-            new UserDAO().UpdateStatusUser(status, user_Id);
+            new UserDAO().UpdateStatusUser(status, user_Id);// Cập nhật trạng thái người dùng bằng cách gọi phương thức UpdateStatusUser trong UserDAO
             
             response.sendRedirect("list-user");
         }

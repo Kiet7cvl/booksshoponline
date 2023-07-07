@@ -116,7 +116,7 @@ public class SaleAndManagerAdminAuthorization implements Filter {
             chain.doFilter(request, response);
             return;
         }
-        req.setAttribute("notification", "Rất tiêc bạn không có quyền truy cập đường dẫn này! Admin");
+        req.setAttribute("notification", "Rất tiêc bạn không có quyền truy cập đường dẫn này! ");
         request.getRequestDispatcher("index.jsp").forward(request, response);
 
 	

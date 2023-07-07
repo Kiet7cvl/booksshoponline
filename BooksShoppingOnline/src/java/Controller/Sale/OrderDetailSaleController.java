@@ -44,13 +44,13 @@ public class OrderDetailSaleController extends HttpServlet {
         HttpSession session = request.getSession();
         String orderId_raw = request.getParameter("orderId");
         int orderId = Integer.parseInt(orderId_raw);
-
+        // Lấy danh sách chi tiết đơn hàng từ lớp OrderDetailDAO dựa trên orderId và đặt vào thuộc tính "Order_Detail"
         List<OrderDetail> Order_Detail = new OrderDetailDAO().getDetailAllOrder(orderId);
         request.setAttribute("Order_Detail", Order_Detail);
-
+        // Lấy danh sách đơn hàng của tôi trong chi tiết từ lớp OrderDao dựa trên orderId và đặt vào thuộc tính "listMyOrderinDetail"
         List<Order> listMyOrderinDetail = new OrderDao().getAllOrderInDetail(orderId);
         request.setAttribute("listMyOrderinDetail", listMyOrderinDetail);
-        
+        // Lấy danh sách người bán từ lớp UserDAO và đặt vào thuộc tính "listSaler"
         List<User> listSaler = new UserDAO().getAllSaler();
         request.setAttribute("listSaler", listSaler);
 

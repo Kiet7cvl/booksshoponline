@@ -2,8 +2,6 @@
 package dal;
 
 import context.DBContext;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,8 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Chart;
 import model.OrderDetail;
 

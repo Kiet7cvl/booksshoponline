@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
@@ -40,13 +41,14 @@ public class DeleteUserController extends HttpServlet {
 //            int userId = Integer.parseInt(request.getParameter("userId"));
 //           UserDAO userDAO = new UserDAO();
 //           userDAO.deleteUser(userId);
-
-            int user_Id = Integer.parseInt(request.getParameter("user_Id"));
-            int status = 0;
-            UserDAO userDAO = new UserDAO();
-            userDAO.UpdateStatusUser(status, user_Id);
-
-            response.sendRedirect("list-user");
+//
+//            int user_Id = Integer.parseInt(request.getParameter("user_Id"));
+////            int status = 0;
+//            UserDAO userDAO = new UserDAO();
+//             User up = userDAO.getUserById(user_Id);
+////            userDAO.UpdateStatusUser(status, user_Id);
+// request.setAttribute("us", up);
+//            request.getRequestDispatcher("UpdateUser.jsp").forward(request, response);
         }
     }
 

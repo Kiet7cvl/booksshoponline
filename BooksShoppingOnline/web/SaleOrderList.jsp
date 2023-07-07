@@ -88,7 +88,6 @@
 
         </style>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-
     </head>
     <body>
         <%@include file="components/account.jsp" %>
@@ -101,14 +100,29 @@
                 <h2 class="mtop title-order" >Danh sách các đơn hàng</h2>
                 <div class="container mtop" style="width:100%">
                     <div class="row-lg-2">
-                        <label for="recordLength">Độ dài hiển thị bản ghi:</label>
-                        <input type="number" id="recordLength" min="1" max="100" value="10">
+                        <label for="recordLength">Hiển thị <input type="number" id="recordLength" min="1" max="100" value="10" style="width: 55px"> bản ghi | </label>
+
                         <label for="startDate">Từ ngày:</label>
                         <input type="date" id="startDate">
                         <label for="endDate">Đến ngày:</label>
                         <input type="date" id="endDate">
+                        <label for="statusFilter"> | Tình trạng:</label>
+                        <select id="statusFilter">
+                            <option value="">Tất cả</option>
+                            <option value="Đang gửi">Đang gửi</option>
+                            <option value="Thành công">Thành công</option>
+                            <option value="Đã hủy">Đã hủy</option>
+                        </select>
+                        <label for="statusFilter"> | Nhân Viên Sale:</label>
+                        <select id="salerFilter1">
+    <option value="">Tất cả</option>
+    <c:forEach items="${salerList}" var="saler">
+        <option value="${saler}">${saler}</option>
+    </c:forEach>
+</select><br>
                         <button id="applyBtn">Áp dụng</button>
                     </div>
+
                     <table class="table table-striped table-bordered tbborder" id="sortTable">
                         <thead>
                             <tr>
@@ -116,7 +130,7 @@
                                 <th>Ngày&nbspmua&nbsphàng</th>
                                 <th>Sản&nbspphẩm</th>
                                 <th>Tổng&nbspchi&nbspphí</th>
-                                <th>ID&nbsptài&nbspkhoản</th>
+                                <th>Tên&nbspkhách&nbsphàng</th>
                                 <th>Nhân&nbspviên&nbspsale</th>
                                 <th>Tình&nbsptrạng</th>
                                 <th></th>
@@ -135,7 +149,7 @@
                                         <td>${c.fullNameFirstProduct}</td>
                                     </c:if>
                                     <td>${c.total_cost}</td>
-                                    <td>${c.userId}</td>
+                                    <td>${c.fullName}</td>
                                     <td>${c.fullNameSaler}</td>
 
                                     <td>
@@ -207,6 +221,9 @@
                     table.page.len(recordLength).draw();
                 });
                 $('#applyBtn').on('click', function () {
+                    var recordLength = parseInt($('#recordLength').val());
+                    table.page.len(recordLength).draw();
+
                     var startDate = $('#startDate').val();
                     var endDate = $('#endDate').val();
 
@@ -218,6 +235,17 @@
                     table
                             .columns(1)
                             .search(endDate, true, false)
+                            .draw();
+var salerFilter1 = $('#salerFilter1').val();
+  table
+    .columns(5)
+    .search(salerFilter1)
+    .draw();
+
+                    var statusFilter = $('#statusFilter').val();
+                    table
+                            .columns(6)
+                            .search(statusFilter)
                             .draw();
                 });
             });

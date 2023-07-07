@@ -1,11 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.Admin;
+package Controller.Marketing;
 
-import dal.UserDAO;
+import dal.CustomerDAO;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,11 +13,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.SendMail;
+import model.Customer;
+import model.User;
 
-
-@WebServlet(name = "CreateUserController", urlPatterns = {"/create-user"})
-public class CreateUserController extends HttpServlet {
+/**
+ *
+ * @author ASUS
+ */
+@WebServlet(name = "UpdateCustomerController", urlPatterns = {"/update-customer"})
+public class UpdateCustomerController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,37 +36,30 @@ public class CreateUserController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        String fullName = request.getParameter("fullName");
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
-            String mobile = request.getParameter("mobile");
-            String address = request.getParameter("address");
-           
-            String role_id = request.getParameter("role_id");
-            String gender = request.getParameter("gender");
+        int cid = Integer.parseInt(request.getParameter("customer_id"));
+        String cname = request.getParameter("customer_name");
+        String cemail = request.getParameter("customer_email");
+        String cmobile = request.getParameter("customer_mobile");
 
+        CustomerDAO cus = new CustomerDAO();
+      
 
-       
-            UserDAO dao = new UserDAO();
-            boolean u = dao.chekcAccount(email);
-            if (!mobile.matches("[0-9]*")) {
-                request.setAttribute("notification", "Your Mobile Invalid");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            } else if (password.length() < 8 || password.length() > 32) {
-                request.setAttribute("notification", "Mật khẩu của bạn ít hơn 8 ký tự hoặc nhiều hơn 32 ký tự");
-                request.getRequestDispatcher("AddUser.jsp").forward(request, response);
-            } else if (u == false) {
-                SendMail.sendEmailSignup(email);
-                dao.crNewUser(fullName, password, gender, email, mobile, address,  role_id);
-                request.setAttribute("notification", "Thêm thành công!");
-                request.getRequestDispatcher("list-user").forward(request, response);
-            } else {
-                request.setAttribute("notification", "Email đã tồn tại");
-                request.getRequestDispatcher("AddUser.jsp").forward(request, response);
-            }
+        //sua thanh cong
+        Customer c = cus.checkCustomer(cemail, cmobile, cid);
+        if (c != null) {
+            request.setAttribute("notification", "Khách hàng đã tồn tại");
+            request.getRequestDispatcher("customer-detail?cid=" + cid).forward(request, response);
+        } else {
+            HttpSession session = request.getSession();
+            User u = (User) session.getAttribute("us");
+            cus.updateCustomer(cname, cemail, cmobile, cid);
+            cus.updateHistory(cid, cemail, cname, cmobile, u.getUser_Id());
+
+            response.sendRedirect("customer-detail?cid=" + cid);
         }
-    
+
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

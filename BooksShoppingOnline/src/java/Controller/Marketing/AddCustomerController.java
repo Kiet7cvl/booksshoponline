@@ -1,11 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.Admin;
+package Controller.Marketing;
 
-import dal.UserDAO;
+import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,11 +12,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.SendMail;
+import model.Customer;
 
-
-@WebServlet(name = "CreateUserController", urlPatterns = {"/create-user"})
-public class CreateUserController extends HttpServlet {
+/**
+ *
+ * @author ASUS
+ */
+@WebServlet(name = "AddCustomerController", urlPatterns = {"/add-customer"})
+public class AddCustomerController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,39 +32,32 @@ public class CreateUserController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        String fullName = request.getParameter("fullName");
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
-            String mobile = request.getParameter("mobile");
-            String address = request.getParameter("address");
-           
-            String role_id = request.getParameter("role_id");
-            String gender = request.getParameter("gender");
-
-
+        String customer_name = request.getParameter("customer_name");
+        String customer_email = request.getParameter("customer_email");
+        String customer_mobile = request.getParameter("customer_mobile");
        
-            UserDAO dao = new UserDAO();
-            boolean u = dao.chekcAccount(email);
-            if (!mobile.matches("[0-9]*")) {
-                request.setAttribute("notification", "Your Mobile Invalid");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            } else if (password.length() < 8 || password.length() > 32) {
-                request.setAttribute("notification", "Mật khẩu của bạn ít hơn 8 ký tự hoặc nhiều hơn 32 ký tự");
-                request.getRequestDispatcher("AddUser.jsp").forward(request, response);
-            } else if (u == false) {
-                SendMail.sendEmailSignup(email);
-                dao.crNewUser(fullName, password, gender, email, mobile, address,  role_id);
-                request.setAttribute("notification", "Thêm thành công!");
-                request.getRequestDispatcher("list-user").forward(request, response);
-            } else {
-                request.setAttribute("notification", "Email đã tồn tại");
-                request.getRequestDispatcher("AddUser.jsp").forward(request, response);
-            }
+        boolean status = true;
+
+        CustomerDAO dao = new CustomerDAO();
+        Customer u = dao.checkCustomerExist(customer_email);
+        if (!customer_mobile.matches("[0-9]*")) {
+            request.setAttribute("notification", "Số điện thoại không hợp lệ");
+            request.getRequestDispatcher("customer-list").forward(request, response);
+        } else if (u == null) {
+            //dang ky thanh cong
+            dao.addCustomer(customer_name, customer_email, customer_mobile, status);
+            request.setAttribute("notification", "Thêm khách hàng thành công");
+            request.getRequestDispatcher("customer-list").forward(request, response);
+        } else {
+            request.setAttribute("notification", "Email đã tồn tại");
+            request.getRequestDispatcher("customer-list").forward(request, response);
         }
-    
+
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -90,6 +85,7 @@ public class CreateUserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+       
     }
 
     /**
@@ -103,3 +99,4 @@ public class CreateUserController extends HttpServlet {
     }// </editor-fold>
 
 }
+

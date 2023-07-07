@@ -1,28 +1,27 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.Public;
+package Controller.Marketing;
 
-import dal.BlogDAO;
-import dal.CategoryDAO;
+import dal.CustomerDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+import model.Customer;
 
-import model.Blog;
-import model.CategoryBlog;
-
-
-@WebServlet(name = "BlogController", urlPatterns = {"/blog"})
-public class BlogController extends HttpServlet {
+/**
+ *
+ * @author ASUS
+ */
+@WebServlet(name = "CustomerListController", urlPatterns = {"/customer-list"})
+public class CustomerListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,28 +37,16 @@ public class BlogController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+
+        CustomerDAO cd = new CustomerDAO();
+
         HttpSession session = request.getSession();
-        final int PAGE_SIZE = 3;  // Set total blog each page
-        BlogDAO bd = new BlogDAO();
-        // Set page
-        int page = 1;
-        String strPage = request.getParameter("page");
-        if (strPage != null) {
-            page = Integer.parseInt(strPage);
-        }
 
         // Set key for search 
         String searchKey = "";
         String strSearchKey = request.getParameter("key");
         if (strSearchKey != null) {
             searchKey = strSearchKey;
-        }
-
-        // Set category
-        String categoryId = "!= -1";
-        String strCategoryId = request.getParameter("categoryId");
-        if (strCategoryId != null) {
-            categoryId = "= " + strCategoryId;
         }
 
         // Set sort 
@@ -74,36 +61,40 @@ public class BlogController extends HttpServlet {
             value = strValue;
         }
 
+        // Set status
+        String status = "!= -1";
+        String strStatus = request.getParameter("status");
+        if (strStatus != null) {
+            status = "= " + strStatus;
+        }
+        
+        final int PAGE_SIZE = 50;  // Set total product each page
+        // Set page
+        int page = 1;
+        String strPage = request.getParameter("page");
+        if (strPage != null) {
+            page = Integer.parseInt(strPage);
+        }
+        
         // Set total page 
-        int totalBlog = bd.getTotalBlog(searchKey, categoryId);
-        int totalPage = totalBlog / PAGE_SIZE;
-        if (totalBlog % PAGE_SIZE != 0) {
+        int totalCustomer = cd.getTotalCustomer(searchKey, status);
+        int totalPage = totalCustomer / PAGE_SIZE;
+        if (totalCustomer % PAGE_SIZE != 0) {
             totalPage += 1;
         }
 
-        // Get list blog
-        List<Blog> listBlog = bd.getBlogWithPaging(page, PAGE_SIZE, searchKey, categoryId, type, value);
-        List<CategoryBlog> listCategoryBlog_BlogList = new CategoryDAO().getAllCategoryBlog();
-        session.setAttribute("listCategoryBlog", listCategoryBlog_BlogList);
-        Blog newBlog = bd.getBlogNew();
-        session.setAttribute("newBlog", newBlog);
-        
-       
+        // Get list customer
+        List<Customer> listCustomer = cd.getCustomerWithPaging(page, PAGE_SIZE, searchKey, type, value, status);
 
         // Set param request to jsp page
-        session.setAttribute("listBlogList", listBlog);
-        session.setAttribute("historyUrl", "blog");
-        String history = "blog?page=" + page;
+        session.setAttribute("listCustomer", listCustomer);
+        String history = "customer-list?page=" + page;
         if (strSearchKey != null) {
             history = history + "&key=" + strSearchKey;
             request.setAttribute("historyKey", "&key=" + strSearchKey);
             request.setAttribute("key", strSearchKey);
         }
-        if (strCategoryId != null) {
-            history = history + "&categoryId=" + strCategoryId;
-            request.setAttribute("historyCategoryId", "&categoryId=" + strCategoryId);
-            request.setAttribute("categoryId", strCategoryId);
-        }
+
         if (strValue != null) {
             history = history + "&value=" + strValue;
             request.setAttribute("historyValue", "&value=" + strValue);
@@ -114,14 +105,20 @@ public class BlogController extends HttpServlet {
             request.setAttribute("historyType", "&type=" + strType);
             request.setAttribute("type", strType);
         }
+        if (strStatus != null) {
+            history = history + "&status=" + strStatus;
+            request.setAttribute("historyStatus", "&status=" + strStatus);
+            request.setAttribute("status", strStatus);
+        }
+
         request.setAttribute("page", page);
         request.setAttribute("totalPage", totalPage);
         session.setAttribute("historyUrl", history);
 
         // Request
+        request.setAttribute("listCustomer", listCustomer);
+        request.getRequestDispatcher("CustomerList.jsp").forward(request, response);
 
-
-        request.getRequestDispatcher("BlogList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -162,7 +159,5 @@ public class BlogController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    public static void main(String[] args) {
-        
-    }
+
 }

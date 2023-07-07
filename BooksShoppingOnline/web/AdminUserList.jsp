@@ -67,92 +67,52 @@
                 border: 50%;
             }
         </style>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
     </head>
-    
+
     <body class="sb-nav-fixed">
         <%@include file="components/account.jsp" %>
         <%@include file="components/manager-header.jsp" %>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-                            <h4 class="mb-5 text-secondary">Thêm Người Dùng</h4>
-                            <div class="row">
-                                <!--                                <div class="mb-3 col-md-12">
-                                                                    <label>Image Avatar<span class="text-danger">*</span></label>
-                                                                    <input id="file-upload" class="form-control" type="file" name="photo"/>
-                                <c:if test="${not empty ErrCreateMsg[0]}" >
-                                    <div class="alert alert-danger" role="alert">
-                                    ${ErrCreateMsg[0]}
-                                </div>
-                                </c:if>
-                            </div>-->
-                                <form action="create-user">
-                                    <div class="mb-3 col-md-12">
-                                        <label for="fullname">Họ tên<span class="text-danger">*</span></label>
-                                        <input id="fullname" type="text" name="fname" class="form-control" placeholder="Nhập họ tên">
-                                    </div>
-                                    <div class="mb-3 col-md-12">
-                                        <label for="pass">Mật khẩu<span class="text-danger">*</span></label>
-                                        <input id="pass" type="password" name="password" class="form-control" placeholder="Nhập mật khẩu">
-                                    </div>
-                                    <div class="mb-3 col-md-12">
-                                        <label for="Email">Email<span class="text-danger">*</span></label>
-                                        <input id="Email" type="text" name="email" class="form-control" placeholder="Nhập email">
-                                    </div>
-                                    <div class="mb-3 col-md-12">
-                                        <label for="phone">Số điện thoại<span class="text-danger">*</span></label>
-                                        <input id="phone" type="text" name="phone" class="form-control" placeholder="Nhập số điện thoại">
-                                    </div>
-                                    <div class="mb-3 col-md-12">
-                                        <label for="address" >Địa chỉ<span class="text-danger">*</span></label>
-                                        <input id="address" type="text" name="address" class="form-control" placeholder="Nhập địa chỉ">
-                                    </div>
 
 
-                                    <div class="mb-3 col-md-12 input-group " style="margin-top: 35px">
-                                        <label class="input-group-text" for="inputGroupSelect01" style="">Giới tính</label>
-                                        <select name="sex_id" class="form-select" id="inputGroupSelect01">
-                                            <option value="True">Nam</option> 
-                                            <option value="False">Nữ</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3 col-md-12 input-group "  style="margin-top: 35px">
-                                        <label class="input-group-text" for="inputGroupSelect02">Vai trò</label>
 
-                                        <select name="role_id" class="form-select" id="inputGroupSelect02">
-                                            <c:forEach items="${listRole}" var="lr">
-                                                <option value="${lr.role_id}">${lr.role_name}</option>
-                                            </c:forEach>
-
-                                        </select>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Lưu</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        
-        
         <div id="layoutSidenav">
             <%@include file="components/admin-left-dashboard.jsp" %>
             <div class="groundy" id="layoutSidenav_content">
                 <main>
                     <div class="col-md-1">
-                            <a href="AddUser.jsp"><button type="button" class="btn btn-danger " style="">Thêm</button></a>
-                        </div>
+                        <a href="AddUser.jsp"><button type="button" class="btn btn-danger " style="">Thêm</button></a>
+                    </div>
                     <div class="container-fluid rounded row" style="margin-top: 3% !important; margin-bottom: 1% !important">
-                        
+                        <div class="row-lg-2">
+                            <label for="recordLength">Hiển thị <input type="number" id="recordLength" min="1" max="100" value="10" style="width: 55px"> bản ghi | </label>
+                            <label for="genderFilter"> | Giới Tính:</label>
+                            <select id="genderFilter">
+                                <option value="">Tất cả</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                            <label for="roleFilter"> | Vai Trò:</label>
+                            <select id="roleFilter">
+                                <option value="">Tất cả</option>
+                                <option value="Customer">Customer</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Sale">Sale</option>
+                                <option value="Sale manager">Sale manager</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                            <label for="statusFilter"> | Trạng thái:</label>
+                            <select id="statusFilter">
+                                <option value="">Tất cả</option>
+                                <option value="Ẩn">Ẩn</option>
+                                <option value="Hiện">Hiện</option>
+                            </select>
+
+
+
+                            <button id="applyBtn">Áp dụng</button>
+                        </div>
                         <table class="table table-striped table-bordered" id="sortTable"  style="margin-top: 4%; background: #FFFFE0; ">
                             <thead  class="text-center">
                             <th>ID</th>
@@ -169,7 +129,7 @@
                                     <tr class="text-center">
                                         <th scope="row">${U.user_Id}</th>
                                         <td>${U.full_Name}</td>
-                                        
+
                                         <!--giới tính-->
                                         <c:if test="${U.gender == true}">
                                             <td style="text-align: center">Nam</td>
@@ -177,7 +137,8 @@
                                         <c:if test="${U.gender == false}">
                                             <td style="text-align: center">Nữ</td>
                                         </c:if>
-                                            
+
+
                                         <td>${U.email}</td>
                                         <td>${U.mobile}</td>
                                         <!--role-->
@@ -197,11 +158,13 @@
                                             <td style="text-align: center">admin</td>
                                         </c:if>
                                         <c:if test="${U.status == true}">
-                                            <td><img class="circle" src="images/active.png"></td>
-                                            </c:if>
-                                            <c:if test="${U.status != true}">
-                                            <td><img class="circle" src="images/inactive.png"></td>
-                                            </c:if>
+                                            <td><img class="circle" src="images/active.png"><div hidden="">hiện</div></td>
+
+                                        </c:if>
+                                        <c:if test="${U.status != true}">
+                                            <td><img class="circle" src="images/inactive.png"><div hidden="">ẩn</div></td>
+
+                                        </c:if>
                                         <td style="width: 125px">
                                             <c:if test="${U.status == true}">
                                                 <a class="btn btn-dark" href="update-status-user?status=0&userId=${U.user_Id}" role="button" title="Ẩn" style='font-size:10px'>
@@ -213,7 +176,17 @@
                                                     <i style='font-size:10px' class='fas'>&#xf06e;</i>
                                                 </a>
                                             </c:if>
+                                            <a class="btn btn-dark" href="UpUser?user_Id=${U.user_Id}" role="button" title="Chi tiết" style='font-size:10px'>
+                                                <i style='font-size:10px' class='fas'>&#xf044;</i>
+                                            </a>
                                         </td>
+<!--                                        <td style="width: 125px">
+
+                                            <a href="UpUser?user_Id=${U.user_Id}" class="delete" title="Xóa" ><i
+class="material-icons">&#xf06e;</i></a>
+                                        </td>-->
+
+
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -224,16 +197,16 @@
         </div>
         <script>
             $(document).ready(function () {
-                $('#sortTable').DataTable({
+                var table = $('#sortTable').DataTable({
                     "language": {
                         "decimal": "",
-                        "emptyTable": "Không có dữ liệu trong bản ghi",
-                        "info": " Hiển thị <_START_> đến <_END_> trong _TOTAL_ người dùng",
+                        "emptyTable": "No data available in table",
+                        "info": " _START_ đến _END_ của _TOTAL_ bản ghi",
                         "infoEmpty": "HIển thị 0 to 0 of 0 bản ghi",
                         "infoFiltered": "(kết quả từ _MAX_ tổng số bản ghi)",
                         "infoPostFix": "",
                         "thousands": ",",
-                        "lengthMenu": "Hiển thị _MENU_ người dùng",
+                        "lengthMenu": "",
                         "loadingRecords": "Loading...",
                         "processing": "",
                         "search": "Tìm kiếm:",
@@ -250,6 +223,32 @@
                         }
                     }
                 });
+                $('#applyBtn').on('click', function () {
+                    var recordLength = parseInt($('#recordLength').val());
+                    table.page.len(recordLength).draw();
+                });
+                $('#applyBtn').on('click', function () {
+                    var recordLength = parseInt($('#recordLength').val());
+                    table.page.len(recordLength).draw();
+
+                    var genderFilter = $('#genderFilter').val();
+                    table
+                            .columns(2)
+                            .search(genderFilter)
+                            .draw();
+
+                    var roleFilter = $('#roleFilter').val();
+                    table
+                            .columns(5)
+                            .search(roleFilter)
+                            .draw();
+                    var statusFilter = $('#statusFilter').val();
+                    table
+                            .columns(6)
+                            .search(statusFilter)
+                            .draw();
+                });
+
             });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

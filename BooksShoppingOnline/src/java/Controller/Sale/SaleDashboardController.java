@@ -43,32 +43,35 @@ public class SaleDashboardController extends HttpServlet {
         OrderDao od = new OrderDao();
         DateDAO dd = new DateDAO();
         UserDAO ud = new UserDAO();
-
+        // Lấy ngày trong khoảng 7 ngày trước đến ngày hiện tại
         Date date = dd.get7day();
         String start = date.getStart().toString();
         String end = date.getEnd().toString();
         String salerId = "!= -1";
+        // Lấy giá trị tham số từ request nếu có
         String start_raw = request.getParameter("start");
         String end_raw = request.getParameter("end");
         String salerId_raw = request.getParameter("salerId");
+        // Kiểm tra nếu có giá trị start và end từ request thì gán lại
         if (start_raw != null) {
             start = start_raw;
             end = end_raw;
         }
+        // Kiểm tra nếu có giá trị salerId từ request thì gán lại
         if(salerId_raw != null){
             salerId = "= "+salerId_raw;
         }
-
+        // Tính số ngày trong khoảng thời gian start và end
         int day = dd.CountDayByStartEnd(start, end);
         
         
-        // set parameter for order
+        // Thiết lập tham số cho đơn hàng
         int totalOrder = od.getTotalOrder(salerId,start, end);
         int totalOrderSubmited = od.getTotalOrderSubmited(salerId,start, end);
         int totalOrderSuccesful = od.getTotalOrderSuccesful(salerId,start, end);
         int totalOrderCanceled = od.getTotalOrderCanceled(salerId,start, end);
 
-        // set chart for order
+        // Thiết lập biểu đồ cho đơn hàng
         List<Chart> listChartOrderBar = od.getChartOrderBar(salerId,start, day);
         int maxListChartOderBar = -1;
         for (Chart o : listChartOrderBar) {
@@ -77,7 +80,7 @@ public class SaleDashboardController extends HttpServlet {
             }
         }
         
-        // set chart revenue
+        // Thiết lập biểu đồ doanh thu
         List<Chart> listChartRevenueBar = od.getChartRevenueBar(salerId,start, day);
         List<Chart> listChartRevenueArea = od.getChartRevenueArea(salerId,start, day);
         int maxListChartRevenueBar = -1;
@@ -100,7 +103,7 @@ public class SaleDashboardController extends HttpServlet {
         List<User> listSaler = ud.getAllSaler();
 
         
-        // set parameter blog chart request to jsp
+        // Thiết lập các tham số cho biểu đồ trong JSP
         request.setAttribute("listChartRevenueBar", listChartRevenueBar);
         request.setAttribute("listChartRevenueArea", listChartRevenueArea);
         request.setAttribute("maxListChartRevenueBar", maxListChartRevenueBar);

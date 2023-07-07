@@ -1,26 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.Sale;
+package Controller.Marketing;
 
-import dal.OrderDao;
+import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author MSI Bravo
+ * @author ASUS
  */
-@WebServlet(name = "UpdateSuccessfullOrder", urlPatterns = {"/update-successfull-order"})
-
-public class UpdateSuccessfullOrder extends HttpServlet {
+public class ChangeStatusCustomerController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,13 +28,18 @@ public class UpdateSuccessfullOrder extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int id = Integer.parseInt(request.getParameter("order_id"));
-            new OrderDao().updateStatusOrder(id, 2);// Cập nhật trạng thái đơn hàng bằng cách gọi phương thức updateStatusOrder trong OrderDao
-            response.sendRedirect("order-list-sale");
-        
+        try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            int customerId = Integer.parseInt(request.getParameter("customerId"));
+            int status = Integer.parseInt(request.getParameter("status"));
+            CustomerDAO cd = new CustomerDAO();
+            cd.changeStatusById(customerId, status);
+            String historyUrl = (String)session.getAttribute("historyUrl");
+            response.sendRedirect(historyUrl);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

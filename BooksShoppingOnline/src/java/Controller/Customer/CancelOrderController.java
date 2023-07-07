@@ -37,8 +37,8 @@ public class CancelOrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             int id = Integer.parseInt(request.getParameter("order_id"));
-            new OrderDao().updateStatusOrder(id, 3);
-            response.sendRedirect("myorder");
+            new OrderDao().updateStatusOrder(id, 3);// Cập nhật trạng thái đơn hàng bằng cách gọi phương thức updateStatusOrder trong OrderDao
+            response.sendRedirect("order-detail?orderId="+id);
         }
     }
 
