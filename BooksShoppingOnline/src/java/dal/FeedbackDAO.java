@@ -16,6 +16,36 @@ import model.Feedback;
 
 public class FeedbackDAO extends DBContext {
 
+        public List<Feedback> getAllFeedback() {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "SELECT f.*, p.product_name \n" +
+                     "FROM Feedback f \n" +
+                     "JOIN Product p ON f.product_id = p.product_id;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback f = Feedback.builder()
+                        .id(rs.getInt(1))
+                        .fullName(rs.getString(2))
+                        .rated_star(rs.getInt(3))
+                        .feedback(rs.getString(4))
+                        .image(rs.getString(5))
+                        .status(rs.getBoolean(6))
+                        .product_id(rs.getInt(7))
+                        .user_id(rs.getInt(8))
+                        .date(rs.getDate(9))
+                        .product_name(rs.getString(10))
+                        .build();
+
+                list.add(f);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return list;
+    }
     public int getTotalFeedback(int product_id) {
         String sql = "SELECT COUNT(feedBack_id) FROM Feedback WHERE product_id = ?";
         try {
@@ -142,6 +172,53 @@ public class FeedbackDAO extends DBContext {
 
         } catch (SQLException e) {
             System.out.println(e);
+        }
+    }
+        public Feedback getFeedbackUserById(int feedbackId) {
+        String sql = "SELECT f.*, p.product_name, u.email, u.mobile\n" +
+                     "FROM Feedback f\n" +
+                     "JOIN Product p ON f.product_id = p.product_id\n" +
+                     "JOIN `User` u ON f.userId = u.userId\n" +
+                     "WHERE f.feedback_id = ?;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, feedbackId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback f = Feedback.builder()
+                        .id(rs.getInt(1))
+                        .fullName(rs.getString(2))
+                        .rated_star(rs.getInt(3))
+                        .feedback(rs.getString(4))
+                        .image(rs.getString(5))
+                        .status(rs.getBoolean(6))
+                        .product_id(rs.getInt(7))
+                        .user_id(rs.getInt(8))
+                        .date(rs.getDate(9))
+                        .product_name(rs.getString(10))
+                        .email(rs.getString(11))
+                        .phone(rs.getString(12))
+                        .build();
+                return f;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return null;
+    }
+    public void changeStatusFeedback(int feeback_id, int status) {
+        try {
+            String sql = "UPDATE `Feedback` "
+                    + "SET `status` = ? "
+                    + "WHERE `feedBack_id` = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, status);
+            st.setInt(2, feeback_id);
+
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
     }
     

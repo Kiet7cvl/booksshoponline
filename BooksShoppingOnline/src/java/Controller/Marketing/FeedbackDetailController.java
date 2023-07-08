@@ -1,31 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.Public;
+package Controller.Marketing;
 
 import dal.FeedbackDAO;
-import dal.OrderDao;
-import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import model.Feedback;
-import model.Order;
-import model.Product;
-import model.User;
 
 /**
  *
- * @author dongh
+ * @author tr498
  */
-public class ListDetailController extends HttpServlet {
+public class FeedbackDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,42 +32,12 @@ public class ListDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
             /* TODO output your page here. You may use following sample code. */
-            int productId = Integer.parseInt(request.getParameter("productId"));
-            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-            User u = (User) session.getAttribute("us");
+            int feedbackId = Integer.parseInt(request.getParameter("feedbackId"));
+            Feedback feedback = new FeedbackDAO().getFeedbackUserById(feedbackId);
 
-            ProductDAO productDAO = new ProductDAO();
-            Product product = productDAO.getProductById(productId);
-            FeedbackDAO fed = new FeedbackDAO();
-            OrderDao od = new OrderDao();
-            Order accept = null;
-            int Total = fed.getTotalFeedback(productId);
-            if (u != null) {
-                accept = od.checkProductOrderByUser(u.getUser_Id(), productId);
-            }
-
-            List<Feedback> listfeedbackbyproduct = fed.getAllFeedbackByProductId(productId);
-
-            // Lấy số lượng sản phẩm có sẵn từ cơ sở dữ liệu
-            int maxQuantity = productDAO.getProductQuantity(productId);
-
-            List<Product> listProduct = productDAO.getProductTop4Category(productId, categoryId);
-            double avg = productDAO.getRatedProduct(productId);
-
-            request.setAttribute("listfeedbackbyproduct", listfeedbackbyproduct);
-            request.setAttribute("total", Total);
-            request.setAttribute("listProduct", listProduct);
-            request.setAttribute("product", product);
-            request.setAttribute("avg", avg);
-            request.setAttribute("accept", accept);
-            session.setAttribute("historyUrl", "list-detail?productId=" + productId + "&categoryId=" + categoryId);
-
-            // Chuyển số lượng tối đa vào thuộc tính "maxQuantity"
-            request.setAttribute("maxQuantity", maxQuantity);
-
-            request.getRequestDispatcher("list-detail.jsp").forward(request, response);
+            request.setAttribute("feedback", feedback);
+            request.getRequestDispatcher("MKTFeedbackDetail.jsp").forward(request, response);
         }
     }
 
