@@ -80,8 +80,7 @@ public class EditUserProfileController extends HttpServlet {
          
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        
+        response.setCharacterEncoding("UTF-8");  
        
         HttpSession session = request.getSession();
         UserDAO ud = new UserDAO();
@@ -113,25 +112,22 @@ public class EditUserProfileController extends HttpServlet {
             final PrintWriter writer = response.getWriter();
 
             try {
-                
 
-                File file = new File("C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\shopping_online\\booksshop\\BooksShoppingOnline\\web\\images\\avatar" + File.separator + fileName);
+                
+                File file = new File("E:\\Ki5\\SWP391\\ShoppingOnile\\BooksShoppingOnline\\web\\images\\avatar" + File.separator + fileName);
+
                 url_avatar = url_avatar + file.getName();
 
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();
                 int read;
-
                 final byte[] bytes = new byte[1024];
-
-
                 while ((read = filecontent.read(bytes)) != -1) {
                     out.write(bytes, 0, read);
                 }
-
-                
+               
             } catch (FileNotFoundException fne) { 
-                request.setAttribute("notification", "Bạn cần phải điền đầy đủ thông tin cơ bản của hồ sơ");
+                request.setAttribute("notification", "Bạn cần điền các thông tin hợp lệ");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } 
             int uid = Integer.parseInt(uid_raw);

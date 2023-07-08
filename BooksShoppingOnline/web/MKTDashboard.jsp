@@ -10,7 +10,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
 
-        <title>Dashboard - Maketing</title>
+        <title>Dashboard - Marketing</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
@@ -303,6 +303,55 @@
                             }
                     }
             });
+            var ctx4 = document.getElementById("myAreaChart-4");
+            var myLineChart = new Chart(ctx4, {
+            type: 'line',
+                    data: {
+                    labels: [<c:forEach  items="${listChartFeedbackArea}" var="feedback" > "${feedback.date}",</c:forEach>],
+                            datasets: [{
+                            label: "Phản hồi",
+                                    lineTension: 0.3,
+                                    backgroundColor: "rgba(2,117,216,0.2)",
+                                    borderColor: "rgba(2,117,216,1)",
+                                    pointRadius: 5,
+                                    pointBackgroundColor: "rgba(2,117,216,1)",
+                                    pointBorderColor: "rgba(255,255,255,0.8)",
+                                    pointHoverRadius: 5,
+                                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                                    pointHitRadius: 50,
+                                    pointBorderWidth: 2,
+                                    data: [<c:forEach  items="${listChartFeedbackArea}" var="feedback" > "${feedback.value}",</c:forEach>],
+                            }],
+                    },
+                    options: {
+                    scales: {
+                    xAxes: [{
+                    time: {
+                    unit: 'date'
+                    },
+                            gridLines: {
+                            display: false
+                            },
+                            ticks: {
+                            maxTicksLimit: 7
+                            }
+                    }],
+                            yAxes: [{
+                            ticks: {
+                            min: 0,
+                                    max: ${maxListChartFeedbackArea},
+                                    maxTicksLimit: 5
+                            },
+                                    gridLines: {
+                                    color: "rgba(0, 0, 0, .125)",
+                                    }
+                            }],
+                    },
+                            legend: {
+                            display: false
+                            }
+                    }
+            });
             </script>
 
         <script>
@@ -425,6 +474,47 @@
                             ticks: {
                             min: 0,
                                     max: ${maxListChartCustomerBar},
+                                    maxTicksLimit: 5
+                            },
+                                    gridLines: {
+                                    display: true
+                                    }
+                            }],
+                    },
+                            legend: {
+                            display: false
+                            }
+                    }
+            });
+            var ctx4 = document.getElementById("myBarChart-4");
+            var myLineChart = new Chart(ctx4, {
+            type: 'bar',
+                    data: {
+                    labels: [<c:forEach  items="${listChartFeedbackBar}" var="feedback" > "${feedback.date}",</c:forEach>],
+                            datasets: [{
+                            label: "Phản Hồi",
+                                    backgroundColor: "rgba(2,117,216,1)",
+                                    borderColor: "rgba(2,117,216,1)",
+                                    data: [<c:forEach  items="${listChartFeedbackBar}" var="feedback" > "${feedback.value}",</c:forEach>],
+                            }],
+                    },
+                    options: {
+                    scales: {
+                    xAxes: [{
+                    time: {
+                    unit: 'month'
+                    },
+                            gridLines: {
+                            display: false
+                            },
+                            ticks: {
+                            maxTicksLimit: 6
+                            }
+                    }],
+                            yAxes: [{
+                            ticks: {
+                            min: 0,
+                                    max: ${maxListChartFeedbackBar},
                                     maxTicksLimit: 5
                             },
                                     gridLines: {

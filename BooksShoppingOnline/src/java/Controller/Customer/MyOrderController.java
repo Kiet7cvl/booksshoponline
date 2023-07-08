@@ -39,7 +39,7 @@ public class MyOrderController extends HttpServlet {
         
         HttpSession session = request.getSession();
         User u = (User)session.getAttribute("us");
-        List<Order> listMyOrder = new OrderDao().getAllOrder(u.getUser_Id()); 
+        List<Order> listMyOrder = new OrderDao().getAllOrder(u.getUser_Id()); // Tạo một đối tượng mới của OrderDao và gọi phương thức getAllOrder để lấy danh sách các đơn hàng liên quan đến ID người dùng
         request.setAttribute("listMyOrder", listMyOrder);
         request.getRequestDispatcher("myorder.jsp").forward(request, response);
     }

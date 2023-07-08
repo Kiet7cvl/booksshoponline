@@ -7,7 +7,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 </c:if>
-
+        
+<!-- Notification Input -->
+<c:if test="${sessionScope.notificationinput !=null}">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="position: fixed; z-index: 15 ; margin-left: 40%">
+        <strong>${sessionScope.notificationinput}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</c:if>
 
 <!-- Login -->
 <div class="modal fade col-md-12" role="dialog" id="loginModal">

@@ -41,7 +41,6 @@ public class ProductsListController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            final int PAGE_SIZE = 6;  // Set total product each page
             HttpSession session = request.getSession();
             CategoryDAO c = new CategoryDAO();
             ProductDAO p = new ProductDAO();
@@ -54,11 +53,22 @@ public class ProductsListController extends HttpServlet {
             if (status_raw != null) {
                 status = "= " + status_raw;
             }
+            
+            // Set page_size
+            int PAGE_SIZE = 6;          // default  = 6
+            String strPage_size = request.getParameter("page_size");
+            if (strPage_size != null) {
+                PAGE_SIZE = Integer.parseInt(strPage_size);
+                if(PAGE_SIZE < 1) {
+                    PAGE_SIZE = 6;
+                }
+            } 
+            request.setAttribute("page_size", PAGE_SIZE);
            
             // Set page
             int page = 1;
             String strPage = request.getParameter("page");
-            if (strPage != null) {
+            if (strPage != null ) {
                 page = Integer.parseInt(strPage);
             }
 
@@ -108,7 +118,7 @@ public class ProductsListController extends HttpServlet {
                 history = history + "&key=" + strSearchKey;
                 request.setAttribute("historyKey", "&key=" + strSearchKey);
                 request.setAttribute("key", strSearchKey);
-            }
+            }        
             if (strCategoryId != null) {
                 history = history + "&categoryId=" + strCategoryId;
                 request.setAttribute("historyCategoryId", "&categoryId=" + strCategoryId);
@@ -129,6 +139,11 @@ public class ProductsListController extends HttpServlet {
                 request.setAttribute("historyStatus", "&status=" + status_raw);
                 request.setAttribute("status", status_raw);
             }
+            if (PAGE_SIZE != 0) {
+                history = history + "&page_size=" + PAGE_SIZE;
+                request.setAttribute("historyPage_Size", "&page_size=" + PAGE_SIZE);
+                request.setAttribute("page_size", PAGE_SIZE);
+            }
             request.setAttribute("page", page);
             request.setAttribute("totalPage", totalPage);
             session.setAttribute("historyUrl", history);
@@ -136,7 +151,7 @@ public class ProductsListController extends HttpServlet {
             // Request
             request.setAttribute("total", Total);
             request.setAttribute("PublishedProduct", PublishedProduct);
-            request.getRequestDispatcher("marketing_productlist.jsp").forward(request, response);
+            request.getRequestDispatcher("MKTProductList.jsp").forward(request, response);
         }
     }
 

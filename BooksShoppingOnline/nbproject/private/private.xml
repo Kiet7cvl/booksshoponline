@@ -3,8 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/marketing_productlist.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Common/newpass.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/AddPostController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/product.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/ChangeStatusProductController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/dal/CartDAO.java</file>
@@ -31,7 +31,6 @@
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/AddtoCartController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Common/changepassword.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/context/DBContext.java</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/ChangeStatusFeedbackController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/myorder.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Admin/CreateUserController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/model/Cart.java</file>
@@ -45,7 +44,6 @@
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/UpdateCart.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/UpdateProductController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/css/bootstrap.min.css</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/update_product_new.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/dal/UserDAO.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Common/CustomerAuthorization.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Common/ResetPassController.java</file>
@@ -57,6 +55,7 @@
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Customer/OrderDetailController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/mailCartCompletion.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/model/Feedback.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/ckfinder/skins/v1/app.css</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/BlogList.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/MKTAddProduct.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/components/footer.jsp</file>
@@ -65,28 +64,23 @@
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/AdminSettingDetail.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/cart-completion.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Common/AdminAuthorization.java</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/update_product.jsp</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/dal/BlogDAO.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Common/MKTAuthorization.java</file>
+            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/dal/BlogDAO.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/cart-contact.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/do1/css/style.css</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/dal/FeedbackDAO.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/index.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/DeleteCartController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/dal/OrderDetailDAO.java</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/FeedbackListController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/model/Product.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/DeleteFeedbackController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/dal/OrderDao.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/dal/ProductDAO.java</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/MKTFeedbackDetail.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Customer/MyOrderController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/user-list.jsp</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/FeedbackDetailController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/com/vnpay/common/Config.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Customer/CancelOrderController.java</file>
-            <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/MKTFeedbackList.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/Controller/Public/AddToOrderController.java</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/web/cartCompletion.jsp</file>
             <file>file:/C:/Users/tr498/AssPRJ/Shopping_Online/booksshop/BooksShoppingOnline/src/java/model/User.java</file>

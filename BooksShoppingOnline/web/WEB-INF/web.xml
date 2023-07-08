@@ -69,12 +69,44 @@
         <servlet-class>Controller.Marketing.ProductDetailController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ChangeStatusSliderController</servlet-name>
+        <servlet-class>Controller.Marketing.ChangeStatusSliderController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UpdateProductController</servlet-name>
         <servlet-class>Controller.Marketing.UpdateProductController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ChangeStatusSliderController</servlet-name>
-        <servlet-class>Controller.Marketing.ChangeStatusSliderController</servlet-class>
+        <servlet-name>SliderDetailController</servlet-name>
+        <servlet-class>Controller.Marketing.SliderDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSliderController</servlet-name>
+        <servlet-class>Controller.Marketing.AddSliderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSliderController</servlet-name>
+        <servlet-class>Controller.Marketing.UpdateSliderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostsListController</servlet-name>
+        <servlet-class>Controller.Marketing.PostsListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostDetailsController</servlet-name>
+        <servlet-class>Controller.Marketing.PostDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddPostController</servlet-name>
+        <servlet-class>Controller.Marketing.AddPostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeStatusController</servlet-name>
+        <servlet-class>Controller.Marketing.ChangeStatusController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePostController</servlet-name>
+        <servlet-class>Controller.Marketing.UpdatePostController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteFeedbackController</servlet-name>
@@ -103,6 +135,10 @@
     <servlet>
         <servlet-name>ChangeStatusFeedbackController</servlet-name>
         <servlet-class>Controller.Marketing.ChangeStatusFeedbackController</servlet-class>
+    </servlet>
+    <servlet>    
+        <servlet-name>ChangeStatusCustomerController</servlet-name>
+        <servlet-class>Controller.Marketing.ChangeStatusCustomerController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -181,12 +217,44 @@
         <url-pattern>/product-detail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UpdateProductController</servlet-name>
-        <url-pattern>/update_product</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ChangeStatusSliderController</servlet-name>
         <url-pattern>/change-status-slider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductController</servlet-name>
+        <url-pattern>/updateproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SliderDetailController</servlet-name>
+        <url-pattern>/slider-detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSliderController</servlet-name>
+        <url-pattern>/add-slider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSliderController</servlet-name>
+        <url-pattern>/updateslider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostsListController</servlet-name>
+        <url-pattern>/posts-list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostDetailsController</servlet-name>
+        <url-pattern>/post-details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddPostController</servlet-name>
+        <url-pattern>/add-post</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusController</servlet-name>
+        <url-pattern>/change-status</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePostController</servlet-name>
+        <url-pattern>/update-post</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteFeedbackController</servlet-name>
@@ -216,9 +284,37 @@
         <servlet-name>ChangeStatusFeedbackController</servlet-name>
         <url-pattern>/status-feedback</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>    
+        <servlet-name>ChangeStatusCustomerController</servlet-name>
+        <url-pattern>/change-status-customer</url-pattern>
+ 
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <servlet>
+        <servlet-name>ConnectorServlet</servlet-name>
+        <servlet-class>com.ckfinder.connector.ConnectorServlet</servlet-class>
+        <init-param>
+            <description>
+                Path to configuration file can be relative path inside application,
+                absolute path on local file system or UNC path.
+            </description>
+            <param-name>XMLConfig</param-name>
+            <param-value>/WEB-INF/config.xml</param-value>
+        </init-param>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConnectorServlet</servlet-name>
+        <url-pattern>
+            /ckfinder/core/connector/java/connector.java
+        </url-pattern>
+    </servlet-mapping>
 </web-app>

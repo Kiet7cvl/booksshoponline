@@ -1,8 +1,4 @@
-<%-- 
-    Document   : header
-    Created on : May 30, 2022, 2:32:51 PM
-    Author     : son22
---%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

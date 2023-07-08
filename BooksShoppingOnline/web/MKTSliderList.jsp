@@ -74,13 +74,14 @@
                 border: 50%;
             }
             .mtop {
-                margin-top: 6%;
+                margin-top: 3%;
             }
             .title-order {
                 display: flex;
                 justify-content: center;
                 color: red;
             }
+            
         </style>
     </head>
     <body  class="sb-nav-fixed">
@@ -91,7 +92,7 @@
                 <%@include file="components/MKT-left-board.jsp" %>
                 <h2 class="mtop title-order" >Danh sách Slider</h2>
                 <div class="container mtop" style="width:80%">
-                    <div class="col-md-2 text-center">
+                    <div class="col-md-3 text-center">
                                 <select class="dropdown-font-new" aria-label="Default select example" onchange="location = this.value;">
                                     <option value="slider-list?" ${categoryId == 0 ? "Selected" : ""}>
                                         Trạng thái
@@ -107,19 +108,19 @@
                     <table class="table table-striped table-bordered" id="sortTable">
                         <thead>
                             <tr>
-                                <th>Slider_ID</th>
-                                <th>Slider_Title</th>
-                                <th>Slider_Image</th>
-                                <th>Backlink</th>
-                                <th>Status</th>
-                                <th>Update_Status</th>
+                                <th>Mã</th>
+                                <th class="text-center">Tiêu đề</th>
+                                <th class="text-center">Hình ảnh</th>
+                                <th class="text-center">Đường dẫn</th>
+                                <th class="text-center">Trạng thái</th>
+                                <th class="text-center">Tùy chọn</th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach items ="${SliderList}" var="c">
                                 <tr>
                                     <td>${c.id}</td>
-                                    <td>${c.slider_title}</td>
+                                    <td width="100px">${c.slider_title}</td>
 
                                     <td><img  src="${c.slider_image}" width="200px"></td></td>
 
@@ -131,7 +132,7 @@
                                         <c:if test="${c.status == false}">
                                         <td class="text-center"><img class="circle" src="images/inactive.png"></td>
                                         </c:if>
-                                    <td class="text-center" style="width: 125px">
+                                    <td class="text-center" width="125px">
                                         <a class="btn btn-danger" href="slider-detail?sliderId=${c.id}" role="button" style='font-size:10px'>
                                             <i style='font-size:10px' class='fas'>&#xf044;</i>
                                         </a>

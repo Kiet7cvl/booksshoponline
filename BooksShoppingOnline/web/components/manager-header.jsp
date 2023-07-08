@@ -27,7 +27,6 @@
                     </li>
 
 
-
                 </ul>
                 <!-- Navbar-->
                 <form class="d-flex me-5" action="list">

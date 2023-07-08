@@ -89,8 +89,8 @@
                                 <div class="col-md-7">
                                     <div class="p-3 py-5">
                                         <div class="row mt-16">
-                                            <div class="col-md-12">Giá trị<input type="text" name="value" class="form-control"  value="${setting.value}"></div>
-                                            <div class="col-md-12">Miêu tả<input type="text" name="description" class="form-control" value="${setting.description}"/></div>                                        
+                                            <div class="col-md-12">Giá trị<input required="" type="text" name="value" class="form-control"  value="${setting.value}"></div>
+                                            <div class="col-md-12">Miêu tả<input required="" type="text" name="description" class="form-control" value="${setting.description}"/></div>                                        
 
                                             <div class="col-md-12">Trạng thái
                                                 <br/>
