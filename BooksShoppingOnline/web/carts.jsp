@@ -51,7 +51,7 @@
                     border-radius: 5px;
                     border: 1px solid #e9e9e9;
                     background-color: white;
-                  
+
                 }
                 .delete a:hover{
                     background-color: white;
@@ -73,14 +73,14 @@
                 <div>
                     <div class="return-productlist">
                         <button>
-                            <a href="list" style="font-size: 20px;font-weight: bold;color: black;text-transform: uppercase;text-decoration: none;"> Tiếp tục mua hàng</a>
+                            <a href="list" style="font-size: 20px;font-weight: bold;color: black;text-transform: uppercase;text-decoration: none;">Tiếp tục mua hàng</a>
                         </button>
                     </div>                  
                 </div>
                 <br/>
                 <div class="container" style="max-width: 90%">
                     <div class="row">
-                        <div class="col-lg-12" >
+                        <div class="col-lg-12">
                             <div class="cart-table">
                                 <table>
                                     <thead>
@@ -103,12 +103,13 @@
                                                 <td class="p-price first-row">${c.product_price}đ</td>
                                                 <td class="qua-col first-row">
                                                     <div class="quantity">                                                
-                                                        <form action="update-cart">                                                            
-                                                            <input id="quantityInput" class="form-control form-control-sm" type="number" name="quantity" value="${c.quantity}" data-product-id="${c.product_id}" data-cart-id="${c.cart_id}" min="1" max="${sessionScope.productQuantity}" style="width: 150px"readonly="">
-<input type="hidden" name="productId" value="${c.product_id}"/>
-<input type="hidden" name="cartId" value="${c.cart_id}"/>
-<button onclick="decreaseQuantity()">-</button>
-<button onclick="increaseQuantity()">+</button>
+
+                                                        <form action="update-cart" style="display: flex"> 
+                                                            <button onclick="decreaseQuantity()" style="border-radius: 4px;width: 30px">-</button>
+                                                            <input class="quantityInput form-control form-control-sm" type="number" name="quantity" value="${c.quantity}" data-product-id="${c.product_id}" data-cart-id="${c.cart_id}" min="1" max="${sessionScope.productQuantity}" style="width: 50px" readonly="">
+                                                            <input type="hidden" name="productId" value="${c.product_id}"/>
+                                                            <input type="hidden" name="cartId" value="${c.cart_id}"/>                                     
+                                                            <button onclick="increaseQuantity()" style="border-radius: 4px;width: 30px">+</button>
 
                                                         </form>
                                                     </div>
@@ -121,6 +122,15 @@
                                                 </td>                           
                                             </tr>
                                         </c:forEach>
+
+                                        <c:if test="${empty listCart}">
+                                            <tr>
+                                                <td colspan="6" style="text-align: center; padding-top: 34px">
+                                                    Không có sản phẩm nào trong giỏ hàng
+                                                </td>
+                                            </tr>
+                                            <tr id="emptyCartRow" style="display: none;"></tr>
+                                        </c:if>
                                     </tbody>
                                 </table>
                             </div>
@@ -131,10 +141,8 @@
                                             <li class="cart-total">Tổng tiền các sản phẩm <span>${sum}đ</span></li>
                                         </ul>
                                         <div class="proceed-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-
-                                            <a href="cart-contact" style="color: white">Mua hàng</a>
+                                            <a href="cart-contact" id="purchaseBtn" style="color: white">Mua hàng</a>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +154,7 @@
                 <div class="content-section background-product text-center" ><br/><br/>
                     <!-- Base Product -->
                     <div>
-                    <h2 class="section-heading" >CÓ THỂ BẠN CŨNG THÍCH</h2>
+                        <h2 class="section-heading" >CÓ THỂ BẠN CŨNG THÍCH</h2>
                     </div>
                     <br/><br/><br/>
                     <div  class="container-fluid">
@@ -183,7 +191,7 @@
                                             </div>
                                             <div class="product-infor">
                                                 <diV style="width: 226px; height: 90px">
-                                                <a href="" class="product-name">${p.name}</a> 
+                                                    <a href="" class="product-name">${p.name}</a> 
                                                 </div>
                                                 <div class="product-price">
                                                     <c:if test="${p.sale_price != 0}">
@@ -245,32 +253,44 @@
             <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
             <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
             <script>
-                                                        function updateCartItem(input) {
-                                                            var quantity = input.value;
-                                                            var productId = input.getAttribute("data-product-id");
-                                                            var cartId = input.getAttribute("data-cart-id");
-
-                                                            // Gửi yêu cầu AJAX đến servlet để cập nhật số lượng sản phẩm
-                                                            $.ajax({
-                                                                url: "update-cart",
-                                                                method: "POST",
-                                                                data: {
-                                                                    quantity: quantity,
-                                                                    productId: productId,
-                                                                    cartId: cartId
-                                                                },
-                                                                success: function (response) {
-                                                                    // Cập nhật số tiền và tổng tiền tương ứng trên giao diện
-                                                                    var totalCostElement = input.closest("tr").querySelector(".total-price");
-                                                                    totalCostElement.textContent = response.totalCost + "đ";
-                                                                    var cartTotalElement = document.querySelector(".cart-total span");
-                                                                    cartTotalElement.textContent = response.cartTotal + "đ";
-                                                                },
-                                                                error: function (xhr, status, error) {
-                                                                    console.log(error); // Xử lý lỗi nếu có
-                                                                }
-                                                            });
+                                                        function decreaseQuantity() {
+                                                            var quantityInput = event.target.parentNode.querySelector(".quantityInput");
+                                                            var currentQuantity = parseInt(quantityInput.value);
+                                                            if (currentQuantity > 1) {
+                                                                quantityInput.value = currentQuantity - 1;
+                                                            }
                                                         }
+
+                                                        function increaseQuantity() {
+                                                            var quantityInput = event.target.parentNode.querySelector(".quantityInput");
+                                                            var currentQuantity = parseInt(quantityInput.value);
+                                                            var maxQuantity = parseInt(quantityInput.getAttribute("max"));
+                                                            if (currentQuantity < maxQuantity) {
+                                                                quantityInput.value = currentQuantity + 1;
+                                                            }
+                                                        }
+
+// Ngăn người dùng nhập số trực tiếp
+                                                        var quantityInput = document.getElementById("quantityInput");
+                                                        quantityInput.addEventListener("keydown", function (e) {
+                                                            if (!isNumericInput(e)) {
+                                                                e.preventDefault();
+                                                            }
+                                                        });
+
+                                                        function isNumericInput(event) {
+                                                            var key = event.keyCode || event.which;
+                                                            return (
+                                                                    (key >= 48 && key <= 57) || // Số từ 0 đến 9
+                                                                    key === 8 || // Phím backspace
+                                                                    key === 9 || // Phím tab
+                                                                    key === 37 || // Phím mũi tên trái
+                                                                    key === 39 || // Phím mũi tên phải
+                                                                    key === 46 || // Phím delete
+                                                                    (key >= 96 && key <= 105) // Số từ bàn phím số
+                                                                    );
+                                                        }
+
             </script>
             <script>
                 function showMess(productId, userId) {
@@ -281,6 +301,7 @@
                 }
             </script>
             <script>
+<<<<<<< HEAD
                 function decreaseQuantity() {
   var quantityInput = document.getElementById("quantityInput");
   var currentQuantity = parseInt(quantityInput.value);
@@ -319,6 +340,22 @@ function isNumericInput(event) {
   );
 }
 
+=======
+                document.addEventListener("DOMContentLoaded", function () {
+                    const purchaseBtn = document.getElementById("purchaseBtn");
+                    const emptyCartRow = document.getElementById("emptyCartRow");
+
+                    // Kiểm tra nếu không có sản phẩm trong giỏ hàng
+                    if (emptyCartRow && emptyCartRow.style.display === "none") {
+                        // Hiển thị thông báo không có sản phẩm
+                        emptyCartRow.style.display = "table-row";
+
+                        // Vô hiệu hóa nút "Mua hàng"
+                        purchaseBtn.classList.add("disabled");
+                        purchaseBtn.removeAttribute("href");
+                    }
+                });
+>>>>>>> 79852b2a8c8adc319e2024b40185e88ebe502ce4
             </script>
         </body>
 

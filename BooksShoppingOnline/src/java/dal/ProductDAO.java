@@ -134,7 +134,7 @@ public class ProductDAO extends DBContext {
 
     public Product getProductNew() {
         List<Product> list = new ArrayList<>();
-        String sql = "SELECT * FROM Product ORDER BY update_date DESC LIMIT 1;";
+        String sql = "SELECT * FROM Product where `status` = 1 ORDER BY update_date DESC LIMIT 1;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();

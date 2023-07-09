@@ -79,6 +79,7 @@ public class changepassword extends HttpServlet {
 
         User user = new UserDAO().getUser(userId, old_pass);
 
+        //chẹck password
         if (user == null) {
             request.setAttribute("notification", "Mật khẩu cũ sai");
             request.getRequestDispatcher("index.jsp").forward(request, response);

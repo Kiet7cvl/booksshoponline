@@ -177,6 +177,19 @@
                 font-size: 20px;
 
             }
+            #message {
+                background-color: #f77575;
+                color: #333;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                margin-bottom: 10px;
+                display: none; /* Ẩn thông báo ban đầu */
+            }
+
+            #message.show {
+                display: block; /* Hiển thị thông báo */
+            }
         </style>
         <%@include file="components/javascript.jsp" %>
     </head>
@@ -184,10 +197,16 @@
         <!-- Navigation-->
         <%@include file="components/header.jsp" %>
         <%@include file="components/account.jsp" %>
-
+        <%
+    // Assuming you have a "maxQuantity" attribute set in the servlet
+    int maxQuantity = (int) request.getAttribute("maxQuantity");
+        %>
         <!-- Product section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
+                <c:if test="${not empty message}">
+                    <div id="message" class="show">${message}</div>
+                </c:if>
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-5"><img class="card-img-top mb-5 mb-md-0" style="max-width: 450px" src="${product.image}" alt="..." /></div>
                     <div class="col-md-7">
@@ -234,11 +253,14 @@
                             </div>
                             <h6>Miêu tả ngắn gọn: </h6>
                             <div class="mb-5">${product.brief_infor}</div>
+                            <div class="alert alert-info" role="alert">
+                                Số lượng hiện có trong kho: <%= maxQuantity %>
+                            </div>
 
                             <div class="row">
                                 <div class="countProduct col-lg-3" style="margin-left: 3%">
                                     <div id="decrement" onclick="stepper(this)"><b>-</b></div>
-                                    <input type="number" name="quantity" min="1" max="100" step="1" value="1" id="my-input" readonly>
+                                    <input type="number" name="quantity" min="1" max="${maxQuantity}" step="1" value="1" id="my-input" readonly>
                                     <input type="hidden" name="productId" value="${product.id}" />
                                     <div id="increment" onclick="stepper(this)"><b>+</b></div>
                                 </div>
@@ -311,8 +333,8 @@
                         <h2 style="margin-left: 35%">Bình luận</h2>
                     </div>
                     <div class="modal-body">
-                        <form action="feedback" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="productId" value="${product.id}"/>
+                        <form action="feedback" method="post" enctype="multipart/form-data" onsubmit="return validateFeedbackForm()">
+                            <input type="hidden" name="productId" value="${product.id}" />
                             <b>Viết bình luận:</b>&nbsp;&nbsp;
                             <div class="form-group">
                                 <textarea name="subject" placeholder="Viết bình luận.." style="height:200px ; width: 460px"></textarea>
@@ -322,8 +344,8 @@
                                 <input value="" name="feedback" type="file" class="form-control" style="border-radius: 100px;">
                             </div>
                             <b>Đánh giá:</b>&nbsp;&nbsp;
-                            <div class="form-group" >
-                                <select name = "star" style="border-radius: 100px;" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                            <div class="form-group">
+                                <select name="star" style="border-radius: 100px;" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                     <option selected>Chọn số sao bạn dành cho KingBook</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -333,10 +355,7 @@
                                 </select>
                             </div>
                             <br>
-
-
                             <center><button type="submit" class="btn btn-dark" style="padding-right: 160px;padding-left: 160px; border-radius: 100px;">Bình luận</button></center>
-
                         </form>
                         <br><br>
                     </div>
@@ -355,7 +374,7 @@
                 <span><h2 class="marketing_feedback_margin marketing_feedbac_displayinline">${Math.round(avg * 1000) / 1000}/5 <img style="height: 40px; width: 40px;margin-top: -10px" src="images/star-symbol-icon.png"></h2></span>
                         <c:if test="${accept.orderID != null}">
                     <h2 class="marketing_feedback_margin marketing_feedbac_displayinline" >
-                        <a data-toggle="modal" data-dismiss="modal" data-target="#feedback" style="margin-left: 520px"> Viết nhận xét <img style="width: 50px" src="images/feedback-icon.png" > </a>
+                        <a data-toggle="modal" data-dismiss="modal" data-target="#feedback" style="margin-left: 450px"> Viết nhận xét <img style="width: 50px" src="images/feedback-icon.png" > </a>
                     </h2>
                 </div>
             </c:if>
@@ -404,20 +423,45 @@
             <!-- Core theme JS-->
             <script src="do/js/scripts.js"></script>
             <script>
-                                        const myInput = document.getElementById("my-input");
-                                        function stepper(btn) {
-                                            let id = btn.getAttribute("id");
-                                            let min = myInput.getAttribute("min");
-                                            let max = myInput.getAttribute("max");
-                                            let step = myInput.getAttribute("step");
-                                            let val = myInput.getAttribute("value");
-                                            let calcStep = (id == "increment") ? (step * 1) : (step * -1);
-                                            let newValue = parseInt(val) + calcStep;
+                            const myInput = document.getElementById("my-input");
+                            function stepper(btn) {
+                                let id = btn.getAttribute("id");
+                                let min = myInput.getAttribute("min");
+                                let max = myInput.getAttribute("max");
+                                let step = myInput.getAttribute("step");
+                                let val = myInput.getAttribute("value");
+                                let calcStep = (id == "increment") ? (step * 1) : (step * -1);
+                                let newValue = parseInt(val) + calcStep;
 
-                                            if (newValue >= min && newValue <= max) {
-                                                myInput.setAttribute("value", newValue);
-                                            }
-                                        }
+                                if (newValue >= min && newValue <= max) {
+                                    myInput.setAttribute("value", newValue);
+                                }
+                            }
             </script>
+            <script>
+                function validateFeedbackForm() {
+                    var subject = document.getElementsByName("subject")[0].value;
+                    var star = document.getElementsByName("star")[0].value;
+
+                    if (subject.trim() === "" || star === "") {
+                        alert("Vui lòng nhập đủ thông tin để gửi phản hồi!");
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
+            <script>
+                // Hàm để tắt thông báo sau một khoảng thời gian
+                function closeMessage() {
+                    var messageElement = document.getElementById("message");
+                    messageElement.style.display = "none";
+                }
+
+                // Đặt thời gian tắt thông báo sau khi trang tải
+                window.onload = function () {
+                    setTimeout(closeMessage, 1000); // Thời gian 1000ms = 1 giây, bạn có thể điều chỉnh thời gian theo ý muốn
+                };
+            </script>
+
     </body>
 </html>

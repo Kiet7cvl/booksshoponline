@@ -63,55 +63,7 @@
     </head>
     <body class="sb-nav-fixed">
         <%@include file="components/account.jsp" %>
-        <nav class="sb-topnav navbar navbar-expand navbar-light bg-light    ">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand me-5 ti-joomla" href="home" style="padding-left: 2%">KingsBook</a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <div class="collapse navbar-collapse ms-5" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item me-4">
-                        <a class="nav-link active" aria-current="page" href="home">Trang chủ</a>
-                    </li>
-                    <li class="nav-item me-4">
-                        <a class="nav-link" href="list">Sản Phẩm</a>
-                    </li>
-                    <li class="nav-item me-4">
-                        <a class="nav-link" href="blog">Blog</a>
-                    </li>
-                    <li class="nav-item me-4">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-
-
-                </ul>
-                <!-- Navbar-->
-                <form class="d-flex me-5" action="list">
-                    <input class="form-control me-2" type="text" name ="key" placeholder="Tìm kiếm sản phẩm..." aria-label="Search" value="${key}" id="" required class="form-control">
-                    <button class="btn btn-outline-danger" type="submit">Tìm</button>
-                </form>
-
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                    <c:if test="${sessionScope.us != null}">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-outline-dark dropdown-toggle py-2 px-4" data-bs-toggle="dropdown" aria-expanded="false">
-                                Hello ${sessionScope.us.full_Name}
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" type="button" data-toggle="modal"  data-target="#userProfileModal">Thông tin cá nhân</a></li>
-                                <li><a class="dropdown-item" href="#">Danh sách đơn hàng</a></li>
-                                <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
-                            </ul>
-                        </div>
-                    </c:if>
-                    <c:if test="${sessionScope.us == null}">
-                        <li class="nav-item">
-                            <a><i type="button" class="ti-user btn btn-icon py-2 px-4" data-toggle="modal"  data-target="#loginModal"></i></a>
-                        </li>
-                    </c:if>
-                </ul>
-        </nav>
+        <%@include file="components/manager-header.jsp" %>
         <div id="layoutSidenav">
             <%@include file="components/MKT-left-board.jsp" %>
             <div class="groundy" id="layoutSidenav_content">
@@ -124,9 +76,9 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="p-3 py-5">
-                                        <div class="col-md-12">Tên sản phẩm<input type="text" class="form-control"  name="name" value="${product.name}"></div>
-                                        <div class="col-md-12">Thông tin rút gọn<textarea class="form-control" name="brief_infor"  rows="2" >${product.brief_infor}</textarea></div>
-                                        <div class="col-md-12">Nội dung<textarea class="form-control" rows="10" id="editor" name="desciption">${product.desciption}</textarea>
+                                        <div class="col-md-12">Tên sản phẩm<input type="text" class="form-control" name="name" value="${product.name}" required="a"></div>
+                                        <div class="col-md-12">Thông tin rút gọn<textarea class="form-control" name="brief_infor"  rows="2" required="">${product.brief_infor}</textarea></div>
+                                        <div class="col-md-12">Nội dung<textarea class="form-control" rows="10" id="editor" name="desciption" required="">${product.desciption}</textarea>
                                             <script>
                                                 var editor = CKEDITOR.replace('editor');
                                                 CKFinder.setupCKEditor(editor, '<%=request.getContextPath()%>/ckfinder/');
@@ -139,9 +91,9 @@
                                         <div class="row mt-16">
                                             <div class="col-md-12">ID<input name="productId" class="form-control"  value="${product.id}" readonly></div>
                                             <div class="col-md-12">Ngày cập nhật<input type="date" class="form-control" value="${product.update_date}"  readonly></div>
-                                            <div class="col-md-12">Giá gốc<input name="original_price" type="number" class="form-control" value="${product.original_price}"/></div>                                        
-                                            <div class="col-md-12">Giá khuyến mãi<input name="sale_price" type="number" class="form-control" value="${product.sale_price}"/></div>                                        
-                                            <div class="col-md-12">Số lượng<input name="quantity" type="number" class="form-control" value="${product.quantity}"/></div>                                        
+                                            <div class="col-md-12">Giá gốc<input name="original_price" type="number" class="form-control" value="${product.original_price}" required=""/></div>                                        
+                                            <div class="col-md-12">Giá khuyến mãi<input name="sale_price" type="number" class="form-control" value="${product.sale_price}" required=""/></div>                                        
+                                            <div class="col-md-12">Số lượng<input name="quantity" type="number" class="form-control" value="${product.quantity}" required=""/></div>                                        
                                             <div class="col-md-12">Danh mục 
                                                 <select class="form-control"  name="categoryId" aria-label="Default select example" >
                                                     <c:forEach items="${sessionScope.listCategories}" var="list">
@@ -151,7 +103,7 @@
                                                     </c:forEach>
                                                 </select>
                                             </div>
-                                            <div class="col-md-12">Tác giả<input name="author" type="text" class="form-control" value="${product.author}"/></div>  
+                                            <div class="col-md-12">Tác giả<input name="author" type="text" class="form-control" value="${product.author}" required=""/></div>  
                                                 <div class="col-md-12">Trạng thái
                                                 <br/>
                                                 <input name="status" type="radio" value="true" ${product.status == true ? 'checked' : ''} />&nbsp;Hiện

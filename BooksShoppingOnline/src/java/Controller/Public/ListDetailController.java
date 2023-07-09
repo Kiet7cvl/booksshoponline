@@ -41,12 +41,13 @@ public class ListDetailController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         try {
+
             HttpSession session = request.getSession();
             /* TODO output your page here. You may use following sample code. */
             int productId = Integer.parseInt(request.getParameter("productId"));
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
             User u = (User) session.getAttribute("us");
-            
+            ProductDAO productDAO = new ProductDAO();  
             Product product = new ProductDAO().getProductById(productId);
             FeedbackDAO fed = new FeedbackDAO();
             OrderDao od = new OrderDao();
@@ -59,9 +60,12 @@ public class ListDetailController extends HttpServlet {
 
             List<Feedback> listfeedbackbyproduct = fed.getAllFeedbackByProductId(productId);
 
-            List<Product> listProduct = new ProductDAO().getProductTop4Category(productId, categoryId);
-            double avg = new ProductDAO().getRatedProduct(productId);
 
+            // Lấy số lượng sản phẩm có sẵn từ cơ sở dữ liệu
+            int maxQuantity = productDAO.getProductQuantity(productId);
+
+            List<Product> listProduct = productDAO.getProductTop4Category(productId, categoryId);
+            double avg = productDAO.getRatedProduct(productId);
             request.setAttribute("listfeedbackbyproduct", listfeedbackbyproduct);
             request.setAttribute("total", Total);
             request.setAttribute("listProduct", listProduct);
@@ -69,6 +73,10 @@ public class ListDetailController extends HttpServlet {
             request.setAttribute("avg", avg);
             request.setAttribute("accept", accept);
             session.setAttribute("historyUrl", "list-detail?productId=" + productId + "&categoryId=" + categoryId);
+
+            // Chuyển số lượng tối đa vào thuộc tính "maxQuantity"
+            request.setAttribute("maxQuantity", maxQuantity);
+
             request.getRequestDispatcher("list-detail.jsp").forward(request, response);
         } catch (Exception e) {
             // If there is an error, set an attribute with the error message
