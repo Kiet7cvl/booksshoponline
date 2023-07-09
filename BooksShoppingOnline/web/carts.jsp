@@ -104,9 +104,12 @@
                                                 <td class="qua-col first-row">
                                                     <div class="quantity">                                                
                                                         <form action="update-cart">                                                            
-                                                            <input id="quantityInput" class="form-control form-control-sm" onchange="this.form.submit()" type="number" name="quantity" value="${c.quantity}" data-product-id="${c.product_id}" data-cart-id="${c.cart_id}" min="1" max="${sessionScope.productQuantity}" style="width: 150px">
-                                                            <input type="hidden" name="productId" value="${c.product_id}"/>
-                                                            <input type="hidden" name="cartId" value="${c.cart_id}"/>
+                                                            <input id="quantityInput" class="form-control form-control-sm" type="number" name="quantity" value="${c.quantity}" data-product-id="${c.product_id}" data-cart-id="${c.cart_id}" min="1" max="${sessionScope.productQuantity}" style="width: 150px"readonly="">
+<input type="hidden" name="productId" value="${c.product_id}"/>
+<input type="hidden" name="cartId" value="${c.cart_id}"/>
+<button onclick="decreaseQuantity()">-</button>
+<button onclick="increaseQuantity()">+</button>
+
                                                         </form>
                                                     </div>
                                                 </td>
@@ -276,6 +279,46 @@
                         window.location.href = 'delete-cart?productId=' + productId + '&userId=' + userId;
                     }
                 }
+            </script>
+            <script>
+                function decreaseQuantity() {
+  var quantityInput = document.getElementById("quantityInput");
+  var currentQuantity = parseInt(quantityInput.value);
+  if (currentQuantity > 1) {
+    quantityInput.value = currentQuantity - 1;
+  }
+}
+
+function increaseQuantity() {
+  var quantityInput = document.getElementById("quantityInput");
+  var currentQuantity = parseInt(quantityInput.value);
+  var maxQuantity = parseInt(quantityInput.getAttribute("max"));
+  if (currentQuantity < maxQuantity) {
+    quantityInput.value = currentQuantity + 1;
+  }
+}
+
+// Ngăn người dùng nhập số trực tiếp
+var quantityInput = document.getElementById("quantityInput");
+quantityInput.addEventListener("keydown", function (e) {
+  if (!isNumericInput(e)) {
+    e.preventDefault();
+  }
+});
+
+function isNumericInput(event) {
+  var key = event.keyCode || event.which;
+  return (
+    (key >= 48 && key <= 57) || // Số từ 0 đến 9
+    key === 8 || // Phím backspace
+    key === 9 || // Phím tab
+    key === 37 || // Phím mũi tên trái
+    key === 39 || // Phím mũi tên phải
+    key === 46 || // Phím delete
+    (key >= 96 && key <= 105) // Số từ bàn phím số
+  );
+}
+
             </script>
         </body>
 

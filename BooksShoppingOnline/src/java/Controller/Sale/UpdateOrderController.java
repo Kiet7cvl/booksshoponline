@@ -13,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -39,10 +41,11 @@ public class UpdateOrderController extends HttpServlet {
             String note_raw = request.getParameter("note");
             String salerId_raw = request.getParameter("salerId");
             String orderId_raw = request.getParameter("orderId");
-
+            HttpSession session = request.getSession();
+            User u = (User) session.getAttribute("us");
             // Khởi tạo biến với giá trị mặc định
             int status = 0;
-            int salerId = 1;
+            int salerId = u.getUser_Id();
             int orderId = 0;
 
             // Chuyển đổi chuỗi ban đầu thành số nguyên nếu chúng không null hoặc trống
