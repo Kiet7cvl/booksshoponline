@@ -19,7 +19,7 @@ import java.io.PrintWriter;
  * @author MSI Bravo
  */
 @WebServlet(name = "newpass", urlPatterns = {"/newpass"})
-public class newpass extends HttpServlet {
+public class newpassController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

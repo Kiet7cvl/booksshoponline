@@ -1,6 +1,7 @@
 
 package dal;
 
+import com.oracle.wls.shaded.org.apache.bcel.generic.AALOAD;
 import context.DBContext;
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -120,7 +121,7 @@ public class ProductDAO extends DBContext {
                         .category_id(rs.getInt(9))
                         .update_date(rs.getDate(10))
                         .image(rs.getString(14))
-                        //                        .rated_star(getRatedProduct(rs.getInt(1)))
+                        .rated_star(getRatedProduct(rs.getInt(1)))
                         .build();
 
                 list.add(p);

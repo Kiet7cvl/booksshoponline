@@ -84,7 +84,13 @@
                                     <img src="${sessionScope.pNew.image}" alt="">
 
                                 </a>
-                                <a href="addcart?productId=${sessionScope.pNew.id}" class="buy-now" >Mua ngay</a>
+                                <c:if test="${sessionScope.us == null}" >
+                                    <a class="buy-now" data-toggle="modal"  data-target="#loginModal" style="color: white">Mua ngay</a>
+                                </c:if>
+                                <c:if test="${sessionScope.us != null}" >
+                                    <a href="addcart?productId=${sessionScope.pNew.id}" class="buy-now" >Mua ngay</a>
+                                </c:if>
+
 
                             </div>
                             <div class="product-infor">

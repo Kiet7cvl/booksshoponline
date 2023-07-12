@@ -141,9 +141,9 @@ public class BlogDAO extends DBContext {
     public int getTotalBlog(String searchKey, String categoryId) {
         String sql = "SELECT COUNT(*)\n"
                 + "FROM books_shop_online.blog\n"
-                + "WHERE categoryBlog_id = categoryId\n"
+                + "WHERE categoryBlog_id " + categoryId 
                 + "  AND status = 1\n"
-                + "  AND title LIKE CONCAT('%', searchKey, '%');";
+                + "  and title like N'%" + searchKey + "%'\n";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -397,7 +397,7 @@ public class BlogDAO extends DBContext {
         BlogDAO sc = new BlogDAO();
         //  System.out.println(sc.getChartBlogArea("", 4));
         // System.out.println(sc.getBlogWithPaging(1, 2, "bad");    
-//        System.out.println(sc.getBlogNew());
+       System.out.println(sc.getTotalBlog("", "!=-1"));
 
     }
 }
