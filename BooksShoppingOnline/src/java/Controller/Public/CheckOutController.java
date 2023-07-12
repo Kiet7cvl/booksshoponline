@@ -129,8 +129,6 @@ public class CheckOutController extends HttpServlet {
                 request.setAttribute("code", "00");
                 request.setAttribute("message", "success");
                 request.setAttribute("data", paymentUrl);
-                OrderDao od = new OrderDao();
-                od.updateStatusOrder(id, 2);
                 response.sendRedirect(paymentUrl);
             } else {
                 response.sendRedirect("successful?vnp_OrderInfo=-1");
