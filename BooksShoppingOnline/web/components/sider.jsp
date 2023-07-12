@@ -25,13 +25,13 @@
 
 <select class="list-group-item list-group-item-action" aria-label="Default select example" onchange="redirectToPage(this)">
   <option value="">Thể Loại</option>
-  <option value="http://localhost:9999/BooksShoppingOnline/list?&categoryId=1">Light Novel</option>
-  <option value="http://localhost:9999/BooksShoppingOnline/list?&categoryId=2">Kĩ năng sống</option>
-  <option value="http://localhost:9999/BooksShoppingOnline/list?&categoryId=3">Manga - Comic</option>
-  <option value="http://localhost:9999/BooksShoppingOnline/list?&categoryId=4">Nghệ thuật - Giải trí</option>
+  <option value="http://localhost:9999/booksshoppingonline/list?&categoryId=1">Light Novel</option>
+  <option value="http://localhost:9999/booksshoppingonline/list?&categoryId=2">Kĩ năng sống</option>
+  <option value="http://localhost:9999/booksshoppingonline/list?&categoryId=3">Manga - Comic</option>
+  <option value="http://localhost:9999/booksshoppingonline/list?&categoryId=4">Nghệ thuật - Giải trí</option>
   
 </select>
-<a class="list-group-item list-group-item-action" aria-label="Default select example" href="http://localhost:9999/BooksShoppingOnline/list?&type=desc" >Sản phẩm mới nhất</a>
+<a class="list-group-item list-group-item-action" aria-label="Default select example" href="http://localhost:9999/booksshoppingonline/list?&type=desc" >Sản phẩm mới nhất</a>
 
 
 

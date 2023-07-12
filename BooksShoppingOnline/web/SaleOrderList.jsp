@@ -112,14 +112,14 @@
                             <option value="Đang gửi">Đang gửi</option>
                             <option value="Thành công">Thành công</option>
                             <option value="Đã hủy">Đã hủy</option>
-                        </select>
+                        </select><c:if test = "${sessionScope.us.role_Id == 4}">
                         <label for="statusFilter"> | Nhân Viên Sale:</label>
-                        <select id="salerFilter1">
+                        <select id="salerFilter1"style="width: 100px;">
                             <option value="">Tất cả</option>
                             <c:forEach items="${salerList}" var="saler">
                                 <option value="${saler}">${saler}</option>
                             </c:forEach>
-                        </select><br>
+                        </select><br></c:if>
                         <button id="applyBtn">Áp dụng</button>
                     </div>
 

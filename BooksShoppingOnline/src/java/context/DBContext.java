@@ -12,7 +12,7 @@ public class DBContext {
         try {
             String url = "jdbc:mysql://localhost:3306/books_shop_online";
             String username = "root";
-            String password = "123456"; // Thay doi tren tung may
+            String password = "123456789"; // Thay doi tren tung may
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url,username, password);
