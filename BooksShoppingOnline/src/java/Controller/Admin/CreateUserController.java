@@ -13,11 +13,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.SendMail;
 
-/**
- *
- * @author lam
- */
+
 @WebServlet(name = "CreateUserController", urlPatterns = {"/create-user"})
 public class CreateUserController extends HttpServlet {
 
@@ -35,22 +33,36 @@ public class CreateUserController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String fname = request.getParameter("fname");
+        String fullName = request.getParameter("fullName");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
+            String mobile = request.getParameter("mobile");
             String address = request.getParameter("address");
-            String status = "1";
+           
             String role_id = request.getParameter("role_id");
-            String gender = request.getParameter("sex_id");
+            String gender = request.getParameter("gender");
 
-            new UserDAO().createNewUser(fname, password, email, phone, address, status, role_id, gender);
 
-            response.sendRedirect("list-user");
+       
+            UserDAO dao = new UserDAO();
+            boolean u = dao.chekcAccount(email);
+            if (!mobile.matches("[0-9]*")) {
+                request.setAttribute("notification", "Your Mobile Invalid");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else if (password.length() < 8 || password.length() > 32) {
+                request.setAttribute("notification", "Mật khẩu của bạn ít hơn 8 ký tự hoặc nhiều hơn 32 ký tự");
+                request.getRequestDispatcher("AddUser.jsp").forward(request, response);
+            } else if (u == false) {
+                SendMail.sendEmailSignup(email);
+                dao.crNewUser(fullName, password, gender, email, mobile, address,  role_id);
+                request.setAttribute("notification", "Thêm thành công!");
+                request.getRequestDispatcher("list-user").forward(request, response);
+            } else {
+                request.setAttribute("notification", "Email đã tồn tại");
+                request.getRequestDispatcher("AddUser.jsp").forward(request, response);
+            }
         }
-    }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -25,7 +25,7 @@ import model.User;
  *
  * @author ADMIN
  */
-@WebFilter(filterName="CustomerAuthorization", urlPatterns={"/myorder","/order-detail","/cart-contact","/addcart","/delete-cart","/update-cart","/changepassword"})
+@WebFilter(filterName="CustomerAuthorization", urlPatterns={"/myorder","/order-detail","/cart-contact","/checkout","/delete-cart","/update-cart","/add-order","/successful"})
 public class CustomerAuthorization implements Filter {
 
     private static final boolean debug = true;
@@ -115,7 +115,7 @@ public class CustomerAuthorization implements Filter {
             chain.doFilter(request, response);
             return;
         }
-        req.setAttribute("notification", "Rất tiêc bạn không có quyền truy cập đường dẫn này! Cus");
+        req.setAttribute("notification", "Bạn cần đăng nhập để truy cập đường dẫn này!");
         request.getRequestDispatcher("index.jsp").forward(request, response);
 	
 	Throwable problem = null;

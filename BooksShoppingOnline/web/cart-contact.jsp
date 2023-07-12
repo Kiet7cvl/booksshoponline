@@ -25,10 +25,10 @@
             background: #ddd;
             min-height: 100vh;
             vertical-align: middle;
-/*            display: flex;*/
+            /*            display: flex;*/
             font-family: sans-serif;
-/*            font-size: 0.8rem;
-            font-weight: bold;*/
+            /*            font-size: 0.8rem;
+                        font-weight: bold;*/
         }
 
         .title {
@@ -205,7 +205,7 @@
     <body>
 
         <div class="card" style="margin-top: 10%; margin-bottom: 5%">
-            <div class=" row">
+            <div class="row">
                 <div class="col-md-7 cart" style="font-size: 0.8rem;font-weight: bold;">
                     <div class="title">
                         <div class="row">
@@ -214,24 +214,39 @@
                             </div>
                         </div>
                     </div>
-                    <c:forEach items="${listCart}" var="c">
-                    <div class="row border-top border-bottom">
-                        <div class="row main align-items-center">                          
-                            <div class="col">
-                                <div class="row">${c.product_id}</div>
+                    <c:choose>
+                        <c:when test="${empty listCart}">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Không có sản phẩm trong giỏ hàng.</p>
+                                    <div class="back-to-shop text-muted">
+                                        <a href="carts">&leftarrow; Trở lại cửa hàng</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col">
-                                <div class="row">${c.product_name}</div>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${listCart}" var="c">
+                                <div class="row border-top border-bottom">
+                                    <div class="row main align-items-center">
+                                        <div class="col">
+                                            <div class="row">${c.product_id}</div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">${c.product_name}</div>
+                                        </div>
+                                        <div class="col" style="text-align: center;">
+                                            <div class="text-muted">Số lượng: ${c.quantity}</div>
+                                        </div>
+                                        <div class="col" style="text-align: center;">${c.product_price}đ</div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                            <div class="back-to-shop text-muted">
+                                <a href="carts">&leftarrow; Trở lại cửa hàng</a>
                             </div>
-                            <div class="col" style="text-align: center;">
-                                <div class="text-muted">Số lượng: ${c.quantity}</div>
-                            </div>
-                            <div class="col" style="text-align: center;">${c.product_price}đ</div>
-                        </div>
-                    </div>
-                    </c:forEach>
-
-                    <div class="back-to-shop text-muted"><a href="carts">&leftarrow; Trở lại cửa hàng</a></div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <div class="style-btn col-md-5 summary" style="font-size: 0.8rem;font-weight: bold;">
                     <div class="row">
@@ -239,30 +254,45 @@
                         <div class="col align-self-center text-right text-muted">Hãy sửa các thông tin chính xác nhất</div>
                     </div>
                     <hr>
-                    <form class="input-name" action="add-order">
-                        <label for="fullname">Họ Tên</label>
-                        <input id="fullname" type="text" name="fullname" value="${user.full_Name}">
+                    <c:if test="${not empty listCart}">
+                        <form class="input-name" action="add-order" onsubmit="return validateForm()">
+                            <label for="fullname">Họ Tên</label>
+                            <input id="fullname" type="text" name="fullname" value="${user.full_Name}">
 
-                        <label for="phone">SỐ ĐIỆN THOẠI</label>
-                        <input id="phone" type="text" name="phone" value="${user.mobile}">
+                            <label for="phone">SỐ ĐIỆN THOẠI</label>
+                            <input id="phone" type="text" name="phone" value="${user.mobile}">
 
-                        <label for="address">ĐỊA CHỈ</label>
-                        <input id="address" type="text" name="address" value="${user.address}">
+                            <label for="address">ĐỊA CHỈ</label>
+                            <input id="address" type="text" name="address" value="${user.address}">
 
-                        <label for="note">GHI CHÚ</label>
-                        <textarea id="note" class="form-control" name="note" style="background-color: rgb(247, 247, 247);"
-                                  id="exampleFormControlTextarea1" rows="3"></textarea>
-                    
-                    <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                        <div class="col">TỔNG TIỀN</div>
-                        <div class="col text-right">${sum}đ</div>
-                        <input type="hidden" name="sum" value="${sum}">
-                    </div>
-                    <button type="submit" class="btn" style="font-size: 12px;">Gửi thông tin</button>
-                    </form>
+                            <label for="note">GHI CHÚ</label>
+                            <textarea id="note" class="form-control" name="note"
+                                      style="background-color: rgb(247, 247, 247);" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+                            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                <div class="col">TỔNG TIỀN</div>
+                                <div class="col text-right">${sum}đ</div>
+                                <input type="hidden" name="sum" value="${sum}">
+                            </div>
+                            <button type="submit" class="btn" style="font-size: 12px;">Gửi thông tin</button>
+                        </form>
+                    </c:if>
                 </div>
             </div>
         </div>
+        <script>
+            function validateForm() {
+                var fullname = document.getElementById("fullname").value;
+                var phone = document.getElementById("phone").value;
+                var address = document.getElementById("address").value;
+
+                if (fullname === "" || phone === "" || address === "") {
+                    alert("Vui lòng nhập đủ họ tên, số điện thoại và địa chỉ!");
+                    return false;
+                }
+                return true;
+            }
+        </script>
         <%@include file="components/footer.jsp" %>
-</body>
+    </body>
 </html>

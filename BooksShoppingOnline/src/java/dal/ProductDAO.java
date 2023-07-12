@@ -1,9 +1,8 @@
 
 package dal;
 
+import com.oracle.wls.shaded.org.apache.bcel.generic.AALOAD;
 import context.DBContext;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,8 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Chart;
 import model.OrderDetail;
 
@@ -124,7 +121,7 @@ public class ProductDAO extends DBContext {
                         .category_id(rs.getInt(9))
                         .update_date(rs.getDate(10))
                         .image(rs.getString(14))
-                        //                        .rated_star(getRatedProduct(rs.getInt(1)))
+                        .rated_star(getRatedProduct(rs.getInt(1)))
                         .build();
 
                 list.add(p);
@@ -138,7 +135,7 @@ public class ProductDAO extends DBContext {
 
     public Product getProductNew() {
         List<Product> list = new ArrayList<>();
-        String sql = "SELECT * FROM Product ORDER BY update_date DESC LIMIT 1;";
+        String sql = "SELECT * FROM Product where `status` = 1 ORDER BY update_date DESC LIMIT 1;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();

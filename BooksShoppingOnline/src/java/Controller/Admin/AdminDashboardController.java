@@ -41,77 +41,85 @@ public class AdminDashboardController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        ProductDAO pd = new ProductDAO();
-        CustomerDAO cd = new CustomerDAO();
-        FeedbackDAO fd = new FeedbackDAO();
-        CategoryDAO ctd = new CategoryDAO();
-        OrderDao od = new OrderDao();
-        DateDAO dd = new DateDAO();
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            ProductDAO pd = new ProductDAO();
+            CustomerDAO cd = new CustomerDAO();
+            FeedbackDAO fd = new FeedbackDAO();
+            CategoryDAO ctd = new CategoryDAO();
+            OrderDao od = new OrderDao();
+            DateDAO dd = new DateDAO();
 
-        Date date = dd.get7day();
-        String salerId = "!= -1";
-        String start = date.getStart().toString();
-        String end = date.getEnd().toString();
-        String start_raw = request.getParameter("start");
-        String end_raw = request.getParameter("end");
-        if (start_raw != null) {
-            start = start_raw;
-            end = end_raw;
-        }
 
-        int day = dd.CountDayByStartEnd(start, end);
-
-        int totalProduct =  pd.getTotalProduct(end);
-        int totalProduct1 = pd.getTotalProduct(1, end);
-        int totalProduct2 = pd.getTotalProduct(2, end);
-        int totalProduct3 = pd.getTotalProduct(3, end);
-        int totalProduct4 = pd.getTotalProduct(4, end);
-
-        List<Category> listCategoryProduct = ctd.getAllCategory();
-        
-        // set chart revenue
-        List<Chart> listChartRevenueArea = od.getChartRevenueArea(salerId, start, day);
-        int maxListChartRevenueArea = -1;
-        for (Chart o : listChartRevenueArea) {
-            if (o.getValue() > maxListChartRevenueArea) {
-                maxListChartRevenueArea = o.getValue();
+            Date date = dd.get7day();
+            String salerId = "!= -1";
+            String start = date.getStart().toString();
+            String end = date.getEnd().toString();
+            String start_raw = request.getParameter("start");
+            String end_raw = request.getParameter("end");
+            if (start_raw != null) {
+                start = start_raw;
+                end = end_raw;
             }
-        }
-        maxListChartRevenueArea = (maxListChartRevenueArea / 1000000 + 1) * 1000000;
-        
-        // set chart customer
-        List<Chart> listChartCustomer = cd.getChartCustomerArea(start, day);
-        int maxListChartCustomerArea = -1;
-        for (Chart o : listChartCustomer) {
-            if (o.getValue() > maxListChartCustomerArea) {
-                maxListChartCustomerArea = o.getValue();
-            }
-        }
-        maxListChartCustomerArea = (maxListChartCustomerArea / 10 + 1) * 10;
-        
-        // set chart avg rated
-        List<ChartStar> listChartAvgStar = fd.getChartAvgStar(start, day);
 
-        request.setAttribute("totalProduct", totalProduct);
-        request.setAttribute("totalProduct1", totalProduct1);
-        request.setAttribute("totalProduct2", totalProduct2);
-        request.setAttribute("totalProduct3", totalProduct3);
-        request.setAttribute("totalProduct4", totalProduct4);
-        
-        
-        request.setAttribute("listCategoryProduct", listCategoryProduct);
-        
-        request.setAttribute("listChartRevenueArea", listChartRevenueArea);
-        request.setAttribute("maxListChartRevenueArea", maxListChartRevenueArea);
-        
-        request.setAttribute("listChartCustomer", listChartCustomer);
-        request.setAttribute("maxListChartCustomerArea", maxListChartCustomerArea);
-        
-        request.setAttribute("listChartAvgStar", listChartAvgStar);
-        request.setAttribute("start", start);
-        request.setAttribute("end", end);
-        request.getRequestDispatcher("AdminDashboard.jsp").forward(request, response);
+            int day = dd.CountDayByStartEnd(start, end);
+
+            int totalProduct = pd.getTotalProduct(end);
+            int totalProduct1 = pd.getTotalProduct(1, end);
+            int totalProduct2 = pd.getTotalProduct(2, end);
+            int totalProduct3 = pd.getTotalProduct(3, end);
+            int totalProduct4 = pd.getTotalProduct(4, end);
+
+            List<Category> listCategoryProduct = ctd.getAllCategory();
+
+            // set chart revenue
+            List<Chart> listChartRevenueArea = od.getChartRevenueArea(salerId, start, day);
+            int maxListChartRevenueArea = -1;
+            for (Chart o : listChartRevenueArea) {
+                if (o.getValue() > maxListChartRevenueArea) {
+                    maxListChartRevenueArea = o.getValue();
+                }
+            }
+            maxListChartRevenueArea = (maxListChartRevenueArea / 1000000 + 1) * 1000000;
+
+            // set chart customer
+            List<Chart> listChartCustomer = cd.getChartCustomerArea(start, day);
+            int maxListChartCustomerArea = -1;
+            for (Chart o : listChartCustomer) {
+                if (o.getValue() > maxListChartCustomerArea) {
+                    maxListChartCustomerArea = o.getValue();
+                }
+            }
+            maxListChartCustomerArea = (maxListChartCustomerArea / 10 + 1) * 10;
+            
+            // set chart avg rated
+            List<ChartStar> listChartAvgStar = fd.getChartAvgStar(start, day);
+            
+            request.setAttribute("totalProduct", totalProduct);
+            request.setAttribute("totalProduct1", totalProduct1);
+            request.setAttribute("totalProduct2", totalProduct2);
+            request.setAttribute("totalProduct3", totalProduct3);
+            request.setAttribute("totalProduct4", totalProduct4);
+
+            request.setAttribute("listCategoryProduct", listCategoryProduct);
+
+            request.setAttribute("listChartRevenueArea", listChartRevenueArea);
+            request.setAttribute("maxListChartRevenueArea", maxListChartRevenueArea);
+
+            request.setAttribute("listChartCustomer", listChartCustomer);
+            request.setAttribute("maxListChartCustomerArea", maxListChartCustomerArea);
+
+            request.setAttribute("listChartAvgStar", listChartAvgStar);
+            request.setAttribute("start", start);
+            request.setAttribute("end", end);
+            request.getRequestDispatcher("AdminDashboard.jsp").forward(request, response);
+            
+        } catch (Exception e) {
+            // If there is an error, set an attribute with the error message
+            request.setAttribute("errorMessage", "Error data. Please try again later.");
+            // Forward the request to the error JSP page
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

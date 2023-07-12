@@ -40,25 +40,27 @@
              align-items: baseline;
              flex-wrap: nowrap;">
             <!-- Side widgets-->
-            <div class="col-lg-2" style="padding: 0;margin: 0;    padding-right: 32px;">
+            <div  style="padding: 0;margin: 0;    padding-right: 32px;flex: 0 0 auto;
+                  width: 11.66666667%;margin-top: 100px;   position: relative;top: 66.5px;">
                 <!-- Search widget-->
                 <%@include file="components/sider.jsp" %>
             </div>
 
             <div class="container mtop" style="width:80%;padding: 0; margin: 0; ">
                 <h2 class="mtop title-order" style="    margin-top: 100px;" >Danh sách các đơn hàng</h2>
-<div class="row-lg-2">
-    <label for="recordLength">Độ dài hiển thị bản ghi:</label>
-    <input type="number" id="recordLength" min="1" max="100" value="10">
-    <label for="startDate">Từ ngày:</label>
-    <input type="date" id="startDate">
-    <label for="endDate">Đến ngày:</label>
-    <input type="date" id="endDate">
-    <button id="applyBtn">Áp dụng</button>
-</div>
+                <div class="row-lg-2" style="    position: relative;z-index: 10;
+    top: 42px;width: 40%">
+                    <label for="recordLength">Hiển thị <input type="number" id="recordLength" min="1" max="100" value="10" style="    width: 45px;"> đơn hàng</label>
+                    
+                    <!--    <label for="startDate">Từ ngày:</label>
+                        <input type="date" id="startDate">
+                        <label for="endDate">Đến ngày:</label>
+                        <input type="date" id="endDate">-->
+                    <button id="applyBtn">Áp dụng</button>
+                </div>
 
                 <table class="table table-striped table-bordered" id="sortTable" style="display: flow">
-                    
+
                     <thead>
                         <tr>
                             <th>OrderID</th>
@@ -66,7 +68,7 @@
                             <th>Sản&nbspphẩm</th>
                             <th>Tổng&nbspchi&nbspphí</th>
                             <th>Tình&nbsptrạng</th>
-                            <th></th>
+<!--                            <th></th>-->
                         </tr>
                     </thead>
                     <tbody>
@@ -83,13 +85,14 @@
                                 </c:if>
                                 <td>${c.total_cost}</td>
                                 <td>${c.status_order_name}</td>
-                                <td>
+<!--                                <td>
                                     <c:if test="${c.status_order_name eq 'Đang gửi'}">
                                         <div class="row">
                                             <a style="width: auto;margin-left: 12px;" href="cancel-order?order_id=${c.orderID}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true" >Hủy</a>
                                         </div>
 
-                                    </c:if></td>
+                                    </c:if>
+                                </td>-->
                             </tr>
 
                         </c:forEach>
@@ -107,13 +110,13 @@
                 var table = $('#sortTable').DataTable({
                     "language": {
                         "decimal": "",
-                        "emptyTable": "No data available in table",
-                        "info": " _START_ đến _END_ của _TOTAL_ bản ghi",
+                        "emptyTable": "Không có đơn hàng nào ",
+                        "info": " _START_ đến _END_ của _TOTAL_ đơn hàng",
                         "infoEmpty": "HIển thị 0 to 0 of 0 bản ghi",
                         "infoFiltered": "(kết quả từ _MAX_ tổng số bản ghi)",
                         "infoPostFix": "",
                         "thousands": ",",
-                        "lengthMenu": "Hiển thị _MENU_ bản ghi",
+                        "lengthMenu": "",
                         "loadingRecords": "Loading...",
                         "processing": "",
                         "search": "Tìm kiếm:",
@@ -136,20 +139,20 @@
                     var recordLength = parseInt($('#recordLength').val());
                     table.page.len(recordLength).draw();
                 });
-                $('#applyBtn').on('click', function() {
-        var startDate = $('#startDate').val();
-        var endDate = $('#endDate').val();
+                $('#applyBtn').on('click', function () {
+                    var startDate = $('#startDate').val();
+                    var endDate = $('#endDate').val();
 
-        table
-            .columns(1)
-            .search(startDate, true, false)
-            .draw();
+                    table
+                            .columns(1)
+                            .search(startDate, true, false)
+                            .draw();
 
-        table
-            .columns(1)
-            .search(endDate, true, false)
-            .draw();
-    });
+                    table
+                            .columns(1)
+                            .search(endDate, true, false)
+                            .draw();
+                });
             });
 
         </script>

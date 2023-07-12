@@ -1,14 +1,11 @@
 package dal;
 
 import context.DBContext;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import model.User;
 
@@ -113,18 +110,19 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public void register(String fullName, String password, String gender, String email, String mobile, String address) {
-        String sql = "INSERT INTO user (`fullName`, `password`,`gender`, `email`, `mobile`, `address`, `status`, `role_id`) VALUES \n"
-                + "(?,?,b?,?,?,?,0,1)";
+    public void register(String fullName, String password, String avatar, String gender, String email, String mobile, String address) {
+        String sql = "INSERT INTO user (`fullName`, `password`,`avatar`, `gender`, `email`, `mobile`, `address`, `status`, `role_id`) VALUES \n"
+                + "(?,?,?,b?,?,?,?,0,1)";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, fullName);
             st.setString(2, password);
-            st.setString(3, gender);
-            st.setString(4, email);
-            st.setString(5, mobile);
-            st.setString(6, address);
+            st.setString(3, avatar);
+            st.setString(4, gender);
+            st.setString(5, email);
+            st.setString(6, mobile);
+            st.setString(7, address);
             st.executeUpdate();
         } catch (Exception e) {
         }
@@ -315,6 +313,7 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
+
     public List<User> getAllAuthor() {
         List<User> list = new ArrayList<>();
         String sql = "select * from User where role_id = 2";
@@ -341,7 +340,7 @@ public class UserDAO extends DBContext {
         return list;
     }
 
-   public List<User> getAllSaler() {
+    public List<User> getAllSaler() {
         List<User> list = new ArrayList<>();
         String sql = "SELECT * FROM `User` WHERE role_id = 3;";
         try {
@@ -366,7 +365,6 @@ public class UserDAO extends DBContext {
         }
         return list;
     }
-    
 
     public List<User> getAllUsers() {
         List<User> list = new ArrayList<>();
@@ -393,5 +391,86 @@ public class UserDAO extends DBContext {
         } catch (Exception e) {
         }
         return list;
+    }
+
+    public void crNewUser(String fullName, String password, String gender, String email, String mobile, String address, String role_id) {
+        String sql = "INSERT INTO `books_shop_online`.`user` (`fullName`, `password`, `gender`, `email`, `mobile`, `address`, `status`, `role_id`) VALUES (?,?,?,?,?,?,0,?);";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, fullName);
+            st.setString(2, password);
+            st.setString(3, gender);
+            st.setString(4, email);
+            st.setString(5, mobile);
+            st.setString(6, address);
+
+            st.setString(7, role_id);
+            st.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void UpUser(int user_Id, String full_Name, String password, int gender, String email, String mobile, String address, int status, int role_Id) {
+        String sql = "UPDATE `books_shop_online`.`user`\n"
+                + "SET `fullName` = ?,\n"
+                + "    `password` = ?,\n"
+                + "    `gender` = ?,\n"
+                + "    `email` = ?,\n"
+                + "    `mobile` = ?,\n"
+                + "    `address` = ?,\n"
+                + "    `status` = ?,\n"
+                + "    `role_id` = ?\n"
+                + "WHERE `userId` = ?;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, full_Name);
+            st.setString(2, password);
+            st.setInt(3, gender);
+            st.setString(4, email);
+            st.setString(5, mobile);
+            st.setString(6, address);
+            st.setInt(7, status);
+            st.setInt(8, role_Id);
+            st.setInt(9, user_Id);
+            st.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public User getUserByIdd(String uid) {
+        try {
+            String sql = "select * from books_shop_online.user where userId = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, uid);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                User user = User.builder()
+                        .user_Id(rs.getInt(1))
+                        .full_Name(rs.getString(2))
+                        .password(rs.getString(3))
+                        .avatar(rs.getString(4))
+                        .gender(rs.getBoolean(5))
+                        .email(rs.getString(6))
+                        .mobile(rs.getString(7))
+                        .address(rs.getString(8))
+                        .status(rs.getBoolean(9))
+                        .role_Id(rs.getString(10))
+                        .build();
+                System.out.println();
+                return user;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        UserDAO m = new UserDAO();
+        System.out.println(m.getUserByIdd("8"));
     }
 }

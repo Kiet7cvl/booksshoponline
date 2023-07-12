@@ -148,8 +148,20 @@
     </head>
     <body>
         <%@include file="components/header.jsp" %>
-
+<!--<div style="display: flex;display: flex;
+             flex-direction: row;
+             align-content: stretch;
+             justify-content: center;
+             align-items: baseline;
+             flex-wrap: nowrap;">-->
+            <!-- Side widgets-->
+            <div>
         <div class="container-fluid-detail my-5  d-flex  justify-content-center" >
+            <div style="padding: 0;margin: 0;    padding-right: 32px;flex: 0 0 auto;
+    width: 11.66666667%;margin-top: 100px;">
+                <!-- Search widget-->
+                <%@include file="components/sider.jsp" %>
+            </div>
             <div class="card card-1">
                 <div class="card-header bg-white">
                     <div class="media flex-sm-row flex-column-reverse justify-content-between  ">
@@ -207,6 +219,12 @@
                                 <p class="mb-1 cus-fontsize"> OrderId: ${k.orderID}</p>
                                 <p class="mb-1 cus-fontsize">Ngày mua hàng : ${k.date}</p>
                                 <p class="mb-1 cus-fontsize">Trạng thái : ${k.status_order_name}</p>
+                                <c:if test="${k.status_order_name eq 'Đang gửi'}">
+                                        <div class="row">
+                                            <a style="width: auto;margin-left: 12px;" href="cancel-order?order_id=${k.orderID}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true" >Hủy</a>
+                                        </div>
+
+                                    </c:if></td>
                             </div>
 
                             <div class="col">
@@ -245,7 +263,7 @@
                 </div>
             </c:forEach>
         </div>
-
+ </div>
         <%@include file="components/footer.jsp" %>
     </body>
 </html>

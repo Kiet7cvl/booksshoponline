@@ -19,6 +19,18 @@
         <link rel="stylesheet" href="./assets/css/style.css">
         <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
         <style>
             .payment-method__item-name {
                 font-size: 20px;
@@ -64,75 +76,82 @@
         <%@include file="components/manager-header.jsp" %>
         <div id="layoutSidenav">
             <%@include file="components/admin-left-dashboard.jsp" %>
-            
-                
-                    <div class="modal-content">
-                        
-                        <div class="modal-body">
-                            <div class="container">
-                                <h4 class="mb-5 text-secondary">Thêm Người Dùng</h4>
-                                <div class="row">
-                                    <!--                                <div class="mb-3 col-md-12">
-                                                                        <label>Image Avatar<span class="text-danger">*</span></label>
-                                                                        <input id="file-upload" class="form-control" type="file" name="photo"/>
-                                    <c:if test="${not empty ErrCreateMsg[0]}" >
-                                        <div class="alert alert-danger" role="alert">
-                                        ${ErrCreateMsg[0]}
+            <div class="groundy" id="layoutSidenav_content">
+                <main>
+
+                    <div class="container-fluid rounded row" style="margin-top: 3% !important; margin-bottom: 1% !important">
+                        <div class="container">
+                            <h4 class="mb-5 text-secondary">Thêm Người Dùng</h4>
+                            <div class="row">
+
+                                <form action="create-user" method="post">
+                                    <div class="mb-3 col-md-12">
+                                        <label for="fullname">Họ tên<span class="text-danger">*</span></label>
+                                        <input  type="text" name="fullName" class="form-control" placeholder="Nhập họ tên" required>
                                     </div>
-                                    </c:if>
-                                </div>-->
-                                    <form action="create-user">
-                                        <div class="mb-3 col-md-12">
-                                            <label for="fullname">Họ tên<span class="text-danger">*</span></label>
-                                            <input id="fullname" type="text" name="fname" class="form-control" placeholder="Nhập họ tên">
-                                        </div>
-                                        <div class="mb-3 col-md-12">
-                                            <label for="pass">Mật khẩu<span class="text-danger">*</span></label>
-                                            <input id="pass" type="password" name="password" class="form-control" placeholder="Nhập mật khẩu">
-                                        </div>
-                                        <div class="mb-3 col-md-12">
-                                            <label for="Email">Email<span class="text-danger">*</span></label>
-                                            <input id="Email" type="text" name="email" class="form-control" placeholder="Nhập email">
-                                        </div>
-                                        <div class="mb-3 col-md-12">
-                                            <label for="phone">Số điện thoại<span class="text-danger">*</span></label>
-                                            <input id="phone" type="text" name="phone" class="form-control" placeholder="Nhập số điện thoại">
-                                        </div>
-                                        <div class="mb-3 col-md-12">
-                                            <label for="address" >Địa chỉ<span class="text-danger">*</span></label>
-                                            <input id="address" type="text" name="address" class="form-control" placeholder="Nhập địa chỉ">
-                                        </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label for="pass">Mật khẩu<span class="text-danger">*</span></label>
+                                        <input  type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required>
+                                    </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label for="Email">Email<span class="text-danger">*</span></label>
+                                        <input  type="text" name="email" class="form-control" placeholder="Nhập email" required>
+                                    </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label for="phone">Số điện thoại<span class="text-danger">*</span></label>
+                                        <input  type="text" name="mobile" class="form-control" placeholder="Nhập số điện thoại" required>
+                                    </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label for="address" >Địa chỉ<span class="text-danger">*</span></label>
+                                        <input type="text" name="address" class="form-control" placeholder="Nhập địa chỉ" required>
+                                    </div>
 
 
-                                        <div class="mb-3 col-md-12 input-group " style="margin-top: 35px">
-                                            <label class="input-group-text" for="inputGroupSelect01" style="">Giới tính</label>
-                                            <select name="sex_id" class="form-select" id="inputGroupSelect01">
-                                                <option value="True">Nam</option> 
-                                                <option value="False">Nữ</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3 col-md-12 input-group "  style="margin-top: 35px">
-                                            <label class="input-group-text" for="inputGroupSelect02">Vai trò</label>
+                                    <div class="mb-3 col-md-12 input-group " style="margin-top: 35px">
+                                        <label class="input-group-text" for="inputGroupSelect01" style="">Giới tính</label>
+                                        <select name="sex_id" class="form-select" id="inputGroupSelect01">
+                                            <option value="True">Nam</option>
+                                            <option value="False">Nữ</option>
+                                        </select>
+                                    </div>
 
-                                            <select name="role_id" class="form-select" id="inputGroupSelect02">
-                                                <c:forEach items="${listRole}" var="lr">
-                                                    <option value="${lr.role_id}">${lr.role_name}</option>
-                                                </c:forEach>
 
-                                            </select>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Lưu</button>
-                                        </div>
-                                    </form>
-                                </div>
+
+                                    <div class="mb-3 col-md-12 input-group "  style="margin-top: 35px">
+
+                                        <!--                                        Vai trò
+                                                                                <input class="" name="role_id" type="radio" value="1" required/> customer
+                                                                                <input class="" name="role_id" type="radio" value="2" required/> marketing
+                                                                                <input class="" name="role_id" type="radio" value="3" required/> sale
+                                                                                <input class="" name="role_id" type="radio" value="4" required/> sale manager
+                                                                                <input class="" name="role_id" type="radio" value="5" required/> admin-->
+                                        <label class="input-group-text" for="inputGroupSelect02">Vai trò</label>
+                                        <select name="role_id" class="form-select" id="inputGroupSelect02">
+                                            <option value="1">customer</option>
+                                            <option value="2">marketing</option>
+                                            <option value="3">sale</option>
+                                            <option value="4">sale manager</option>
+                                            <option value="5">admin</option>
+
+
+                                        </select>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Lưu</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-
                     </div>
-                
-            
+                </main>
+            </div>
+
+
         </div>
+
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

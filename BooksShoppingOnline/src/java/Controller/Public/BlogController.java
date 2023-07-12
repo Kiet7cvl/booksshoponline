@@ -39,7 +39,7 @@ public class BlogController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        final int PAGE_SIZE = 3;  // Set total product each page
+        final int PAGE_SIZE = 3;  // Set total blog each page
         BlogDAO bd = new BlogDAO();
         // Set page
         int page = 1;
@@ -81,7 +81,7 @@ public class BlogController extends HttpServlet {
             totalPage += 1;
         }
 
-        // Get list product, new, category, slider
+        // Get list blog
         List<Blog> listBlog = bd.getBlogWithPaging(page, PAGE_SIZE, searchKey, categoryId, type, value);
         List<CategoryBlog> listCategoryBlog_BlogList = new CategoryDAO().getAllCategoryBlog();
         session.setAttribute("listCategoryBlog", listCategoryBlog_BlogList);

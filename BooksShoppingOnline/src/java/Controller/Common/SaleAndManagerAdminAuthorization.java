@@ -25,7 +25,7 @@ import model.User;
  *
  * @author lam
  */
-@WebFilter(filterName="SaleAndManagerAdminAuthorization", urlPatterns={"/posts-list","/sale-dashboard","/order-list-sale","/update-successfull-order"})
+@WebFilter(filterName="SaleAndManagerAdminAuthorization", urlPatterns={"/sale-dashboard","/order-list-sale","/update-successfull-order"})
 public class SaleAndManagerAdminAuthorization implements Filter {
 
     private static final boolean debug = true;
@@ -116,7 +116,7 @@ public class SaleAndManagerAdminAuthorization implements Filter {
             chain.doFilter(request, response);
             return;
         }
-        req.setAttribute("notification", "Rất tiêc bạn không có quyền truy cập đường dẫn này! Admin");
+        req.setAttribute("notification", "Rất tiêc bạn không có quyền truy cập đường dẫn này! ");
         request.getRequestDispatcher("index.jsp").forward(request, response);
 
 	

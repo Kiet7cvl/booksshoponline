@@ -42,7 +42,7 @@ public class PostsListController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            final int PAGE_SIZE = 20;  // Set total product each page
+            final int PAGE_SIZE = 20;  // Set total blog each page
             CategoryDAO c = new CategoryDAO();
             BlogDAO b = new BlogDAO();
 

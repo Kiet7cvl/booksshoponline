@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package Controller.Public;
 
 import dal.CartDAO;
@@ -18,54 +17,65 @@ import model.Cart;
 import model.Product;
 import model.User;
 
+public class AddtoCartController extends HttpServlet {
 
-public class AddToCartController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String productId_raw = request.getParameter("productId");
         int product_id = Integer.parseInt(productId_raw);
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("us");
-        int user_id = u.getUser_Id();   
+        int user_id = u.getUser_Id();
         CartDAO cd = new CartDAO();
         Cart c = cd.checkCart(user_id, product_id);
         int quantity = 1;
         String quantity_raw = request.getParameter("quantity");
-        if(quantity_raw != null){
+        if (quantity_raw != null) {
             quantity = Integer.parseInt(quantity_raw);
         }
         int total_cost;
-        if (c == null) {
-            ProductDAO pd = new ProductDAO();
-            Product p = pd.getProductById(product_id);
-            int price = p.getOriginal_price();
-            if (p.getSale_price() != 0) {
-                price = p.getSale_price();
-            }
-            total_cost = quantity * price;
-            cd.addToCart(product_id, p.getName(), price, quantity, total_cost, user_id);
-        } else {
-                quantity += c.getQuantity();
-            total_cost = quantity * c.getProduct_price();
-            cd.addQuantityCartProduct(product_id, quantity, total_cost, user_id);
-        }
         String historyUrl = (String) session.getAttribute("historyUrl");
-        response.sendRedirect(historyUrl);
 
-    } 
+        ProductDAO pd = new ProductDAO();
+        Product p = pd.getProductById(product_id);
+
+        if (p != null) {
+            int availableQuantity = p.getQuantity();
+            if (availableQuantity == 0) {
+                // Số lượng sản phẩm đã hết
+                String message = "Sản phẩm này đã hết";
+                session.setAttribute("message", message);
+            } else if (c != null && quantity + c.getQuantity() > availableQuantity) {
+                // Số lượng thêm vào vượt quá số lượng có sẵn
+                String message = "Số lượng sản phẩm chỉ còn " + availableQuantity;
+                session.setAttribute("message", message);
+            } else {
+                // Xóa thông báo nếu sản phẩm được thêm vào giỏ hàng thành công
+                session.removeAttribute("message");
+
+                if (c == null) {
+                    int price = p.getOriginal_price();
+                    if (p.getSale_price() != 0) {
+                        price = p.getSale_price();
+                    }
+                    total_cost = quantity * price;
+                    cd.addToCart(product_id, p.getName(), price, quantity, total_cost, user_id);
+                } else {
+                    quantity += c.getQuantity();
+                    total_cost = quantity * c.getProduct_price();
+                    cd.addQuantityCartProduct(product_id, quantity, total_cost, user_id);
+                }
+            }
+        }
+
+        response.sendRedirect(historyUrl);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -73,12 +83,13 @@ public class AddToCartController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -86,12 +97,13 @@ public class AddToCartController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

@@ -83,7 +83,8 @@ public class UpdateSliderController extends HttpServlet {
                 if (filePart != null) {
                     fileName = getFileName(filePart);
                 }
-                File file = new File("C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\shopping_online\\booksshop\\BooksShoppingOnline\\web\\images\\slider" + File.separator + fileName);
+                String storePath = servletContext.getRealPath("/images/slider");
+                File file = new File(storePath + File.separator + fileName);
                 String x = file.getName();
                 if (x.equalsIgnoreCase("slider")) {
                     url_thumbnail = sd.getUrlSliderImageById(id);
@@ -120,6 +121,7 @@ public class UpdateSliderController extends HttpServlet {
         }
         return null;
     }
+    
 
     /**
      * Returns a short description of the servlet.

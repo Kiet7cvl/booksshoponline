@@ -13,10 +13,7 @@ import java.util.List;
 import model.Role;
 import model.User;
 
-/**
- *
- * @author dongh
- */
+
 public class RoleDAO extends DBContext {
 
     public List<Role> getAllRole() {
@@ -38,5 +35,9 @@ public class RoleDAO extends DBContext {
         }
         return list;
     }
-
+ public static void main(String[] args) {
+//        System.out.println(new OrderDao().checkProductOrderByUser(1, 2));
+        RoleDAO o = new RoleDAO();
+        System.out.println(o.getAllRole());
+    }
 }

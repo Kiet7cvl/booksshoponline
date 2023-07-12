@@ -1,6 +1,7 @@
 package Controller.Marketing;
 
 import dal.ProductDAO;
+import jakarta.mail.Session;
 import java.io.File;
 import java.io.IOException;
 import jakarta.servlet.ServletContext;
@@ -106,7 +107,8 @@ public class UpdateProductController extends HttpServlet {
                 if (filePart != null) {
                     fileName = getFileName(filePart);
                 }
-                File file = new File("C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\shopping_online\\booksshop\\BooksShoppingOnline\\web\\images\\product" + File.separator + fileName);
+                String storePath = servletContext.getRealPath("/images/product");
+                File file = new File( storePath + File.separator + fileName);
                 String x = file.getName();
 
                 if (x.equalsIgnoreCase("product")) {
@@ -125,8 +127,23 @@ public class UpdateProductController extends HttpServlet {
             } catch (FileNotFoundException fne) {
                 // Handle file not found error
             }
+            if (original_price <= 0) {
+                    request.setAttribute("notification", "Giá gốc sản phẩm phải lớn hơn 0");
+                    request.getRequestDispatcher("product-detail?product_id=" + id).forward(request, response);
+            } else if (sale_price <= 0) {
+                request.setAttribute("notification", "Giá khuyến mãi sản phẩm phải lớn hơn 0");
+                    request.getRequestDispatcher("product-detail?product_id=" + id).forward(request, response);
+            } else if (quantity <= 0) {
+                request.setAttribute("notification", "số lượng sản phẩm phải lớn hơn 0");
+                    request.getRequestDispatcher("product-detail?product_id=" + id).forward(request, response);
+            } else if (sale_price >= original_price) {
+                request.setAttribute("notification", "Giá khuyến mãi phải thấp hơn giá gốc");
+                    request.getRequestDispatcher("product-detail?product_id=" + id).forward(request, response);
+            }
+            else {
             p.UpdateProduct(id, name, desciption, brief_infor, quantity, status, original_price, sale_price, categoryId, author, url_thumbnail);
             response.sendRedirect("product-detail?product_id=" + id);
+            }
         } catch (Exception e) {
             // Handle generic exception
         }

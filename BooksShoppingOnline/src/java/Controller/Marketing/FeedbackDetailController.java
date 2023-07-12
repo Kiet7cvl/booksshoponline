@@ -2,23 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.Common;
+package Controller.Marketing;
 
-import dal.UserDAO;
+import dal.FeedbackDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import model.Feedback;
 
 /**
  *
- * @author MSI Bravo
+ * @author tr498
  */
-@WebServlet(name = "newpass", urlPatterns = {"/newpass"})
-public class newpass extends HttpServlet {
+public class FeedbackDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,15 +33,11 @@ public class newpass extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet newpass</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet newpass at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            int feedbackId = Integer.parseInt(request.getParameter("feedbackId"));
+            Feedback feedback = new FeedbackDAO().getFeedbackUserById(feedbackId);
+
+            request.setAttribute("feedback", feedback);
+            request.getRequestDispatcher("MKTFeedbackDetail.jsp").forward(request, response);
         }
     }
 
@@ -58,7 +53,7 @@ public class newpass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("components/newpassword.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -72,20 +67,7 @@ public class newpass extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int userId = Integer.parseInt(request.getParameter("user_Id"));
-//        String email = request.getParameter("email");
-        String pass = request.getParameter("pass");
-        String pass2 = request.getParameter("pass2");
-        if (pass.matches("((?=.*\\d)[a-zA-Z\\d!@#$%^&*]{8,31})")
-                && pass2.matches("((?=.*\\d)[a-zA-Z\\d!@#$%^&*]{8,31})")
-                && (pass.equals(pass2))) {
-            UserDAO u = new UserDAO();
-            u.changePassword(userId, pass);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-            request.setAttribute("mess", "x");
-            request.getRequestDispatcher("components/newpassword.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

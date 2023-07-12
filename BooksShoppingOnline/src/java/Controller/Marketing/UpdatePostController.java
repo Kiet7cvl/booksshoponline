@@ -126,7 +126,8 @@ public class UpdatePostController extends HttpServlet {
                 InputStream filecontent = null;
 
                 try {
-                    File file = new File("D:\\JAVA\\booksshop2\\BooksShoppingOnline\\web\\images\\blog" + File.separator + fileName);
+                    String storePath = servletContext.getRealPath("/images/blog");
+                    File file = new File(storePath + File.separator + fileName);
                     url_thumbnail = url_thumbnail + file.getName();
                     out = new FileOutputStream(file);
                     filecontent = filePart.getInputStream();

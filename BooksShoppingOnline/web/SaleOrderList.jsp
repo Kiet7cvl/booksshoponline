@@ -88,7 +88,6 @@
 
         </style>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-
     </head>
     <body>
         <%@include file="components/account.jsp" %>
@@ -101,14 +100,29 @@
                 <h2 class="mtop title-order" >Danh sách các đơn hàng</h2>
                 <div class="container mtop" style="width:100%">
                     <div class="row-lg-2">
-                        <label for="recordLength">Độ dài hiển thị bản ghi:</label>
-                        <input type="number" id="recordLength" min="1" max="100" value="10">
+                        <label for="recordLength">Hiển thị <input type="number" id="recordLength" min="1" max="100" value="10" style="width: 55px"> bản ghi | </label>
+
                         <label for="startDate">Từ ngày:</label>
                         <input type="date" id="startDate">
                         <label for="endDate">Đến ngày:</label>
                         <input type="date" id="endDate">
+                        <label for="statusFilter"> | Tình trạng:</label>
+                        <select id="statusFilter">
+                            <option value="">Tất cả</option>
+                            <option value="Đang gửi">Đang gửi</option>
+                            <option value="Thành công">Thành công</option>
+                            <option value="Đã hủy">Đã hủy</option>
+                        </select><c:if test = "${sessionScope.us.role_Id == 4}">
+                        <label for="statusFilter"> | Nhân Viên Sale:</label>
+                        <select id="salerFilter1"style="width: 100px;">
+                            <option value="">Tất cả</option>
+                            <c:forEach items="${salerList}" var="saler">
+                                <option value="${saler}">${saler}</option>
+                            </c:forEach>
+                        </select><br></c:if>
                         <button id="applyBtn">Áp dụng</button>
                     </div>
+
                     <table class="table table-striped table-bordered tbborder" id="sortTable">
                         <thead>
                             <tr>
@@ -116,50 +130,79 @@
                                 <th>Ngày&nbspmua&nbsphàng</th>
                                 <th>Sản&nbspphẩm</th>
                                 <th>Tổng&nbspchi&nbspphí</th>
-                                <th>ID&nbsptài&nbspkhoản</th>
+                                <th>Tên&nbspkhách&nbsphàng</th>
                                 <th>Nhân&nbspviên&nbspsale</th>
                                 <th>Tình&nbsptrạng</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items ="${OrderList}" var="c">
-                                <tr>
-                                    <td><a href="order-detail-sale?orderId=${c.orderID}">
-                                            ${c.orderID}</a></td>
-                                    <td>${c.date}</td>
-                                    <c:if test="${c.countProduct != 0}">
-                                        <td>${c.fullNameFirstProduct} và ${c.countProduct} sản phẩm khác</td>
-                                    </c:if>
-                                    <c:if test="${c.countProduct == 0}">
-                                        <td>${c.fullNameFirstProduct}</td>
-                                    </c:if>
-                                    <td>${c.total_cost}</td>
-                                    <td>${c.userId}</td>
-                                    <td>${c.fullNameSaler}</td>
-
-                                    <td>
-                                        ${c.status_order_name}
-                                    </td>
-
-
-
-
-
-
-
-                                    <td>
-                                        <c:if test="${c.status_order == 1}">
-                                            <div class="row">
-                                                <a href="update-successfull-order?order_id=${c.orderID}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true" style="font-size: 12px">Giao Hàng thành công</a>
-                                            </div>
-
+                            <c:if test = "${sessionScope.us.role_Id == 3}">
+                                <c:forEach items ="${OrderListsaler}" var="d">
+                                    <tr>
+                                        <td><a href="order-detail-sale?orderId=${d.orderID}">
+                                                ${d.orderID}</a></td>
+                                        <td>${d.date}</td>
+                                        <c:if test="${d.countProduct != 0}">
+                                            <td>${d.fullNameFirstProduct} và ${d.countProduct} sản phẩm khác</td>
                                         </c:if>
-                                    </td>
+                                        <c:if test="${d.countProduct == 0}">
+                                            <td>${d.fullNameFirstProduct}</td>
+                                        </c:if>
+                                        <td>${d.total_cost}</td>
+                                        <td>${d.fullName}</td>
+                                        <td>${d.fullNameSaler}</td>
 
-                                </tr>
+                                        <td>
+                                            ${d.status_order_name}
+                                        </td>
+                                        <td>
+                                            <c:if test="${d.status_order == 1}">
+                                                <div class="row">
+                                                    <a href="update-successfull-order?order_id=${d.orderID}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true" style="font-size: 12px">Giao Hàng thành công</a>
+                                                </div>
 
-                            </c:forEach>
+                                            </c:if>
+                                        </td>
+
+                                    </tr>
+
+                                </c:forEach>
+                            </c:if>
+                            <c:if test = "${sessionScope.us.role_Id == 4}">
+                                <c:forEach items ="${OrderList}" var="c">
+                                    <tr>
+                                        <td><a href="order-detail-sale?orderId=${c.orderID}">
+                                                ${c.orderID}</a></td>
+                                        <td>${c.date}</td>
+                                        <c:if test="${c.countProduct != 0}">
+                                            <td>${c.fullNameFirstProduct} và ${c.countProduct} sản phẩm khác</td>
+                                        </c:if>
+                                        <c:if test="${c.countProduct == 0}">
+                                            <td>${c.fullNameFirstProduct}</td>
+                                        </c:if>
+                                        <td>${c.total_cost}</td>
+                                        <td>${c.fullName}</td>
+                                        <td>${c.fullNameSaler}</td>
+
+                                        <td>
+                                            ${c.status_order_name}
+                                        </td>
+                                        <td>
+                                            <c:if test="${c.status_order == 1}">
+                                                <div class="row">
+                                                    <a href="update-successfull-order?order_id=${c.orderID}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true" style="font-size: 12px">Giao Hàng thành công</a>
+                                                </div>
+
+                                            </c:if>
+                                        </td>
+
+                                    </tr>
+
+                                </c:forEach>
+                            </c:if>
+
+
 
                         </tbody>
                     </table>
@@ -207,17 +250,37 @@
                     table.page.len(recordLength).draw();
                 });
                 $('#applyBtn').on('click', function () {
-                    var startDate = $('#startDate').val();
-                    var endDate = $('#endDate').val();
+                    var recordLength = parseInt($('#recordLength').val());
+                    table.page.len(recordLength).draw();
 
+                    var startDate = new Date($('#startDate').val());
+                    var endDate = new Date($('#endDate').val());
+
+                    // Mảng chứa các ngày trong khoảng thời gian
+                    var datesInRange = [];
+
+                    // Thêm các ngày từ startDate đến endDate vào mảng datesInRange
+                    var currentDate = new Date(startDate);
+                    while (currentDate <= endDate) {
+                        datesInRange.push(new Date(currentDate));
+                        currentDate.setDate(currentDate.getDate() + 1);
+                    }
+
+                    // Lọc cột thứ hai (index 1) với các ngày trong khoảng thời gian
                     table
                             .columns(1)
-                            .search(startDate, true, false)
+                            .search(datesInRange.map(date => date.toISOString().slice(0, 10)).join('|'), true, false)
+                            .draw();
+                    var salerFilter1 = $('#salerFilter1').val();
+                    table
+                            .columns(5)
+                            .search(salerFilter1)
                             .draw();
 
+                    var statusFilter = $('#statusFilter').val();
                     table
-                            .columns(1)
-                            .search(endDate, true, false)
+                            .columns(6)
+                            .search(statusFilter)
                             .draw();
                 });
             });

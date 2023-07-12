@@ -13,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -34,16 +36,36 @@ public class UpdateOrderController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             String status_raw = request.getParameter("status");
-            int status = Integer.parseInt(status_raw);
+            String note_raw = request.getParameter("note");
             String salerId_raw = request.getParameter("salerId");
-            int salerId = Integer.parseInt(salerId_raw);
             String orderId_raw = request.getParameter("orderId");
-            int orderId = Integer.parseInt(orderId_raw);
+            HttpSession session = request.getSession();
+            User u = (User) session.getAttribute("us");
+            // Khởi tạo biến với giá trị mặc định
+            int status = 0;
+            int salerId = u.getUser_Id();
+            int orderId = 0;
+
+            // Chuyển đổi chuỗi ban đầu thành số nguyên nếu chúng không null hoặc trống
+            if (status_raw != null && !status_raw.isEmpty()) {
+                status = Integer.parseInt(status_raw);
+            }
+
+            if (salerId_raw != null && !salerId_raw.isEmpty()) {
+                salerId = Integer.parseInt(salerId_raw);
+            }
+
+            if (orderId_raw != null && !orderId_raw.isEmpty()) {
+                orderId = Integer.parseInt(orderId_raw);
+            }
+            // Cập nhật đơn hàng bằng các giá trị đã lấy được
             OrderDao od = new OrderDao();
-            od.updateOrder(orderId, status, salerId);
-            response.sendRedirect("order-detail-sale?orderId="+orderId);
+            od.updateOrder(orderId, status, salerId, note_raw);
+            request.setAttribute("notification", "Cập nhật thành công.");
+            request.getRequestDispatcher("order-detail-sale?orderId=" + orderId).forward(request, response);
+            // response.sendRedirect("order-detail-sale?orderId="+orderId);
         }
     }
 

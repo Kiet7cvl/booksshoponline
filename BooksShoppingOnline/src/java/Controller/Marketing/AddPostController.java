@@ -20,14 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import model.User;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -121,7 +114,8 @@ public class AddPostController extends HttpServlet {
             final PrintWriter writer = response.getWriter();
 
             try {
-                File file = new File("D:\\JAVA\\booksshop2\\BooksShoppingOnline\\web\\images\\blog" + File.separator + fileName);
+                String storePath = servletContext.getRealPath("/images/blog");
+                File file = new File(storePath + File.separator + fileName);
                 url_thumbnail = url_thumbnail + file.getName();
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();
