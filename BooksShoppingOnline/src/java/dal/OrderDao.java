@@ -72,6 +72,7 @@ public class OrderDao extends DBContext {
         OrderDao o = new OrderDao();
         System.out.println(o.getChartRevenueArea("7","2023-06-11",27));
         System.out.println(o.getChartOrderBar("7","2023-06-11",27));
+
     }
     
     public List<Chart> getChartRevenueArea(String salerId, String start, int day) {

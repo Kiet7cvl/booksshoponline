@@ -79,7 +79,8 @@ public class AddProductController extends HttpServlet {
             InputStream filecontent = null;
             final PrintWriter writer = response.getWriter();
             try {
-                File file = new File("C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\shopping_online\\booksshop\\BooksShoppingOnline\\web\\images\\product" + File.separator + fileName);
+                String storePath = servletContext.getRealPath("/images/product");
+                File file = new File(storePath + File.separator + fileName);
                 url_avatar = "images/product/" + file.getName();
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();

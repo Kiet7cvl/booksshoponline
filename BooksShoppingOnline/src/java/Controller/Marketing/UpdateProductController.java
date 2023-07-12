@@ -107,7 +107,8 @@ public class UpdateProductController extends HttpServlet {
                 if (filePart != null) {
                     fileName = getFileName(filePart);
                 }
-                File file = new File("C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\shopping_online\\booksshop\\BooksShoppingOnline\\web\\images\\product" + File.separator + fileName);
+                String storePath = servletContext.getRealPath("/images/product");
+                File file = new File( storePath + File.separator + fileName);
                 String x = file.getName();
 
                 if (x.equalsIgnoreCase("product")) {

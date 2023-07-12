@@ -76,7 +76,8 @@ public class AddSliderController extends HttpServlet {
             final PrintWriter writer = response.getWriter();
 
             try {
-                File file = new File("C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\shopping_online\\booksshop\\BooksShoppingOnline\\web\\images\\slider" + File.separator + fileName);
+                String storePath = servletContext.getRealPath("/images/slider");
+                File file = new File(storePath + File.separator + fileName);
                 url_thumbnail = url_thumbnail + file.getName();
                 out = new FileOutputStream(file);
                 filecontent = filePart.getInputStream();

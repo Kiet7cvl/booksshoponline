@@ -48,7 +48,8 @@
 
     <div class="info-footer">
         <div class="content-footer">
-            
+            <h2>Địa chỉ liên hệ</h2>
+            <p class="mt-40">HUB Hà Nội: Hoalaclink03, thôn Vân Lôi, xã Bình Yên, huyện Thạch Thất, TP. Hà Nội</p>
         </div>
 
         <div class="feedback-footer">
@@ -56,10 +57,10 @@
             <p>Chúng tôi luôn trân trọng và mong đợi nhận được mọi ý kiến đóng góp từ khách hàng để có thể nâng cấp trải nghiệm dịch vụ và sản phẩm tốt hơn nữa</p>
             <br>
             <div class="contact-info">
-                <h2>Địa chỉ liên hệ</h2>
+                
                 <p><i class="ti-location-pin"></i>Tran Duy Hung, Ha Noi</p>
                 <p><i class="ti-mobile"></i>Phone:+0356111214</p>
-                <p><i class="ti-email"></i>dotunglam200xx@gmail.com</p>
+                <p><i class="ti-email"></i>dotunglam@gmail.com</p>
             </div>
         </div>
         <div class="clear"></div>

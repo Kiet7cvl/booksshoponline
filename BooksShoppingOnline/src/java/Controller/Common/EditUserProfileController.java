@@ -113,8 +113,8 @@ public class EditUserProfileController extends HttpServlet {
 
             try {
 
-                
-                File file = new File("E:\\Ki5\\SWP391\\ShoppingOnile\\BooksShoppingOnline\\web\\images\\avatar" + File.separator + fileName);
+                String storePath = servletContext.getRealPath("/images/avatar");
+                File file = new File(storePath + File.separator + fileName);
 
                 url_avatar = url_avatar + file.getName();
 

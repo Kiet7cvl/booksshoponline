@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package Controller.Public;
 
 import com.vnpay.common.Config;
@@ -39,21 +38,23 @@ import model.User;
  * @author tr498
  */
 public class CheckOutController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             String method = request.getParameter("payment-method");
 
             if (method.equalsIgnoreCase("vnpay")) {
@@ -75,8 +76,12 @@ public class CheckOutController extends HttpServlet {
                 vnp_Params.put("vnp_Amount", String.valueOf(amount));
                 vnp_Params.put("vnp_CurrCode", "VND");
                 String bank_code = "";
+                String vnp_CardType = "";
                 if (bank_code != null && bank_code.isEmpty()) {
                     vnp_Params.put("vnp_BankCode", bank_code);
+                }
+                if (vnp_CardType != null && vnp_CardType.isEmpty()) {
+                    vnp_Params.put("vnp_CardType", vnp_CardType);
                 }
                 vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
                 vnp_Params.put("vnp_OrderInfo", vnp_OrderInfo);
@@ -129,19 +134,18 @@ public class CheckOutController extends HttpServlet {
                 request.setAttribute("code", "00");
                 request.setAttribute("message", "success");
                 request.setAttribute("data", paymentUrl);
-                OrderDao od = new OrderDao();
-                od.updateStatusOrder(id, 2);
                 response.sendRedirect(paymentUrl);
             } else {
                 response.sendRedirect("successful?vnp_OrderInfo=-1");
             }
 
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -149,8 +153,8 @@ public class CheckOutController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
@@ -364,10 +368,10 @@ public class CheckOutController extends HttpServlet {
 
         request.getRequestDispatcher("cartCompletion.jsp").forward(request, response);
     }
-    
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -375,12 +379,13 @@ public class CheckOutController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
