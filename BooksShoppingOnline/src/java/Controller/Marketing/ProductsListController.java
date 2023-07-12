@@ -55,7 +55,7 @@ public class ProductsListController extends HttpServlet {
             }
             
             // Set page_size
-            int PAGE_SIZE = 6;
+            int PAGE_SIZE = 6;          // default  = 6
             String strPage_size = request.getParameter("page_size");
             if (strPage_size != null) {
                 PAGE_SIZE = Integer.parseInt(strPage_size);

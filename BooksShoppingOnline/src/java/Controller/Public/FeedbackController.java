@@ -118,14 +118,14 @@ public class FeedbackController extends HttpServlet {
                 }
 
             } catch (FileNotFoundException fne) {
-                
+
             }
             FeedbackDAO fed = new FeedbackDAO();
             fed.addNewFeedback(u.getFull_Name(), star, subject, url_feedback, 1, product_id, u.getUser_Id());
             String historyUrl = (String) session.getAttribute("historyUrl");
             response.sendRedirect(historyUrl);
         } catch (Exception e) {
-                
+
         }
 
     }

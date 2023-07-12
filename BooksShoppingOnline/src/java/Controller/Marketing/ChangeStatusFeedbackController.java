@@ -1,31 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.Sale;
+package Controller.Marketing;
 
-import dal.OrderDao;
+import dal.FeedbackDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import model.Order;
-import model.User;
 
 /**
  *
- * @author MSI Bravo
+ * @author tr498
  */
-@WebServlet(name = "OrderListSaleController", urlPatterns = {"/order-list-sale"})
-
-public class OrderListSaleController extends HttpServlet {
+public class ChangeStatusFeedbackController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,27 +31,16 @@ public class OrderListSaleController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       // String saler_Id = request.getParameter("saler_Id");
-        HttpSession session = request.getSession();
-        User u = (User) session.getAttribute("us");
-        //saler_Id = u.getUser_Id();
-        List<Order> OrderList = new OrderDao().getAllOrder();
-        List<Order> OrderListsaler = new OrderDao().getAllOrdersaler(u.getUser_Id());
-        List<String> salerList = new ArrayList<>();
-        // Lặp qua danh sách đơn hàng và lấy tên người bán (saler) từ mỗi đơn hàng
-        // Nếu tên người bán chưa tồn tại trong danh sách salerList, thêm nó vào danh sách
-        for (Order order : OrderList) {
-            String saler = order.getFullNameSaler();
-            if (!salerList.contains(saler)) {
-                salerList.add(saler);
-            }
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
+            int feeback_id = Integer.parseInt(request.getParameter("feedbackId"));
+            int status = Integer.parseInt(request.getParameter("status"));
+            FeedbackDAO fd = new FeedbackDAO();
+            fd.changeStatusFeedback(feeback_id, status);
+//            String historyUrl = (String)session.getAttribute("historyUrl");
+            response.sendRedirect("feedback-list");
         }
-        // Đặt OrderList và salerList làm thuộc tính của yêu cầu
-        request.setAttribute("OrderList", OrderList);
-        request.setAttribute("OrderListsaler", OrderListsaler);
-        request.setAttribute("salerList", salerList);
-        request.getRequestDispatcher("SaleOrderList.jsp").forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

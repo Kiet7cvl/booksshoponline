@@ -238,7 +238,8 @@
                             </c:forEach>
                             <div id="layoutSidenav"style="flex-direction: column-reverse;margin-top: 50px">
                                 <%@include file="components/sale-left-dashboard.jsp" %>
-                                <c:forEach items="${listMyOrderinDetail}" var="k">
+                                 <c:if test="${sessionScope.us.role_Id == 4}">
+                                  <c:forEach items="${listMyOrderinDetail}" var="k">
                                     <form action="update-order">
 
                                         <div class="row mt-4">
@@ -330,6 +331,89 @@
                                         </div>
                                     </form>
                                 </c:forEach>
+                                                            </c:if>
+                                 <c:if test="${sessionScope.us.role_Id == 3}">
+                                  <c:forEach items="${listMyOrderinDetail}" var="k">
+                                    <form action="update-order">
+
+                                        <div class="row mt-4">
+                                            <div class="col">
+
+                                                <div class="row justify-content-between">
+                                                    <!--                                                    <div class="col-auto"><p class="mb-1 text-dark cus-fontsize"><b>Order Details</b></p></div>-->
+                                                    <div class="col-auto">
+
+                                                    </div>
+
+                                                    <div class="row invoice mt-4 " style="padding: 10px;margin-left: 10px">
+
+                                                        <div class="col">
+                                                            <p class="mb-1 text-dark cus-fontsize"><b>Order Details</b></p>
+
+                                                            <p class="mb-1 cus-fontsize"> OrderId: ${k.orderID}</p>
+                                                            <p class="mb-1 cus-fontsize">Ngày mua hàng : ${k.date}</p>
+                                                            <p class="mb-1 cus-fontsize" style="float: inherit">Trạng thái:</p>
+                                                            <select class="form-control "  name="status" aria-label="Default select example" style="width: auto;" > Trạng thái
+                                                                <option value="1" ${1 == k.status_order ? "Selected" : ""}>
+                                                                    Đang gửi
+                                                                </option>
+                                                                <option value="2" ${2 == k.status_order ? "Selected" : ""}>
+                                                                    Thành công
+                                                                </option>
+                                                                <option value="3" ${3 == k.status_order ? "Selected" : ""}>
+                                                                    Đã hủy
+                                                                </option>
+
+                                                            </select>
+                                                            
+                                                                <p class="mb-1 cus-fontsize" style="margin-top: 10px;float: inherit">Ghi chú:</p>
+                                                                <div> <input type="text" value="${k.note}" name="note" style="width: auto;margin-top: 10px;"></div>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <p class="mb-1 cus-fontsize text-dark "><b>Thông tin Người nhận</b> </p>
+                                                            <p class="mb-1 cus-fontsize">Họ tên : ${k.fullName}</p>
+
+                                                            <c:if test = "${k.gender ==1}">
+                                                                <p class="mb-1 cus-fontsize">Giới tính : Nam</p>
+                                                            </c:if>
+                                                            <c:if test = "${k.gender ==0}">
+                                                                <p class="mb-1 cus-fontsize">Giới tính : Nữ</p>
+                                                            </c:if>
+                                                            <p class="mb-1 cus-fontsize">Email : ${k.email}</p>
+                                                            <p class="mb-1 cus-fontsize">Số điện thoại : ${k.mobile}</p>
+                                                            <p class="mb-1 cus-fontsize">Địa chỉ : ${k.address}</p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="jumbotron-fluid">
+                                                <div class="row justify-content-between ">
+                                                    <div class="col-sm-auto col-auto my-auto">
+<!--                                                        <img class="img-fluid my-auto align-self-center " src="https://salt.tikicdn.com/ts/product%2F73%2F31%2F8f%2F0d2df2f2799036d45c6ed06b946d361e.png" width="115" height="115">-->
+                                                    </div>
+                                                    <div class="col-auto my-auto "><h2 class="mb-0 font-weight-bold">TOTAL PAID</h2></div>
+                                                    <div class="col-auto my-auto ml-auto"><h1 class="display-3 ">${k.total_cost}đ</h1></div>
+                                                </div>
+                                                <div class="row mb-3 mt-3 mt-md-0">
+                                                    <div class="col-auto border-line"> <small class="text-white">Cảm ơn vì</small></div>
+                                                    <div class="col-auto border-line"> <small class="text-white">đã ủng hộ</small></div>
+                                                    <div class="col-auto "><small class="text-white">Chúng tôi<3 </small> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="orderId" value="${k.orderID}"/>
+                                        <input class="btn btn-dark" type="submit" value="Lưu">
+
+                                        </div>
+                                    </form>
+                                </c:forEach>
+                                                            </c:if>
+                                
                             </div>
 
 
