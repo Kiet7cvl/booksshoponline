@@ -103,12 +103,14 @@
                                                 <td class="p-price first-row">${c.product_price}đ</td>
                                                 <td class="qua-col first-row">
                                                     <div class="quantity">                                                
+
                                                         <form action="update-cart" style="display: flex"> 
                                                             <button onclick="decreaseQuantity()" style="border-radius: 4px;width: 30px">-</button>
                                                             <input class="quantityInput form-control form-control-sm" type="number" name="quantity" value="${c.quantity}" data-product-id="${c.product_id}" data-cart-id="${c.cart_id}" min="1" max="${sessionScope.productQuantity}" style="width: 50px" readonly="">
                                                             <input type="hidden" name="productId" value="${c.product_id}"/>
                                                             <input type="hidden" name="cartId" value="${c.cart_id}"/>                                     
                                                             <button onclick="increaseQuantity()" style="border-radius: 4px;width: 30px">+</button>
+
                                                         </form>
                                                     </div>
                                                 </td>
@@ -299,6 +301,46 @@
                 }
             </script>
             <script>
+<<<<<<< HEAD
+                function decreaseQuantity() {
+  var quantityInput = document.getElementById("quantityInput");
+  var currentQuantity = parseInt(quantityInput.value);
+  if (currentQuantity > 1) {
+    quantityInput.value = currentQuantity - 1;
+  }
+}
+
+function increaseQuantity() {
+  var quantityInput = document.getElementById("quantityInput");
+  var currentQuantity = parseInt(quantityInput.value);
+  var maxQuantity = parseInt(quantityInput.getAttribute("max"));
+  if (currentQuantity < maxQuantity) {
+    quantityInput.value = currentQuantity + 1;
+  }
+}
+
+// Ngăn người dùng nhập số trực tiếp
+var quantityInput = document.getElementById("quantityInput");
+quantityInput.addEventListener("keydown", function (e) {
+  if (!isNumericInput(e)) {
+    e.preventDefault();
+  }
+});
+
+function isNumericInput(event) {
+  var key = event.keyCode || event.which;
+  return (
+    (key >= 48 && key <= 57) || // Số từ 0 đến 9
+    key === 8 || // Phím backspace
+    key === 9 || // Phím tab
+    key === 37 || // Phím mũi tên trái
+    key === 39 || // Phím mũi tên phải
+    key === 46 || // Phím delete
+    (key >= 96 && key <= 105) // Số từ bàn phím số
+  );
+}
+
+=======
                 document.addEventListener("DOMContentLoaded", function () {
                     const purchaseBtn = document.getElementById("purchaseBtn");
                     const emptyCartRow = document.getElementById("emptyCartRow");
@@ -313,6 +355,7 @@
                         purchaseBtn.removeAttribute("href");
                     }
                 });
+>>>>>>> 79852b2a8c8adc319e2024b40185e88ebe502ce4
             </script>
         </body>
 

@@ -106,6 +106,7 @@ public class FeedbackController extends HttpServlet {
             final PrintWriter writer = response.getWriter();
 
             try {
+
                 String storePath = servletContext.getRealPath("/images/feedback");
                 File file = new File(storePath + File.separator + fileName);
                 url_feedback = "images/feedback/" + file.getName();
@@ -119,16 +120,14 @@ public class FeedbackController extends HttpServlet {
                 }
 
             } catch (FileNotFoundException fne) {
-//                request.setAttribute("notification", "Bạn cần phải điền đầy đủ");
-//                request.getRequestDispatcher("index.jsp").forward(request, response);
+
             }
             FeedbackDAO fed = new FeedbackDAO();
             fed.addNewFeedback(u.getFull_Name(), star, subject, url_feedback, 1, product_id, u.getUser_Id());
             String historyUrl = (String) session.getAttribute("historyUrl");
             response.sendRedirect(historyUrl);
         } catch (Exception e) {
-//                request.setAttribute("notification", "Bạn cần phải điền đầy đủ");
-//                request.getRequestDispatcher("index.jsp").forward(request, response);
+
         }
 
     }
