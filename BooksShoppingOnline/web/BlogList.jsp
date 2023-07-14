@@ -1,6 +1,4 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-tfo-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Blog</title>
+        <title>Danh sách bài viết</title>
 
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />

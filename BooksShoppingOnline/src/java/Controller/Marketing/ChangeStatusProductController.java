@@ -14,10 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-/**
- *
- * @author son22
- */
+
 public class ChangeStatusProductController extends HttpServlet {
 
     /**

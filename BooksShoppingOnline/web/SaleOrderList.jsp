@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>OrderList_Sale</title>
+        <title>Danh sách đơn hàng</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -221,7 +221,7 @@
                 var table = $('#sortTable').DataTable({
                     "language": {
                         "decimal": "",
-                        "emptyTable": "No data available in table",
+                        "emptyTable": "Không có đơn hàng nào",
                         "info": " _START_ đến _END_ của _TOTAL_ bản ghi",
                         "infoEmpty": "HIển thị 0 to 0 of 0 bản ghi",
                         "infoFiltered": "(kết quả từ _MAX_ tổng số bản ghi)",

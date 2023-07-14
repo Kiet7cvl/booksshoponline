@@ -14,10 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import model.User;
  
-/**
- *
- * @author MSI Bravo
- */
+
 @WebServlet(name = "DetailsUserController", urlPatterns = {"/UpUser"})
 public class DetailsUserController extends HttpServlet {
 

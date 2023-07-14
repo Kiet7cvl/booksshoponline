@@ -21,7 +21,7 @@
                         <a class="nav-link" href="list">Sản Phẩm</a>
                     </li>
                     <li class="nav-item me-4">
-                        <a class="nav-link" href="blog">Blog</a>
+                        <a class="nav-link" href="blog">Bài viết</a>
                     </li>
                 </ul>
 

@@ -9,10 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- *
- * @author ADMIN
- */
+
     @Builder
     @Getter
     @Setter

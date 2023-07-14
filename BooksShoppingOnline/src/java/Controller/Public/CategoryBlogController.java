@@ -18,10 +18,7 @@ import java.util.List;
 
 import model.Blog;
 
-/**
- *
- * @author Veetu
- */
+
 @WebServlet(name = "CategoryBlogController", urlPatterns = {"/categoryBlog"})
 public class CategoryBlogController extends HttpServlet {
 

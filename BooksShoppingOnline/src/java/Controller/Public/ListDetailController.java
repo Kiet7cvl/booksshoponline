@@ -21,10 +21,7 @@ import model.Order;
 import model.Product;
 import model.User;
 
-/**
- *
- * @author dongh
- */
+
 public class ListDetailController extends HttpServlet {
 
     /**

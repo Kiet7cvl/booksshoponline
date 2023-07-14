@@ -14,10 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Customer;
 
-/**
- *
- * @author ASUS
- */
+
 @WebServlet(name = "AddCustomerController", urlPatterns = {"/add-customer"})
 public class AddCustomerController extends HttpServlet {
 

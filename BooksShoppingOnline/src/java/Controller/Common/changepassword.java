@@ -14,10 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import model.User;
 
-/**
- *
- * @author GanKPoet
- */
+
 public class changepassword extends HttpServlet {
 
     /**

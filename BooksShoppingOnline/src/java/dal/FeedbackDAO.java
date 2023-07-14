@@ -67,20 +67,20 @@ public class FeedbackDAO extends DBContext {
         for (int i = 1; i <= day; i++) {
             double value = 0;
             String sql = "SELECT CAST(AVG(rated_star) AS DECIMAL(10,1))\n"
-                    + "FROM Feedback\n"
+                    + "FROM feedback\n"
                     + "WHERE date < DATE_ADD(?, INTERVAL ? DAY);";
             try {
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
+                st.setInt(2, i);
+                st.setString(1, start);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     value = rs.getDouble(1);
                 }
                 sql = "SELECT DATE_ADD(?, INTERVAL ? DAY);";
                 st = connection.prepareStatement(sql);
-                st.setInt(1, i);
-                st.setString(2, start);
+                st.setInt(2, i);
+                st.setString(1, start);
                 rs = st.executeQuery();
                 while (rs.next()) {
                     ChartStar c = ChartStar.builder()

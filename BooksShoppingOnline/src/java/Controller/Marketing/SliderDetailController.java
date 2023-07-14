@@ -16,10 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Slider;
 
-/**
- *
- * @author Admin
- */
+
 public class SliderDetailController extends HttpServlet {
 
     /**

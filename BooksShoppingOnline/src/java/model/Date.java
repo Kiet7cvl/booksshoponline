@@ -10,10 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- *
- * @author son22
- */
+
 @Builder
 @Getter
 @Setter

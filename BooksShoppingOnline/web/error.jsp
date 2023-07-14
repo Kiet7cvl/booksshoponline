@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>Error</title>
+    <title>Lỗi</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
     
 </head>

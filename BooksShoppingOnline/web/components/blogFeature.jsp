@@ -1,8 +1,4 @@
-<%-- 
-    Document   : blogFeature
-    Created on : May 29, 2023, 3:16:33 PM
-    Author     : ASUS
---%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

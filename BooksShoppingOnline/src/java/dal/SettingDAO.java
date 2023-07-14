@@ -15,10 +15,7 @@ import java.util.List;
 import model.Setting;
 import model.TypeSetting;
 
-/**
- *
- * @author son22
- */
+
 public class SettingDAO extends DBContext {
 
     public int getTotalSetting(String searchKey, String typeId, String status) {

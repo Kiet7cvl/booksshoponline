@@ -13,10 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Slider;
 
-/**
- *
- * @author Admin
- */
+
 public class SliderDAO extends DBContext {
 
     public Slider getFirstSlider() {
