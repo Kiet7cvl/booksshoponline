@@ -16,10 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-/**
- *
- * @author tr498
- */
+
 public class Config {
     public static String vnp_PayUrl = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
     public static String vnp_Returnurl = "http://localhost:9999/BooksShoppingOnline/successful";

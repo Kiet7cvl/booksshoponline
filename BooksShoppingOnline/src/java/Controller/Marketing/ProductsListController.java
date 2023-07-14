@@ -18,10 +18,7 @@ import jakarta.servlet.http.HttpSession;
 import model.Category;
 import model.Product;
 
-/**
- *
- * @author GanKPoet
- */
+
 public class ProductsListController extends HttpServlet {
 
     /**

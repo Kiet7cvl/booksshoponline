@@ -6,16 +6,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css">
-       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
         <style>
             * {
@@ -120,16 +120,16 @@
 
 
         </style>
-        <title>New Password</title>
+        <title>Tạo mới mật khẩu</title>
     </head>
     <body>
         <div style="text-align:center">
-        <c:if test="${notification !=null}">
-    <div class="alert alert-warning alert-dismissible fade show " role="alert" style="display: inline-block; z-index: 15 ; margin: 0">
-        <strong>${notification}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-</c:if></div>
+            <c:if test="${notification !=null}">
+                <div class="alert alert-warning alert-dismissible fade show " role="alert" style="display: inline-block; z-index: 15 ; margin: 0">
+                    <strong>${notification}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </c:if></div>
         <div class="class2">
             <div class="class1">
                 <div class="rsp">Đặt lại mật khẩu</div>
@@ -142,11 +142,11 @@
                     <div class="edit">
                         <input type="password"  placeholder=" Xác nhận mật khẩu mới(*)" name="pass2" required>
                     </div> 
-<!--                    <div>
-                        <div style="display: none">
-                            <input style="display: none" name="email" value="${email} ">${email}           
-                        </div>
-                    </div>-->
+                    <!--                    <div>
+                                            <div style="display: none">
+                                                <input style="display: none" name="email" value="${email} ">${email}           
+                                            </div>
+                                        </div>-->
                     <div class="edit">
                         <button type="submit" id="login-btn" class="sb2" value="Reset"> Lưu</button>
                     </div>

@@ -17,10 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Role;
 import model.User;
 
-/**
- *
- * @author MSI Bravo
- */
+
 @WebServlet(name = "ListUserController", urlPatterns = {"/list-user"})
 
 public class ListUserController extends HttpServlet {

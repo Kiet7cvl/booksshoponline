@@ -24,10 +24,7 @@ import model.User;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-/**
- *
- * @author ASUS
- */
+
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,
         maxFileSize = 1024 * 1024 * 10,
         maxRequestSize = 1024 * 1024 * 50)

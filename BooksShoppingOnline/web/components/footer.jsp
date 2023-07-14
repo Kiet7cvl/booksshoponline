@@ -2,45 +2,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="footer">
 
-    <!-- Feedback Form -->
-    <div class="modal fade col-md-12" role="dialog" id="feedback_common">
-        <div class="modal-dialog">
-            <div class="modal-content" style="border-radius: 10px; margin-top: 60px;">
-                <div class="modal-header">
-                    <h2 style="margin-left: 35%">Bình luận</h2>
-                </div>
-                <div class="modal-body">
-                    <form action="feedback_common">
-                        <b>Viết bình luận:</b>&nbsp;&nbsp;
-                        <div class="form-group">
-                            <textarea name="subject" placeholder="Viết bình luận.." style="height:200px ; width: 460px"></textarea>
-                        </div>
-                        <b>Ảnh phản hồi:</b>&nbsp;&nbsp;
-                        <div class="form-group">
-                            <input name="imageurl" type="file" class="form-control" style="border-radius: 100px;" required="">
-                        </div>
-                        <b>Đánh giá:</b>&nbsp;&nbsp;
-                        <div class="form-group" >
-                            <select name = "star" style="border-radius: 100px;" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option selected>Chọn số sao bạn dành cho KingsBook</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                        <br>
-
-
-                        <center><button type="submit" class="btn btn-dark" style="padding-right: 160px;padding-left: 160px; border-radius: 100px;">Bình luận</button></center>
-
-                    </form>
-                    <br><br>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="map">
         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7448.27256631781!2d105.53745830000003!3d21.027232300000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1653919437201!5m2!1svi!2s" 
                 width=90% height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

@@ -25,7 +25,7 @@ import model.User;
  *
  * @author ADMIN
  */
-@WebFilter(filterName="CustomerAuthorization", urlPatterns={"/myorder","/order-detail","/cart-contact","/checkout","/delete-cart","/update-cart","/add-order","/successful"})
+@WebFilter(filterName="CustomerAuthorization", urlPatterns={"/myorder","/order-detail","/cart-contact","/checkout","/delete-cart","/update-cart","/add-order","/successful","/carts"})
 public class CustomerAuthorization implements Filter {
 
     private static final boolean debug = true;

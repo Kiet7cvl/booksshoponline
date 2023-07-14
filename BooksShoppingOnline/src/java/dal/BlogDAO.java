@@ -14,10 +14,7 @@ import java.util.List;
 import model.Blog;
 import model.Chart;
 
-/**
- *
- * @author ADMIN
- */
+
 public class BlogDAO extends DBContext {
 
     public List<Blog> getAllBlog() {

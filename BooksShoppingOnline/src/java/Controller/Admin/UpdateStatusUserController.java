@@ -14,10 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author MSI Bravo
- */
+
 @WebServlet(name = "UpdateStatusUserController", urlPatterns = {"/update-status-user"})
 public class UpdateStatusUserController extends HttpServlet {
 

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : sider
-    Created on : Jun 24, 2023, 8:46:36 PM
-    Author     : MSI Bravo
---%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
