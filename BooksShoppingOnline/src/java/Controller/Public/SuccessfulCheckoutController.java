@@ -47,15 +47,16 @@ public class SuccessfulCheckoutController extends HttpServlet {
             int id = Integer.parseInt(id_raw);
             if (id != -1) {
                 if (vnp_BankCode.equalsIgnoreCase("VNPAY") && vnp_CardType.equalsIgnoreCase("QRCODE")) {
-                    od.updateStatusOrder(id, 3);
+                    od.updateStatusOrder(id, 5);
                     request.setAttribute("notification", "Bạn đã hủy thanh toán thành công");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
-                    od.updateStatusOrder(id, 2);
+                    od.updateStatusOrder(id, 3);
                     request.setAttribute("notification", "Thanh toán bằng VNPAY thành công.");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
             } else {
+                od.updateStatusOrder(id, 2);
                 request.setAttribute("notification", "Bạn đã chọn phương thức thanh toán khi nhận hàng.");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }

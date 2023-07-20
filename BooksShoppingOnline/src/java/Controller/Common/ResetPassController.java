@@ -111,8 +111,8 @@ public class ResetPassController extends HttpServlet {
                     MimeMessage message = new MimeMessage(session);
                     message.setFrom(new InternetAddress(email));
                     message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-                    message.setSubject("Dear MyFriend, ");
-                    String htmlContent = "<h1>Change your password in <a href=\"http://localhost:9999/BooksShoppingOnline/newpass?email=" + to + "\">KingBooks</a></h1> ";
+                    message.setSubject("Xin chào bạn, ");
+                    String htmlContent = "<h1>Thay đổi mật khẩu của bạn ở liên kết <a href=\"http://localhost:9999/BooksShoppingOnline/newpass?email=" + to + "\">KingBooks</a></h1> ";
                     message.setContent(htmlContent, "text/html");
                     System.out.println("message sent successfully");
                     Transport.send(message);

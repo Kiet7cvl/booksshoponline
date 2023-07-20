@@ -107,9 +107,11 @@
                         <label for="endDate">Đến ngày:</label>
                         <input type="date" id="endDate">
                         <label for="statusFilter"> | Tình trạng:</label>
-                        <select id="statusFilter">
+                        <select id="statusFilter" style="width: 150px;">
                             <option value="">Tất cả</option>
-                            <option value="Đang gửi">Đang gửi</option>
+                            <option value="Chờ xác nhận">Chờ xác nhận</option>
+                            <option value="Xác nhận">Xác nhận</option>
+                            <option value="Đã thanh toán và chờ xác nhận">Đã thanh toán và chờ xác nhận</option>
                             <option value="Thành công">Thành công</option>
                             <option value="Đã hủy">Đã hủy</option>
                         </select><c:if test = "${sessionScope.us.role_Id == 4}">
@@ -133,7 +135,7 @@
                                 <th>Tên&nbspkhách&nbsphàng</th>
                                 <th>Nhân&nbspviên&nbspsale</th>
                                 <th>Tình&nbsptrạng</th>
-                                <th></th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -155,14 +157,6 @@
 
                                         <td>
                                             ${d.status_order_name}
-                                        </td>
-                                        <td>
-                                            <c:if test="${d.status_order == 1}">
-                                                <div class="row">
-                                                    <a href="update-successfull-order?order_id=${d.orderID}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true" style="font-size: 12px">Giao Hàng thành công</a>
-                                                </div>
-
-                                            </c:if>
                                         </td>
 
                                     </tr>
@@ -187,14 +181,6 @@
 
                                         <td>
                                             ${c.status_order_name}
-                                        </td>
-                                        <td>
-                                            <c:if test="${c.status_order == 1}">
-                                                <div class="row">
-                                                    <a href="update-successfull-order?order_id=${c.orderID}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true" style="font-size: 12px">Giao Hàng thành công</a>
-                                                </div>
-
-                                            </c:if>
                                         </td>
 
                                     </tr>

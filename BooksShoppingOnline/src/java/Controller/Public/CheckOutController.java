@@ -189,7 +189,7 @@ public class CheckOutController extends HttpServlet {
             String smtpServer = "smtp.gmail.com";
             String to = email;
             String from = "dotung7733@gmail.com";
-            String subject = "Checkout For Order\n";
+            String subject = "Chọn phương thức thanh toán\n";
             String body
                     = "<!DOCTYPE html>\n"
                     + "<html>\n"

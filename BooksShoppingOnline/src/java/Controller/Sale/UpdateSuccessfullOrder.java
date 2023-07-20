@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.SendMail;
 
 /**
  *
@@ -33,9 +34,11 @@ public class UpdateSuccessfullOrder extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String getemail = request.getParameter("a");
         response.setContentType("text/html;charset=UTF-8");
         int id = Integer.parseInt(request.getParameter("order_id"));
-            new OrderDao().updateStatusOrder(id, 2);// Cập nhật trạng thái đơn hàng bằng cách gọi phương thức updateStatusOrder trong OrderDao
+            new OrderDao().updateStatusOrder(id, 4);// Cập nhật trạng thái đơn hàng bằng cách gọi phương thức updateStatusOrder trong OrderDao
+            SendMail.sendEmailFeedback(getemail);
             response.sendRedirect("order-list-sale");
         
     }

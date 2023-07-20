@@ -260,12 +260,18 @@
                                                             <p class="mb-1 cus-fontsize" style="float: inherit">Trạng thái:</p>
                                                             <select class="form-control "  name="status" aria-label="Default select example" style="width: auto;" > Trạng thái
                                                                 <option value="1" ${1 == k.status_order ? "Selected" : ""}>
-                                                                    Đang gửi
+                                                                    Chờ xác nhận
                                                                 </option>
                                                                 <option value="2" ${2 == k.status_order ? "Selected" : ""}>
-                                                                    Thành công
+                                                                    Xác nhận
                                                                 </option>
                                                                 <option value="3" ${3 == k.status_order ? "Selected" : ""}>
+                                                                    Đã thanh toán và chờ xác nhận
+                                                                </option>
+                                                                <option value="4" ${4 == k.status_order ? "Selected" : ""}>
+                                                                    Thành công
+                                                                </option>
+                                                                <option value="5" ${5 == k.status_order ? "Selected" : ""}>
                                                                     Đã hủy
                                                                 </option>
 
@@ -299,6 +305,7 @@
                                                                 <p class="mb-1 cus-fontsize">Giới tính : Nữ</p>
                                                             </c:if>
                                                             <p class="mb-1 cus-fontsize">Email : ${k.email}</p>
+                                                            <input type="hidden" name="getemail" value="${k.email}">
                                                             <p class="mb-1 cus-fontsize">Số điện thoại : ${k.mobile}</p>
                                                             <p class="mb-1 cus-fontsize">Địa chỉ : ${k.address}</p>
                                                         </div>
@@ -306,7 +313,7 @@
 
                                                 </div>
                                             </div>
-
+                                                        
                                         </div>
                                         <div class="card-footer">
                                             <div class="jumbotron-fluid">
@@ -334,7 +341,6 @@
                                  <c:if test="${sessionScope.us.role_Id == 3}">
                                   <c:forEach items="${listMyOrderinDetail}" var="k">
                                     <form action="update-order">
-
                                         <div class="row mt-4">
                                             <div class="col">
 
@@ -354,12 +360,18 @@
                                                             <p class="mb-1 cus-fontsize" style="float: inherit">Trạng thái:</p>
                                                             <select class="form-control "  name="status" aria-label="Default select example" style="width: auto;" > Trạng thái
                                                                 <option value="1" ${1 == k.status_order ? "Selected" : ""}>
-                                                                    Đang gửi
+                                                                    Chờ xác nhận
                                                                 </option>
                                                                 <option value="2" ${2 == k.status_order ? "Selected" : ""}>
-                                                                    Thành công
+                                                                    Xác nhận
                                                                 </option>
                                                                 <option value="3" ${3 == k.status_order ? "Selected" : ""}>
+                                                                    Đã thanh toán và chờ xác nhận
+                                                                </option>
+                                                                <option value="4" ${4 == k.status_order ? "Selected" : ""}>
+                                                                    Thành công
+                                                                </option>
+                                                                <option value="5" ${5 == k.status_order ? "Selected" : ""}>
                                                                     Đã hủy
                                                                 </option>
 
@@ -380,6 +392,7 @@
                                                                 <p class="mb-1 cus-fontsize">Giới tính : Nữ</p>
                                                             </c:if>
                                                             <p class="mb-1 cus-fontsize">Email : ${k.email}</p>
+                                                            <input type="hidden" name="getemail" value="${k.email}">
                                                             <p class="mb-1 cus-fontsize">Số điện thoại : ${k.mobile}</p>
                                                             <p class="mb-1 cus-fontsize">Địa chỉ : ${k.address}</p>
                                                         </div>

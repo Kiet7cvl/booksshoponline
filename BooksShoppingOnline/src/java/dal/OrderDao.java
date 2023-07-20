@@ -47,7 +47,7 @@ public class OrderDao extends DBContext {
         String sql = "SELECT * \n"
                 + "FROM `Order` o \n"
                 + "JOIN Order_Detail od ON o.order_id = od.order_id \n"
-                + "WHERE o.userId = ? AND od.product_id = ?";
+                + "WHERE o.userId = ? AND od.product_id = ? AND `status_order` = 4";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, user_Id);
