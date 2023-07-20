@@ -38,7 +38,7 @@ public class SendMail {
             mess.setFrom(new InternetAddress(fromEmail));
             mess.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmmail));
 
-            mess.setSubject("Đăng kí thành công");
+            mess.setSubject("Register Successfuly");
             String body = "<!DOCTYPE html>\n"
                     + "<html>\n"
                     + "    <head>\n"
@@ -197,7 +197,7 @@ public class SendMail {
             mess.setFrom(new InternetAddress(fromEmail));
             mess.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmmail));
 
-            mess.setSubject("Nhận hàng thành công");
+            mess.setSubject("Received Successfully");
             String body = "<!DOCTYPE html>\n"
                     + "<html>\n"
                     + "    <head>\n"
