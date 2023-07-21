@@ -121,12 +121,14 @@ ol {
 	font-size: 24px;
 	font-weight: 700;
 	color: #e7ab3c;
+/*        text-align: left;*/
 }
 
 .section-title .product-price span {
 	font-size: 16px;
 	font-weight: 400;
 	color: #636363;
+        
 }
 
 .section-title h2 {

@@ -5,11 +5,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title>Trang trủ</title>
+        <title>Trang chủ</title>
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css">
         <%@include file="components/javascript.jsp" %>
-
+        <style>
+            .product-price{
+                text-align: left;
+            }
+        </style>
     </head>
     <body>
         <div id="main">
