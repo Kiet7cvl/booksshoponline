@@ -32,7 +32,7 @@
                 visibility: hidden;
             }
 
-
+            
 
             .checkbox-size:checked + label,
             .checkbox-size:not(:checked) + label{
@@ -191,7 +191,7 @@
         </style>
         <%@include file="components/javascript.jsp" %>
     </head>
-    <body>
+    <body style="background-color: #e6efe9;">
         <!-- Navigation-->
         <%@include file="components/header.jsp" %>
         <%@include file="components/account.jsp" %>
@@ -258,7 +258,7 @@
                             <div class="row">
                                 <div class="countProduct col-lg-3" style="margin-left: 3%">
                                     <div id="decrement" onclick="stepper(this)"><b>-</b></div>
-                                    <input type="number" name="quantity" min="1" max="${maxQuantity}" step="1" value="1" id="my-input" readonly>
+                                    <input style="background-color: #e6efe9;" type="number" name="quantity" min="1" max="${maxQuantity}" step="1" value="1" id="my-input" readonly>
                                     <input type="hidden" name="productId" value="${product.id}" />
                                     <div id="increment" onclick="stepper(this)"><b>+</b></div>
                                 </div>

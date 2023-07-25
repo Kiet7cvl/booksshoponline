@@ -156,7 +156,7 @@
             </div>
         </div>
         <hr>
-        <div  class="container-fluid">
+        <div  class="container-fluid"style="background-color: #e6efe9">
             <div class="row">
                 <c:forEach items="${listProduct}" var="p">
                     <div class="col-lg-2 col-md-3 col-sm-6 product-down">

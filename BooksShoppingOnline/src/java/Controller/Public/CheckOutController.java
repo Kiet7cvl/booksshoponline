@@ -270,7 +270,7 @@ public class CheckOutController extends HttpServlet {
                     + "                                                <tr>\n"
                     + "                                                    <td\n"
                     + "                                                        style=\"text-align:center;padding:20px 25px;border-radius:4px; background:#1666a2\">\n"
-                    + "                                                        <a href=\"http://localhost:9999/BooksShoppingOnline/home\"\n"
+                    + "                                                        <a href=\"http://localhost:9999/BooksShoppingOnline/myorder\"\n"
                     + "                                                           style=\"font-size:16px;text-decoration:none;color:#fff\"\n"
                     + "                                                           target=\"_blank\">Xem đơn hàng</a>\n"
                     + "                                                    </td>\n"

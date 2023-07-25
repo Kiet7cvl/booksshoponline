@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class Config {
     public static String vnp_PayUrl = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_Returnurl = "http://localhost:9999/BooksShoppingOnline/successful";
+    public static String vnp_Returnurl = "http://localhost:9999/BooksShoppingOnline/";
     public static String vnp_TmnCode = "CHYYUYP7";
     public static String vnp_HashSecret = "ZOUKUXIMNFTUUHXMOIWKHFOZMBBZECVG";
     public static String vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";

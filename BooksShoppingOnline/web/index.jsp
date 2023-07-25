@@ -13,6 +13,89 @@
             .product-price{
                 text-align: left;
             }
+           
+            .product-price{
+                text-align: left;
+            }
+            .product-item {
+                position: relative;
+                overflow: hidden;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .product-item:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng khi hover */
+                transform: translateY(-4px); /* Hiệu ứng nhấp nháy khi hover */
+            }
+
+            .product-thumb img {
+                transition: transform 0.2s ease;
+            }
+
+            .product-item:hover .product-thumb img {
+                transform: scale(1.05); /* Phóng to ảnh khi hover */
+            }
+
+            .product-top {
+                position: relative;
+            }
+
+            .buy-now {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 8px;
+                background-color: #3498db;
+                color: #fff;
+                text-align: center;
+                text-decoration: none;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                transition: background-color 0.2s ease;
+            }
+
+            .product-item:hover .buy-now {
+                background-color: #2980b9; /* Màu nền khi hover */
+            }
+            .content-Category-section {
+                padding: 60px 0;
+            }
+
+            .section-heading {
+                font-size: 32px;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 40px;
+                color: #333; /* Màu chữ */
+                text-transform: uppercase; /* Chuyển thành chữ in hoa */
+                border-bottom: 2px solid #3498db; /* Đường viền dưới */
+                padding-bottom: 10px; /* Khoảng cách dưới */
+            }
+
+            /* Phần "Top 4 quyển sách đa dạng" */
+            .background-product {
+                padding: 60px 0;
+            }
+
+            .section-heading.product-heading {
+                font-size: 32px;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 40px;
+                color: #333; /* Màu chữ */
+                text-transform: uppercase; /* Chuyển thành chữ in hoa */
+                border-bottom: 2px solid #3498db; /* Đường viền dưới */
+                padding-bottom: 10px; /* Khoảng cách dưới */
+            }
+
+            .product-down {
+                display: flex;
+                justify-content: center;
+            }
+        
         </style>
     </head>
     <body>
@@ -56,8 +139,8 @@
 
 
             <!-- Content -->
-            <div id="content">
-                <div class="content-section background-product" style="width: 1500px">
+            <div id="content" style="background-color: #e6efe9">
+                <div class="content-section background-product" style="width: 1500px; background-color: #e6efe9">
 
 
                     <!-- Base Product -->
@@ -122,7 +205,7 @@
                 </div>
 
 
-                <div class="content-Category-section background-product"><!--
+                <div class="content-Category-section background-product" style="background-color: #e6efe9"><!--
 
                     <!-- Product list -->
                     <h2 class="section-heading">Những thể loại hấp đẫn</h2>

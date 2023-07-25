@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css">
         <%@include file="components/javascript.jsp" %>
     </head>
-    <body>
+    <body style="background-color: #e6efe9">
         <!-- Responsive navbar-->
         <%@include file="components/header.jsp" %>
         <%@include file="components/account.jsp" %>
