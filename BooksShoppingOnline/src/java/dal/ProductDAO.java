@@ -508,4 +508,20 @@ public class ProductDAO extends DBContext {
             System.out.println(ex);
         }
     }
+    public void updateQuantityProductcan(List<OrderDetail> listOrderDetail) {
+        try {
+            for (OrderDetail orderDetail : listOrderDetail) {
+                String sql = "UPDATE `Product` " +
+             "SET `quantity` = (quantity + ?) " +
+             "WHERE `product_id` = ?";
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setInt(1, orderDetail.getQuantity());
+                st.setInt(2, orderDetail.getProduct_id());
+                st.executeUpdate();
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
 }

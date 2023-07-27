@@ -5,12 +5,16 @@
 package Controller.Public;
 
 import dal.OrderDao;
+import dal.OrderDetailDAO;
+import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.OrderDetail;
 
 /**
  *
@@ -48,6 +52,10 @@ public class SuccessfulCheckoutController extends HttpServlet {
             if (id != -1) {
                 if (vnp_BankCode.equalsIgnoreCase("VNPAY") && vnp_CardType.equalsIgnoreCase("QRCODE")) {
                     od.updateStatusOrder(id, 5);
+                    ProductDAO pd = new ProductDAO();
+                    OrderDetailDAO odd = new OrderDetailDAO();
+                    List<OrderDetail> listOrderDetail = odd.getAllByOderId(id);
+                    pd.updateQuantityProductcan(listOrderDetail);
                     request.setAttribute("notification", "Bạn đã hủy thanh toán thành công");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
 

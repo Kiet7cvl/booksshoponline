@@ -6,6 +6,8 @@
 package Controller.Sale;
 
 import dal.OrderDao;
+import dal.OrderDetailDAO;
+import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,6 +16,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.OrderDetail;
 import model.SendMail;
 import model.User;
 
@@ -43,7 +47,7 @@ public class UpdateOrderController extends HttpServlet {
             String salerId_raw = request.getParameter("salerId");
             String orderId_raw = request.getParameter("orderId");
             String getemail = request.getParameter("getemail");
-            
+
             HttpSession session = request.getSession();
             User u = (User) session.getAttribute("us");
             // Khởi tạo biến với giá trị mặc định
@@ -66,10 +70,15 @@ public class UpdateOrderController extends HttpServlet {
             // Cập nhật đơn hàng bằng các giá trị đã lấy được
             OrderDao od = new OrderDao();
             od.updateOrder(orderId, status, salerId, note_raw);
-            if(status_raw.equalsIgnoreCase("4")) {
+            if (status_raw.equalsIgnoreCase("4")) {
                 SendMail.sendEmailFeedback(getemail);
             }
-            
+            if (status_raw.equalsIgnoreCase("5")) {
+                ProductDAO pd = new ProductDAO();
+                OrderDetailDAO odd = new OrderDetailDAO();
+                List<OrderDetail> listOrderDetail = odd.getAllByOderId(orderId);
+                pd.updateQuantityProductcan(listOrderDetail);
+            }
             request.setAttribute("notification", "Cập nhật thành công.");
             request.getRequestDispatcher("order-detail-sale?orderId=" + orderId).forward(request, response);
             // response.sendRedirect("order-detail-sale?orderId="+orderId);

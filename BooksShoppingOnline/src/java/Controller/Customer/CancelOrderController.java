@@ -6,6 +6,8 @@
 package Controller.Customer;
 
 import dal.OrderDao;
+import dal.OrderDetailDAO;
+import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +15,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.OrderDetail;
 
 /**
  *
@@ -37,7 +41,11 @@ public class CancelOrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             int id = Integer.parseInt(request.getParameter("order_id"));
-            new OrderDao().updateStatusOrder(id, 3);// Cập nhật trạng thái đơn hàng bằng cách gọi phương thức updateStatusOrder trong OrderDao
+            ProductDAO pd = new ProductDAO();
+            OrderDetailDAO odd = new OrderDetailDAO();
+            List<OrderDetail> listOrderDetail = odd.getAllByOderId(id);
+            pd.updateQuantityProductcan(listOrderDetail);
+            new OrderDao().updateStatusOrder(id, 5);// Cập nhật trạng thái đơn hàng bằng cách gọi phương thức updateStatusOrder trong OrderDao
             response.sendRedirect("order-detail?orderId="+id);
         }
     }

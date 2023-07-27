@@ -20,10 +20,7 @@ import model.Category;
 import model.Product;
 import model.Slider;
 
-/**
- *
- * @author son22
- */
+
 public class ProductListController extends HttpServlet {
 
     /**
