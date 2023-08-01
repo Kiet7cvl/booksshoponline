@@ -220,7 +220,7 @@
                                 <p class="mb-1 cus-fontsize"> OrderId: ${k.orderID}</p>
                                 <p class="mb-1 cus-fontsize">Ngày mua hàng : ${k.date}</p>
                                 <p class="mb-1 cus-fontsize">Trạng thái : ${k.status_order_name}</p>
-                                <c:if test="${k.status_order_name eq 'Đang gửi'}">
+                                <c:if test="${k.status_order_name eq 'Chờ xác nhận'}">
                                         <div class="row">
                                             <a style="width: auto;margin-left: 12px;" href="cancel-order?order_id=${k.orderID}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true" >Hủy</a>
                                         </div>

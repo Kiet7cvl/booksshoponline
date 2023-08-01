@@ -167,18 +167,18 @@ public class CheckOutController extends HttpServlet {
 
         User u = (User) session.getAttribute("us");
         int user_id = u.getUser_Id();
-        cd.deleteCartByUserId(user_id);
-        Order o = od.getOrderNew(user_id);
-        int saler_id = od.getAssignOrder();
+        cd.deleteCartByUserId(user_id); // xoá item trong cart theo user id 
+        Order o = od.getOrderNew(user_id);//lấy ra order mới vưa tạo 
+        int saler_id = od.getAssignOrder(); //add thêm 1 ramdom saler dèault cho order 
 
-        od.updateSalerOrder(o.getOrderID(), saler_id);
-        od.updateStatusOrder(o.getOrderID(), 1);
-        List<OrderDetail> listOrderDetail = odd.getAllByOderId(o.getOrderID());
-        pd.updateQuantityProduct(listOrderDetail);
-        Customer c = cus.checkCustomer(o.getFullName(), u.getEmail(), o.getMobile());
+        od.updateSalerOrder(o.getOrderID(), saler_id); // cập nhật saler cho order 
+        od.updateStatusOrder(o.getOrderID(), 1);// cập nhật status cho order 
+        List<OrderDetail> listOrderDetail = odd.getAllByOderId(o.getOrderID());//lấy all order detail theo order id 
+        pd.updateQuantityProduct(listOrderDetail); //cập nhật số lg sản phẩm 
+        Customer c = cus.checkCustomer(o.getFullName(), u.getEmail(), o.getMobile()); //check customer exist 
 
         if (c == null) {
-            cus.storedNewCustomer(o.getFullName(), u.getEmail(), o.getMobile());
+            cus.storedNewCustomer(o.getFullName(), u.getEmail(), o.getMobile());//tạo mới customer nếu họ chưa exist
         }
         request.setAttribute("order_id", o.getOrderID());
         request.setAttribute("total_cost", o.getTotal_cost());

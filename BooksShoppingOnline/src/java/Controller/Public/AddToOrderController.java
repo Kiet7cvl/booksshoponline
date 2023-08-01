@@ -51,9 +51,9 @@ public class AddToOrderController extends HttpServlet {
             HttpSession session = request.getSession();
             User u = (User) session.getAttribute("us");
             int user_id = u.getUser_Id();
-            int order_id = od.createNewOrder(sum, fullname, phone, address, user_id, note);
-            List<Cart> listCart = c.getAllCartByUserId(user_id);
-            odd.addCartToOrder(listCart, order_id);
+            int order_id = od.createNewOrder(sum, fullname, phone, address, user_id, note); //tạo 1 order mới
+            List<Cart> listCart = c.getAllCartByUserId(user_id); //lấy tất cả các item trong rỏ hàng theo User id
+            odd.addCartToOrder(listCart, order_id); // theo các item trong giỏi hàng vào order mới vừa tạo 
             
             request.setAttribute("fullname", fullname);
             request.setAttribute("phone", phone);
