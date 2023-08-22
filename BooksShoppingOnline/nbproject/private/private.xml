@@ -3,17 +3,100 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/web/index.jsp</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/ProductDAO.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/web/components/account.jsp</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/web/order-detail.jsp</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/CheckOutController.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Sale/UpdateOrderController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Admin/AddSettingController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Customer/OrderDetailController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/model/OrderDetail.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Sale/SaleDashboardController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/DeleteFeedbackController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/SliderListController.java</file>
             <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/SuccessfulCheckoutController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Admin/SettingListController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/AddtoCartController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/PostsListController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/DeleteCartController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/model/Product.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/model/Feedback.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/FeedbackListController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/AddProductController.java</file>
             <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/model/Chart.java</file>
-            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/ProductListController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Admin/SettingDetailsController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Common/CustomerAuthorization.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Common/AdminAuthorization.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/UserDAO.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/model/Customer.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Customer/MyOrderController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Common/EditUserProfileController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/model/Role.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/CheckOutController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/ChangeStatusController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/HomeController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/UpdateProductController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Sale/OrderDetailSaleController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/ChangeStatusCustomerController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/UpdateCustomerController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/BlogDAO.java</file>
             <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/com/vnpay/common/Config.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/DateDAO.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/ChangeStatusFeedbackController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/AddCustomerController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/AddSliderController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/UpdateCart.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Common/newpassController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Admin/AdminDashboardController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Admin/UpdateStatusUserController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/SliderDetailController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/ProductListController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/model/Blog.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/CartContactController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/ProductDAO.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Common/LogoutController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/PostDetailsController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/BlogController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Admin/ListUserController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/ListDetailController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Admin/CreateUserController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/AddPostController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/RoleDAO.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/SliderDAO.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Admin/DetailsUserController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/FeedbackDAO.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Common/MKTAuthorization.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/CategoryBlogController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/CustomerDetailController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/context/DBContext.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/OrderDao.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/OrderDetailDAO.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/MKTDashboardController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/ProductsListController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/model/Date.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/SettingDAO.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/BlogDetailController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Common/LoginController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Sale/OrderListSaleController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Sale/UpdateSuccessfullOrder.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/model/ChartStar.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/UpdateSliderController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/CustomerDAO.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/CartDAO.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/ProductDetailController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Sale/UpdateOrderController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/CustomerListController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/dal/CategoryDAO.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Common/changepassword.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/FeedbackDetailController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/CartController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/ChangeStatusProductController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/UpdatePostController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/model/Cart.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Admin/UpdateSettingController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Common/SaleAndManagerAdminAuthorization.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/model/Category.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Common/ResetPassController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Common/RegisterController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Marketing/ChangeStatusSliderController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/model/SendMail.java</file>
             <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Customer/CancelOrderController.java</file>
+            <file>file:/E:/Ki5/SWP391/ShoppingOnile/booksshop/BooksShoppingOnline/src/java/Controller/Public/AddToOrderController.java</file>
         </group>
     </open-files>
 </project-private>

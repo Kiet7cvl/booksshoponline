@@ -20,7 +20,7 @@
                 font-family: 'Lato', sans-serif;
                 color: rgba(116, 116, 116, 0.667);
                 background: linear-gradient(140deg , #a75555 , 50% , #0089ff);
-                background-color: #e6efe9";
+                background-color: #e6efe9;
 
             }
             .container-fluid-detail {
